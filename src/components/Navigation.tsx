@@ -34,7 +34,7 @@ export default function Navigation(): ReactElement {
           />
         </Grid>
       </Grid>
-      { isNavigationResponsiveShow && <NavigationResponsive /> }
+      { isNavigationResponsiveShow && <NavigationResponsive toggleHandler={setIsNavigationResponsiveShow}/> }
     </Container>
   )
 }
