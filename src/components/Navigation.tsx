@@ -1,5 +1,7 @@
 import { Container, Grid, makeStyles, Typography } from '@material-ui/core'
 import React, { ReactElement, useState } from 'react'
+import { useRecoilValue } from 'recoil'
+import { navigationLinks } from '../store/links'
 import NavigationResponsive from './NavigationResponsive'
 
 const useStyles = makeStyles(({spacing, breakpoints}) => ({
@@ -37,23 +39,7 @@ const useStyles = makeStyles(({spacing, breakpoints}) => ({
 export default function Navigation(): ReactElement {
   const [isNavigationResponsiveShow, setIsNavigationResponsiveShow] = useState(false)
 
-  const listNavigationLink = [{
-    id: 1,
-    name: 'Home',
-    href: '/'
-  }, {
-    id: 2,
-    name: 'About',
-    href: '/'
-  }, {
-    id: 3,
-    name: 'Kompetisi',
-    href: '/'
-  }, {
-    id: 4,
-    name: 'Expo',
-    href: '/'
-  }]
+  const listNavigationLink = useRecoilValue(navigationLinks)
 
   const toggleNavigationResponsive = () => setIsNavigationResponsiveShow(!isNavigationResponsiveShow)
 

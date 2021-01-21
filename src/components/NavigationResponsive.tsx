@@ -1,5 +1,7 @@
 import { Container, Grid, makeStyles, Typography } from '@material-ui/core'
 import React, { ReactElement } from 'react'
+import { useRecoilValue } from 'recoil'
+import { navigationLinks } from '../store/links'
 
 interface NavigationResponsiveProps {
   toggleHandler: (status: boolean) => void
@@ -48,23 +50,7 @@ const useStyles = makeStyles(({ spacing }) => ({
 }))
 
 export default function NavigationResponsive(props: NavigationResponsiveProps): ReactElement {
-  const listNavigationLink = [{
-    id: 1,
-    name: 'Home',
-    href: '/'
-  },{
-    id: 2,
-    name: 'Home',
-    href: '/'
-  }, {
-    id: 3,
-    name: 'Home',
-    href: '/'
-  }, {
-    id: 4,
-    name: 'Home',
-    href: '/'
-    }]
+  const listNavigationLink = useRecoilValue(navigationLinks)
   
   const contactLink = [{
     name: 'Instagram',
