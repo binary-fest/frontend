@@ -1,10 +1,14 @@
+import { ThemeProvider, Typography } from '@material-ui/core';
 import React from 'react';
+import theme from './theme';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Hello world !</h1>
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className="App">
+        <Typography>Hello world !</Typography>
+      </div>
+    </ThemeProvider>
   );
 }
 
