@@ -13,8 +13,15 @@ const useStyles = makeStyles(({ spacing }) => ({
     zIndex: 10,
     width: "80%",
     top: "0",
-    right: "0",
-    paddingTop: spacing(2)
+    right: "0"
+  },
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    height: '100%',
+    paddingTop: spacing(2),
+    paddingBottom: spacing(2)
   },
   navigationLink: {
     marginBottom: spacing(4),
@@ -32,6 +39,11 @@ const useStyles = makeStyles(({ spacing }) => ({
     position: 'fixed',
     top: 0,
     left: 0
+  },
+  contactContainer: {
+    width: '174px',
+    display: 'flex',
+    justifyContent: 'space-between'
   }
 }))
 
@@ -54,6 +66,20 @@ export default function NavigationResponsive(props: NavigationResponsiveProps): 
     href: '/'
     }]
   
+  const contactLink = [{
+    name: 'Instagram',
+    url: '/',
+    svgUrl: '/instagram-icon.svg'
+  }, {
+    name: 'Telegram',
+    url: '/',
+    svgUrl: '/telegram-icon.svg'
+  }, {
+    name: 'Youtube',
+    url: '/',
+    svgUrl: '/youtube-icon.svg'
+  }]
+  
   const hideHandler = () => {
     props.toggleHandler(false)
   }
@@ -63,7 +89,7 @@ export default function NavigationResponsive(props: NavigationResponsiveProps): 
   return (
     <>
       <div className={classes.root}>
-        <Container>
+        <Container className={classes.container}>
           <Grid container justify="space-between">
             <Grid item>
               {listNavigationLink.map((link) => {
@@ -79,6 +105,17 @@ export default function NavigationResponsive(props: NavigationResponsiveProps): 
                 onClick={hideHandler}
                 className={classes.closeIcon}
               />
+            </Grid>
+          </Grid>
+          <Grid container justify="center">
+            <Grid item className={classes.contactContainer}>
+              {contactLink.map(contact => {
+                return (
+                  <a key={contact.name} href={contact.url} target="_blank" rel="noreferrer">
+                    <img src={contact.svgUrl} alt={contact.name} />
+                  </a>
+                )
+              })}
             </Grid>
           </Grid>
         </Container>
