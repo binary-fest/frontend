@@ -15,15 +15,15 @@ const navigationLinks = atom<NavigationLink[]>({
   }, {
     id: 2,
     name: 'About',
-    href: '/'
+    href: '/about'
   }, {
     id: 3,
     name: 'Kompetisi',
-    href: '/'
+    href: '/competition'
   }, {
     id: 4,
     name: 'Expo',
-    href: '/'
+    href: '/expo'
   }]
 })
 
