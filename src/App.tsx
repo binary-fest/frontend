@@ -4,10 +4,10 @@ import { RecoilRoot } from 'recoil';
 import Navigation from './components/Navigation';
 import theme from './theme';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(({palette}) => ({
   root: {
     minHeight: '100vh',
-    background: "radial-gradient(312.96% 312.96% at 109.41% -262.96%, #780031 13.16%, #100E17 100%)"
+    background: palette.gradient?.main
   }
 }))
 
