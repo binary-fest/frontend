@@ -8,7 +8,8 @@ import NavigationResponsive from './NavigationResponsive'
 const useStyles = makeStyles(({spacing, breakpoints}) => ({
   root: {
     top: spacing(2),
-    position: 'relative'
+    position: 'absolute',
+    maxWidth: 'none'
   },
   hamburgerIcon: {
     cursor: 'pointer',
