@@ -1,5 +1,6 @@
 import { Container, Grid, makeStyles } from '@material-ui/core'
-import React, { ReactElement } from 'react'
+import React, { ReactElement, useState } from 'react'
+import NavigationResponsive from './NavigationResponsive'
 
 const useStyles = makeStyles(({spacing}) => ({
   root: {
@@ -12,6 +13,10 @@ const useStyles = makeStyles(({spacing}) => ({
 }))
 
 export default function Navigation(): ReactElement {
+  const [isNavigationResponsiveShow, setIsNavigationResponsiveShow] = useState(false)
+
+  const toggleNavigationResponsive = () => setIsNavigationResponsiveShow(!isNavigationResponsiveShow)
+
   const classes = useStyles()
 
   return (
@@ -21,9 +26,15 @@ export default function Navigation(): ReactElement {
           <img src="/binary-fest-logo-mobile.svg" alt="Binary Fest"/>
         </Grid>
         <Grid item>
-          <img className={classes.hamburgerIcon} src="/hamburger-icon.svg" alt="Binary Fest"/>
+          <img
+            className={classes.hamburgerIcon}
+            src="/hamburger-icon.svg"
+            alt="Binary Fest"
+            onClick={toggleNavigationResponsive}
+          />
         </Grid>
       </Grid>
+      { isNavigationResponsiveShow && <NavigationResponsive /> }
     </Container>
   )
 }
