@@ -1,5 +1,6 @@
 import { Container, Grid, makeStyles, Typography } from '@material-ui/core'
 import React, { ReactElement } from 'react'
+import { Link } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import { navigationLinks } from '../store/links'
 
@@ -80,7 +81,9 @@ export default function NavigationResponsive(props: NavigationResponsiveProps): 
             <Grid item>
               {listNavigationLink.map((link) => {
                 return (
-                  <Typography key={link.id} className={classes.navigationLink}>{link.name}</Typography>
+                  <Link key={link.id} to={link.href}>
+                    <Typography className={classes.navigationLink}>{link.name}</Typography>
+                  </Link>
                 )
               })}
             </Grid>

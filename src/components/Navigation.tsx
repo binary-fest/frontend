@@ -1,5 +1,6 @@
 import { Container, Grid, makeStyles, Typography } from '@material-ui/core'
 import React, { ReactElement, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import { navigationLinks } from '../store/links'
 import NavigationResponsive from './NavigationResponsive'
@@ -61,9 +62,9 @@ export default function Navigation(): ReactElement {
           <div className={classes.listLink}>
             {listNavigationLink.map(link => {
               return (
-                <a key={link.id} href={link.href}>
+                <Link key={link.id} to={link.href}>
                   <Typography>{link.name}</Typography>
-                </a>
+                </Link>
               )
             })}
           </div>
