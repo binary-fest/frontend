@@ -22,6 +22,16 @@ const useStyles = makeStyles(({ spacing }) => ({
   },
   closeIcon: {
     cursor: 'pointer'
+  },
+  backdrop: {
+    backgroundColor: 'black',
+    opacity: 0.5,
+    width: '100%',
+    height: '100%',
+    zIndex: 5,
+    position: 'fixed',
+    top: 0,
+    left: 0
   }
 }))
 
@@ -51,26 +61,29 @@ export default function NavigationResponsive(props: NavigationResponsiveProps): 
   const classes = useStyles()
 
   return (
-    <div className={classes.root}>
-      <Container>
-        <Grid container justify="space-between">
-          <Grid item>
-            {listNavigationLink.map((link) => {
-              return (
-                <Typography key={link.id} className={classes.navigationLink}>{link.name}</Typography>
-              )
-            })}
+    <>
+      <div className={classes.root}>
+        <Container>
+          <Grid container justify="space-between">
+            <Grid item>
+              {listNavigationLink.map((link) => {
+                return (
+                  <Typography key={link.id} className={classes.navigationLink}>{link.name}</Typography>
+                )
+              })}
+            </Grid>
+            <Grid item>
+              <img
+                src="/close-navigation.svg"
+                alt="Close navigation"
+                onClick={hideHandler}
+                className={classes.closeIcon}
+              />
+            </Grid>
           </Grid>
-          <Grid item>
-            <img
-              src="/close-navigation.svg"
-              alt="Close navigation"
-              onClick={hideHandler}
-              className={classes.closeIcon}
-            />
-          </Grid>
-        </Grid>
-      </Container>
-    </div>
+        </Container>
+      </div>
+      <div className={classes.backdrop} onClick={hideHandler} />
+    </>
   )
 }
