@@ -32,25 +32,46 @@ const navigationLinks = atom<LinkState[]>({
   }]
 })
 
+const socialMediaLinks = atom<LinkState[]>({
+  key: 'socialMediaLinks',
+  default: [{
+    id: 1,
+    name: 'Instagram',
+    href: ''
+  }, {
+    id: 2,
+    name: 'Telegram',
+    href: ''
+  }, {
+    id: 3,
+    name: 'Youtube',
+    href: ''
+  }]
+})
+
+const socialMediaIcons = selector({
+  key: 'socialMediaIcons',
+  get: ({ get }) => {
+    const socialMediaAtom = get(socialMediaLinks)
+
+    return socialMediaAtom.map((item) => {
+      return {
+        ...item,
+        whiteSvgFile: item.name.toLowerCase() + '-icon.svg',
+        gradientSvgFile: item.name.toLowerCase() + '-icon-gradient.svg',
+      }
+    })
+  }
+})
+
 const footerLinks = selector<FooterLinkGroup[]>({
   key: 'footerLinks',
   get: ({get}) => {
     const menuLinks = get(navigationLinks)
+    const socialMediaAtom = get(socialMediaLinks)
     const links: FooterLinkGroup[] = [{
       group: 'Contact',
-      list: [{
-        id: 1,
-        name: 'Whatsapp',
-        href: ''
-      }, {
-        id: 2,
-        name: 'Telegram',
-        href: ''
-      }, {
-        id: 3,
-        name: 'Gmail',
-        href: ''
-      }]
+      list: socialMediaAtom
       }, {
       group: 'Kompetisi',
       list: [{
@@ -71,4 +92,4 @@ const footerLinks = selector<FooterLinkGroup[]>({
   }
 })
 
-export { navigationLinks, footerLinks }
+export { navigationLinks, footerLinks, socialMediaIcons }

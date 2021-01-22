@@ -2,7 +2,7 @@ import { Container, Grid, makeStyles, Typography } from '@material-ui/core'
 import React, { ReactElement } from 'react'
 import { Link } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
-import { navigationLinks } from '../store/links'
+import { navigationLinks, socialMediaIcons } from '../store/links'
 
 interface NavigationResponsiveProps {
   toggleHandler: (status: boolean) => void
@@ -24,11 +24,14 @@ const useStyles = makeStyles(({ spacing }) => ({
     justifyContent: 'space-between',
     height: '100%',
     paddingTop: spacing(2),
-    paddingBottom: spacing(2)
+    paddingBottom: spacing(2),
   },
   navigationLink: {
     marginBottom: spacing(4),
-    cursor: 'pointer'
+    cursor: 'pointer',
+    display: 'block',
+    color: '#2F2F2F',
+    textDecoration: 'none'
   },
   closeIcon: {
     cursor: 'pointer'
@@ -52,20 +55,7 @@ const useStyles = makeStyles(({ spacing }) => ({
 
 export default function NavigationResponsive(props: NavigationResponsiveProps): ReactElement {
   const listNavigationLink = useRecoilValue(navigationLinks)
-  
-  const contactLink = [{
-    name: 'Instagram',
-    url: '/',
-    svgUrl: '/instagram-icon.svg'
-  }, {
-    name: 'Telegram',
-    url: '/',
-    svgUrl: '/telegram-icon.svg'
-  }, {
-    name: 'Youtube',
-    url: '/',
-    svgUrl: '/youtube-icon.svg'
-  }]
+  const listSocialMedia = useRecoilValue(socialMediaIcons)
   
   const hideHandler = () => {
     props.toggleHandler(false)
@@ -81,8 +71,8 @@ export default function NavigationResponsive(props: NavigationResponsiveProps): 
             <Grid item>
               {listNavigationLink.map((link) => {
                 return (
-                  <Link key={link.id} to={link.href}>
-                    <Typography className={classes.navigationLink}>{link.name}</Typography>
+                  <Link key={link.id} to={link.href} className={classes.navigationLink}>
+                    <Typography>{link.name}</Typography>
                   </Link>
                 )
               })}
@@ -98,10 +88,10 @@ export default function NavigationResponsive(props: NavigationResponsiveProps): 
           </Grid>
           <Grid container justify="center">
             <Grid item className={classes.contactContainer}>
-              {contactLink.map(contact => {
+              {listSocialMedia.map(contact => {
                 return (
-                  <a key={contact.name} href={contact.url} target="_blank" rel="noreferrer">
-                    <img src={contact.svgUrl} alt={contact.name} />
+                  <a key={contact.name} href={contact.href} target="_blank" rel="noreferrer">
+                    <img src={contact.gradientSvgFile} alt={contact.name} />
                   </a>
                 )
               })}
