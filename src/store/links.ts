@@ -1,12 +1,17 @@
-import { atom } from 'recoil'
+import { atom, selector } from 'recoil'
 
-interface NavigationLink {
+interface LinkState {
   id: number
   href: string
   name: string
 }
 
-const navigationLinks = atom<NavigationLink[]>({
+interface FooterLinkGroup {
+  group: string,
+  list: LinkState[]
+}
+
+const navigationLinks = atom<LinkState[]>({
   key: 'navigationLinks',
   default: [{
     id: 1,
@@ -27,4 +32,43 @@ const navigationLinks = atom<NavigationLink[]>({
   }]
 })
 
-export { navigationLinks }
+const footerLinks = selector<FooterLinkGroup[]>({
+  key: 'footerLinks',
+  get: ({get}) => {
+    const menuLinks = get(navigationLinks)
+    const links: FooterLinkGroup[] = [{
+      group: 'Contact',
+      list: [{
+        id: 1,
+        name: 'Whatsapp',
+        href: ''
+      }, {
+        id: 2,
+        name: 'Telegram',
+        href: ''
+      }, {
+        id: 3,
+        name: 'Gmail',
+        href: ''
+      }]
+      }, {
+      group: 'Kompetisi',
+      list: [{
+        id: 1,
+        name: 'UI / UX',
+        href: ''
+      }, {
+        id: 2,
+        name: 'Internet of Things',
+        href: ''
+      }]
+    }, {
+      group: 'Menu',
+      list: menuLinks
+    }]
+
+    return links
+  }
+})
+
+export { navigationLinks, footerLinks }
