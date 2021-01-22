@@ -1,13 +1,8 @@
 import { Grid, makeStyles, Typography } from '@material-ui/core'
 import React, { ReactElement } from 'react'
-import { GradientButton, GradientTypography } from '../theme/extends';
+import { GradientButton, GradientTypography, StaticPageContentStyled } from '../theme/extends';
 
 const useStyles = makeStyles(({spacing, breakpoints}) => ({
-  root: {
-    paddingTop: '139px',
-    maxWidth: '806px',
-    margin: '0 auto'
-  },
   heading: {
     fontSize: '36px',
     fontWeight: 'bold'
@@ -76,7 +71,7 @@ export default function Competition(): ReactElement {
   const classes = useStyles()
   
   return (
-    <div className={classes.root}>
+    <StaticPageContentStyled>
       <GradientTypography className={classes.heading} align="center">Kompetisi</GradientTypography>
       <Grid container className={classes.listCompetition} justify="space-between">
         {competitions.map(competition => {
@@ -102,6 +97,6 @@ export default function Competition(): ReactElement {
           <GradientButton variant='contained' color="primary">Registrasi Kompetisi</GradientButton>
         </div>
       </div>
-    </div>
+    </StaticPageContentStyled>
   )
 }
