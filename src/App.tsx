@@ -8,6 +8,7 @@ import About from './pages/About';
 import Competition from './pages/Competition';
 import Expo from './pages/Expo';
 import FooterPage from './components/FooterPage';
+import FixedSocialMedia from './components/FixedSocialMedia';
 
 const useStyles = makeStyles(({palette}) => ({
   root: {
@@ -23,6 +24,7 @@ function App() {
     <RecoilRoot>
       <div className={classes.root}>
         <Navigation />
+        <FixedSocialMedia />
         <Container>
           <Switch>
             <Route path="/" exact>
