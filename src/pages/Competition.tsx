@@ -14,6 +14,7 @@ const useStyles = makeStyles(({spacing, breakpoints}) => ({
   },
   listCompetition: {
     color: 'white',
+    marginBottom: '-67px',
     '& .competition-item': {
       display: 'flex',
       flexDirection: 'column',
@@ -49,6 +50,7 @@ const useStyles = makeStyles(({spacing, breakpoints}) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    margin: '210px 0',
     '& h1': {
       fontSize: '70px',
       fontWeight: 'bold',
