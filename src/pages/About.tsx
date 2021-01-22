@@ -78,11 +78,51 @@ const useStyles = makeStyles(({ spacing, breakpoints }) => ({
       fontSize: '30px',
       fontWeight: 'bold'
     },
+  },
+  mission: {
+    color: 'white',
+    maxWidth: '1016px',
+    position: 'relative',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    marginBottom: '147px',
+    '& h1': {
+      fontSize: '30px',
+      fontWeight: 'bold'
+    },
+    '& .mission-item': {
+      marginBottom: '45px',
+      '& h4': {
+        fontSize: '64px',
+        fontWeight: 'bold',
+        marginBottom: '9px'
+      },
+      [breakpoints.up('md')]: {
+        maxWidth: '250px'
+      },
+      [breakpoints.up('lg')]: {
+        maxWidth: '300px'
+      },
+    },
+    [breakpoints.up('lg')]: {
+      width: '1016px',
+    },
   }
 }))
 
 export default function About(): ReactElement {
   const classes = useStyles()
+
+  const missions = [{
+    no: '1',
+    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Risus vitae id odio at mi mauris. Dolor purus lacus risus rhoncus. Interdum lobortis massa nisi, turpis dictum fusce ultrices. Turpis bibendum cursus ut a mauris,'
+  }, {
+    no: '2',
+    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Risus vitae id odio at mi mauris. Dolor purus lacus risus rhoncus. Interdum lobortis massa nisi, turpis dictum fusce ultrices. Turpis bibendum cursus ut a mauris,'
+  }, {
+    no: '3',
+    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Risus vitae id odio at mi mauris. Dolor purus lacus risus rhoncus. Interdum lobortis massa nisi, turpis dictum fusce ultrices. Turpis bibendum cursus ut a mauris,'
+  }]
 
   return (
     <StaticPageContentStyled>
@@ -114,6 +154,19 @@ export default function About(): ReactElement {
         </Grid>
         <Grid item>
           <Typography align="center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Risus vitae id odio at mi mauris. Dolor purus lacus risus rhoncus. Interdum lobortis massa nisi, turpis dictum fusce ultrices. Turpis bibendum cursus ut a mauris, mi sit quam.  Dolor purus lacus risus rhoncus. Interdum lobortis massa nisi, turpis dictum fusce ultrices. Turpis bibendum cursus ut a mauris, mi sit quam.</Typography>
+        </Grid>
+      </Grid>
+      <Grid container className={classes.mission} direction="column">
+        <Grid item>
+          <Typography variant="h1" className={classes.titleTrapezoid}>Misi</Typography>
+        </Grid>
+        <Grid container justify="space-between">
+          {missions.map(mission => (
+            <Grid item xs={12} key={mission.no} className="mission-item">
+              <Typography variant="h4" align="center">{mission.no}</Typography>
+              <Typography align="center">{mission.content}</Typography>
+            </Grid>
+          ))}
         </Grid>
       </Grid>
     </StaticPageContentStyled>
