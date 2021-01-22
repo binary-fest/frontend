@@ -39,6 +39,26 @@ const useStyles = makeStyles(({ spacing, breakpoints }) => ({
         right: '0'
       }
     }
+  },
+  quote: {
+    color: 'white',
+    margin: '110px 0',
+    '& p': {
+      fontSize: '24px',
+      margin: '12px 0',
+      [breakpoints.up('md')]: {
+        fontSize: '48px',
+        maxWidth: '459px',
+        textAlign: 'center'
+      }
+    },
+    [breakpoints.up('md')]: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      maxWidth: '711px',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+    }
   }
 }))
 
@@ -56,6 +76,17 @@ export default function About(): ReactElement {
         </Grid>
         <Grid item className="content">
           <Typography>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Risus vitae id odio at mi mauris. Dolor purus lacus risus rhoncus. Interdum lobortis massa nisi, turpis dictum fusce ultrices. Turpis bibendum cursus ut a mauris, mi sit quam.  Dolor purus lacus risus rhoncus. Interdum lobortis massa nisi, turpis dictum fusce ultrices. Turpis bibendum cursus ut a mauris, mi sit quam.</Typography>
+        </Grid>
+      </Grid>
+      <Grid container className={classes.quote} direction="column" alignItems="center">
+        <Grid item>
+          <img src="/quote-icon.svg" alt="quote"/>
+        </Grid>
+        <Grid item>
+          <Typography>Lorem ipsum dolor sit amet</Typography>
+        </Grid>
+        <Grid item>
+          <img src="/quote-icon.svg" alt="quote"/>
         </Grid>
       </Grid>
     </StaticPageContentStyled>
