@@ -1,4 +1,4 @@
-import { Button, withStyles } from '@material-ui/core';
+import { Button, Typography, withStyles } from '@material-ui/core';
 
 const GradientButton = withStyles({
   root: {
@@ -8,4 +8,17 @@ const GradientButton = withStyles({
   }
 })(Button)
 
-export default GradientButton
+const GradientTypography = withStyles({
+  root: {
+    backgroundImage: 'linear-gradient(140.7deg, #FF512F 12%, #DF2672 95.63%)',
+    '-webkit-background-clip': 'text',
+    '-webkit-text-fill-color': 'transparent',
+    '-moz-background-clip': 'text',
+    '-moz-text-fill-color': 'transparent',
+  }
+})(Typography)
+
+export {
+  GradientButton,
+  GradientTypography
+}

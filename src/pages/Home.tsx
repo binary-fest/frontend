@@ -1,7 +1,8 @@
 import { Grid, makeStyles, Typography } from '@material-ui/core'
 import React, { ReactElement } from 'react'
+import { GradientTypography } from '../theme/extends'
 
-const useStyles = makeStyles(({palette, breakpoints, spacing}) => ({
+const useStyles = makeStyles(({breakpoints, spacing}) => ({
   hero: {
     height: '100vh',
     display: 'flex',
@@ -20,11 +21,6 @@ const useStyles = makeStyles(({palette, breakpoints, spacing}) => ({
         }
       },
       '& .coming-soon': {
-        backgroundImage: 'linear-gradient(140.7deg, #FF512F 12%, #DF2672 95.63%)',
-        '-webkit-background-clip': 'text',
-        '-webkit-text-fill-color': 'transparent', 
-        '-moz-background-clip': 'text',
-        '-moz-text-fill-color': 'transparent',
         fontSize: '50px',
         [breakpoints.up('md')]: {
           fontSize: '72px',
@@ -44,11 +40,6 @@ const useStyles = makeStyles(({palette, breakpoints, spacing}) => ({
       },
       '& .detail-text': {
         fontWeight: 'bold',
-        backgroundImage: 'linear-gradient(140.7deg, #FF512F 12%, #DF2672 95.63%)',
-        '-webkit-background-clip': 'text',
-        '-webkit-text-fill-color': 'transparent',
-        '-moz-background-clip': 'text',
-        '-moz-text-fill-color': 'transparent',
         fontSize: '14px',
         [breakpoints.up('md')]: {
           fontSize: '18px',
@@ -93,9 +84,9 @@ export default function Home(): ReactElement {
           style={{color: 'white'}}
           className="heading"
         >Want to Be First BinaryFest Pariticipant ?</Typography>
-        <Typography
+        <GradientTypography
           className="coming-soon"
-        >COMING SOON</Typography>
+        >COMING SOON</GradientTypography>
         <Typography
           className="date"
         >ON MARCH 2021</Typography>
@@ -104,7 +95,7 @@ export default function Home(): ReactElement {
             return (
               <Grid item key={detail.text}>
                 <Typography className="detail-remain">{detail.remain}</Typography>
-                <Typography className="detail-text">{detail.text}</Typography>
+                <GradientTypography className="detail-text">{detail.text}</GradientTypography>
               </Grid>
             )
           })}
