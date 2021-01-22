@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Competition from './pages/Competition';
 import Expo from './pages/Expo';
+import FooterPage from './components/FooterPage';
 
 const useStyles = makeStyles(({palette}) => ({
   root: {
@@ -38,6 +39,7 @@ function App() {
             </Route>
           </Switch>
         </Container>
+        <FooterPage />
       </div>
     </RecoilRoot>
   );
