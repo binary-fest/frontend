@@ -2,7 +2,7 @@ import { Container, Grid, makeStyles, Typography } from '@material-ui/core'
 import React, { ReactElement } from 'react'
 import { Link } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
-import { navigationLinks } from '../store/links'
+import { navigationLinks, socialMediaIcons } from '../store/links'
 
 interface NavigationResponsiveProps {
   toggleHandler: (status: boolean) => void
@@ -55,20 +55,7 @@ const useStyles = makeStyles(({ spacing }) => ({
 
 export default function NavigationResponsive(props: NavigationResponsiveProps): ReactElement {
   const listNavigationLink = useRecoilValue(navigationLinks)
-  
-  const contactLink = [{
-    name: 'Instagram',
-    url: '/',
-    svgUrl: '/instagram-icon-gradient.svg'
-  }, {
-    name: 'Telegram',
-    url: '/',
-    svgUrl: '/telegram-icon-gradient.svg'
-  }, {
-    name: 'Youtube',
-    url: '/',
-    svgUrl: '/youtube-icon-gradient.svg'
-  }]
+  const listSocialMedia = useRecoilValue(socialMediaIcons)
   
   const hideHandler = () => {
     props.toggleHandler(false)
@@ -101,10 +88,10 @@ export default function NavigationResponsive(props: NavigationResponsiveProps): 
           </Grid>
           <Grid container justify="center">
             <Grid item className={classes.contactContainer}>
-              {contactLink.map(contact => {
+              {listSocialMedia.map(contact => {
                 return (
-                  <a key={contact.name} href={contact.url} target="_blank" rel="noreferrer">
-                    <img src={contact.svgUrl} alt={contact.name} />
+                  <a key={contact.name} href={contact.href} target="_blank" rel="noreferrer">
+                    <img src={contact.gradientSvgFile} alt={contact.name} />
                   </a>
                 )
               })}

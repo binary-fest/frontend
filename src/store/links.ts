@@ -36,7 +36,7 @@ const socialMediaLinks = atom<LinkState[]>({
   key: 'socialMediaLinks',
   default: [{
     id: 1,
-    name: 'Whatsapp',
+    name: 'Instagram',
     href: ''
   }, {
     id: 2,
@@ -47,6 +47,21 @@ const socialMediaLinks = atom<LinkState[]>({
     name: 'Youtube',
     href: ''
   }]
+})
+
+const socialMediaIcons = selector({
+  key: 'socialMediaIcons',
+  get: ({ get }) => {
+    const socialMediaAtom = get(socialMediaLinks)
+
+    return socialMediaAtom.map((item) => {
+      return {
+        ...item,
+        whiteSvgFile: item.name.toLowerCase() + '-icon.svg',
+        gradientSvgFile: item.name.toLowerCase() + '-icon-gradient.svg',
+      }
+    })
+  }
 })
 
 const footerLinks = selector<FooterLinkGroup[]>({
@@ -77,4 +92,4 @@ const footerLinks = selector<FooterLinkGroup[]>({
   }
 })
 
-export { navigationLinks, footerLinks }
+export { navigationLinks, footerLinks, socialMediaIcons }
