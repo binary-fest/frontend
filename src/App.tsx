@@ -10,10 +10,22 @@ import Expo from './pages/Expo';
 import FooterPage from './components/FooterPage';
 import FixedSocialMedia from './components/FixedSocialMedia';
 
-const useStyles = makeStyles(({palette}) => ({
+const useStyles = makeStyles(({palette, breakpoints}) => ({
   root: {
     minHeight: '100vh',
     background: palette.gradient.main
+  },
+  decoration1: {
+    display: 'none',
+    position: 'fixed',
+    top: '236px',
+    left: '60px',
+    [breakpoints.up('sm')]: {
+      display: 'flex'
+    },
+    [breakpoints.up('md')]: {
+      left: '96px'
+    }
   }
 }))
 
@@ -24,6 +36,7 @@ function App() {
     <RecoilRoot>
       <div className={classes.root}>
         <Navigation />
+        <img className={classes.decoration1} src="/decoration-1.svg" alt="decoration"/>
         <FixedSocialMedia />
         <Container>
           <Switch>
