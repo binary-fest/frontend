@@ -1,5 +1,6 @@
-import { Button, Grid, makeStyles, Typography } from '@material-ui/core'
+import { Grid, makeStyles, Typography } from '@material-ui/core'
 import React, { ReactElement } from 'react'
+import GradientButton from '../theme/extends';
 
 const useStyles = makeStyles(({spacing, breakpoints}) => ({
   root: {
@@ -86,7 +87,7 @@ export default function Competition(): ReactElement {
                 <Typography>{competition.description}</Typography>
               </div>
               <div>
-                <Button variant='contained' color="primary">Download Guide Book</Button>
+                <GradientButton variant='contained' color="primary">Download Guide Book</GradientButton>
               </div>
             </Grid>
           )
@@ -95,7 +96,7 @@ export default function Competition(): ReactElement {
       <div className={classes.reoffer}>
         <Typography variant="h1" align="center">Do you ready ?</Typography>
         <div>
-          <Button variant='contained' color="primary">Registrasi Kompetisi</Button>
+          <GradientButton variant='contained' color="primary">Registrasi Kompetisi</GradientButton>
         </div>
       </div>
     </div>
