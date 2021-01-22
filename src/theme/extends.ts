@@ -1,4 +1,5 @@
 import { Button, Typography, withStyles } from '@material-ui/core';
+import styled from 'styled-components';
 
 const GradientButton = withStyles({
   root: {
@@ -18,7 +19,14 @@ const GradientTypography = withStyles({
   }
 })(Typography)
 
+const StaticPageContainerStyled = styled.div`
+  margin: 0 auto;
+  max-width: 806px;
+  padding-top: 139px;
+`
+
 export {
   GradientButton,
-  GradientTypography
+  GradientTypography,
+  StaticPageContainerStyled as StaticPageContentStyled
 }
