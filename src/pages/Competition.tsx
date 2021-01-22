@@ -54,7 +54,8 @@ const useStyles = makeStyles(({spacing, breakpoints}) => ({
     '& h1': {
       fontSize: '70px',
       fontWeight: 'bold',
-      color: 'white'
+      color: 'white',
+      marginBottom: '27px'
     }
   }
 }))
