@@ -24,11 +24,14 @@ const useStyles = makeStyles(({ spacing }) => ({
     justifyContent: 'space-between',
     height: '100%',
     paddingTop: spacing(2),
-    paddingBottom: spacing(2)
+    paddingBottom: spacing(2),
   },
   navigationLink: {
     marginBottom: spacing(4),
-    cursor: 'pointer'
+    cursor: 'pointer',
+    display: 'block',
+    color: '#2F2F2F',
+    textDecoration: 'none'
   },
   closeIcon: {
     cursor: 'pointer'
@@ -81,8 +84,8 @@ export default function NavigationResponsive(props: NavigationResponsiveProps): 
             <Grid item>
               {listNavigationLink.map((link) => {
                 return (
-                  <Link key={link.id} to={link.href}>
-                    <Typography className={classes.navigationLink}>{link.name}</Typography>
+                  <Link key={link.id} to={link.href} className={classes.navigationLink}>
+                    <Typography>{link.name}</Typography>
                   </Link>
                 )
               })}
