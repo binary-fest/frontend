@@ -17,7 +17,7 @@ const useStyles = makeStyles(({palette, breakpoints}) => ({
   },
   decoration1: {
     display: 'none',
-    position: 'fixed',
+    position: 'absolute',
     top: '236px',
     left: '60px',
     [breakpoints.up('sm')]: {
