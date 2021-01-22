@@ -32,10 +32,13 @@ const useStyles = makeStyles(({spacing, breakpoints}) => ({
         fontWeight: 'bold',
         marginBottom: spacing(2)
       },
-      '& img': {
+      '& .competition-image': {
         width: '100%',
         maxWidth: '363px',
         borderRadius: '0 20px 0 20px'
+      },
+      '& .download-icon': {
+        marginRight: spacing(2)
       },
       '& *': {
         textAlign: 'center'
@@ -76,13 +79,15 @@ export default function Competition(): ReactElement {
         {competitions.map(competition => {
           return (
             <Grid item key={competition.title} className="competition-item">
-              <img src={competition.imageUrl} alt={competition.title} />
+              <img src={competition.imageUrl} alt={competition.title} className="competition-image"/>
               <div className="competition-content">
                 <Typography variant="h1">{competition.title}</Typography>
                 <Typography>{competition.description}</Typography>
               </div>
               <div>
-                <GradientButton variant='contained' color="primary">Download Guide Book</GradientButton>
+                <GradientButton variant='contained' color="primary">
+                  <img src="/download-icon.svg" alt="Download guide book" className="download-icon"/>
+                  Download Guide Book</GradientButton>
               </div>
             </Grid>
           )
