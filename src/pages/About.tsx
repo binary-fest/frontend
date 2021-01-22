@@ -59,6 +59,25 @@ const useStyles = makeStyles(({ spacing, breakpoints }) => ({
       marginLeft: 'auto',
       marginRight: 'auto',
     }
+  },
+  titleTrapezoid: {
+    backgroundImage: 'url(/trapezoid.svg)',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    height: '79.5px',
+    marginBottom: '56px'
+  },
+  visi: {
+    color: 'white',
+    marginBottom: '84px',
+    '& h1': {
+      fontSize: '30px',
+      fontWeight: 'bold'
+    },
   }
 }))
 
@@ -87,6 +106,14 @@ export default function About(): ReactElement {
         </Grid>
         <Grid item>
           <img src="/quote-icon.svg" alt="quote"/>
+        </Grid>
+      </Grid>
+      <Grid container className={classes.visi} direction="column">
+        <Grid item>
+          <Typography variant="h1" className={classes.titleTrapezoid}>Visi</Typography>
+        </Grid>
+        <Grid item>
+          <Typography align="center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Risus vitae id odio at mi mauris. Dolor purus lacus risus rhoncus. Interdum lobortis massa nisi, turpis dictum fusce ultrices. Turpis bibendum cursus ut a mauris, mi sit quam.  Dolor purus lacus risus rhoncus. Interdum lobortis massa nisi, turpis dictum fusce ultrices. Turpis bibendum cursus ut a mauris, mi sit quam.</Typography>
         </Grid>
       </Grid>
     </StaticPageContentStyled>
