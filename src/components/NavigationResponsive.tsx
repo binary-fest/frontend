@@ -59,15 +59,15 @@ export default function NavigationResponsive(props: NavigationResponsiveProps): 
   const contactLink = [{
     name: 'Instagram',
     url: '/',
-    svgUrl: '/instagram-icon.svg'
+    svgUrl: '/instagram-icon-gradient.svg'
   }, {
     name: 'Telegram',
     url: '/',
-    svgUrl: '/telegram-icon.svg'
+    svgUrl: '/telegram-icon-gradient.svg'
   }, {
     name: 'Youtube',
     url: '/',
-    svgUrl: '/youtube-icon.svg'
+    svgUrl: '/youtube-icon-gradient.svg'
   }]
   
   const hideHandler = () => {
