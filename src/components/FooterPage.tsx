@@ -6,6 +6,7 @@ import { footerLinks } from '../store/links'
 const useStyles = makeStyles(({ spacing, breakpoints }) => ({
   root: {
     maxWidth: '924px',
+    paddingBottom: spacing(5)
   },
   footer: {
     margin: '0 auto',
