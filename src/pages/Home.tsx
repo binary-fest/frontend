@@ -53,7 +53,10 @@ const useStyles = makeStyles(({breakpoints, spacing}) => ({
         marginTop: spacing(2),
         [breakpoints.up('md')]: {
           maxWidth: '535px',
-        }
+          '& div': {
+            width: '95px'
+          }
+        },
       }
     },
   }
