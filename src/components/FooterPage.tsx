@@ -1,5 +1,6 @@
 import { Container, Grid, makeStyles, Typography } from '@material-ui/core'
 import React, { ReactElement } from 'react'
+import { Link } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import { footerLinks } from '../store/links'
 
@@ -45,6 +46,8 @@ const useStyles = makeStyles(({ spacing, breakpoints }) => ({
 export default function FooterPage(): ReactElement {
   const listFooterLinks = useRecoilValue(footerLinks)
 
+  const scrollToTop = () => window.scrollTo(0, 0)
+
   const classes = useStyles()
 
   return (
@@ -54,11 +57,18 @@ export default function FooterPage(): ReactElement {
           return (
             <Grid item key={contact.group} className="nav-group" xs={12} md={3} sm={4}>
               <Typography className="title" color="inherit">{contact.group}</Typography>
-              {contact.list.map((item: any) => (
-                <a key={item.name} href={item.href}>
-                  <Typography>{item.name}</Typography>
-                </a>
-              ))}
+              {contact.group.toLowerCase() === "menu" ?
+                contact.list.map((item: any) => (
+                  <Link key={item.name} to={item.href} onClick={scrollToTop}>
+                    <Typography>{item.name}</Typography>
+                  </Link>
+                )) :
+                contact.list.map((item: any) => (
+                  <a key={item.name} href={item.href}>
+                    <Typography>{item.name}</Typography>
+                  </a>
+                ))
+              }
             </Grid>
           )
         })}
