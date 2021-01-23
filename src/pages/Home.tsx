@@ -1,6 +1,5 @@
-import { Grid, makeStyles, Typography } from '@material-ui/core'
+import { makeStyles, Typography } from '@material-ui/core'
 import React, { ReactElement } from 'react'
-import useCountdown from '../hooks/useCountdown'
 import useTitlePage from '../hooks/useTitlePage'
 import { GradientTypography } from '../theme/extends'
 
@@ -64,8 +63,6 @@ const useStyles = makeStyles(({breakpoints, spacing}) => ({
 
 export default function Home(): ReactElement {
   useTitlePage("BinaryFest 2021")
-  const [dateRemain] = useCountdown()
-
   const classes = useStyles()
 
   return (
@@ -81,16 +78,6 @@ export default function Home(): ReactElement {
         <Typography
           className="date"
         >ON MARCH 2021</Typography>
-        <Grid container justify="space-between" className="detail-container">
-          {dateRemain.map(detail => {
-            return (
-              <Grid item key={detail.text}>
-                <Typography className="detail-remain">{detail.remain}</Typography>
-                <GradientTypography className="detail-text">{detail.text}</GradientTypography>
-              </Grid>
-            )
-          })}
-        </Grid>
       </div>
     </div>
   )
