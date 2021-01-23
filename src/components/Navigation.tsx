@@ -1,8 +1,5 @@
-import { Container, Grid, makeStyles, Typography } from '@material-ui/core'
+import { Container, Grid, makeStyles } from '@material-ui/core'
 import React, { ReactElement, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { useRecoilValue } from 'recoil'
-import { navigationLinks } from '../store/links'
 import NavigationResponsive from './NavigationResponsive'
 
 const useStyles = makeStyles(({spacing, breakpoints}) => ({
@@ -41,8 +38,6 @@ const useStyles = makeStyles(({spacing, breakpoints}) => ({
 export default function Navigation(): ReactElement {
   const [isNavigationResponsiveShow, setIsNavigationResponsiveShow] = useState(false)
 
-  const listNavigationLink = useRecoilValue(navigationLinks)
-
   const toggleNavigationResponsive = () => setIsNavigationResponsiveShow(!isNavigationResponsiveShow)
 
   const classes = useStyles()
@@ -60,15 +55,6 @@ export default function Navigation(): ReactElement {
             alt="Binary Fest"
             onClick={toggleNavigationResponsive}
           />
-          <div className={classes.listLink}>
-            {listNavigationLink.map(link => {
-              return (
-                <Link key={link.id} to={link.href}>
-                  <Typography>{link.name}</Typography>
-                </Link>
-              )
-            })}
-          </div>
         </Grid>
       </Grid>
       { isNavigationResponsiveShow && <NavigationResponsive toggleHandler={setIsNavigationResponsiveShow}/> }
