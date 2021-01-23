@@ -1,5 +1,6 @@
 import { Grid, makeStyles, Typography } from '@material-ui/core'
 import React, { ReactElement } from 'react'
+import useTitlePage from '../hooks/useTitlePage'
 import { GradientTypography, StaticPageContentStyled } from '../theme/extends'
 
 const useStyles = makeStyles(({ spacing, breakpoints }) => ({
@@ -111,6 +112,7 @@ const useStyles = makeStyles(({ spacing, breakpoints }) => ({
 }))
 
 export default function About(): ReactElement {
+  useTitlePage("About - BinaryFest")
   const classes = useStyles()
 
   const missions = [{

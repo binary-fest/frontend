@@ -1,5 +1,6 @@
 import { Grid, makeStyles, Typography } from '@material-ui/core'
 import React, { ReactElement } from 'react'
+import useTitlePage from '../hooks/useTitlePage'
 import { GradientTypography } from '../theme/extends'
 
 const useStyles = makeStyles(({breakpoints, spacing}) => ({
@@ -58,6 +59,8 @@ const useStyles = makeStyles(({breakpoints, spacing}) => ({
 }))
 
 export default function Home(): ReactElement {
+  useTitlePage("BinaryFest 2021")
+
   const dateDetails = [{
       remain: '12',
       text: 'Day'

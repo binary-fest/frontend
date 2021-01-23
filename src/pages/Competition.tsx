@@ -1,5 +1,6 @@
 import { Grid, makeStyles, Typography } from '@material-ui/core'
 import React, { ReactElement } from 'react'
+import useTitlePage from '../hooks/useTitlePage';
 import { GradientButton, GradientTypography, StaticPageContentStyled } from '../theme/extends';
 
 const useStyles = makeStyles(({spacing, breakpoints}) => ({
@@ -56,6 +57,8 @@ const useStyles = makeStyles(({spacing, breakpoints}) => ({
 }))
 
 export default function Competition(): ReactElement {
+  useTitlePage("Competition - BinaryFest")
+
   const competitions = [{
     title: 'UI / UX',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut facilisis eu lacus vel aliquam. Suspendisse potenti. Ut sed orci quis nisl lacinia ullamcorper.',
