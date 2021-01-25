@@ -14,9 +14,16 @@ const useStyles = makeStyles(({breakpoints, spacing}) => ({
       '& *': {
         textAlign: 'center'
       },
-      '& img': {
+      '& .binary-fest-logo': {
         [breakpoints.up('md')]: {
           width: '225px'
+        },
+      },
+      '& .arrows-down': {
+        position: 'relative',
+        top: '79px',
+        [breakpoints.up('sm')]: {
+          display: 'none'
         },
       },
       '& .heading': {
@@ -78,13 +85,14 @@ export default function Home(): ReactElement {
   return (
     <div className={classes.hero}>
       <div className="hero-content">
-        <img src="/binary-fest-text-bottom.svg" alt="binary-fest"/>
+        <img src="/binary-fest-text-bottom.svg" className="binary-fest-logo" alt="binary-fest"/>
         <Typography
           className="coming-soon"
         >COMING SOON</Typography>
         <Typography
           className="tagline"
         >"Future Technology to Reinforce 9th Sustainable Developement"</Typography>
+        <img src="/arrows-down.svg" className="arrows-down" alt="arrows down"/>
       </div>
     </div>
   )
