@@ -36,7 +36,10 @@ const useStyles = makeStyles(({breakpoints, spacing}) => ({
       '& .tagline': {
         color: '#FFFFFF',
         fontSize: '18px',
-        lineHeight: '36px'
+        lineHeight: '36px',
+        [breakpoints.up('sm')]: {
+          width: '388px'
+        }
       },
       '& .detail-remain': {
         color: 'white',
