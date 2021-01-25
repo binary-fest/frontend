@@ -1,7 +1,6 @@
 import { makeStyles, Typography } from '@material-ui/core'
 import React, { ReactElement } from 'react'
 import useTitlePage from '../hooks/useTitlePage'
-import { GradientTypography } from '../theme/extends'
 
 const useStyles = makeStyles(({breakpoints, spacing}) => ({
   hero: {
@@ -23,9 +22,7 @@ const useStyles = makeStyles(({breakpoints, spacing}) => ({
       },
       '& .coming-soon': {
         fontSize: '50px',
-        [breakpoints.up('md')]: {
-          fontSize: '72px',
-        }
+        color: '#CBCBCB'
       },
       '& .date': {
         color: '#C4C4C4',
@@ -72,9 +69,9 @@ export default function Home(): ReactElement {
           style={{color: 'white'}}
           className="heading"
         >Want to Be First BinaryFest Pariticipant ?</Typography>
-        <GradientTypography
+        <Typography
           className="coming-soon"
-        >COMING SOON</GradientTypography>
+        >COMING SOON</Typography>
         <Typography
           className="date"
         >ON MARCH 2021</Typography>
