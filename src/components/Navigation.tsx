@@ -6,7 +6,7 @@ const useStyles = makeStyles(({spacing, breakpoints}) => ({
   root: {
     top: spacing(2),
     position: 'absolute',
-    maxWidth: 'none'
+    maxWidth: 'none',
   },
   hamburgerIcon: {
     cursor: 'pointer',
@@ -32,7 +32,20 @@ const useStyles = makeStyles(({spacing, breakpoints}) => ({
       left: "50%",
       transform: 'translateX(-50%)'
     }
-  }
+  },
+  decoration2: {
+    display: 'none',
+    position: 'absolute',
+    right: '30px',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    [breakpoints.up('sm')]: {
+      display: 'block'
+    },
+    [breakpoints.up('md')]: {
+      right: '66px'
+    }
+  },
 }))
 
 export default function Navigation(): ReactElement {
@@ -57,6 +70,7 @@ export default function Navigation(): ReactElement {
           />
         </Grid>
       </Grid>
+      <img src="/decoration-2.svg" alt="decoration-2" className={classes.decoration2}/>
       { isNavigationResponsiveShow && <NavigationResponsive toggleHandler={setIsNavigationResponsiveShow}/> }
     </Container>
   )
