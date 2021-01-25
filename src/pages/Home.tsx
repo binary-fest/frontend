@@ -88,11 +88,35 @@ const useStyles = makeStyles(({breakpoints, spacing}) => ({
     '& h3': {
       color: 'white'
     },
+    [breakpoints.up('sm')]: {
+      padding: '21px 36px',
+      position: 'absolute',
+      bottom: '0',
+      left: '50%',
+      transform: 'translateX(-50%)',
+      maxWidth: '500px',
+      width: '100%'
+    },
+    [breakpoints.up('md')]: {
+      padding: '21px 36px',
+      maxWidth: '671px',
+    },
+    '& .footer-links': {
+      [breakpoints.up('sm')]: {
+        flexDirection: 'row',
+        maxWidth: '366px',
+        justifyContent: 'space-between',
+        margin: '0 auto'
+      }
+    },
     '& .footer-link': {
       color: 'white',
       textDecoration: 'none',
       marginTop: '56px',
-      display: 'block'
+      display: 'block',
+      [breakpoints.up('sm')]: {
+        marginTop: '24px'
+      }
     },
     '& .footer-credit': {
       '& .footer-link': {
@@ -142,7 +166,7 @@ export default function Home(): ReactElement {
             >Want to Be The First BinaryFest Participant ?</Typography>
           </Grid>
           <Grid item>
-            <Grid container direction="column" alignItems="center">
+            <Grid container direction="column" alignItems="center" className="footer-links">
               {links.map((link) => {
                 return (
                   <Grid item key={link.id}>

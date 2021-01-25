@@ -15,12 +15,10 @@ const useStyles = makeStyles(({ palette, breakpoints }) => ({
     overflowY: 'hidden',
     width: '17px',
     height: '100vh',
-    [breakpoints.up('sm')]: {
-      display: 'flex'
-    },
     top: '236px',
     left: '60px',
     [breakpoints.up('md')]: {
+      display: 'flex',
       left: '96px'
     }
   },
