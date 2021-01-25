@@ -93,6 +93,22 @@ const useStyles = makeStyles(({breakpoints, spacing}) => ({
       textDecoration: 'none',
       marginTop: '56px',
       display: 'block'
+    },
+    '& .footer-credit': {
+      '& .footer-link': {
+        marginTop: '28px',
+      },
+    },
+    '& .footer-separator': {
+      height: '1px',
+      backgroundColor: 'rgba(255, 255, 255, 0.17)',
+      width: '100%',
+      marginTop: '28px',
+    },
+    '& .footer-credit, & .footer-separator': {
+      [breakpoints.up('sm')]: {
+        display: 'none'
+      }
     }
   }
 }))
@@ -136,6 +152,10 @@ export default function Home(): ReactElement {
                   </Grid>
                 )
               })}
+              <div className="footer-separator" />
+              <Grid item className="footer-credit">
+                <Typography className="footer-link">© BinaryFest 2021</Typography>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
