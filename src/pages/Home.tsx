@@ -8,8 +8,16 @@ const useStyles = makeStyles(({breakpoints, spacing}) => ({
     display: 'flex',
     '& .hero-content': {
       margin: 'auto',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
       '& *': {
         textAlign: 'center'
+      },
+      '& img': {
+        [breakpoints.up('md')]: {
+          width: '225px'
+        },
       },
       '& .heading': {
         fontWeight: 'bold',
@@ -22,11 +30,13 @@ const useStyles = makeStyles(({breakpoints, spacing}) => ({
       },
       '& .coming-soon': {
         fontSize: '50px',
-        color: '#CBCBCB'
+        color: '#CBCBCB',
+        margin: '21px 0'
       },
-      '& .date': {
-        color: '#C4C4C4',
-        fontSize: '18px'
+      '& .tagline': {
+        color: '#FFFFFF',
+        fontSize: '18px',
+        lineHeight: '36px'
       },
       '& .detail-remain': {
         color: 'white',
@@ -65,16 +75,13 @@ export default function Home(): ReactElement {
   return (
     <div className={classes.hero}>
       <div className="hero-content">
-        <Typography
-          style={{color: 'white'}}
-          className="heading"
-        >Want to Be First BinaryFest Pariticipant ?</Typography>
+        <img src="/binary-fest-text-bottom.svg" alt="binary-fest"/>
         <Typography
           className="coming-soon"
         >COMING SOON</Typography>
         <Typography
-          className="date"
-        >ON MARCH 2021</Typography>
+          className="tagline"
+        >"Future Technology to Reinforce 9th Sustainable Developement"</Typography>
       </div>
     </div>
   )
