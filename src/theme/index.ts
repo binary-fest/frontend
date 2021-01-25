@@ -1,6 +1,15 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
+  overrides: {
+    MuiTypography: {
+      h3: {
+        fontSize: '24px',
+        fontWeight: 'bold',
+        lineHeight: '36px'
+      }
+    }
+  },
   typography: {
     fontFamily: "'Montserrat', sans-serif"
   },
