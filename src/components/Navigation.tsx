@@ -2,11 +2,14 @@ import { Container, Grid, makeStyles } from '@material-ui/core'
 import React, { ReactElement, useState } from 'react'
 import NavigationResponsive from './NavigationResponsive'
 
-const useStyles = makeStyles(({spacing, breakpoints}) => ({
+const useStyles = makeStyles(({ spacing, breakpoints }) => ({
   root: {
     top: spacing(2),
     position: 'absolute',
     maxWidth: 'none',
+    [breakpoints.up('md')]: {
+      padding: '0 96px'
+    }
   },
   hamburgerIcon: {
     cursor: 'pointer',
@@ -46,6 +49,17 @@ const useStyles = makeStyles(({spacing, breakpoints}) => ({
       right: '66px'
     }
   },
+  mobileIcon: {
+    [breakpoints.up('md')]: {
+      display: 'none'
+    }
+  },
+  desktopIcon: {
+    display: 'none',
+    [breakpoints.up('md')]: {
+      display: 'block'
+    }
+  }
 }))
 
 export default function Navigation(): ReactElement {
@@ -59,7 +73,8 @@ export default function Navigation(): ReactElement {
     <Container className={classes.root}>
       <Grid container justify="space-between" alignItems="center">
         <Grid item>
-          <img src="/binary-fest-logo-mobile.svg" alt="Binary Fest"/>
+          <img src="/binary-fest-logo-mobile.svg" alt="Binary Fest" className={classes.mobileIcon}/>
+          <img src="/binary-fest-text-right.svg" alt="Binary Fest" className={classes.desktopIcon}/>
         </Grid>
         <Grid item className={classes.containerLinkResponsive}>
           <img
