@@ -165,6 +165,26 @@ const useStyles = makeStyles(({breakpoints, spacing}) => ({
       overflowX: 'hidden',
     }
   },
+  arrows: {
+    position: 'relative',
+    top: '50px',
+    '& span': {
+      width: '27px',
+      height: '27px',
+      borderBottom: '1px solid #fff',
+      borderRight: '1px solid #fff',
+      transform: 'rotate(45deg)',
+      display: 'block',
+      animation: '$arrows 1s linear infinite',
+      margin: '0 auto',
+      '&:nth-child(2)': {
+        animationDelay: '0.2s'
+      },
+      '&:nth-child(3)': {
+        animationDelay: '0.4s'
+      }
+    }
+  },
   "@keyframes loading": {
     "0%": {
       width: '0%'
@@ -180,6 +200,19 @@ const useStyles = makeStyles(({breakpoints, spacing}) => ({
     "100%": {
       opacity: 1
     }
+  },
+  '@keyframes arrows': {
+    '0%': {
+      opacity: 0,
+      transform: 'rotate(45deg) translate(-27px, -27px)'
+    },
+    '50%': {
+      opacity: 1
+    },
+    '100%': {
+      opacity: 0,
+      transform: 'rotate(45deg) translate(27px, 27px)'
+    },
   }
 }))
 
@@ -200,10 +233,16 @@ export default function Home(): ReactElement {
           <Typography
             className="tagline"
           >"Future Technology to Reinforce 9th Sustainable Developement"</Typography>
-          <img src="/arrows-down.svg" className="arrows-down" alt="arrows down"/>
+          <a href="#start">
+            <div className={classes.arrows}>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </a>
         </div>
       </div>
-      <div className={classes.footer}>
+      <div className={classes.footer} id="start">
         <Grid container direction="column">
           <Grid item>
             <Typography
