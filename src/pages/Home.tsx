@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import useTitlePage from '../hooks/useTitlePage'
 import { navigationLinks } from '../store/links'
-import { GradientTypography, WhiteTypography } from '../theme/extends'
 
 const useStyles = makeStyles(({breakpoints, spacing}) => ({
   hero: {
@@ -138,15 +137,48 @@ const useStyles = makeStyles(({breakpoints, spacing}) => ({
   },
   loadingText: {
     display: 'none',
+    position: 'absolute',
+    right: '70px',
+    bottom: '15px',
+    '& span': {
+      fontWeight: 'bold',
+      fontSize: '24px',
+      fontStyle: 'italic'
+    },
     [breakpoints.up('lg')]: {
-      display: 'block',
+      display: 'flex',
+    }
+  },
+  animateLoadingText: {
+    color: 'rgba(0, 0, 0, 0.0)',
+    position: 'relative',
+    '-webkit-text-stroke': '0.05vw white',
+    animation: '$opacity 1s linear infinite alternate',
+    '&::before': {
+      animation: '$loading 6s linear infinite',
+      content: 'attr(data-text)',
+      fontFamily: "'Montserrat', sans-serif",
+      '-webkit-text-stroke': '0.05vw white',
       position: 'absolute',
-      right: '70px',
-      bottom: '15px',
-      '& span': {
-        fontSize: '24px',
-        fontStyle: 'italic'
-      }
+      width: '100%',
+      color: 'white',
+      overflowX: 'hidden',
+    }
+  },
+  "@keyframes loading": {
+    "0%": {
+      width: '0%'
+    },
+    "100%": {
+      width: '100%'
+    }
+  },
+  "@keyframes opacity": {
+    "0%": {
+      opacity: 0.5
+    },
+    "100%": {
+      opacity: 1
     }
   }
 }))
@@ -200,8 +232,11 @@ export default function Home(): ReactElement {
       </div>
       <div className={classes.loadingText}>
         <span>
-          <GradientTypography variant="caption">Loadi</GradientTypography>
-          <WhiteTypography variant="caption">ng...</WhiteTypography>
+          <Typography
+            variant="caption"
+            data-text="Loading..." 
+            className={classes.animateLoadingText}
+          >Loading...</Typography>
         </span>
       </div>
     </>
