@@ -23,13 +23,6 @@ const useStyles = makeStyles(({breakpoints, spacing}) => ({
           width: '225px'
         },
       },
-      '& .arrows-down': {
-        position: 'relative',
-        top: '79px',
-        [breakpoints.up('sm')]: {
-          display: 'none'
-        },
-      },
       '& .heading': {
         fontWeight: 'bold',
         fontSize: '24px',
@@ -168,6 +161,9 @@ const useStyles = makeStyles(({breakpoints, spacing}) => ({
   arrows: {
     position: 'relative',
     top: '50px',
+    [breakpoints.up('sm')]: {
+      display: 'none'
+    },
     '& span': {
       width: '27px',
       height: '27px',
