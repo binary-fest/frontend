@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import useTitlePage from '../hooks/useTitlePage'
 import { navigationLinks } from '../store/links'
-import { GradientTypography, WhiteTypography } from '../theme/extends'
 
 const useStyles = makeStyles(({breakpoints, spacing}) => ({
   hero: {
@@ -22,13 +21,6 @@ const useStyles = makeStyles(({breakpoints, spacing}) => ({
       '& .binary-fest-logo': {
         [breakpoints.up('md')]: {
           width: '225px'
-        },
-      },
-      '& .arrows-down': {
-        position: 'relative',
-        top: '79px',
-        [breakpoints.up('sm')]: {
-          display: 'none'
         },
       },
       '& .heading': {
@@ -138,16 +130,85 @@ const useStyles = makeStyles(({breakpoints, spacing}) => ({
   },
   loadingText: {
     display: 'none',
+    position: 'absolute',
+    right: '70px',
+    bottom: '15px',
+    '& span': {
+      fontWeight: 'bold',
+      fontSize: '24px',
+      fontStyle: 'italic'
+    },
     [breakpoints.up('lg')]: {
-      display: 'block',
+      display: 'flex',
+    }
+  },
+  animateLoadingText: {
+    color: 'rgba(0, 0, 0, 0.0)',
+    position: 'relative',
+    '-webkit-text-stroke': '0.05vw white',
+    animation: '$opacity 1s linear infinite alternate',
+    '&::before': {
+      animation: '$loading 6s linear infinite',
+      content: 'attr(data-text)',
+      fontFamily: "'Montserrat', sans-serif",
+      '-webkit-text-stroke': '0.05vw white',
       position: 'absolute',
-      right: '70px',
-      bottom: '15px',
-      '& span': {
-        fontSize: '24px',
-        fontStyle: 'italic'
+      width: '100%',
+      color: 'white',
+      overflowX: 'hidden',
+    }
+  },
+  arrows: {
+    position: 'relative',
+    top: '50px',
+    [breakpoints.up('sm')]: {
+      display: 'none'
+    },
+    '& span': {
+      width: '27px',
+      height: '27px',
+      borderBottom: '1px solid #fff',
+      borderRight: '1px solid #fff',
+      transform: 'rotate(45deg)',
+      display: 'block',
+      animation: '$arrows 1s linear infinite',
+      margin: '0 auto',
+      '&:nth-child(2)': {
+        animationDelay: '0.2s'
+      },
+      '&:nth-child(3)': {
+        animationDelay: '0.4s'
       }
     }
+  },
+  "@keyframes loading": {
+    "0%": {
+      width: '0%'
+    },
+    "100%": {
+      width: '100%'
+    }
+  },
+  "@keyframes opacity": {
+    "0%": {
+      opacity: 0.5
+    },
+    "100%": {
+      opacity: 1
+    }
+  },
+  '@keyframes arrows': {
+    '0%': {
+      opacity: 0,
+      transform: 'rotate(45deg) translate(-27px, -27px)'
+    },
+    '50%': {
+      opacity: 1
+    },
+    '100%': {
+      opacity: 0,
+      transform: 'rotate(45deg) translate(27px, 27px)'
+    },
   }
 }))
 
@@ -168,10 +229,16 @@ export default function Home(): ReactElement {
           <Typography
             className="tagline"
           >"Future Technology to Reinforce 9th Sustainable Developement"</Typography>
-          <img src="/arrows-down.svg" className="arrows-down" alt="arrows down"/>
+          <a href="#start">
+            <div className={classes.arrows}>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </a>
         </div>
       </div>
-      <div className={classes.footer}>
+      <div className={classes.footer} id="start">
         <Grid container direction="column">
           <Grid item>
             <Typography
@@ -200,8 +267,11 @@ export default function Home(): ReactElement {
       </div>
       <div className={classes.loadingText}>
         <span>
-          <GradientTypography variant="caption">Loadi</GradientTypography>
-          <WhiteTypography variant="caption">ng...</WhiteTypography>
+          <Typography
+            variant="caption"
+            data-text="Loading..." 
+            className={classes.animateLoadingText}
+          >Loading...</Typography>
         </span>
       </div>
     </>
