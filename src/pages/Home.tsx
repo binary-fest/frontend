@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import useTitlePage from '../hooks/useTitlePage'
 import { navigationLinks } from '../store/links'
+import { GradientTypography, WhiteTypography } from '../theme/extends'
 
 const useStyles = makeStyles(({breakpoints, spacing}) => ({
   hero: {
@@ -134,6 +135,19 @@ const useStyles = makeStyles(({breakpoints, spacing}) => ({
         display: 'none'
       }
     }
+  },
+  loadingText: {
+    display: 'none',
+    [breakpoints.up('lg')]: {
+      display: 'block',
+      position: 'absolute',
+      right: '70px',
+      bottom: '15px',
+      '& span': {
+        fontSize: '24px',
+        fontStyle: 'italic'
+      }
+    }
   }
 }))
 
@@ -183,6 +197,12 @@ export default function Home(): ReactElement {
             </Grid>
           </Grid>
         </Grid>
+      </div>
+      <div className={classes.loadingText}>
+        <span>
+          <GradientTypography variant="caption">Loadi</GradientTypography>
+          <WhiteTypography variant="caption">ng...</WhiteTypography>
+        </span>
       </div>
     </>
   )
