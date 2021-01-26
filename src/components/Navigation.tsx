@@ -1,15 +1,15 @@
-import { Container, Grid, makeStyles, Typography } from '@material-ui/core'
+import { Container, Grid, makeStyles } from '@material-ui/core'
 import React, { ReactElement, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { useRecoilValue } from 'recoil'
-import { navigationLinks } from '../store/links'
 import NavigationResponsive from './NavigationResponsive'
 
-const useStyles = makeStyles(({spacing, breakpoints}) => ({
+const useStyles = makeStyles(({ spacing, breakpoints }) => ({
   root: {
     top: spacing(2),
     position: 'absolute',
-    maxWidth: 'none'
+    maxWidth: 'none',
+    [breakpoints.up('md')]: {
+      padding: '0 96px'
+    }
   },
   hamburgerIcon: {
     cursor: 'pointer',
@@ -35,13 +35,35 @@ const useStyles = makeStyles(({spacing, breakpoints}) => ({
       left: "50%",
       transform: 'translateX(-50%)'
     }
+  },
+  decoration2: {
+    display: 'none',
+    position: 'absolute',
+    right: '30px',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    [breakpoints.up('sm')]: {
+      display: 'block'
+    },
+    [breakpoints.up('md')]: {
+      right: '66px'
+    }
+  },
+  mobileIcon: {
+    [breakpoints.up('md')]: {
+      display: 'none'
+    }
+  },
+  desktopIcon: {
+    display: 'none',
+    [breakpoints.up('md')]: {
+      display: 'block'
+    }
   }
 }))
 
 export default function Navigation(): ReactElement {
   const [isNavigationResponsiveShow, setIsNavigationResponsiveShow] = useState(false)
-
-  const listNavigationLink = useRecoilValue(navigationLinks)
 
   const toggleNavigationResponsive = () => setIsNavigationResponsiveShow(!isNavigationResponsiveShow)
 
@@ -51,7 +73,8 @@ export default function Navigation(): ReactElement {
     <Container className={classes.root}>
       <Grid container justify="space-between" alignItems="center">
         <Grid item>
-          <img src="/binary-fest-logo-mobile.svg" alt="Binary Fest"/>
+          <img src="/binary-fest-logo-mobile.svg" alt="Binary Fest" className={classes.mobileIcon}/>
+          <img src="/binary-fest-text-right.svg" alt="Binary Fest" className={classes.desktopIcon}/>
         </Grid>
         <Grid item className={classes.containerLinkResponsive}>
           <img
@@ -60,17 +83,9 @@ export default function Navigation(): ReactElement {
             alt="Binary Fest"
             onClick={toggleNavigationResponsive}
           />
-          <div className={classes.listLink}>
-            {listNavigationLink.map(link => {
-              return (
-                <Link key={link.id} to={link.href}>
-                  <Typography>{link.name}</Typography>
-                </Link>
-              )
-            })}
-          </div>
         </Grid>
       </Grid>
+      <img src="/decoration-2.svg" alt="decoration-2" className={classes.decoration2}/>
       { isNavigationResponsiveShow && <NavigationResponsive toggleHandler={setIsNavigationResponsiveShow}/> }
     </Container>
   )

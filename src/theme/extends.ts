@@ -19,6 +19,12 @@ const GradientTypography = withStyles({
   }
 })(Typography)
 
+const WhiteTypography = withStyles({
+  root: {
+    color: 'white'
+  }
+})(Typography)
+
 const StaticPageContainerStyled = styled.div`
   margin: 0 auto;
   max-width: 806px;
@@ -28,5 +34,6 @@ const StaticPageContainerStyled = styled.div`
 export {
   GradientButton,
   GradientTypography,
-  StaticPageContainerStyled as StaticPageContentStyled
+  StaticPageContainerStyled as StaticPageContentStyled,
+  WhiteTypography
 }

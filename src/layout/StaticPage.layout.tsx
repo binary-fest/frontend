@@ -2,7 +2,6 @@ import { Container, makeStyles } from '@material-ui/core'
 import React, { ReactElement } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import FixedSocialMedia from '../components/FixedSocialMedia'
-import FooterPage from '../components/FooterPage'
 import Navigation from '../components/Navigation'
 import About from '../pages/About'
 import Competition from '../pages/Competition'
@@ -10,17 +9,21 @@ import Expo from '../pages/Expo'
 import Home from '../pages/Home'
 
 const useStyles = makeStyles(({ palette, breakpoints }) => ({
-  decoration1: {
+  decorationContainer: {
     display: 'none',
-    position: 'absolute',
+    position: 'fixed',
+    overflowY: 'hidden',
+    width: '17px',
+    height: '100vh',
     top: '236px',
     left: '60px',
-    [breakpoints.up('sm')]: {
-      display: 'flex'
-    },
     [breakpoints.up('md')]: {
+      display: 'flex',
       left: '96px'
     }
+  },
+  decoration1: {
+    position: 'absolute',
   }
 }))
 
@@ -56,14 +59,15 @@ export default function StaticPageLayout(): ReactElement {
   return (
     <>
       <Navigation />
-      <img className={classes.decoration1} src="/decoration-1.svg" alt="decoration" />
+      <div className={classes.decorationContainer}>
+        <img className={classes.decoration1} src="/decoration-1.svg" alt="decoration" />
+      </div>
       <FixedSocialMedia />
       <Container>
         <Switch>
           <RouteComponents />
         </Switch>
       </Container>
-      <FooterPage />  
     </>
   )
 }
