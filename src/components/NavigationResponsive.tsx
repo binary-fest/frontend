@@ -1,5 +1,6 @@
 import { Container, Grid, makeStyles, Typography } from '@material-ui/core'
-import React, { ReactElement } from 'react'
+import clsx from 'clsx'
+import React, { ReactElement, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { navigationLinks, socialMediaIcons } from '../store/links'
@@ -17,7 +18,13 @@ const useStyles = makeStyles(({ spacing }) => ({
     zIndex: 1000,
     width: "80%",
     top: "0",
-    right: "0"
+  },
+  showNav: {
+    right: '0',
+    animation: '$showNav .5s linear alternate',
+  },
+  hideNav: {
+    animation: '$hideNav .5s linear alternate',
   },
   container: {
     display: 'flex',
@@ -51,23 +58,43 @@ const useStyles = makeStyles(({ spacing }) => ({
     width: '174px',
     display: 'flex',
     justifyContent: 'space-between'
+  },
+  '@keyframes showNav': {
+    '0%': {
+      right: '-100%'
+    },
+    '100%': {
+      right: '0'
+    }
+  },
+  '@keyframes hideNav': {
+    '0%': {
+      right: '0'
+    },
+    '100%': {
+      right: '-100%'
+    }
   }
 }))
 
 export default function NavigationResponsive(props: NavigationResponsiveProps): ReactElement {
   const listNavigationLink = useRecoilValue(navigationLinks)
   const listSocialMedia = useRecoilValue(socialMediaIcons)
-  const [, setIsNavigationShow] = useRecoilState(isNavigationResponsiveShowAtom)
+  const [isNavigationShow, setIsNavigationShow] = useRecoilState(isNavigationResponsiveShowAtom)
+  const [animationRoot, setAnimationRoot] = useState(isNavigationShow)
   
   const hideHandler = () => {
-    setIsNavigationShow(false)
+    setTimeout(() => {
+      setIsNavigationShow(false)
+    }, 500)
+    setAnimationRoot(false)
   }
 
   const classes = useStyles()
 
   return (
     <>
-      <div className={classes.root}>
+      <div className={clsx(classes.root, animationRoot ? classes.showNav : classes.hideNav)}>
         <Container className={classes.container}>
           <Grid container justify="space-between">
             <Grid item>
