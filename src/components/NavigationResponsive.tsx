@@ -1,11 +1,12 @@
 import { Container, Grid, makeStyles, Typography } from '@material-ui/core'
 import React, { ReactElement } from 'react'
 import { Link } from 'react-router-dom'
-import { useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import { navigationLinks, socialMediaIcons } from '../store/links'
+import { isNavigationResponsiveShowAtom } from '../store/ui'
 
 interface NavigationResponsiveProps {
-  toggleHandler: (status: boolean) => void
+  toggleHandler?: (status: boolean) => void
 }
 
 const useStyles = makeStyles(({ spacing }) => ({
@@ -13,7 +14,7 @@ const useStyles = makeStyles(({ spacing }) => ({
     backgroundColor: 'white',
     height: '100vh',
     position: 'fixed',
-    zIndex: 10,
+    zIndex: 1000,
     width: "80%",
     top: "0",
     right: "0"
@@ -40,8 +41,8 @@ const useStyles = makeStyles(({ spacing }) => ({
     backgroundColor: 'black',
     opacity: 0.5,
     width: '100%',
-    height: '100%',
-    zIndex: 5,
+    height: '100vh',
+    zIndex: 100,
     position: 'fixed',
     top: 0,
     left: 0
@@ -56,9 +57,10 @@ const useStyles = makeStyles(({ spacing }) => ({
 export default function NavigationResponsive(props: NavigationResponsiveProps): ReactElement {
   const listNavigationLink = useRecoilValue(navigationLinks)
   const listSocialMedia = useRecoilValue(socialMediaIcons)
+  const [, setIsNavigationShow] = useRecoilState(isNavigationResponsiveShowAtom)
   
   const hideHandler = () => {
-    props.toggleHandler(false)
+    setIsNavigationShow(false)
   }
 
   const classes = useStyles()

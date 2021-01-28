@@ -1,13 +1,15 @@
 import { Container, Grid, makeStyles } from '@material-ui/core'
-import React, { ReactElement, useState } from 'react'
+import React, { ReactElement } from 'react'
 import { Link } from 'react-router-dom'
-import NavigationResponsive from './NavigationResponsive'
+import { useRecoilState } from 'recoil'
+import { isNavigationResponsiveShowAtom } from '../store/ui'
 
 const useStyles = makeStyles(({ spacing, breakpoints }) => ({
   root: {
-    top: spacing(2),
+    paddingTop: spacing(2),
     position: 'absolute',
     maxWidth: 'none',
+    zIndex: 10,
     [breakpoints.up('md')]: {
       padding: '0 96px'
     }
@@ -64,7 +66,7 @@ const useStyles = makeStyles(({ spacing, breakpoints }) => ({
 }))
 
 export default function Navigation(): ReactElement {
-  const [isNavigationResponsiveShow, setIsNavigationResponsiveShow] = useState(false)
+  const [isNavigationResponsiveShow, setIsNavigationResponsiveShow] = useRecoilState(isNavigationResponsiveShowAtom)
 
   const toggleNavigationResponsive = () => setIsNavigationResponsiveShow(!isNavigationResponsiveShow)
 
@@ -89,7 +91,6 @@ export default function Navigation(): ReactElement {
         </Grid>
       </Grid>
       <img src="/decoration-2.svg" alt="decoration-2" className={classes.decoration2}/>
-      { isNavigationResponsiveShow && <NavigationResponsive toggleHandler={setIsNavigationResponsiveShow}/> }
     </Container>
   )
 }
