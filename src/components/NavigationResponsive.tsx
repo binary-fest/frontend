@@ -71,6 +71,13 @@ export default function NavigationResponsive(props: NavigationResponsiveProps): 
         <Container className={classes.container}>
           <Grid container justify="space-between">
             <Grid item>
+              <Link
+                onClick={hideHandler}
+                to="/"
+                className={classes.navigationLink}
+              >
+                <Typography>Homepage</Typography>
+              </Link>
               {listNavigationLink.map((link) => {
                 return (
                   <Link
