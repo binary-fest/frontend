@@ -11,7 +11,8 @@ const useStyles = makeStyles(({ spacing, breakpoints }) => ({
     maxWidth: 'none',
     zIndex: 10,
     [breakpoints.up('md')]: {
-      padding: '0 96px'
+      padding: '0 96px',
+      paddingTop: spacing(2),
     }
   },
   hamburgerIcon: {
