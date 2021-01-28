@@ -4,6 +4,8 @@ import { RecoilRoot } from 'recoil';
 import StaticPageLayout from './layout/StaticPage.layout';
 import AOS from 'aos';
 
+import './styles/root.css';
+
 const useStyles = makeStyles(({palette, breakpoints}) => ({
   root: {
     minHeight: '100vh',
