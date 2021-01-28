@@ -20,7 +20,7 @@ const navigationLinks = atom<LinkState[]>({
   }, {
     id: 2,
     name: 'Kompetisi',
-    href: '/competition'
+    href: '/'
   }, {
     id: 3,
     name: 'Tech Expo',
