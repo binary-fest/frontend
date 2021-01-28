@@ -70,7 +70,7 @@ export default function Navigation(): ReactElement {
   const classes = useStyles()
 
   return (
-    <Container className={classes.root}>
+    <Container className={classes.root} data-aos="fade-down">
       <Grid container justify="space-between" alignItems="center">
         <Grid item>
           <img src="/binary-fest-logo-mobile.svg" alt="Binary Fest" className={classes.mobileIcon}/>

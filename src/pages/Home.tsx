@@ -222,12 +222,16 @@ export default function Home(): ReactElement {
     <>
       <div className={classes.hero}>
         <div className="hero-content">
-          <img src="/binary-fest-text-bottom.svg" className="binary-fest-logo" alt="binary-fest"/>
+          <img data-aos="fade-up" src="/binary-fest-text-bottom.svg" className="binary-fest-logo" alt="binary-fest"/>
           <Typography
             className="coming-soon"
+            data-aos="fade-up"
+            data-aos-delay="500"
           >COMING SOON</Typography>
           <Typography
             className="tagline"
+            data-aos="fade-up"
+            data-aos-delay="1000"
           >"Future Technology to Reinforce 9th Sustainable Developement"</Typography>
           <a href="#start">
             <div className={classes.arrows}>
@@ -238,7 +242,10 @@ export default function Home(): ReactElement {
           </a>
         </div>
       </div>
-      <div className={classes.footer} id="start">
+      <div
+        className={classes.footer}
+        id="start"
+      >
         <Grid container direction="column">
           <Grid item>
             <Typography
