@@ -29,16 +29,18 @@ export default function FixedSocialMedia(): ReactElement {
   const classes = useStyles()
 
   return (
-    <Grid container className={classes.root} direction="column">
-      {listSocialMedia.map((item) => {
-        return (
-          <Grid item key={item.name}>
-            <a href={item.href}>
-              <img src={item.whiteSvgFile} alt={item.name} />
-            </a>
-          </Grid>
-        )
-      })}
-    </Grid>
+    <div className={classes.root}>
+      <Grid container direction="column" data-aos="fade-left">
+        {listSocialMedia.map((item) => {
+          return (
+            <Grid item key={item.name}>
+              <a href={item.href}>
+                <img src={item.whiteSvgFile} alt={item.name} />
+              </a>
+            </Grid>
+          )
+        })}
+      </Grid>
+    </div>
   )
 }

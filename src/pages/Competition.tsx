@@ -1,5 +1,6 @@
 import { Grid, makeStyles, Typography } from '@material-ui/core'
 import React, { ReactElement } from 'react'
+import FooterPage from '../components/FooterPage';
 import useTitlePage from '../hooks/useTitlePage';
 import { GradientButton, GradientTypography, StaticPageContentStyled } from '../theme/extends';
 
@@ -77,9 +78,15 @@ export default function Competition(): ReactElement {
     <StaticPageContentStyled>
       <GradientTypography className={classes.heading} align="center">Kompetisi</GradientTypography>
       <Grid container className={classes.listCompetition} justify="space-between">
-        {competitions.map(competition => {
+        {competitions.map((competition, index) => {
           return (
-            <Grid item key={competition.title} className="competition-item">
+            <Grid
+              item
+              key={competition.title}
+              className="competition-item"
+              data-aos="fade-up"
+              data-aos-delay={index * 500}
+            >
               <img src={competition.imageUrl} alt={competition.title} className="competition-image"/>
               <div className="competition-content">
                 <Typography variant="h1">{competition.title}</Typography>
@@ -94,12 +101,13 @@ export default function Competition(): ReactElement {
           )
         })}
       </Grid>
-      <div className={classes.reoffer}>
+      <div className={classes.reoffer} data-aos="zoom-in">
         <Typography variant="h1" align="center">Do you ready ?</Typography>
         <div>
           <GradientButton variant='contained' color="primary">Registrasi Kompetisi</GradientButton>
         </div>
       </div>
+      <FooterPage />
     </StaticPageContentStyled>
   )
 }

@@ -1,11 +1,13 @@
 import { Container, Grid, makeStyles, Typography } from '@material-ui/core'
-import React, { ReactElement } from 'react'
+import clsx from 'clsx'
+import React, { ReactElement, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import { navigationLinks, socialMediaIcons } from '../store/links'
+import { isNavigationResponsiveShowAtom } from '../store/ui'
 
 interface NavigationResponsiveProps {
-  toggleHandler: (status: boolean) => void
+  toggleHandler?: (status: boolean) => void
 }
 
 const useStyles = makeStyles(({ spacing }) => ({
@@ -13,10 +15,16 @@ const useStyles = makeStyles(({ spacing }) => ({
     backgroundColor: 'white',
     height: '100vh',
     position: 'fixed',
-    zIndex: 10,
+    zIndex: 1000,
     width: "80%",
     top: "0",
-    right: "0"
+  },
+  showNav: {
+    right: '0',
+    animation: '$showNav .5s linear alternate',
+  },
+  hideNav: {
+    animation: '$hideNav .5s linear alternate',
   },
   container: {
     display: 'flex',
@@ -40,8 +48,8 @@ const useStyles = makeStyles(({ spacing }) => ({
     backgroundColor: 'black',
     opacity: 0.5,
     width: '100%',
-    height: '100%',
-    zIndex: 5,
+    height: '100vh',
+    zIndex: 100,
     position: 'fixed',
     top: 0,
     left: 0
@@ -50,28 +58,61 @@ const useStyles = makeStyles(({ spacing }) => ({
     width: '174px',
     display: 'flex',
     justifyContent: 'space-between'
+  },
+  '@keyframes showNav': {
+    '0%': {
+      right: '-100%'
+    },
+    '100%': {
+      right: '0'
+    }
+  },
+  '@keyframes hideNav': {
+    '0%': {
+      right: '0'
+    },
+    '100%': {
+      right: '-100%'
+    }
   }
 }))
 
 export default function NavigationResponsive(props: NavigationResponsiveProps): ReactElement {
   const listNavigationLink = useRecoilValue(navigationLinks)
   const listSocialMedia = useRecoilValue(socialMediaIcons)
+  const [isNavigationShow, setIsNavigationShow] = useRecoilState(isNavigationResponsiveShowAtom)
+  const [animationRoot, setAnimationRoot] = useState(isNavigationShow)
   
   const hideHandler = () => {
-    props.toggleHandler(false)
+    setTimeout(() => {
+      setIsNavigationShow(false)
+    }, 500)
+    setAnimationRoot(false)
   }
 
   const classes = useStyles()
 
   return (
     <>
-      <div className={classes.root}>
+      <div className={clsx(classes.root, animationRoot ? classes.showNav : classes.hideNav)}>
         <Container className={classes.container}>
           <Grid container justify="space-between">
             <Grid item>
+              <Link
+                onClick={hideHandler}
+                to="/"
+                className={classes.navigationLink}
+              >
+                <Typography>Homepage</Typography>
+              </Link>
               {listNavigationLink.map((link) => {
                 return (
-                  <Link key={link.id} to={link.href} className={classes.navigationLink}>
+                  <Link
+                    onClick={hideHandler}
+                    key={link.id}
+                    to={link.href}
+                    className={classes.navigationLink}
+                  >
                     <Typography>{link.name}</Typography>
                   </Link>
                 )

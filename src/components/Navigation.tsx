@@ -1,14 +1,18 @@
 import { Container, Grid, makeStyles } from '@material-ui/core'
-import React, { ReactElement, useState } from 'react'
-import NavigationResponsive from './NavigationResponsive'
+import React, { ReactElement } from 'react'
+import { Link } from 'react-router-dom'
+import { useRecoilState } from 'recoil'
+import { isNavigationResponsiveShowAtom } from '../store/ui'
 
 const useStyles = makeStyles(({ spacing, breakpoints }) => ({
   root: {
-    top: spacing(2),
+    paddingTop: spacing(2),
     position: 'absolute',
     maxWidth: 'none',
+    zIndex: 10,
     [breakpoints.up('md')]: {
-      padding: '0 96px'
+      padding: '0 96px',
+      paddingTop: spacing(2),
     }
   },
   hamburgerIcon: {
@@ -63,18 +67,20 @@ const useStyles = makeStyles(({ spacing, breakpoints }) => ({
 }))
 
 export default function Navigation(): ReactElement {
-  const [isNavigationResponsiveShow, setIsNavigationResponsiveShow] = useState(false)
+  const [isNavigationResponsiveShow, setIsNavigationResponsiveShow] = useRecoilState(isNavigationResponsiveShowAtom)
 
   const toggleNavigationResponsive = () => setIsNavigationResponsiveShow(!isNavigationResponsiveShow)
 
   const classes = useStyles()
 
   return (
-    <Container className={classes.root}>
+    <Container className={classes.root} data-aos="fade-down">
       <Grid container justify="space-between" alignItems="center">
         <Grid item>
-          <img src="/binary-fest-logo-mobile.svg" alt="Binary Fest" className={classes.mobileIcon}/>
-          <img src="/binary-fest-text-right.svg" alt="Binary Fest" className={classes.desktopIcon}/>
+          <Link to="/">
+            <img src="/binary-fest-logo-mobile.svg" alt="Binary Fest" className={classes.mobileIcon}/>
+            <img src="/binary-fest-text-right.svg" alt="Binary Fest" className={classes.desktopIcon}/>
+          </Link>
         </Grid>
         <Grid item className={classes.containerLinkResponsive}>
           <img
@@ -86,7 +92,6 @@ export default function Navigation(): ReactElement {
         </Grid>
       </Grid>
       <img src="/decoration-2.svg" alt="decoration-2" className={classes.decoration2}/>
-      { isNavigationResponsiveShow && <NavigationResponsive toggleHandler={setIsNavigationResponsiveShow}/> }
     </Container>
   )
 }

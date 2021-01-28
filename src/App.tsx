@@ -1,7 +1,8 @@
 import { makeStyles } from '@material-ui/core';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { RecoilRoot } from 'recoil';
 import StaticPageLayout from './layout/StaticPage.layout';
+import AOS from 'aos';
 
 const useStyles = makeStyles(({palette, breakpoints}) => ({
   root: {
@@ -12,6 +13,12 @@ const useStyles = makeStyles(({palette, breakpoints}) => ({
 
 function App() {
   const classes = useStyles()
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000
+    })
+  }, [])
 
   return (
     <RecoilRoot>
