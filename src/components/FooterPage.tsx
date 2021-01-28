@@ -38,7 +38,13 @@ const useStyles = makeStyles(({ spacing, breakpoints }) => ({
     },
     '& .icon-wrapper': {
       display: 'flex',
-      flexDirection: 'column'
+      flexDirection: 'column',
+      '& img': {
+        display: 'none',
+        [breakpoints.up('md')]: {
+          display: 'block',
+        },
+      },
     }
   }
 }))
