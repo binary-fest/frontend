@@ -1,5 +1,6 @@
 import { Container, Grid, makeStyles } from '@material-ui/core'
 import React, { ReactElement, useState } from 'react'
+import { Link } from 'react-router-dom'
 import NavigationResponsive from './NavigationResponsive'
 
 const useStyles = makeStyles(({ spacing, breakpoints }) => ({
@@ -73,8 +74,10 @@ export default function Navigation(): ReactElement {
     <Container className={classes.root} data-aos="fade-down">
       <Grid container justify="space-between" alignItems="center">
         <Grid item>
-          <img src="/binary-fest-logo-mobile.svg" alt="Binary Fest" className={classes.mobileIcon}/>
-          <img src="/binary-fest-text-right.svg" alt="Binary Fest" className={classes.desktopIcon}/>
+          <Link to="/">
+            <img src="/binary-fest-logo-mobile.svg" alt="Binary Fest" className={classes.mobileIcon}/>
+            <img src="/binary-fest-text-right.svg" alt="Binary Fest" className={classes.desktopIcon}/>
+          </Link>
         </Grid>
         <Grid item className={classes.containerLinkResponsive}>
           <img
