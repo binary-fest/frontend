@@ -1,5 +1,6 @@
 import { Grid, makeStyles, Typography } from '@material-ui/core'
 import React, { ReactElement } from 'react'
+import FooterPage from '../components/FooterPage';
 import useTitlePage from '../hooks/useTitlePage';
 import { GradientButton, GradientTypography, StaticPageContentStyled } from '../theme/extends';
 
@@ -100,6 +101,7 @@ export default function Competition(): ReactElement {
           <GradientButton variant='contained' color="primary">Registrasi Kompetisi</GradientButton>
         </div>
       </div>
+      <FooterPage />
     </StaticPageContentStyled>
   )
 }
