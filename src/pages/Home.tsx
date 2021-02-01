@@ -241,7 +241,7 @@ export default function Home(): ReactElement {
             className="tagline"
             data-aos="fade-up"
             data-aos-delay="1000"
-          >"Future Technology to Reinforce 9th Sustainable Developement"</Typography>
+          >"Future Technology to Reinforce 9th Sustainable Development"</Typography>
           <div onClick={scrollToFooter}>
             <div className={classes.arrows}>
               <span></span>
