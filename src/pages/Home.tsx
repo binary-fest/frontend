@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import useTitlePage from '../hooks/useTitlePage'
 import { navigationLinks } from '../store/links'
+import { Element, scroller } from 'react-scroll'
 
 const useStyles = makeStyles(({breakpoints, spacing}) => ({
   hero: {
@@ -216,6 +217,14 @@ export default function Home(): ReactElement {
   useTitlePage("BinaryFest 2021")
   const links = useRecoilValue(navigationLinks)
 
+  const scrollToFooter = () => {
+    scroller.scrollTo('scroll-to-element', {
+      duration: 500,
+      delay: 0,
+      smooth: 'linear'
+    })
+  }
+
   const classes = useStyles()
 
   return (
@@ -233,17 +242,18 @@ export default function Home(): ReactElement {
             data-aos="fade-up"
             data-aos-delay="1000"
           >"Future Technology to Reinforce 9th Sustainable Developement"</Typography>
-          <a href="#start">
+          <div onClick={scrollToFooter}>
             <div className={classes.arrows}>
               <span></span>
               <span></span>
               <span></span>
             </div>
-          </a>
+          </div>
         </div>
       </div>
-      <div
+      <Element
         className={classes.footer}
+        name="scroll-to-element"
         id="start"
       >
         <Grid container direction="column">
@@ -271,7 +281,7 @@ export default function Home(): ReactElement {
             </Grid>
           </Grid>
         </Grid>
-      </div>
+      </Element>
       <div className={classes.loadingText}>
         <span>
           <Typography
