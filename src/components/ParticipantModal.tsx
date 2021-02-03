@@ -8,22 +8,27 @@ import {
   InputLabel,
   RadioGroup,
   FormControlLabel,
-  Radio
+  Radio,
 } from '@material-ui/core'
 import React, { ReactElement } from 'react'
+import { GradientButton } from '../theme/extends'
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(({breakpoints}) => ({
   container: {
     position: 'fixed',
     zIndex: 10000,
+    top: '1rem',
     left: '50%',
-    top: '50%',
-    transform: 'translate(-50%, -50%)'
+    transform: 'translateX(-50%)'
   },
   root: {
+    display: 'flex',
+    flexDirection: 'column',
     backgroundColor: 'white',
     borderRadius: '10px',
     padding: '2rem',
+    maxHeight: '90vh',
+    overflowY: 'auto',
     '& h3': {
       marginBottom: '31px'
     }
@@ -35,6 +40,34 @@ const useStyles = makeStyles(() => ({
   },
   radioGroup: {
     flexDirection: 'row'
+  },
+  labelUpload: {
+    color: 'white',
+    cursor: 'pointer'
+  },
+  uploadContainer: {
+    '& > div': {
+      marginBottom: '1rem',
+      '& p': {
+        marginBottom: '.5rem'
+      },
+      '& .file-name': {
+        marginLeft: '1rem'
+      }
+    }
+  },
+  addParticipantButton: {
+    marginTop: '3rem',
+    [breakpoints.up('sm')]: {
+      marginTop: '1rem'
+    },
+    [breakpoints.up('md')]: {
+      marginLeft: 'auto',
+    },
+    '& button': {
+      color: 'white',
+      width: '100%'
+    },
   }
 }))
 
@@ -45,8 +78,8 @@ export default function ParticipantModal(): ReactElement {
     <Container className={classes.container}>
       <div className={classes.root}>
         <Typography variant="h3">Tambah Peserta</Typography>
-        <Grid container>
-          <Grid item xs={12} className={classes.formArea}>
+        <Grid container spacing={4}>
+          <Grid item xs={12} sm={6} className={classes.formArea}>
             <FormControl fullWidth>
               <InputLabel htmlFor="input-name">Nama</InputLabel>
               <Input id="input-name" fullWidth />
@@ -64,7 +97,7 @@ export default function ParticipantModal(): ReactElement {
               <Input id="input-whatsapp" type="number" fullWidth />
             </FormControl>
             <Grid container>
-              <Grid item xs={12}>
+              <Grid item xs={12} md={6}>
                 <Typography>Jenis Kelamin</Typography>
                 <RadioGroup className={classes.radioGroup}>
                   <FormControlLabel
@@ -79,7 +112,7 @@ export default function ParticipantModal(): ReactElement {
                   />
                 </RadioGroup>
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} md={6}>
                 <Typography>Peran</Typography>
                 <RadioGroup className={classes.radioGroup}>
                   <FormControlLabel
@@ -96,7 +129,45 @@ export default function ParticipantModal(): ReactElement {
               </Grid>
             </Grid>
           </Grid>
+          <Grid item xs={12} sm={6}>
+            <Grid container direction="column" className={classes.uploadContainer}>
+              <Grid item>
+                <Typography>Upload KTM / NISN</Typography>
+                <input type="file" id="input-ktm" style={{display: 'none'}}/>
+                <GradientButton>
+                  <label htmlFor="input-ktm" className={classes.labelUpload}>
+                    Pilih File
+                  </label>
+                </GradientButton>
+                <Typography variant="caption" className="file-name">Tidak ada file dipilih</Typography>
+              </Grid>
+              <Grid item>
+                <Typography>Upload Pas Foto 3x4</Typography>
+                <input type="file" id="input-picture" style={{display: 'none'}}/>
+                <GradientButton>
+                  <label htmlFor="input-picture" className={classes.labelUpload}>
+                    Pilih File
+                  </label>
+                </GradientButton>
+                <Typography variant="caption" className="file-name">Tidak ada file dipilih</Typography>
+              </Grid>
+              <Grid item>
+                <Typography>Bukti Follow IG @binaryfest.uty</Typography>
+                <input type="file" id="input-screenshot" style={{display: 'none'}}/>
+                <GradientButton>
+                  <label htmlFor="input-screenshot" className={classes.labelUpload}>
+                    Pilih File
+                  </label>
+                </GradientButton>
+                <Typography variant="caption" className="file-name">Tidak ada file dipilih</Typography>
+              </Grid>
+            </Grid>
+          </Grid>
         </Grid>
+      
+        <div className={classes.addParticipantButton}>
+          <GradientButton>Tambah Peserta</GradientButton>
+        </div>
       </div>
     </Container>
   )
