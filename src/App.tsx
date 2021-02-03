@@ -5,6 +5,9 @@ import StaticPageLayout from './layout/StaticPage.layout';
 import AOS from 'aos';
 
 import './styles/root.css';
+import { Route, Switch } from 'react-router-dom';
+import Register from './pages/Register';
+import Navigation from './components/Navigation';
 
 const useStyles = makeStyles(({palette, breakpoints}) => ({
   root: {
@@ -25,7 +28,11 @@ function App() {
   return (
     <RecoilRoot>
       <div className={classes.root}>
-        <StaticPageLayout />
+        <Navigation />
+        <Switch>
+          <Route path="/register" exact component={Register} />
+          <Route path="/" component={StaticPageLayout} />
+        </Switch>
       </div>
     </RecoilRoot>
   );
