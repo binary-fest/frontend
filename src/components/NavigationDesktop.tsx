@@ -66,7 +66,7 @@ const useStyles = makeStyles(({ spacing, breakpoints }) => ({
   }
 }))
 
-export default function Navigation(): ReactElement {
+export default function NavigationDesktop(): ReactElement {
   const [isNavigationResponsiveShow, setIsNavigationResponsiveShow] = useRecoilState(isNavigationResponsiveShowAtom)
 
   const toggleNavigationResponsive = () => setIsNavigationResponsiveShow(!isNavigationResponsiveShow)

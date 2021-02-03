@@ -3,7 +3,7 @@ import React, { ReactElement } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import FixedSocialMedia from '../components/FixedSocialMedia'
-import Navigation from '../components/Navigation'
+import NavigationDesktop from '../components/NavigationDesktop'
 import NavigationResponsive from '../components/NavigationResponsive'
 import About from '../pages/About'
 import Competition from '../pages/Competition'
@@ -66,7 +66,7 @@ export default function StaticPageLayout(): ReactElement {
 
   return (
     <>
-      <Navigation />
+      <NavigationDesktop />
       {isNavigationResponsiveShow && <NavigationResponsive />}
       <div className={classes.decorationContainer}>
         <img className={classes.decoration1} src="/decoration-1.svg" alt="decoration" />
