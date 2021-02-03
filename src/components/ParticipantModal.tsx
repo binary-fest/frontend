@@ -5,7 +5,10 @@ import {
   FormControl,
   Grid,
   Input,
-  InputLabel
+  InputLabel,
+  RadioGroup,
+  FormControlLabel,
+  Radio
 } from '@material-ui/core'
 import React, { ReactElement } from 'react'
 
@@ -29,6 +32,9 @@ const useStyles = makeStyles(() => ({
     '& > div:not(:last-child)': {
       marginBottom: '38px'
     }
+  },
+  radioGroup: {
+    flexDirection: 'row'
   }
 }))
 
@@ -57,6 +63,38 @@ export default function ParticipantModal(): ReactElement {
               <InputLabel htmlFor="input-whatsapp">Nomor Whatsapp</InputLabel>
               <Input id="input-whatsapp" type="number" fullWidth />
             </FormControl>
+            <Grid container>
+              <Grid item xs={12}>
+                <Typography>Jenis Kelamin</Typography>
+                <RadioGroup className={classes.radioGroup}>
+                  <FormControlLabel
+                    value="pria"
+                    control={<Radio color="primary" />}
+                    label="Pria"
+                  />
+                  <FormControlLabel
+                    value="wanita"
+                    control={<Radio color="primary" />}
+                    label="Wanita"
+                  />
+                </RadioGroup>
+              </Grid>
+              <Grid item xs={12}>
+                <Typography>Peran</Typography>
+                <RadioGroup className={classes.radioGroup}>
+                  <FormControlLabel
+                    value="Ketua"
+                    control={<Radio color="primary" />}
+                    label="Ketua"
+                  />
+                  <FormControlLabel
+                    value="Anggota"
+                    control={<Radio color="primary" />}
+                    label="Anggota"
+                  />
+                </RadioGroup>
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
       </div>
