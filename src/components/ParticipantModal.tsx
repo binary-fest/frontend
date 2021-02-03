@@ -1,4 +1,12 @@
-import { makeStyles, Typography, Container } from '@material-ui/core'
+import {
+  makeStyles,
+  Typography,
+  Container,
+  FormControl,
+  Grid,
+  Input,
+  InputLabel
+} from '@material-ui/core'
 import React, { ReactElement } from 'react'
 
 const useStyles = makeStyles(() => ({
@@ -12,7 +20,15 @@ const useStyles = makeStyles(() => ({
   root: {
     backgroundColor: 'white',
     borderRadius: '10px',
-    padding: '1rem'
+    padding: '2rem',
+    '& h3': {
+      marginBottom: '31px'
+    }
+  },
+  formArea: {
+    '& > div:not(:last-child)': {
+      marginBottom: '38px'
+    }
   }
 }))
 
@@ -23,6 +39,26 @@ export default function ParticipantModal(): ReactElement {
     <Container className={classes.container}>
       <div className={classes.root}>
         <Typography variant="h3">Tambah Peserta</Typography>
+        <Grid container>
+          <Grid item xs={12} className={classes.formArea}>
+            <FormControl fullWidth>
+              <InputLabel htmlFor="input-name">Nama</InputLabel>
+              <Input id="input-name" fullWidth />
+            </FormControl>
+            <FormControl fullWidth>
+              <InputLabel htmlFor="input-id">NISN / NIM</InputLabel>
+              <Input id="input-id" fullWidth />
+            </FormControl>
+            <FormControl fullWidth>
+              <InputLabel htmlFor="input-email">Email</InputLabel>
+              <Input id="input-email" type="email" fullWidth />
+            </FormControl>
+            <FormControl fullWidth>
+              <InputLabel htmlFor="input-whatsapp">Nomor Whatsapp</InputLabel>
+              <Input id="input-whatsapp" type="number" fullWidth />
+            </FormControl>
+          </Grid>
+        </Grid>
       </div>
     </Container>
   )
