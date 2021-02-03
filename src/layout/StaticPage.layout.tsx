@@ -9,6 +9,7 @@ import About from '../pages/About'
 import Competition from '../pages/Competition'
 import Expo from '../pages/Expo'
 import Home from '../pages/Home'
+import Register from '../pages/Register'
 import { isNavigationResponsiveShowAtom } from '../store/ui'
 
 const useStyles = makeStyles(({ palette, breakpoints }) => ({
@@ -43,6 +44,9 @@ const RouteComponents = (): ReactElement => {
   }, {
     path: '/expo',
     components: Expo
+  }, {
+    path: '/register',
+    components: Register
   }]
 
   return (
