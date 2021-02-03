@@ -1,5 +1,6 @@
 import { Button, Container, FormControl, Grid, makeStyles, Typography } from '@material-ui/core'
 import React, { ReactElement, useState } from 'react'
+import UploadProposal from '../components/UploadProposal'
 import { GradientButton, WhiteInput, WhiteInputLabel, WhiteTypography } from '../theme/extends'
 
 const useStyles = makeStyles(() => ({
@@ -17,6 +18,9 @@ const useStyles = makeStyles(() => ({
       marginRight: '16px',
       marginTop: '29px'
     }
+  },
+  uploadFile: {
+    marginTop: '36px'
   }
 }))
 
@@ -91,6 +95,17 @@ export default function Register(): ReactElement {
               )
             ))}
           </div>
+          {competitions.map((competition) => {
+            if (!competition.isSelected) return null
+
+            return (
+              <div key={competition.id} className={classes.uploadFile}>
+                {competition.id === "IOT" ? 
+                  (<UploadProposal />) :
+                  (<WhiteTypography variant="h3">Link Video</WhiteTypography>)}
+              </div>
+            )
+          })}
         </Grid>
       </Grid>
     </Container>
