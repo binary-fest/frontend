@@ -3,7 +3,7 @@ import React, { ReactElement, useState } from 'react'
 import UploadProposal from '../components/UploadProposal'
 import { GradientButton, WhiteInput, WhiteInputLabel, WhiteTypography } from '../theme/extends'
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(({breakpoints}) => ({
   root: {
     paddingTop: '139px'
   },
@@ -14,6 +14,9 @@ const useStyles = makeStyles(() => ({
   },
   competitionType: {
     marginTop: '3rem',
+    [breakpoints.up('md')]: {
+      marginTop: '0'
+    },
     '& button': {
       marginRight: '16px',
       marginTop: '29px'
@@ -48,8 +51,8 @@ export default function Register(): ReactElement {
 
   return (
     <Container className={classes.root}>
-      <Grid container>
-        <Grid item xs={12}>
+      <Grid container spacing={4}>
+        <Grid item xs={12} md={6} lg={5}>
           <WhiteTypography variant="h3">Pendaftaran Team</WhiteTypography>
           <div className={classes.teamForm}>
             <FormControl fullWidth>
@@ -71,7 +74,7 @@ export default function Register(): ReactElement {
           </div>
         </Grid>
       
-        <Grid item xs={12} className={classes.competitionType}>
+        <Grid item xs={12} md={6} lg={7} className={classes.competitionType}>
           <div>
             <WhiteTypography variant="h3">Jenis Perlombaan</WhiteTypography>
             {competitions.map((competition) => (
