@@ -1,5 +1,6 @@
 import { Button, Container, FormControl, Grid, makeStyles, Typography } from '@material-ui/core'
 import React, { ReactElement, useState } from 'react'
+import ListMember from '../components/ListMember'
 import UploadProposal from '../components/UploadProposal'
 import { GradientButton, WhiteInput, WhiteInputLabel, WhiteTypography } from '../theme/extends'
 
@@ -111,6 +112,7 @@ export default function Register(): ReactElement {
           })}
         </Grid>
       </Grid>
+      <ListMember />
     </Container>
   )
 }
