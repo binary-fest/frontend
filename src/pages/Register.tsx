@@ -1,7 +1,10 @@
 import { Button, Container, FormControl, Grid, makeStyles, Typography } from '@material-ui/core'
 import React, { ReactElement, useState } from 'react'
+import { useRecoilValue } from 'recoil'
 import ListMember from '../components/ListMember'
+import ParticipantModal from '../components/ParticipantModal'
 import UploadProposal from '../components/UploadProposal'
+import { isParticipantModalShowAtom } from '../store/ui'
 import { GradientButton, WhiteInput, WhiteInputLabel, WhiteTypography } from '../theme/extends'
 
 const useStyles = makeStyles(({breakpoints}) => ({
@@ -29,6 +32,8 @@ const useStyles = makeStyles(({breakpoints}) => ({
 }))
 
 export default function Register(): ReactElement {
+  const isParticipantModalShow = useRecoilValue(isParticipantModalShowAtom)
+  
   const [competitions, setCompetitions] = useState([
     {
       id: 'IOT',
@@ -51,6 +56,8 @@ export default function Register(): ReactElement {
   const classes = useStyles()
 
   return (
+    <>
+    {isParticipantModalShow && <ParticipantModal />}
     <Container className={classes.root}>
       <Grid container spacing={4}>
         <Grid item xs={12} md={6} lg={5}>
@@ -114,5 +121,6 @@ export default function Register(): ReactElement {
       </Grid>
       <ListMember />
     </Container>
+    </>
   )
 }
