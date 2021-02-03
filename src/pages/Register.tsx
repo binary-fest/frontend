@@ -4,8 +4,7 @@ import { GradientButton, WhiteInput, WhiteInputLabel, WhiteTypography } from '..
 
 const useStyles = makeStyles(() => ({
   root: {
-    position: 'relative',
-    top: '139px'
+    paddingTop: '139px'
   },
   teamForm: {
     '& > div': {
