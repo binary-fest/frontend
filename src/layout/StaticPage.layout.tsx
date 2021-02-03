@@ -1,16 +1,13 @@
 import { Container, makeStyles } from '@material-ui/core'
 import React, { ReactElement } from 'react'
 import { Route, Switch } from 'react-router-dom'
-import { useRecoilValue } from 'recoil'
 import FixedSocialMedia from '../components/FixedSocialMedia'
-import NavigationDesktop from '../components/NavigationDesktop'
-import NavigationResponsive from '../components/NavigationResponsive'
+import Navigation from '../components/Navigation'
 import About from '../pages/About'
 import Competition from '../pages/Competition'
 import Expo from '../pages/Expo'
 import Home from '../pages/Home'
 import Register from '../pages/Register'
-import { isNavigationResponsiveShowAtom } from '../store/ui'
 
 const useStyles = makeStyles(({ palette, breakpoints }) => ({
   decorationContainer: {
@@ -61,13 +58,11 @@ const RouteComponents = (): ReactElement => {
 }
 
 export default function StaticPageLayout(): ReactElement {
-  const isNavigationResponsiveShow = useRecoilValue(isNavigationResponsiveShowAtom)
   const classes = useStyles()
 
   return (
     <>
-      <NavigationDesktop />
-      {isNavigationResponsiveShow && <NavigationResponsive />}
+      <Navigation />
       <div className={classes.decorationContainer}>
         <img className={classes.decoration1} src="/decoration-1.svg" alt="decoration" />
       </div>
