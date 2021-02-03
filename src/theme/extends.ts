@@ -1,4 +1,4 @@
-import { Button, Typography, withStyles } from '@material-ui/core';
+import { Button, Input, InputLabel, Typography, withStyles } from '@material-ui/core';
 import styled from 'styled-components';
 
 const GradientButton = withStyles({
@@ -31,9 +31,32 @@ const StaticPageContainerStyled = styled.div`
   padding-top: 139px;
 `
 
+const WhiteInputLabel = withStyles({
+  root: {
+    color: 'white'
+  },
+  focused: {
+    color: 'white !important'
+  }
+})(InputLabel)
+
+const WhiteInput = withStyles({
+  underline: {
+    borderBottom: '1px solid white',
+    '&:after': {
+      borderBottom: '1px solid white'
+    }
+  },
+  root: {
+    color: 'white'
+  }
+})(Input)
+
 export {
   GradientButton,
   GradientTypography,
   StaticPageContainerStyled as StaticPageContentStyled,
-  WhiteTypography
+  WhiteTypography,
+  WhiteInputLabel,
+  WhiteInput
 }
