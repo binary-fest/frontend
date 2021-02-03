@@ -28,14 +28,6 @@ const membersAtom = atom<Member[]>({
       "gender": "pria",
       "isAdmin": true
     },
-    {
-      "name": "andi",
-      "nim": "occaecat",
-      "email": "frostglenn@squish.com",
-      "phone": "(814) 495-3603",
-      "gender": "pria",
-      "isAdmin": false
-    }
   ]
 })
 
