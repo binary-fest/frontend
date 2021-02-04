@@ -134,6 +134,19 @@ export default function ParticipantModal(): ReactElement {
       if (!values.gender) errors.gender = "Pilih salah satu"
       if (!values.role) errors.role = "Pilih salah satu"
 
+      if (!pictureProfile.fileName) {
+        setPictureProfile((curr) => ({ ...curr, error: 'File tidak boleh kosong' }))
+        errors.upload = ''
+      }
+      if (!cardProfile.fileName) {
+        setCardProfile((curr) => ({ ...curr, error: 'File tidak boleh kosong' }))
+        errors.upload = ''
+      }
+      if (!screenshotFile.fileName) {
+        setScreenshotFile((curr) => ({ ...curr, error: 'File tidak boleh kosong' }))
+        errors.upload = ''
+      }
+
       return errors
     },
     onSubmit: (values, helpers) => {
