@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core'
 import React, { ReactElement } from 'react'
 import { GradientButton } from '../theme/extends'
+import { useFormik } from 'formik'
 
 const useStyles = makeStyles(({breakpoints}) => ({
   container: {
@@ -72,11 +73,30 @@ const useStyles = makeStyles(({breakpoints}) => ({
 }))
 
 export default function ParticipantModal(): ReactElement {
+  const formik = useFormik({
+    initialValues: {
+      name: '',
+      nisn: '',
+      email: '',
+      phone: ''
+    },
+    onSubmit: (values, helpers) => {
+      console.log('submitting')
+    }
+  })
+
+
   const classes = useStyles()
 
   return (
     <Container className={classes.container}>
-      <div className={classes.root}>
+      <form
+        className={classes.root}
+        onSubmit={(e) => {
+          e.preventDefault()
+          formik.handleSubmit()
+        }}
+      >
         <Typography variant="h3">Tambah Peserta</Typography>
         <Grid container spacing={4}>
           <Grid item xs={12} sm={6} className={classes.formArea}>
@@ -166,9 +186,9 @@ export default function ParticipantModal(): ReactElement {
         </Grid>
       
         <div className={classes.addParticipantButton}>
-          <GradientButton>Tambah Peserta</GradientButton>
+          <GradientButton type="submit">Tambah Peserta</GradientButton>
         </div>
-      </div>
+      </form>
     </Container>
   )
 }
