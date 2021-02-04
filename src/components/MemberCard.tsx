@@ -105,21 +105,7 @@ export default function MemberCard({member}: Props): ReactElement {
           <Typography>{member.email}</Typography>
           <Typography>{member.phone}</Typography>
         </div>
-        <div className="member-files">
-          <Typography align="left">Berkas</Typography>
-          <div className="files">
-            <Typography>
-              <a href="/" target="_blank">KTM<span className="check" /></a>
-            </Typography>
-            <Typography>
-              <a href="/" target="_blank">Pas Foto 3x4<span className="check" /></a>
-            </Typography>
-            <Typography>
-              <a href="/" target="_blank">Bukti Follow<span className="check" /></a>
-            </Typography>
-          </div>
-        </div>
-        <Typography variant="h3" style={{ margin: '0' }}>
+        <Typography variant="h3" style={{ marginTop: '1rem' }}>
           {member.isAdmin ? 'Leader' : 'Member'}
         </Typography>
       </div>
