@@ -76,15 +76,15 @@ export default function ParticipantModal(): ReactElement {
   const formik = useFormik({
     initialValues: {
       name: '',
-      nisn: '',
+      nim: '',
       email: '',
-      phone: ''
+      phone: '',
+      gender: ''
     },
     onSubmit: (values, helpers) => {
-      console.log('submitting')
+      console.log(values)
     }
   })
-
 
   const classes = useStyles()
 
@@ -102,24 +102,45 @@ export default function ParticipantModal(): ReactElement {
           <Grid item xs={12} sm={6} className={classes.formArea}>
             <FormControl fullWidth>
               <InputLabel htmlFor="input-name">Nama</InputLabel>
-              <Input id="input-name" fullWidth />
+              <Input
+                id="input-name"
+                fullWidth
+                name="name"
+                onChange={formik.handleChange}
+              />
             </FormControl>
             <FormControl fullWidth>
               <InputLabel htmlFor="input-id">NISN / NIM</InputLabel>
-              <Input id="input-id" fullWidth />
+              <Input 
+                id="input-id" 
+                fullWidth name="nim"
+                onChange={formik.handleChange}
+              />
             </FormControl>
             <FormControl fullWidth>
               <InputLabel htmlFor="input-email">Email</InputLabel>
-              <Input id="input-email" type="email" fullWidth />
+              <Input
+                id="input-email"
+                type="email"
+                fullWidth 
+                name="email"
+                onChange={formik.handleChange}
+              />
             </FormControl>
             <FormControl fullWidth>
               <InputLabel htmlFor="input-whatsapp">Nomor Whatsapp</InputLabel>
-              <Input id="input-whatsapp" type="number" fullWidth />
+              <Input
+                id="input-whatsapp"
+                type="number"
+                fullWidth
+                name="phone"
+                onChange={formik.handleChange}
+              />
             </FormControl>
             <Grid container>
               <Grid item xs={12} md={6}>
                 <Typography>Jenis Kelamin</Typography>
-                <RadioGroup className={classes.radioGroup}>
+                <RadioGroup className={classes.radioGroup} onChange={formik.handleChange} name="gender">
                   <FormControlLabel
                     value="pria"
                     control={<Radio color="primary" />}
@@ -134,7 +155,7 @@ export default function ParticipantModal(): ReactElement {
               </Grid>
               <Grid item xs={12} md={6}>
                 <Typography>Peran</Typography>
-                <RadioGroup className={classes.radioGroup}>
+                <RadioGroup className={classes.radioGroup} onChange={formik.handleChange} name="role">
                   <FormControlLabel
                     value="Ketua"
                     control={<Radio color="primary" />}
