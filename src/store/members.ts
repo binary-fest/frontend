@@ -9,6 +9,8 @@ interface Member {
   gender: "pria" | "wanita" | ""
   isAdmin: boolean,
   pictureFile?: FileUpload
+  profileCardFile?: FileUpload
+  screenshotFile?: FileUpload
 }
 
 const membersAtom = atom<Member[]>({

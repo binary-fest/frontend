@@ -148,6 +148,16 @@ export default function ParticipantModal(): ReactElement {
           base64: pictureProfile.base64,
           fileName: pictureProfile.fileName,
           size: pictureProfile.size
+        },
+        profileCardFile: {
+          base64: cardProfile.base64,
+          fileName: cardProfile.fileName,
+          size: cardProfile.size
+        },
+        screenshotFile: {
+          base64: screenshotFile.base64,
+          fileName: screenshotFile.fileName,
+          size: screenshotFile.size
         }
       }
 
