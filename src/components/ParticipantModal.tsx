@@ -31,7 +31,8 @@ const useStyles = makeStyles(({breakpoints}) => ({
     zIndex: 10000,
     top: '1rem',
     left: '50%',
-    transform: 'translateX(-50%)'
+    transform: 'translateX(-50%)',
+    maxWidth: '650px'
   },
   root: {
     display: 'flex',
@@ -154,7 +155,7 @@ export default function ParticipantModal(): ReactElement {
       >
         <Typography variant="h3">Tambah Peserta</Typography>
         <Grid container spacing={4}>
-          <Grid item xs={12} sm={6} className={classes.formArea}>
+          <Grid item className={classes.formArea}>
             <ParticipantInput
               handleChange={formik.handleChange}
               error={formik.errors.name}
