@@ -13,6 +13,9 @@ import {
 import React, { ReactElement } from 'react'
 import { GradientButton } from '../theme/extends'
 import { useFormik } from 'formik'
+import { useRecoilState } from 'recoil'
+import membersAtom, { Member } from '../store/members'
+import { isParticipantModalShowAtom } from '../store/ui'
 
 const useStyles = makeStyles(({breakpoints}) => ({
   container: {
@@ -73,16 +76,33 @@ const useStyles = makeStyles(({breakpoints}) => ({
 }))
 
 export default function ParticipantModal(): ReactElement {
+  const [, setMembersAtom] = useRecoilState(membersAtom)
+  const [, setIsParticipantModalShow] = useRecoilState(isParticipantModalShowAtom)
+
   const formik = useFormik({
     initialValues: {
       name: '',
       nim: '',
       email: '',
       phone: '',
-      gender: ''
+      gender: '',
+      role: ''
     },
     onSubmit: (values, helpers) => {
-      console.log(values)
+      const memberData: Member = {
+        name: values.name,
+        nim: values.nim,
+        email: values.email,
+        phone: values.phone,
+        gender: values.gender as "pria" | "wanita",
+        isAdmin: values.role === 'Ketua'
+      }
+
+      setMembersAtom((currVal) => {
+        const resetVal = currVal.map(val => ({...val, isAdmin: false}))
+        return [...resetVal, memberData]
+      })
+      setIsParticipantModalShow(false)
     }
   })
 
