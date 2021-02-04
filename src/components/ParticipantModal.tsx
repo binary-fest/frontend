@@ -11,27 +11,18 @@ import {
   Radio,
   FormHelperText,
 } from '@material-ui/core'
-import React, { ReactElement, useState } from 'react'
+import React, { ReactElement } from 'react'
 import { AbsoluteFormHelperText, GradientButton } from '../theme/extends'
 import { useFormik } from 'formik'
 import { useRecoilState } from 'recoil'
 import membersAtom, { Member } from '../store/members'
 import { isParticipantModalShowAtom } from '../store/ui'
-import { FileUploadState } from '../@types/FileUpload'
-import UploadButtonArea from './UploadButtonArea'
 
 interface ParticipantInputProps {
   error: string | undefined
   name: string
   placeholder: string
   handleChange: (e: React.ChangeEvent<any>) => void
-}
-
-const fileUploadInititalState: FileUploadState = {
-  fileName: '',
-  base64: '',
-  size: 0,
-  error: ''
 }
 
 const useStyles = makeStyles(({breakpoints}) => ({
@@ -110,9 +101,6 @@ const ParticipantInput = ({ error, handleChange, name, placeholder }: Participan
 export default function ParticipantModal(): ReactElement {
   const [, setMembersAtom] = useRecoilState(membersAtom)
   const [, setIsParticipantModalShow] = useRecoilState(isParticipantModalShowAtom)
-  const [pictureProfile, setPictureProfile] = useState<FileUploadState>(fileUploadInititalState)
-  const [cardProfile, setCardProfile] = useState<FileUploadState>(fileUploadInititalState)
-  const [screenshotFile, setScreenshotFile] = useState<FileUploadState>(fileUploadInititalState)
 
   const formik = useFormik({
     initialValues: {
@@ -122,7 +110,6 @@ export default function ParticipantModal(): ReactElement {
       phone: '',
       gender: '',
       role: '',
-      pictureFile: ''
     },
     validateOnChange: false,
     validate: (values) => {
@@ -134,19 +121,6 @@ export default function ParticipantModal(): ReactElement {
       if (!values.gender) errors.gender = "Pilih salah satu"
       if (!values.role) errors.role = "Pilih salah satu"
 
-      if (!pictureProfile.fileName) {
-        setPictureProfile((curr) => ({ ...curr, error: 'File tidak boleh kosong' }))
-        errors.upload = ''
-      }
-      if (!cardProfile.fileName) {
-        setCardProfile((curr) => ({ ...curr, error: 'File tidak boleh kosong' }))
-        errors.upload = ''
-      }
-      if (!screenshotFile.fileName) {
-        setScreenshotFile((curr) => ({ ...curr, error: 'File tidak boleh kosong' }))
-        errors.upload = ''
-      }
-
       return errors
     },
     onSubmit: (values, helpers) => {
@@ -157,21 +131,6 @@ export default function ParticipantModal(): ReactElement {
         phone: values.phone,
         gender: values.gender as "pria" | "wanita",
         isAdmin: values.role === 'Ketua',
-        pictureFile: {
-          base64: pictureProfile.base64,
-          fileName: pictureProfile.fileName,
-          size: pictureProfile.size
-        },
-        profileCardFile: {
-          base64: cardProfile.base64,
-          fileName: cardProfile.fileName,
-          size: cardProfile.size
-        },
-        screenshotFile: {
-          base64: screenshotFile.base64,
-          fileName: screenshotFile.fileName,
-          size: screenshotFile.size
-        }
       }
 
       setMembersAtom((currVal) => {
@@ -256,35 +215,7 @@ export default function ParticipantModal(): ReactElement {
             </Grid>
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Grid container direction="column" className={classes.uploadContainer}>
-              <Grid item>
-                <Typography>Upload KTM / NISN</Typography>
-                <UploadButtonArea
-                  id="input-ktm"
-                  onUpload={(fileInfo) => setCardProfile(fileInfo)}
-                  max={2097152}
-                  state={cardProfile}
-                />
-              </Grid>
-              <Grid item>
-                <Typography>Upload Pas Foto 3x4</Typography>
-                <UploadButtonArea
-                  id="input-picture"
-                  onUpload={(fileInfo) => setPictureProfile(fileInfo)}
-                  max={2097152}
-                  state={pictureProfile}
-                />
-              </Grid>
-              <Grid item>
-                <Typography>Bukti Follow IG @binaryfest.uty</Typography>
-                <UploadButtonArea
-                  id="input-screenshot"
-                  onUpload={(fileInfo) => setScreenshotFile(fileInfo)}
-                  max={1048576}
-                  state={screenshotFile}
-                />
-              </Grid>
-            </Grid>
+            
           </Grid>
         </Grid>
       

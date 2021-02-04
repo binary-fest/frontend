@@ -1,5 +1,4 @@
 import { atom } from 'recoil'
-import FileUpload from '../@types/FileUpload'
 
 interface Member {
   name: string
@@ -8,9 +7,6 @@ interface Member {
   phone: string
   gender: "pria" | "wanita" | ""
   isAdmin: boolean,
-  pictureFile: FileUpload
-  profileCardFile: FileUpload
-  screenshotFile: FileUpload
 }
 
 const membersAtom = atom<Member[]>({

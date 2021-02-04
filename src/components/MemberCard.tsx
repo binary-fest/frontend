@@ -100,9 +100,6 @@ export default function MemberCard({member}: Props): ReactElement {
   return (
     <Grid item xs={12} sm={6} md={4}>
       <div className={clsx(classes.root, member.isAdmin ? classes.leaderCard : classes.memberCard)}>
-        <div className={classes.profilePicture}>
-          {member.pictureFile && (<img src={member.pictureFile.base64} alt="profil"/>)}
-        </div>
         <div className="member-bio">
           <Typography className="member-name">{member.name}</Typography>
           <Typography>{member.email}</Typography>
