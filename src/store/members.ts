@@ -8,9 +8,9 @@ interface Member {
   phone: string
   gender: "pria" | "wanita" | ""
   isAdmin: boolean,
-  pictureFile?: FileUpload
-  profileCardFile?: FileUpload
-  screenshotFile?: FileUpload
+  pictureFile: FileUpload
+  profileCardFile: FileUpload
+  screenshotFile: FileUpload
 }
 
 const membersAtom = atom<Member[]>({
