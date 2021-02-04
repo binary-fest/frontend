@@ -9,13 +9,21 @@ import {
   RadioGroup,
   FormControlLabel,
   Radio,
+  FormHelperText,
 } from '@material-ui/core'
 import React, { ReactElement } from 'react'
-import { GradientButton } from '../theme/extends'
+import { AbsoluteFormHelperText, GradientButton } from '../theme/extends'
 import { useFormik } from 'formik'
 import { useRecoilState } from 'recoil'
 import membersAtom, { Member } from '../store/members'
 import { isParticipantModalShowAtom } from '../store/ui'
+
+interface ParticipantInputProps {
+  error: string | undefined
+  name: string
+  placeholder: string
+  handleChange: (e: React.ChangeEvent<any>) => void
+}
 
 const useStyles = makeStyles(({breakpoints}) => ({
   container: {
@@ -75,6 +83,21 @@ const useStyles = makeStyles(({breakpoints}) => ({
   }
 }))
 
+const ParticipantInput = ({ error, handleChange, name, placeholder }: ParticipantInputProps) => {
+  return (
+    <FormControl fullWidth error={!!error}>
+      <InputLabel htmlFor={`input-${name}`}>{placeholder}</InputLabel>
+      <Input
+        id={`input-${name}`}
+        fullWidth
+        name={name}
+        onChange={handleChange}
+      />
+      <AbsoluteFormHelperText>{error}</AbsoluteFormHelperText>
+    </FormControl>
+  )
+}
+
 export default function ParticipantModal(): ReactElement {
   const [, setMembersAtom] = useRecoilState(membersAtom)
   const [, setIsParticipantModalShow] = useRecoilState(isParticipantModalShowAtom)
@@ -88,7 +111,21 @@ export default function ParticipantModal(): ReactElement {
       gender: '',
       role: ''
     },
+    validateOnChange: false,
+    validate: (values) => {
+      const errors: any = {}
+      if (!values.name) errors.name = "Tidak boleh kosong"
+      if (!values.nim) errors.nim = "Tidak boleh kosong"
+      if (!values.email) errors.email = "Tidak boleh kosong"
+      if (!values.phone) errors.phone = "Tidak boleh kosong"
+      if (!values.gender) errors.gender = "Pilih salah satu"
+      if (!values.role) errors.role = "Pilih salah satu"
+
+      return errors
+    },
     onSubmit: (values, helpers) => {
+      console.log(values)
+
       const memberData: Member = {
         name: values.name,
         nim: values.nim,
@@ -120,43 +157,30 @@ export default function ParticipantModal(): ReactElement {
         <Typography variant="h3">Tambah Peserta</Typography>
         <Grid container spacing={4}>
           <Grid item xs={12} sm={6} className={classes.formArea}>
-            <FormControl fullWidth>
-              <InputLabel htmlFor="input-name">Nama</InputLabel>
-              <Input
-                id="input-name"
-                fullWidth
-                name="name"
-                onChange={formik.handleChange}
-              />
-            </FormControl>
-            <FormControl fullWidth>
-              <InputLabel htmlFor="input-id">NISN / NIM</InputLabel>
-              <Input 
-                id="input-id" 
-                fullWidth name="nim"
-                onChange={formik.handleChange}
-              />
-            </FormControl>
-            <FormControl fullWidth>
-              <InputLabel htmlFor="input-email">Email</InputLabel>
-              <Input
-                id="input-email"
-                type="email"
-                fullWidth 
-                name="email"
-                onChange={formik.handleChange}
-              />
-            </FormControl>
-            <FormControl fullWidth>
-              <InputLabel htmlFor="input-whatsapp">Nomor Whatsapp</InputLabel>
-              <Input
-                id="input-whatsapp"
-                type="number"
-                fullWidth
-                name="phone"
-                onChange={formik.handleChange}
-              />
-            </FormControl>
+            <ParticipantInput
+              handleChange={formik.handleChange}
+              error={formik.errors.name}
+              name="name"
+              placeholder="Nama"
+            />
+            <ParticipantInput
+              handleChange={formik.handleChange}
+              error={formik.errors.nim}
+              name="nim"
+              placeholder="NISN / NIM"
+            />
+            <ParticipantInput
+              handleChange={formik.handleChange}
+              error={formik.errors.email}
+              name="email"
+              placeholder="Email"
+            />
+            <ParticipantInput
+              handleChange={formik.handleChange}
+              error={formik.errors.phone}
+              name="phone"
+              placeholder="Nomor Whatsapp"
+            />
             <Grid container>
               <Grid item xs={12} md={6}>
                 <Typography>Jenis Kelamin</Typography>
@@ -171,7 +195,8 @@ export default function ParticipantModal(): ReactElement {
                     control={<Radio color="primary" />}
                     label="Wanita"
                   />
-                </RadioGroup>
+                </RadioGroup> 
+                <FormHelperText error={!!formik.errors.gender}>{formik.errors.gender}</FormHelperText> 
               </Grid>
               <Grid item xs={12} md={6}>
                 <Typography>Peran</Typography>
@@ -187,6 +212,7 @@ export default function ParticipantModal(): ReactElement {
                     label="Anggota"
                   />
                 </RadioGroup>
+                <FormHelperText error={!!formik.errors.role}>{formik.errors.role}</FormHelperText> 
               </Grid>
             </Grid>
           </Grid>

@@ -1,4 +1,4 @@
-import { Button, Input, InputLabel, Typography, withStyles } from '@material-ui/core';
+import { Button, FormHelperText, Input, InputLabel, Typography, withStyles } from '@material-ui/core';
 import styled from 'styled-components';
 
 const GradientButton = withStyles({
@@ -52,11 +52,19 @@ const WhiteInput = withStyles({
   }
 })(Input)
 
+const AbsoluteFormHelperText = withStyles({
+  root: {
+    position: 'absolute',
+    bottom: '-1.3rem'
+  }
+})(FormHelperText)
+
 export {
   GradientButton,
   GradientTypography,
   StaticPageContainerStyled as StaticPageContentStyled,
   WhiteTypography,
   WhiteInputLabel,
-  WhiteInput
+  WhiteInput,
+  AbsoluteFormHelperText
 }
