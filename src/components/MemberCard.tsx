@@ -1,10 +1,13 @@
-import { Grid, makeStyles, Typography } from '@material-ui/core'
+import { Button, Grid, makeStyles, Typography } from '@material-ui/core'
 import clsx from 'clsx'
 import React, { ReactElement } from 'react'
-import { Member } from '../store/members'
+import { useRecoilState } from 'recoil'
+import { MemberState } from '../@types/Member'
+import membersState, { memberModalState } from '../store/members'
+import { isParticipantModalShowAtom } from '../store/ui'
 
 interface Props {
-  member: Member
+  member: MemberState
 }
 
 const useStyles = makeStyles(({ breakpoints }) => ({
@@ -94,20 +97,43 @@ const useStyles = makeStyles(({ breakpoints }) => ({
   },
 }))
 
-export default function MemberCard({member}: Props): ReactElement {
+export default function MemberCard({ member }: Props): ReactElement {
+  const [, setMemberState] = useRecoilState(membersState)
+  const [, setMemberModalState] = useRecoilState(memberModalState)
+  const [, setIsParticipantModalShow] = useRecoilState(isParticipantModalShowAtom)
   const classes = useStyles()
+
+  const deleteMember = () => setMemberState(members => members.filter(data => data.id !== member.id))
+
+  const openModal = () => {
+    setMemberModalState(member)
+    setIsParticipantModalShow(true)
+  }
 
   return (
     <Grid item xs={12} sm={6} md={4}>
-      <div className={clsx(classes.root, member.isAdmin ? classes.leaderCard : classes.memberCard)}>
+      <div className={clsx(classes.root, member.isLeader ? classes.leaderCard : classes.memberCard)}>
         <div className="member-bio">
           <Typography className="member-name">{member.name}</Typography>
           <Typography>{member.email}</Typography>
           <Typography>{member.phone}</Typography>
         </div>
         <Typography variant="h3" style={{ marginTop: '1rem' }}>
-          {member.isAdmin ? 'Leader' : 'Member'}
+          {member.isLeader ? 'Leader' : 'Member'}
         </Typography>
+        <div style={{marginTop: '1rem'}}>
+          <Button 
+            variant="contained" 
+            color="secondary" 
+            style={{ marginRight: '1rem' }}
+            onClick={openModal}
+          >Update</Button>
+          <Button 
+            variant="contained" 
+            color="secondary"
+            onClick={deleteMember}
+          >Delete</Button>
+        </div>
       </div>
     </Grid>
   )

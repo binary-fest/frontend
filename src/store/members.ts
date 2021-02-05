@@ -1,29 +1,35 @@
 import { atom, selector } from 'recoil'
+import { MemberState } from '../@types/Member'
 
-interface Member {
-  name: string
-  nim: string
-  email: string
-  phone: string
-  gender: "pria" | "wanita" | ""
-  isAdmin: boolean,
+const initialMemberModal: MemberState = {
+  id: '',
+  name: '',
+  student_id: '',
+  email: '',
+  gender: 'pria',
+  isLeader: false,
+  phone: '',
 }
 
-const membersAtom = atom<Member[]>({
-  key: 'membersAtom',
+const membersState = atom<MemberState[]>({
+  key: 'membersState',
   default: []
 })
 
-const leaderAtom = selector<Member>({
+const memberModalState = atom<MemberState>({
+  key: 'memberModalState',
+  default: initialMemberModal
+})
+
+const leaderAtom = selector<MemberState>({
   key: 'leaderAtom',
   get: ({ get }) => {
-    const members = get(membersAtom)
-    const [leader] = members.filter(member => member.isAdmin)
+    const members = get(membersState)
+    const [leader] = members.filter(member => member.isLeader)
 
     return leader
   }
 })
 
-export default membersAtom
-export { leaderAtom }
-export type { Member }
+export default membersState
+export { leaderAtom, memberModalState, initialMemberModal }

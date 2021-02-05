@@ -15,13 +15,15 @@ import React, { ReactElement } from 'react'
 import { AbsoluteFormHelperText, GradientButton } from '../theme/extends'
 import { useFormik } from 'formik'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import membersAtom, { leaderAtom, Member } from '../store/members'
+import membersState, { initialMemberModal, leaderAtom, memberModalState } from '../store/members'
 import { isParticipantModalShowAtom } from '../store/ui'
+import { MemberFormik, MemberState } from '../@types/Member'
 
 interface ParticipantInputProps {
   error: string | undefined
   name: string
   placeholder: string
+  value: any
   handleChange: (e: React.ChangeEvent<any>) => void
 }
 
@@ -84,7 +86,7 @@ const useStyles = makeStyles(({breakpoints}) => ({
   }
 }))
 
-const ParticipantInput = ({ error, handleChange, name, placeholder }: ParticipantInputProps) => {
+const ParticipantInput = ({ error, handleChange, name, placeholder, value }: ParticipantInputProps) => {
   return (
     <FormControl fullWidth error={!!error}>
       <InputLabel htmlFor={`input-${name}`}>{placeholder}</InputLabel>
@@ -92,6 +94,7 @@ const ParticipantInput = ({ error, handleChange, name, placeholder }: Participan
         id={`input-${name}`}
         fullWidth
         name={name}
+        value={value}
         onChange={handleChange}
       />
       <AbsoluteFormHelperText>{error}</AbsoluteFormHelperText>
@@ -100,24 +103,25 @@ const ParticipantInput = ({ error, handleChange, name, placeholder }: Participan
 }
 
 export default function ParticipantModal(): ReactElement {
-  const [, setMembersAtom] = useRecoilState(membersAtom)
+  const [memberModal, setMemberModalState] = useRecoilState(memberModalState)
+  const [, setMembersAtom] = useRecoilState(membersState)
   const leader = useRecoilValue(leaderAtom)
   const [, setIsParticipantModalShow] = useRecoilState(isParticipantModalShowAtom)
 
-  const formik = useFormik({
+  const formik = useFormik<MemberFormik>({
     initialValues: {
-      name: '',
-      nim: '',
-      email: '',
-      phone: '',
-      gender: '',
-      role: '',
+      name: memberModal.name,
+      student_id: memberModal.student_id,
+      email: memberModal.email,
+      phone: memberModal.phone,
+      gender: memberModal.gender,
+      role: memberModal.isLeader ? 'ketua' : 'anggota',
     },
     validateOnChange: false,
     validate: (values) => {
       const errors: any = {}
       if (!values.name) errors.name = "Tidak boleh kosong"
-      if (!values.nim) errors.nim = "Tidak boleh kosong"
+      if (!values.student_id) errors.student_id = "Tidak boleh kosong"
       if (!values.email) errors.email = "Tidak boleh kosong"
       if (!values.phone) errors.phone = "Tidak boleh kosong"
       if (!values.gender) errors.gender = "Pilih salah satu"
@@ -126,14 +130,32 @@ export default function ParticipantModal(): ReactElement {
       return errors
     },
     onSubmit: (values, helpers) => {
-      const memberData: Member = {
+      const memberData: MemberState = {
+        id: (new Date().getTime()).toString(),
         name: values.name,
-        nim: values.nim,
+        student_id: values.student_id,
         email: values.email,
         phone: values.phone,
-        gender: values.gender as "pria" | "wanita",
-        isAdmin: values.role === 'Ketua',
+        gender: values.gender,
+        isLeader: values.role === 'ketua',
       }
+
+      if (memberModal.id !== '') {
+        setMembersAtom((members) => {
+          const newMember = members.map((member) => {
+            if (member.id !== memberModal.id) return member
+
+            memberData.id = memberModal.id
+            return memberData
+          })
+
+          return newMember
+        })
+        setMemberModalState(initialMemberModal)
+        setIsParticipantModalShow(false)
+        return
+      }
+      
 
       setMembersAtom((currVal) => [...currVal, memberData])
       setIsParticipantModalShow(false)
@@ -151,37 +173,48 @@ export default function ParticipantModal(): ReactElement {
           formik.handleSubmit()
         }}
       >
-        <Typography variant="h3">Tambah Peserta</Typography>
+        <Typography variant="h3">
+          {memberModal.id !== '' ? 'Update Anggota' : 'Tambah Anggota'}
+        </Typography>
         <Grid container spacing={4}>
           <Grid item className={classes.formArea}>
             <ParticipantInput
               handleChange={formik.handleChange}
               error={formik.errors.name}
+              value={formik.values.name}
               name="name"
               placeholder="Nama"
             />
             <ParticipantInput
               handleChange={formik.handleChange}
-              error={formik.errors.nim}
-              name="nim"
+              error={formik.errors.student_id}
+              value={formik.values.student_id}
+              name="student_id"
               placeholder="NISN / NIM"
             />
             <ParticipantInput
               handleChange={formik.handleChange}
               error={formik.errors.email}
+              value={formik.values.email}
               name="email"
               placeholder="Email"
             />
             <ParticipantInput
               handleChange={formik.handleChange}
               error={formik.errors.phone}
+              value={formik.values.phone}
               name="phone"
               placeholder="Nomor Whatsapp"
             />
             <Grid container>
               <Grid item xs={12} md={6}>
                 <Typography>Jenis Kelamin</Typography>
-                <RadioGroup className={classes.radioGroup} onChange={formik.handleChange} name="gender">
+                <RadioGroup
+                  className={classes.radioGroup}
+                  onChange={formik.handleChange}
+                  name="gender"
+                  defaultValue={formik.initialValues.gender}
+                >
                   <FormControlLabel
                     value="pria"
                     control={<Radio color="primary" />}
@@ -197,17 +230,22 @@ export default function ParticipantModal(): ReactElement {
               </Grid>
               <Grid item xs={12} md={6}>
                 <Typography>Peran</Typography>
-                <RadioGroup className={classes.radioGroup} onChange={formik.handleChange} name="role">
+                <RadioGroup
+                  className={classes.radioGroup}
+                  onChange={formik.handleChange}
+                  name="role"
+                  defaultValue={formik.initialValues.role}
+                >
                   <FormControlLabel
-                    value="Ketua"
-                    disabled={!!leader}
-                    control={<Radio color="primary" />}
-                    label="Ketua"
-                  />
-                  <FormControlLabel
-                    value="Anggota"
+                    value="anggota"
                     control={<Radio color="primary" />}
                     label="Anggota"
+                  />
+                  <FormControlLabel
+                    value="ketua"
+                    disabled={formik.initialValues.role === "ketua" ? false : !!leader}
+                    control={<Radio color="primary" />}
+                    label="Ketua"
                   />
                 </RadioGroup>
                 <FormHelperText error={!!formik.errors.role}>{formik.errors.role}</FormHelperText> 
@@ -220,7 +258,9 @@ export default function ParticipantModal(): ReactElement {
         </Grid>
       
         <div className={classes.addParticipantButton}>
-          <GradientButton type="submit">Tambah Peserta</GradientButton>
+          <GradientButton type="submit">
+            {memberModal.id !== '' ? 'Update Anggota' : 'Tambah Anggota'}
+          </GradientButton>
         </div>
       </form>
     </Container>
