@@ -1,10 +1,11 @@
 import { Grid, makeStyles, Typography } from '@material-ui/core'
 import React, {  ReactElement } from 'react'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { indexedMemberState } from '../store/members'
 import MemberCard from './MemberCard'
 import { WhiteTypography } from '../theme/extends'
 import { isMemberModalShowState } from '../store/ui'
+import { IndexedMemberState } from '../@types/Member'
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -31,8 +32,16 @@ const useStyles = makeStyles(() => ({
   }
 }))
 
+const MembersComponent = React.memo((props: { members: IndexedMemberState[] }) => {
+  return (
+    <>
+      {props.members.map(member => <MemberCard member={member} key={member.id} idx={member.idx} />)}
+    </>
+  )
+})
+
 export default function ListMember(): ReactElement {
-  const [, setIsMemberModalShowState] = useRecoilState(isMemberModalShowState)
+  const setIsMemberModalShowState = useSetRecoilState(isMemberModalShowState)
   const indexedMembers = useRecoilValue(indexedMemberState)
   const classes = useStyles()
 
@@ -47,7 +56,7 @@ export default function ListMember(): ReactElement {
         marginBottom: '29px'
       }}>* Klik anggota untuk mengedit</WhiteTypography>
       <Grid container spacing={3} justify="center">
-        {indexedMembers.map(member => <MemberCard member={member} key={member.id} idx={member.idx}/>)}
+        <MembersComponent members={indexedMembers}/>
         {indexedMembers.length < 3 && (
           <Grid item xs={12} sm={6} md={4} onClick={showMemberModalHandler}>
             <div className="add-participant">

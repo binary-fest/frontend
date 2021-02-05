@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 import { initialMemberModal, memberModalState } from '../store/members'
 import { isMemberModalShowState } from '../store/ui'
 import Backdrop from './Backdrop'
@@ -7,7 +7,7 @@ import MemberModal from './MemberModal'
 
 export default function MemberModalPopup(): ReactElement {
   const [isMemberModalShow, setIsMemberModalShow] = useRecoilState(isMemberModalShowState)
-  const [, setMemberModalState] = useRecoilState(memberModalState)
+  const setMemberModalState = useSetRecoilState(memberModalState)
 
   const resetMemberModal = () => {
     setMemberModalState(initialMemberModal)

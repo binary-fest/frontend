@@ -14,7 +14,7 @@ import {
 import React, { ReactElement } from 'react'
 import { AbsoluteFormHelperText, GradientButton } from '../theme/extends'
 import { useFormik } from 'formik'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import membersState, { initialMemberModal, leaderAtom, memberModalState } from '../store/members'
 import { isMemberModalShowState } from '../store/ui'
 import { MemberFormik, MemberState } from '../@types/Member'
@@ -113,9 +113,9 @@ const MemberInput = React.memo(
 
 export default function MemberModal(): ReactElement {
   const [memberModal, setMemberModalState] = useRecoilState(memberModalState)
-  const [, setMembersAtom] = useRecoilState(membersState)
+  const setMembersAtom = useSetRecoilState(membersState)
   const leader = useRecoilValue(leaderAtom)
-  const [, setIsMemberModalShowState] = useRecoilState(isMemberModalShowState)
+  const setIsMemberModalShowState = useSetRecoilState(isMemberModalShowState)
 
   const formik = useFormik<MemberFormik>({
     initialValues: {

@@ -1,7 +1,7 @@
 import { Grid, makeStyles, Typography } from '@material-ui/core'
 import clsx from 'clsx'
 import React, { ReactElement } from 'react'
-import { useRecoilState } from 'recoil'
+import { useSetRecoilState } from 'recoil'
 import { MemberState } from '../@types/Member'
 import membersState, { memberModalState } from '../store/members'
 import { isMemberModalShowState } from '../store/ui'
@@ -121,10 +121,10 @@ const useStyles = makeStyles(({ breakpoints }) => ({
   },
 }))
 
-export default function MemberCard({ member, idx = 1 }: Props): ReactElement {
-  const [, setMemberState] = useRecoilState(membersState)
-  const [, setMemberModalState] = useRecoilState(memberModalState)
-  const [, setIsMemberModalShowState] = useRecoilState(isMemberModalShowState)
+export default React.memo(function MemberCard({ member, idx = 1 }: Props): ReactElement {
+  const setMemberState = useSetRecoilState(membersState)
+  const setMemberModalState = useSetRecoilState(memberModalState)
+  const setIsMemberModalShowState = useSetRecoilState(isMemberModalShowState)
   const classes = useStyles()
 
   const deleteMember = () => setMemberState(members => members.filter(data => data.id !== member.id))
@@ -177,4 +177,4 @@ export default function MemberCard({ member, idx = 1 }: Props): ReactElement {
       </div>
     </Grid>
   )
-}
+})
