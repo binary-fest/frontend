@@ -6,6 +6,7 @@ import ParticipantModal from '../components/MemberModal'
 import { isMemberModalShowState } from '../store/ui'
 import { GradientButton, WhiteInput, WhiteInputLabel, WhiteTypography } from '../theme/extends'
 import Backdrop from '../components/Backdrop'
+import { initialMemberModal, memberModalState } from '../store/members'
 
 const useStyles = makeStyles(({breakpoints}) => ({
   root: {
@@ -39,6 +40,7 @@ const useStyles = makeStyles(({breakpoints}) => ({
 
 export default function Register(): ReactElement {
   const [isMemberModalShow, setIsMemberModalShow] = useRecoilState(isMemberModalShowState)
+  const [, setMemberModalState] = useRecoilState(memberModalState)
   
   const [competitions, setCompetitions] = useState([
     {
@@ -66,7 +68,10 @@ export default function Register(): ReactElement {
     {isMemberModalShow && (
         <>
           <ParticipantModal />
-          <Backdrop zIndex={999} onClick={() => setIsMemberModalShow(false)}/>
+          <Backdrop zIndex={999} onClick={() => {
+            setMemberModalState(initialMemberModal)
+            setIsMemberModalShow(false)
+          }} />
         </>
       )
     }
