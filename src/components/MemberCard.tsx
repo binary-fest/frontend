@@ -8,6 +8,7 @@ import { isParticipantModalShowAtom } from '../store/ui'
 
 interface Props {
   member: MemberState
+  idx?: number
 }
 
 const useStyles = makeStyles(({ breakpoints }) => ({
@@ -97,7 +98,7 @@ const useStyles = makeStyles(({ breakpoints }) => ({
   },
 }))
 
-export default function MemberCard({ member }: Props): ReactElement {
+export default function MemberCard({ member, idx = 1 }: Props): ReactElement {
   const [, setMemberState] = useRecoilState(membersState)
   const [, setMemberModalState] = useRecoilState(memberModalState)
   const [, setIsParticipantModalShow] = useRecoilState(isParticipantModalShowAtom)
@@ -119,7 +120,7 @@ export default function MemberCard({ member }: Props): ReactElement {
           <Typography>{member.phone}</Typography>
         </div>
         <Typography variant="h3" style={{ marginTop: '1rem' }}>
-          {member.isLeader ? 'Leader' : 'Member'}
+          {member.isLeader ? 'Ketua' : `Anggota ${idx}` }
         </Typography>
         <div style={{marginTop: '1rem'}}>
           <Button 

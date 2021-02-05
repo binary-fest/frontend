@@ -1,5 +1,5 @@
 import { atom, selector } from 'recoil'
-import { MemberState } from '../@types/Member'
+import { IndexedMemberState, MemberState } from '../@types/Member'
 
 const initialMemberModal: MemberState = {
   id: '',
@@ -21,6 +21,24 @@ const memberModalState = atom<MemberState>({
   default: initialMemberModal
 })
 
+const indexedMemberState = selector<IndexedMemberState[]>({
+  key: 'indexedMemberState',
+  get: ({get}) => {
+    const members = get(membersState)
+    let nonLeaderIndex = 0
+
+    const newMembers = members.map(member => {
+      if (!member.isLeader) nonLeaderIndex++
+      return {
+        idx: nonLeaderIndex,
+        ...member
+      }
+    })
+
+    return newMembers
+  }
+})
+
 const leaderAtom = selector<MemberState>({
   key: 'leaderAtom',
   get: ({ get }) => {
@@ -32,4 +50,4 @@ const leaderAtom = selector<MemberState>({
 })
 
 export default membersState
-export { leaderAtom, memberModalState, initialMemberModal }
+export { indexedMemberState, leaderAtom, memberModalState, initialMemberModal }

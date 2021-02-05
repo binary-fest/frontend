@@ -23,4 +23,8 @@ interface MemberState extends Member {
   id: string
 }
 
-export type { Member, GenderType, MemberState, MemberFormik }
+interface IndexedMemberState extends MemberState {
+  idx: number
+}
+
+export type { Member, GenderType, MemberState, MemberFormik, IndexedMemberState }
