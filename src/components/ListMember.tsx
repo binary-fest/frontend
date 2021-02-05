@@ -36,6 +36,8 @@ export default function ListMember(): ReactElement {
   const indexedMembers = useRecoilValue(indexedMemberState)
   const classes = useStyles()
 
+  const showMemberModalHandler = () => setIsMemberModalShowState(true)
+
   return (
     <div className={classes.root}>
       <WhiteTypography variant="h3" className="title">List Anggota</WhiteTypography>
@@ -47,7 +49,7 @@ export default function ListMember(): ReactElement {
       <Grid container spacing={3} justify="center">
         {indexedMembers.map(member => <MemberCard member={member} key={member.id} idx={member.idx}/>)}
         {indexedMembers.length < 3 && (
-          <Grid item xs={12} sm={6} md={4} onClick={() => setIsMemberModalShowState(true)}>
+          <Grid item xs={12} sm={6} md={4} onClick={showMemberModalHandler}>
             <div className="add-participant">
               <img src="/add-participant.svg" alt="Add Participant"/>
               <Typography>Tambah Peserta</Typography>
