@@ -48,7 +48,8 @@ export default function Register(): ReactElement {
     }
   ])
 
-  const selectCompetition = (id: string) => {
+  const selectCompetitionHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const id = e.currentTarget.dataset.competition
     setCompetitions(
       competitions.map((comp) => ({ ...comp, isSelected: comp.id === id }))
     )
@@ -91,7 +92,8 @@ export default function Register(): ReactElement {
                 <GradientButton
                   key={competition.id}
                   style={{ padding: '16px' }}
-                  onClick={() => selectCompetition(competition.id)}
+                  data-competition={competition.id}
+                  onClick={selectCompetitionHandler}
                 >
                   <WhiteTypography>{competition.name}</WhiteTypography>
                 </GradientButton>
@@ -100,7 +102,8 @@ export default function Register(): ReactElement {
                   variant="contained"
                   key={competition.id}
                   style={{ padding: '16px' }}
-                  onClick={() => selectCompetition(competition.id)}
+                  data-competition={competition.id}
+                  onClick={selectCompetitionHandler}
                 >
                   <Typography>{competition.name}</Typography>
                 </Button>
