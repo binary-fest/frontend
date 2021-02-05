@@ -1,7 +1,7 @@
 import { Grid, makeStyles, Typography } from '@material-ui/core'
 import React, { ReactElement } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import membersAtom from '../store/members'
+import membersState from '../store/members'
 import MemberCard from './MemberCard'
 import { WhiteTypography } from '../theme/extends'
 import { isParticipantModalShowAtom } from '../store/ui'
@@ -33,7 +33,7 @@ const useStyles = makeStyles(() => ({
 
 export default function ListMember(): ReactElement {
   const [,setIsParticipantModalShow] = useRecoilState(isParticipantModalShowAtom)
-  const members = useRecoilValue(membersAtom)
+  const members = useRecoilValue(membersState)
   const classes = useStyles()
 
   return (

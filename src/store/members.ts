@@ -9,21 +9,21 @@ interface Member {
   isAdmin: boolean,
 }
 
-const membersAtom = atom<Member[]>({
-  key: 'membersAtom',
+const membersState = atom<Member[]>({
+  key: 'membersState',
   default: []
 })
 
 const leaderAtom = selector<Member>({
   key: 'leaderAtom',
   get: ({ get }) => {
-    const members = get(membersAtom)
+    const members = get(membersState)
     const [leader] = members.filter(member => member.isAdmin)
 
     return leader
   }
 })
 
-export default membersAtom
+export default membersState
 export { leaderAtom }
 export type { Member }
