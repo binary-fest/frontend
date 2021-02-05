@@ -9,6 +9,22 @@ const GradientButton = withStyles({
   }
 })(Button)
 
+const WhiteButton = withStyles({
+  root: {
+    textTransform: 'capitalize',
+    padding: '16px 24px',
+    background: 'white',
+    color: 'black',
+    '&:hover': {
+      backgroundImage: 'linear-gradient(140.7deg, #FF512F 12%, #DF2672 95.63%)',
+      '-webkit-background-clip': 'text',
+      '-moz-background-clip': 'text',
+      color: 'white',
+      border: '1px solid white'
+    }
+  },
+})(Button)
+
 const GradientTypography = withStyles({
   root: {
     backgroundImage: 'linear-gradient(140.7deg, #FF512F 12%, #DF2672 95.63%)',
@@ -66,5 +82,6 @@ export {
   WhiteTypography,
   WhiteInputLabel,
   WhiteInput,
-  AbsoluteFormHelperText
+  AbsoluteFormHelperText,
+  WhiteButton
 }
