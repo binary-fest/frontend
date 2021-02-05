@@ -3,7 +3,6 @@ import React, { ReactElement, useState } from 'react'
 import { useRecoilState } from 'recoil'
 import ListMember from '../components/ListMember'
 import ParticipantModal from '../components/ParticipantModal'
-import UploadProposal from '../components/UploadProposal'
 import { isParticipantModalShowAtom } from '../store/ui'
 import { GradientButton, WhiteInput, WhiteInputLabel, WhiteTypography } from '../theme/extends'
 import Backdrop from '../components/Backdrop'
@@ -25,6 +24,12 @@ const useStyles = makeStyles(({breakpoints}) => ({
     '& button': {
       marginRight: '16px',
       marginTop: '29px'
+    },
+    '& .form-input-link': {
+      marginTop: '29px',
+      '& h3': {
+        marginBottom: '1rem'
+      }
     }
   },
   uploadFile: {
@@ -113,17 +118,13 @@ export default function Register(): ReactElement {
               )
             ))}
           </div>
-          {competitions.map((competition) => {
-            if (!competition.isSelected) return null
-
-            return (
-              <div key={competition.id} className={classes.uploadFile}>
-                {competition.id === "IOT" ? 
-                  (<UploadProposal />) :
-                  (<WhiteTypography variant="h3">Link Video</WhiteTypography>)}
-              </div>
-            )
-          })}
+          <div className="form-input-link">
+            <WhiteTypography variant="h3">Link Berkas</WhiteTypography>
+            <FormControl fullWidth>
+              <WhiteInputLabel htmlFor="input-judul">Link</WhiteInputLabel>
+              <WhiteInput id="input-judul" fullWidth />
+            </FormControl>
+          </div>
         </Grid>
       </Grid>
       <ListMember />
