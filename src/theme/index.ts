@@ -8,6 +8,11 @@ const theme = createMuiTheme({
         fontWeight: 'bold',
         lineHeight: '36px'
       }
+    },
+    MuiButton: {
+      root: {
+        textTransform: 'capitalize',
+      }
     }
   },
   typography: {

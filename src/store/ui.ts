@@ -5,4 +5,9 @@ const isNavigationResponsiveShowAtom = atom({
   default: false
 })
 
-export { isNavigationResponsiveShowAtom }
+const isParticipantModalShowAtom = atom({
+  key: "isParticipantModalShowAtom",
+  default: false
+})
+
+export { isNavigationResponsiveShowAtom, isParticipantModalShowAtom }

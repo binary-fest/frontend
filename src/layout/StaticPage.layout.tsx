@@ -1,15 +1,11 @@
 import { Container, makeStyles } from '@material-ui/core'
 import React, { ReactElement } from 'react'
-import { Route, Switch } from 'react-router-dom'
-import { useRecoilValue } from 'recoil'
+import { Route } from 'react-router-dom'
 import FixedSocialMedia from '../components/FixedSocialMedia'
-import Navigation from '../components/Navigation'
-import NavigationResponsive from '../components/NavigationResponsive'
 import About from '../pages/About'
 import Competition from '../pages/Competition'
 import Expo from '../pages/Expo'
 import Home from '../pages/Home'
-import { isNavigationResponsiveShowAtom } from '../store/ui'
 
 const useStyles = makeStyles(({ palette, breakpoints }) => ({
   decorationContainer: {
@@ -48,30 +44,23 @@ const RouteComponents = (): ReactElement => {
   return (
     <>
       {routes.map(route => (
-        <Route path={route.path} exact key={route.path}>
-          <route.components />
-        </Route>
+        <Route path={route.path} exact key={route.path} component={route.components} />
       ))}
     </>
   )
 }
 
 export default function StaticPageLayout(): ReactElement {
-  const isNavigationResponsiveShow = useRecoilValue(isNavigationResponsiveShowAtom)
   const classes = useStyles()
 
   return (
     <>
-      <Navigation />
-      {isNavigationResponsiveShow && <NavigationResponsive />}
       <div className={classes.decorationContainer}>
         <img className={classes.decoration1} src="/decoration-1.svg" alt="decoration" />
       </div>
       <FixedSocialMedia />
       <Container>
-        <Switch>
-          <RouteComponents />
-        </Switch>
+        <RouteComponents />
       </Container>
     </>
   )
