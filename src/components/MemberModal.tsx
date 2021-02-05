@@ -16,7 +16,7 @@ import { AbsoluteFormHelperText, GradientButton } from '../theme/extends'
 import { useFormik } from 'formik'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import membersState, { initialMemberModal, leaderAtom, memberModalState } from '../store/members'
-import { isParticipantModalShowAtom } from '../store/ui'
+import { isMemberModalShowState } from '../store/ui'
 import { MemberFormik, MemberState } from '../@types/Member'
 
 interface ParticipantInputProps {
@@ -106,7 +106,7 @@ export default function MemberModal(): ReactElement {
   const [memberModal, setMemberModalState] = useRecoilState(memberModalState)
   const [, setMembersAtom] = useRecoilState(membersState)
   const leader = useRecoilValue(leaderAtom)
-  const [, setIsParticipantModalShow] = useRecoilState(isParticipantModalShowAtom)
+  const [, setIsMemberModalShowState] = useRecoilState(isMemberModalShowState)
 
   const formik = useFormik<MemberFormik>({
     initialValues: {
@@ -152,13 +152,13 @@ export default function MemberModal(): ReactElement {
           return newMember
         })
         setMemberModalState(initialMemberModal)
-        setIsParticipantModalShow(false)
+        setIsMemberModalShowState(false)
         return
       }
       
 
       setMembersAtom((currVal) => [...currVal, memberData])
-      setIsParticipantModalShow(false)
+      setIsMemberModalShowState(false)
     }
   })
 

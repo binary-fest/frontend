@@ -4,7 +4,7 @@ import { useRecoilState, useRecoilValue } from 'recoil'
 import { indexedMemberState } from '../store/members'
 import MemberCard from './MemberCard'
 import { WhiteTypography } from '../theme/extends'
-import { isParticipantModalShowAtom } from '../store/ui'
+import { isMemberModalShowState } from '../store/ui'
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -32,7 +32,7 @@ const useStyles = makeStyles(() => ({
 }))
 
 export default function ListMember(): ReactElement {
-  const [, setIsParticipantModalShow] = useRecoilState(isParticipantModalShowAtom)
+  const [, setIsMemberModalShowState] = useRecoilState(isMemberModalShowState)
   const indexedMembers = useRecoilValue(indexedMemberState)
   const classes = useStyles()
 
@@ -47,7 +47,7 @@ export default function ListMember(): ReactElement {
       <Grid container spacing={3} justify="center">
         {indexedMembers.map(member => <MemberCard member={member} key={member.id} idx={member.idx}/>)}
         {indexedMembers.length < 3 && (
-          <Grid item xs={12} sm={6} md={4} onClick={() => setIsParticipantModalShow(true)}>
+          <Grid item xs={12} sm={6} md={4} onClick={() => setIsMemberModalShowState(true)}>
             <div className="add-participant">
               <img src="/add-participant.svg" alt="Add Participant"/>
               <Typography>Tambah Peserta</Typography>

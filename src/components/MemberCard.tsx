@@ -4,7 +4,7 @@ import React, { ReactElement } from 'react'
 import { useRecoilState } from 'recoil'
 import { MemberState } from '../@types/Member'
 import membersState, { memberModalState } from '../store/members'
-import { isParticipantModalShowAtom } from '../store/ui'
+import { isMemberModalShowState } from '../store/ui'
 
 interface Props {
   member: MemberState
@@ -101,14 +101,14 @@ const useStyles = makeStyles(({ breakpoints }) => ({
 export default function MemberCard({ member, idx = 1 }: Props): ReactElement {
   const [, setMemberState] = useRecoilState(membersState)
   const [, setMemberModalState] = useRecoilState(memberModalState)
-  const [, setIsParticipantModalShow] = useRecoilState(isParticipantModalShowAtom)
+  const [, setIsMemberModalShowState] = useRecoilState(isMemberModalShowState)
   const classes = useStyles()
 
   const deleteMember = () => setMemberState(members => members.filter(data => data.id !== member.id))
 
   const openModal = () => {
     setMemberModalState(member)
-    setIsParticipantModalShow(true)
+    setIsMemberModalShowState(true)
   }
 
   return (
