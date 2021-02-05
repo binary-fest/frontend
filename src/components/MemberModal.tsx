@@ -19,7 +19,7 @@ import membersState, { initialMemberModal, leaderAtom, memberModalState } from '
 import { isMemberModalShowState } from '../store/ui'
 import { MemberFormik, MemberState } from '../@types/Member'
 
-interface ParticipantInputProps {
+interface MemberInputProps {
   error: string | undefined
   name: string
   placeholder: string
@@ -92,21 +92,24 @@ const useStyles = makeStyles(({breakpoints}) => ({
   }
 }))
 
-const ParticipantInput = ({ error, handleChange, name, placeholder, value }: ParticipantInputProps) => {
-  return (
-    <FormControl fullWidth error={!!error}>
-      <InputLabel htmlFor={`input-${name}`}>{placeholder}</InputLabel>
-      <Input
-        id={`input-${name}`}
-        fullWidth
-        name={name}
-        value={value}
-        onChange={handleChange}
-      />
-      <AbsoluteFormHelperText>{error}</AbsoluteFormHelperText>
-    </FormControl>
-  )
-}
+const MemberInput = React.memo(
+  ({ error, handleChange, name, placeholder, value }: MemberInputProps) =>
+  {
+    return (
+      <FormControl fullWidth error={!!error}>
+        <InputLabel htmlFor={`input-${name}`}>{placeholder}</InputLabel>
+        <Input
+          id={`input-${name}`}
+          fullWidth
+          name={name}
+          value={value}
+          onChange={handleChange}
+        />
+        <AbsoluteFormHelperText>{error}</AbsoluteFormHelperText>
+      </FormControl>
+    )
+  }
+)
 
 export default function MemberModal(): ReactElement {
   const [memberModal, setMemberModalState] = useRecoilState(memberModalState)
@@ -192,28 +195,28 @@ export default function MemberModal(): ReactElement {
         </Typography>
         <Grid container spacing={4}>
           <Grid item className={classes.formArea}>
-            <ParticipantInput
+            <MemberInput
               handleChange={formik.handleChange}
               error={formik.errors.name}
               value={formik.values.name}
               name="name"
               placeholder="Nama"
             />
-            <ParticipantInput
+            <MemberInput
               handleChange={formik.handleChange}
               error={formik.errors.student_id}
               value={formik.values.student_id}
               name="student_id"
               placeholder="NISN / NIM"
             />
-            <ParticipantInput
+            <MemberInput
               handleChange={formik.handleChange}
               error={formik.errors.email}
               value={formik.values.email}
               name="email"
               placeholder="Email"
             />
-            <ParticipantInput
+            <MemberInput
               handleChange={formik.handleChange}
               error={formik.errors.phone}
               value={formik.values.phone}
