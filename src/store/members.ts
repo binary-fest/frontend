@@ -32,4 +32,4 @@ const leaderAtom = selector<MemberState>({
 })
 
 export default membersState
-export { leaderAtom, memberModalState }
+export { leaderAtom, memberModalState, initialMemberModal }

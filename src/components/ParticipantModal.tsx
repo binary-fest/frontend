@@ -15,7 +15,7 @@ import React, { ReactElement } from 'react'
 import { AbsoluteFormHelperText, GradientButton } from '../theme/extends'
 import { useFormik } from 'formik'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import membersState, { leaderAtom, memberModalState } from '../store/members'
+import membersState, { initialMemberModal, leaderAtom, memberModalState } from '../store/members'
 import { isParticipantModalShowAtom } from '../store/ui'
 import { MemberFormik, MemberState } from '../@types/Member'
 
@@ -103,7 +103,7 @@ const ParticipantInput = ({ error, handleChange, name, placeholder, value }: Par
 }
 
 export default function ParticipantModal(): ReactElement {
-  const memberModal = useRecoilValue(memberModalState)
+  const [memberModal, setMemberModalState] = useRecoilState(memberModalState)
   const [, setMembersAtom] = useRecoilState(membersState)
   const leader = useRecoilValue(leaderAtom)
   const [, setIsParticipantModalShow] = useRecoilState(isParticipantModalShowAtom)
@@ -139,6 +139,23 @@ export default function ParticipantModal(): ReactElement {
         gender: values.gender,
         isLeader: values.role === 'ketua',
       }
+
+      if (memberModal.id !== '') {
+        setMembersAtom((members) => {
+          const newMember = members.map((member) => {
+            if (member.id !== memberModal.id) return member
+
+            memberData.id = memberModal.id
+            return memberData
+          })
+
+          return newMember
+        })
+        setMemberModalState(initialMemberModal)
+        setIsParticipantModalShow(false)
+        return
+      }
+      
 
       setMembersAtom((currVal) => [...currVal, memberData])
       setIsParticipantModalShow(false)
