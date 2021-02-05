@@ -1,7 +1,9 @@
-import { Grid, makeStyles, Typography } from '@material-ui/core'
+import { Button, Grid, makeStyles, Typography } from '@material-ui/core'
 import clsx from 'clsx'
 import React, { ReactElement } from 'react'
+import { useRecoilState } from 'recoil'
 import { MemberState } from '../@types/Member'
+import membersState from '../store/members'
 
 interface Props {
   member: MemberState
@@ -94,8 +96,11 @@ const useStyles = makeStyles(({ breakpoints }) => ({
   },
 }))
 
-export default function MemberCard({member}: Props): ReactElement {
+export default function MemberCard({ member }: Props): ReactElement {
+  const [, setMemberState] = useRecoilState(membersState)
   const classes = useStyles()
+
+  const deleteMember = () => setMemberState(members => members.filter(data => data.id !== member.id))
 
   return (
     <Grid item xs={12} sm={6} md={4}>
@@ -108,6 +113,18 @@ export default function MemberCard({member}: Props): ReactElement {
         <Typography variant="h3" style={{ marginTop: '1rem' }}>
           {member.isLeader ? 'Leader' : 'Member'}
         </Typography>
+        <div style={{marginTop: '1rem'}}>
+          <Button 
+            variant="contained" 
+            color="secondary" 
+            style={{marginRight: '1rem'}}
+          >Update</Button>
+          <Button 
+            variant="contained" 
+            color="secondary"
+            onClick={deleteMember}
+          >Delete</Button>
+        </div>
       </div>
     </Grid>
   )
