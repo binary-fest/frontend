@@ -135,7 +135,10 @@ export default function ParticipantModal(): ReactElement {
       }
 
       setMembersAtom((currVal) => {
-        const resetVal = currVal.map(val => ({ ...val, isAdmin: false }))
+        const resetVal = currVal.map(val => ({
+          ...val,
+          isAdmin: !memberData.isAdmin
+        }))
         return [...resetVal, memberData]
       })
       setIsParticipantModalShow(false)
