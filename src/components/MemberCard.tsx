@@ -1,10 +1,10 @@
 import { Grid, makeStyles, Typography } from '@material-ui/core'
 import clsx from 'clsx'
 import React, { ReactElement } from 'react'
-import { Member } from '../store/members'
+import { MemberState } from '../@types/Member'
 
 interface Props {
-  member: Member
+  member: MemberState
 }
 
 const useStyles = makeStyles(({ breakpoints }) => ({
@@ -99,14 +99,14 @@ export default function MemberCard({member}: Props): ReactElement {
 
   return (
     <Grid item xs={12} sm={6} md={4}>
-      <div className={clsx(classes.root, member.isAdmin ? classes.leaderCard : classes.memberCard)}>
+      <div className={clsx(classes.root, member.isLeader ? classes.leaderCard : classes.memberCard)}>
         <div className="member-bio">
           <Typography className="member-name">{member.name}</Typography>
           <Typography>{member.email}</Typography>
           <Typography>{member.phone}</Typography>
         </div>
         <Typography variant="h3" style={{ marginTop: '1rem' }}>
-          {member.isAdmin ? 'Leader' : 'Member'}
+          {member.isLeader ? 'Leader' : 'Member'}
         </Typography>
       </div>
     </Grid>

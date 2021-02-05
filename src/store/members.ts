@@ -1,24 +1,16 @@
 import { atom, selector } from 'recoil'
+import { MemberState } from '../@types/Member'
 
-interface Member {
-  name: string
-  nim: string
-  email: string
-  phone: string
-  gender: "pria" | "wanita" | ""
-  isAdmin: boolean,
-}
-
-const membersState = atom<Member[]>({
+const membersState = atom<MemberState[]>({
   key: 'membersState',
   default: []
 })
 
-const leaderAtom = selector<Member>({
+const leaderAtom = selector<MemberState>({
   key: 'leaderAtom',
   get: ({ get }) => {
     const members = get(membersState)
-    const [leader] = members.filter(member => member.isAdmin)
+    const [leader] = members.filter(member => member.isLeader)
 
     return leader
   }
@@ -26,4 +18,3 @@ const leaderAtom = selector<Member>({
 
 export default membersState
 export { leaderAtom }
-export type { Member }

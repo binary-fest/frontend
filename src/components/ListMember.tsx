@@ -45,7 +45,7 @@ export default function ListMember(): ReactElement {
         marginBottom: '29px'
       }}>* Klik anggota untuk mengedit</WhiteTypography>
       <Grid container spacing={3} justify="center">
-        {members.map(member => <MemberCard member={member} key={member.name} />)}
+        {members.map(member => <MemberCard member={member} key={member.id} />)}
         {members.length < 3 && (
           <Grid item xs={12} sm={6} md={4} onClick={() => setIsParticipantModalShow(true)}>
             <div className="add-participant">

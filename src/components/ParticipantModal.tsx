@@ -15,8 +15,9 @@ import React, { ReactElement } from 'react'
 import { AbsoluteFormHelperText, GradientButton } from '../theme/extends'
 import { useFormik } from 'formik'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import membersState, { leaderAtom, Member } from '../store/members'
+import membersState, { leaderAtom } from '../store/members'
 import { isParticipantModalShowAtom } from '../store/ui'
+import { MemberState } from '../@types/Member'
 
 interface ParticipantInputProps {
   error: string | undefined
@@ -126,13 +127,14 @@ export default function ParticipantModal(): ReactElement {
       return errors
     },
     onSubmit: (values, helpers) => {
-      const memberData: Member = {
+      const memberData: MemberState = {
+        id: (new Date().getTime()).toString(),
         name: values.name,
-        nim: values.nim,
+        student_id: values.nim,
         email: values.email,
         phone: values.phone,
         gender: values.gender as "pria" | "wanita",
-        isAdmin: values.role === 'Ketua',
+        isLeader: values.role === 'Ketua',
       }
 
       setMembersAtom((currVal) => [...currVal, memberData])
