@@ -17,7 +17,7 @@ import { useFormik } from 'formik'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import membersState, { leaderAtom } from '../store/members'
 import { isParticipantModalShowAtom } from '../store/ui'
-import { MemberState } from '../@types/Member'
+import { MemberFormik, MemberState } from '../@types/Member'
 
 interface ParticipantInputProps {
   error: string | undefined
@@ -105,20 +105,20 @@ export default function ParticipantModal(): ReactElement {
   const leader = useRecoilValue(leaderAtom)
   const [, setIsParticipantModalShow] = useRecoilState(isParticipantModalShowAtom)
 
-  const formik = useFormik({
+  const formik = useFormik<MemberFormik>({
     initialValues: {
       name: '',
-      nim: '',
+      student_id: '',
       email: '',
       phone: '',
-      gender: '',
-      role: '',
+      gender: 'pria',
+      role: 'anggota',
     },
     validateOnChange: false,
     validate: (values) => {
       const errors: any = {}
       if (!values.name) errors.name = "Tidak boleh kosong"
-      if (!values.nim) errors.nim = "Tidak boleh kosong"
+      if (!values.student_id) errors.student_id = "Tidak boleh kosong"
       if (!values.email) errors.email = "Tidak boleh kosong"
       if (!values.phone) errors.phone = "Tidak boleh kosong"
       if (!values.gender) errors.gender = "Pilih salah satu"
@@ -130,11 +130,11 @@ export default function ParticipantModal(): ReactElement {
       const memberData: MemberState = {
         id: (new Date().getTime()).toString(),
         name: values.name,
-        student_id: values.nim,
+        student_id: values.student_id,
         email: values.email,
         phone: values.phone,
-        gender: values.gender as "pria" | "wanita",
-        isLeader: values.role === 'Ketua',
+        gender: values.gender,
+        isLeader: values.role === 'ketua',
       }
 
       setMembersAtom((currVal) => [...currVal, memberData])
@@ -164,8 +164,8 @@ export default function ParticipantModal(): ReactElement {
             />
             <ParticipantInput
               handleChange={formik.handleChange}
-              error={formik.errors.nim}
-              name="nim"
+              error={formik.errors.student_id}
+              name="student_id"
               placeholder="NISN / NIM"
             />
             <ParticipantInput
@@ -183,7 +183,12 @@ export default function ParticipantModal(): ReactElement {
             <Grid container>
               <Grid item xs={12} md={6}>
                 <Typography>Jenis Kelamin</Typography>
-                <RadioGroup className={classes.radioGroup} onChange={formik.handleChange} name="gender">
+                <RadioGroup
+                  className={classes.radioGroup}
+                  onChange={formik.handleChange}
+                  name="gender"
+                  defaultValue="pria"
+                >
                   <FormControlLabel
                     value="pria"
                     control={<Radio color="primary" />}
@@ -199,17 +204,22 @@ export default function ParticipantModal(): ReactElement {
               </Grid>
               <Grid item xs={12} md={6}>
                 <Typography>Peran</Typography>
-                <RadioGroup className={classes.radioGroup} onChange={formik.handleChange} name="role">
+                <RadioGroup
+                  className={classes.radioGroup}
+                  onChange={formik.handleChange}
+                  name="role"
+                  defaultValue="anggota"
+                >
                   <FormControlLabel
-                    value="Ketua"
+                    value="anggota"
+                    control={<Radio color="primary" />}
+                    label="Anggota"
+                  />
+                  <FormControlLabel
+                    value="ketua"
                     disabled={!!leader}
                     control={<Radio color="primary" />}
                     label="Ketua"
-                  />
-                  <FormControlLabel
-                    value="Anggota"
-                    control={<Radio color="primary" />}
-                    label="Anggota"
                   />
                 </RadioGroup>
                 <FormHelperText error={!!formik.errors.role}>{formik.errors.role}</FormHelperText> 
