@@ -15,7 +15,7 @@ import React, { ReactElement } from 'react'
 import { AbsoluteFormHelperText, GradientButton } from '../theme/extends'
 import { useFormik } from 'formik'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import membersState, { leaderAtom } from '../store/members'
+import membersState, { leaderAtom, memberModalState } from '../store/members'
 import { isParticipantModalShowAtom } from '../store/ui'
 import { MemberFormik, MemberState } from '../@types/Member'
 
@@ -23,6 +23,7 @@ interface ParticipantInputProps {
   error: string | undefined
   name: string
   placeholder: string
+  value: any
   handleChange: (e: React.ChangeEvent<any>) => void
 }
 
@@ -85,7 +86,7 @@ const useStyles = makeStyles(({breakpoints}) => ({
   }
 }))
 
-const ParticipantInput = ({ error, handleChange, name, placeholder }: ParticipantInputProps) => {
+const ParticipantInput = ({ error, handleChange, name, placeholder, value }: ParticipantInputProps) => {
   return (
     <FormControl fullWidth error={!!error}>
       <InputLabel htmlFor={`input-${name}`}>{placeholder}</InputLabel>
@@ -93,6 +94,7 @@ const ParticipantInput = ({ error, handleChange, name, placeholder }: Participan
         id={`input-${name}`}
         fullWidth
         name={name}
+        value={value}
         onChange={handleChange}
       />
       <AbsoluteFormHelperText>{error}</AbsoluteFormHelperText>
@@ -101,18 +103,19 @@ const ParticipantInput = ({ error, handleChange, name, placeholder }: Participan
 }
 
 export default function ParticipantModal(): ReactElement {
+  const memberModal = useRecoilValue(memberModalState)
   const [, setMembersAtom] = useRecoilState(membersState)
   const leader = useRecoilValue(leaderAtom)
   const [, setIsParticipantModalShow] = useRecoilState(isParticipantModalShowAtom)
 
   const formik = useFormik<MemberFormik>({
     initialValues: {
-      name: '',
-      student_id: '',
-      email: '',
-      phone: '',
-      gender: 'pria',
-      role: 'anggota',
+      name: memberModal.name,
+      student_id: memberModal.student_id,
+      email: memberModal.email,
+      phone: memberModal.phone,
+      gender: memberModal.gender,
+      role: memberModal.isLeader ? 'ketua' : 'anggota',
     },
     validateOnChange: false,
     validate: (values) => {
@@ -159,24 +162,28 @@ export default function ParticipantModal(): ReactElement {
             <ParticipantInput
               handleChange={formik.handleChange}
               error={formik.errors.name}
+              value={formik.values.name}
               name="name"
               placeholder="Nama"
             />
             <ParticipantInput
               handleChange={formik.handleChange}
               error={formik.errors.student_id}
+              value={formik.values.student_id}
               name="student_id"
               placeholder="NISN / NIM"
             />
             <ParticipantInput
               handleChange={formik.handleChange}
               error={formik.errors.email}
+              value={formik.values.email}
               name="email"
               placeholder="Email"
             />
             <ParticipantInput
               handleChange={formik.handleChange}
               error={formik.errors.phone}
+              value={formik.values.phone}
               name="phone"
               placeholder="Nomor Whatsapp"
             />
@@ -187,7 +194,7 @@ export default function ParticipantModal(): ReactElement {
                   className={classes.radioGroup}
                   onChange={formik.handleChange}
                   name="gender"
-                  defaultValue="pria"
+                  defaultValue={formik.initialValues.gender}
                 >
                   <FormControlLabel
                     value="pria"
@@ -208,7 +215,7 @@ export default function ParticipantModal(): ReactElement {
                   className={classes.radioGroup}
                   onChange={formik.handleChange}
                   name="role"
-                  defaultValue="anggota"
+                  defaultValue={formik.initialValues.role}
                 >
                   <FormControlLabel
                     value="anggota"
