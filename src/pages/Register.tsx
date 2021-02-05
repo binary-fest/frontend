@@ -1,12 +1,8 @@
 import { Button, Container, FormControl, Grid, makeStyles, Typography } from '@material-ui/core'
 import React, { ReactElement, useState } from 'react'
-import { useRecoilState } from 'recoil'
 import ListMember from '../components/ListMember'
-import ParticipantModal from '../components/MemberModal'
-import { isMemberModalShowState } from '../store/ui'
 import { GradientButton, WhiteInput, WhiteInputLabel, WhiteTypography } from '../theme/extends'
-import Backdrop from '../components/Backdrop'
-import { initialMemberModal, memberModalState } from '../store/members'
+import MemberModalPopup from '../components/MemberModalPopup'
 
 const useStyles = makeStyles(({breakpoints}) => ({
   root: {
@@ -39,9 +35,6 @@ const useStyles = makeStyles(({breakpoints}) => ({
 }))
 
 export default function Register(): ReactElement {
-  const [isMemberModalShow, setIsMemberModalShow] = useRecoilState(isMemberModalShowState)
-  const [, setMemberModalState] = useRecoilState(memberModalState)
-  
   const [competitions, setCompetitions] = useState([
     {
       id: 'IOT',
@@ -65,16 +58,7 @@ export default function Register(): ReactElement {
 
   return (
     <>
-    {isMemberModalShow && (
-        <>
-          <ParticipantModal />
-          <Backdrop zIndex={999} onClick={() => {
-            setMemberModalState(initialMemberModal)
-            setIsMemberModalShow(false)
-          }} />
-        </>
-      )
-    }
+    <MemberModalPopup />
     <Container className={classes.root}>
       <Grid container spacing={4}>
         <Grid item xs={12} md={6} lg={5}>
