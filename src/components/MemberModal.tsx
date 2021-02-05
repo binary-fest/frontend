@@ -102,7 +102,7 @@ const ParticipantInput = ({ error, handleChange, name, placeholder, value }: Par
   )
 }
 
-export default function ParticipantModal(): ReactElement {
+export default function MemberModal(): ReactElement {
   const [memberModal, setMemberModalState] = useRecoilState(memberModalState)
   const [, setMembersAtom] = useRecoilState(membersState)
   const leader = useRecoilValue(leaderAtom)

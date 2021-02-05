@@ -2,7 +2,7 @@ import { Button, Container, FormControl, Grid, makeStyles, Typography } from '@m
 import React, { ReactElement, useState } from 'react'
 import { useRecoilState } from 'recoil'
 import ListMember from '../components/ListMember'
-import ParticipantModal from '../components/ParticipantModal'
+import ParticipantModal from '../components/MemberModal'
 import { isParticipantModalShowAtom } from '../store/ui'
 import { GradientButton, WhiteInput, WhiteInputLabel, WhiteTypography } from '../theme/extends'
 import Backdrop from '../components/Backdrop'
