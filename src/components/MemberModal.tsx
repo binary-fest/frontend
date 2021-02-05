@@ -34,7 +34,13 @@ const useStyles = makeStyles(({breakpoints}) => ({
     top: '1rem',
     left: '50%',
     transform: 'translateX(-50%)',
-    maxWidth: '650px'
+    maxWidth: '650px',
+    '& .close-button': {
+      position: 'absolute',
+      right: '3rem',
+      top: '2.5rem',
+      cursor: 'pointer'
+    }
   },
   root: {
     display: 'flex',
@@ -162,6 +168,11 @@ export default function MemberModal(): ReactElement {
     }
   })
 
+  const closeModal = () => {
+    setMemberModalState(initialMemberModal)
+    setIsMemberModalShowState(false)
+  }
+
   const classes = useStyles()
 
   return (
@@ -173,6 +184,9 @@ export default function MemberModal(): ReactElement {
           formik.handleSubmit()
         }}
       >
+        <div className="close-button" onClick={closeModal}>
+          <img src="/delete-member.svg" alt="close"/>
+        </div>
         <Typography variant="h3">
           {memberModal.id !== '' ? 'Update Anggota' : 'Tambah Anggota'}
         </Typography>
