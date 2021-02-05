@@ -3,7 +3,8 @@ import clsx from 'clsx'
 import React, { ReactElement } from 'react'
 import { useRecoilState } from 'recoil'
 import { MemberState } from '../@types/Member'
-import membersState from '../store/members'
+import membersState, { memberModalState } from '../store/members'
+import { isParticipantModalShowAtom } from '../store/ui'
 
 interface Props {
   member: MemberState
@@ -98,9 +99,16 @@ const useStyles = makeStyles(({ breakpoints }) => ({
 
 export default function MemberCard({ member }: Props): ReactElement {
   const [, setMemberState] = useRecoilState(membersState)
+  const [, setMemberModalState] = useRecoilState(memberModalState)
+  const [, setIsParticipantModalShow] = useRecoilState(isParticipantModalShowAtom)
   const classes = useStyles()
 
   const deleteMember = () => setMemberState(members => members.filter(data => data.id !== member.id))
+
+  const openModal = () => {
+    setMemberModalState(member)
+    setIsParticipantModalShow(true)
+  }
 
   return (
     <Grid item xs={12} sm={6} md={4}>
@@ -117,7 +125,8 @@ export default function MemberCard({ member }: Props): ReactElement {
           <Button 
             variant="contained" 
             color="secondary" 
-            style={{marginRight: '1rem'}}
+            style={{ marginRight: '1rem' }}
+            onClick={openModal}
           >Update</Button>
           <Button 
             variant="contained" 

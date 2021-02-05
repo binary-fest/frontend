@@ -156,7 +156,9 @@ export default function ParticipantModal(): ReactElement {
           formik.handleSubmit()
         }}
       >
-        <Typography variant="h3">Tambah Peserta</Typography>
+        <Typography variant="h3">
+          {memberModal.id !== '' ? 'Update Anggota' : 'Tambah Anggota'}
+        </Typography>
         <Grid container spacing={4}>
           <Grid item className={classes.formArea}>
             <ParticipantInput
@@ -239,7 +241,9 @@ export default function ParticipantModal(): ReactElement {
         </Grid>
       
         <div className={classes.addParticipantButton}>
-          <GradientButton type="submit">Tambah Peserta</GradientButton>
+          <GradientButton type="submit">
+            {memberModal.id !== '' ? 'Update Anggota' : 'Tambah Anggota'}
+          </GradientButton>
         </div>
       </form>
     </Container>
