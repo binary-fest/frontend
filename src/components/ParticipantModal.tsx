@@ -243,7 +243,7 @@ export default function ParticipantModal(): ReactElement {
                   />
                   <FormControlLabel
                     value="ketua"
-                    disabled={!!leader}
+                    disabled={formik.initialValues.role === "ketua" ? false : !!leader}
                     control={<Radio color="primary" />}
                     label="Ketua"
                   />
