@@ -14,8 +14,8 @@ import {
 import React, { ReactElement } from 'react'
 import { AbsoluteFormHelperText, GradientButton } from '../theme/extends'
 import { useFormik } from 'formik'
-import { useRecoilState } from 'recoil'
-import membersAtom, { Member } from '../store/members'
+import { useRecoilState, useRecoilValue } from 'recoil'
+import membersAtom, { leaderAtom, Member } from '../store/members'
 import { isParticipantModalShowAtom } from '../store/ui'
 
 interface ParticipantInputProps {
@@ -101,6 +101,7 @@ const ParticipantInput = ({ error, handleChange, name, placeholder }: Participan
 
 export default function ParticipantModal(): ReactElement {
   const [, setMembersAtom] = useRecoilState(membersAtom)
+  const leader = useRecoilValue(leaderAtom)
   const [, setIsParticipantModalShow] = useRecoilState(isParticipantModalShowAtom)
 
   const formik = useFormik({
@@ -134,13 +135,7 @@ export default function ParticipantModal(): ReactElement {
         isAdmin: values.role === 'Ketua',
       }
 
-      setMembersAtom((currVal) => {
-        const resetVal = currVal.map(val => ({
-          ...val,
-          isAdmin: !memberData.isAdmin
-        }))
-        return [...resetVal, memberData]
-      })
+      setMembersAtom((currVal) => [...currVal, memberData])
       setIsParticipantModalShow(false)
     }
   })
@@ -205,6 +200,7 @@ export default function ParticipantModal(): ReactElement {
                 <RadioGroup className={classes.radioGroup} onChange={formik.handleChange} name="role">
                   <FormControlLabel
                     value="Ketua"
+                    disabled={!!leader}
                     control={<Radio color="primary" />}
                     label="Ketua"
                   />

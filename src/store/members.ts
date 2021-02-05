@@ -1,4 +1,4 @@
-import { atom } from 'recoil'
+import { atom, selector } from 'recoil'
 
 interface Member {
   name: string
@@ -14,5 +14,16 @@ const membersAtom = atom<Member[]>({
   default: []
 })
 
+const leaderAtom = selector<Member>({
+  key: 'leaderAtom',
+  get: ({ get }) => {
+    const members = get(membersAtom)
+    const [leader] = members.filter(member => member.isAdmin)
+
+    return leader
+  }
+})
+
 export default membersAtom
+export { leaderAtom }
 export type { Member }
