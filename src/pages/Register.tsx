@@ -24,7 +24,14 @@ interface TeamInputProps {
 
 const useStyles = makeStyles(({breakpoints}) => ({
   root: {
-    paddingTop: '139px'
+    paddingTop: '139px',
+    '& .error-list-member': {
+      color: '#f44336',
+      textAlign: 'center',
+      marginTop: '1rem',
+      fontWeight: 'bold',
+      fontSize: '20px'
+    }
   },
   teamForm: {
     '& > div': {
@@ -52,13 +59,18 @@ const useStyles = makeStyles(({breakpoints}) => ({
   }
 }))
 
-const initialValueFormik: Team = {
+interface RegisterFormik extends Team{
+  membersError: string
+}
+
+const initialValueFormik: RegisterFormik = {
   name: '',
   email: '',
   institute: '',
   title: '',
   url_files: '',
-  competition_type: 'iot'
+  competition_type: 'iot',
+  membersError: ''
 }
 
 const TeamMemberInput = React.memo(
@@ -112,6 +124,7 @@ export default function Register(): ReactElement {
       if (!values.institute) errors.institute = "Tidak boleh kosong"
       if (!values.title) errors.title = "Tidak boleh kosong"
       if (!values.url_files) errors.url_files = "Tidak boleh kosong"
+      if (!membersRequestBody.length) errors.membersError = "Minimal harus memiliki 1 ketua"
 
       return errors
     },
@@ -222,6 +235,9 @@ export default function Register(): ReactElement {
             </Grid>
           </Grid>
           <ListMember />
+          {formik.errors.membersError &&
+            <Typography className="error-list-member">Error: {formik.errors.membersError}</Typography>
+          }
           <div style={{marginTop: '5rem', paddingBottom: '200px', display: 'flex'}}>
             <GradientButton type="submit" fullWidth style={{maxWidth: '440px', margin: '0 auto'}}>
               <WhiteTypography>Register</WhiteTypography>

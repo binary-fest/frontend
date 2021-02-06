@@ -25,8 +25,10 @@ const membersRequestBodyState = selector<Member[]>({
   key: 'membersRequestBodyState',
   get: ({get}) => {
     const members = get(membersState)
-
+    let hasLeader = false
     const newMembers = members.map(member => {
+      member.isLeader && (hasLeader = true)
+
       return {
         name: member.name,
         student_id: member.student_id,
@@ -37,7 +39,7 @@ const membersRequestBodyState = selector<Member[]>({
       }
     })
 
-    return newMembers
+    return hasLeader ? newMembers : []
   }
 })
 
