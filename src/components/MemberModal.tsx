@@ -104,6 +104,7 @@ const MemberInput = React.memo(
           name={name}
           value={value}
           onChange={handleChange}
+          type="url"
         />
         <AbsoluteFormHelperText>{error}</AbsoluteFormHelperText>
       </FormControl>
@@ -186,6 +187,7 @@ export default function MemberModal(): ReactElement {
           e.preventDefault()
           formik.handleSubmit()
         }}
+        autoComplete="off"
       >
         <div className="close-button" onClick={closeModal}>
           <img src="/delete-member.svg" alt="close"/>

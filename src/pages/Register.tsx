@@ -96,6 +96,7 @@ const TeamMemberInput = React.memo(
           name={name}
           value={value}
           onChange={handleChange}
+          type="url"
         />
         <AbsoluteFormHelperText>{error}</AbsoluteFormHelperText>
       </FormControl>
@@ -173,6 +174,7 @@ export default function Register(): ReactElement {
             e.preventDefault()
             formik.handleSubmit()
           }}
+          autoComplete="off"
         >
           <Grid container spacing={4}>
             <Grid item xs={12} md={6} lg={5}>
