@@ -4,6 +4,7 @@ import { initialMemberModal, memberModalState } from '../store/members'
 import { isMemberModalShowState } from '../store/ui'
 import Backdrop from './Backdrop'
 import MemberModal from './MemberModal'
+import { CSSTransition } from 'react-transition-group'
 
 export default function MemberModalPopup(): ReactElement {
   const [isMemberModalShow, setIsMemberModalShow] = useRecoilState(isMemberModalShowState)
@@ -16,13 +17,22 @@ export default function MemberModalPopup(): ReactElement {
 
   return (
     <>
-      {isMemberModalShow && (
-        <>
-          <MemberModal />
-          <Backdrop zIndex={999} onClick={resetMemberModal} />
-        </>
-      )
-      }
+      <CSSTransition
+        in={isMemberModalShow}
+        classNames="animate-MemberModal"
+        timeout={500}
+        unmountOnExit
+      >
+        <MemberModal />
+      </CSSTransition>
+      <CSSTransition
+        in={isMemberModalShow}
+        classNames="animate-Backdrop"
+        timeout={500}
+        unmountOnExit
+      >
+        <Backdrop zIndex={999} onClick={resetMemberModal}/>
+      </CSSTransition>
     </>
   )
 }
