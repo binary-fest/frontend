@@ -71,6 +71,7 @@ const useStyles = makeStyles(({breakpoints}) => ({
 
 interface RegisterFormik extends Team{
   membersError: string
+  verify: string[]
 }
 
 const initialValueFormik: RegisterFormik = {
@@ -80,7 +81,8 @@ const initialValueFormik: RegisterFormik = {
   title: '',
   url_files: '',
   competition_type: 'iot',
-  membersError: ''
+  membersError: '',
+  verify: []
 }
 
 const TeamMemberInput = React.memo(
@@ -135,6 +137,7 @@ export default function Register(): ReactElement {
       if (!values.title) errors.title = "Tidak boleh kosong"
       if (!values.url_files) errors.url_files = "Tidak boleh kosong"
       if (!membersRequestBody.length) errors.membersError = "Minimal harus memiliki 1 ketua"
+      if (values.verify.length < 2) errors.verify = "Harap menyetujui 2 bidang diatas"
 
       return errors
     },
@@ -253,10 +256,10 @@ export default function Register(): ReactElement {
               className="label"
               control={
                 <WhiteCheckbox
-                  name="googleDrive"
-                  value="Validation"
+                  name="verify"
+                  value="responsibilityVerify"
                   onChange={formik.handleChange}
-                  color="primary"
+                  color="default"
                 />
               }
               label={
@@ -269,10 +272,10 @@ export default function Register(): ReactElement {
               className="label"
               control={
                 <WhiteCheckbox
-                  name="googleDrive"
-                  value="Validation"
+                  name="verify"
+                  value="googleDriveVerify"
                   onChange={formik.handleChange}
-                  color="primary"
+                  color="default"
                 />
               }
               label={
@@ -281,6 +284,14 @@ export default function Register(): ReactElement {
                 </WhiteTypography>
               }
             />
+            {
+              formik.errors.verify && (
+                <WhiteInputLabel
+                  className="label"
+                  error={!!formik.errors.verify}
+                >{formik.errors.verify}</WhiteInputLabel>
+              )
+            }
             <GradientButton type="submit" fullWidth style={{margin: '0 auto'}}>
               <WhiteTypography>Register</WhiteTypography>
             </GradientButton>
