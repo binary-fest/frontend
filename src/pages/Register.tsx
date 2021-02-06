@@ -1,7 +1,7 @@
 import { Button, Container, FormControl, Grid, makeStyles, Typography } from '@material-ui/core'
 import React, { ReactElement, useState } from 'react'
 import ListMember from '../components/ListMember'
-import { GradientButton, WhiteInput, WhiteInputLabel, WhiteTypography } from '../theme/extends'
+import { AbsoluteFormHelperText, GradientButton, WhiteInput, WhiteInputLabel, WhiteTypography } from '../theme/extends'
 import MemberModalPopup from '../components/MemberModalPopup'
 import { useFormik } from 'formik'
 import { CompetitionType, Team } from '../@types/Team'
@@ -10,6 +10,14 @@ interface CompetitionState {
   id: CompetitionType,
   name: string,
   isSelected: boolean
+}
+
+interface TeamInputProps {
+  error: string | undefined
+  name: string
+  placeholder: string
+  value: any
+  handleChange: (e: React.ChangeEvent<any>) => void
 }
 
 const useStyles = makeStyles(({breakpoints}) => ({
@@ -51,6 +59,24 @@ const initialValueFormik: Team = {
   competition_type: 'iot'
 }
 
+const TeamMemberInput = React.memo(
+  ({ error, handleChange, name, placeholder, value }: TeamInputProps) => {
+    return (
+      <FormControl fullWidth error={!!error}>
+        <WhiteInputLabel htmlFor={`input-${name}`}>{placeholder}</WhiteInputLabel>
+        <WhiteInput
+          id={`input-${name}`}
+          fullWidth
+          name={name}
+          value={value}
+          onChange={handleChange}
+        />
+        <AbsoluteFormHelperText>{error}</AbsoluteFormHelperText>
+      </FormControl>
+    )
+  }
+)
+
 export default function Register(): ReactElement {
   const [competitions, setCompetitions] = useState<CompetitionState[]>([
     {
@@ -74,6 +100,18 @@ export default function Register(): ReactElement {
 
   const formik = useFormik({
     initialValues: { ...initialValueFormik },
+    validateOnChange: false,
+    validate: (values) => {
+      const errors: any = {}
+      if (!values.name) errors.name = "Tidak boleh kosong"
+      if (!values.email) errors.email = "Tidak boleh kosong"
+      else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) errors.email = "Email tidak valid";
+      if (!values.institute) errors.institute = "Tidak boleh kosong"
+      if (!values.title) errors.title = "Tidak boleh kosong"
+      if (!values.url_files) errors.url_files = "Tidak boleh kosong"
+
+      return errors
+    },
     onSubmit: (values) => {
       const [selectedCompetition] = competitions.filter(comp => comp.isSelected)
 
@@ -105,43 +143,34 @@ export default function Register(): ReactElement {
             <Grid item xs={12} md={6} lg={5}>
               <WhiteTypography variant="h3">Pendaftaran Team</WhiteTypography>
               <div className={classes.teamForm}>
-                <FormControl fullWidth>
-                  <WhiteInputLabel htmlFor="input-name-team">Nama Team</WhiteInputLabel>
-                  <WhiteInput
-                    id="input-name-team"
-                    fullWidth
-                    onChange={formik.handleChange}
-                    name="name"
-                  />
-                </FormControl>
-                <FormControl fullWidth>
-                  <WhiteInputLabel htmlFor="input-email-team">Email ( Perwakilan )</WhiteInputLabel>
-                  <WhiteInput
-                    id="input-email-team"
-                    type="email"
-                    fullWidth
-                    onChange={formik.handleChange}
-                    name="email"
-                  />
-                </FormControl>
-                <FormControl fullWidth>
-                  <WhiteInputLabel htmlFor="input-instansi-team">Instansi</WhiteInputLabel>
-                  <WhiteInput
-                    id="input-instansi-team"
-                    fullWidth
-                    onChange={formik.handleChange}
-                    name="institute"
-                  />
-                </FormControl>
-                <FormControl fullWidth>
-                  <WhiteInputLabel htmlFor="input-judul">Judul</WhiteInputLabel>
-                  <WhiteInput
-                    id="input-judul"
-                    fullWidth
-                    onChange={formik.handleChange}
-                    name="title"
-                  />
-                </FormControl>
+                <TeamMemberInput
+                  handleChange={formik.handleChange}
+                  name="name"
+                  value={formik.values.name}
+                  placeholder="Name"
+                  error={formik.errors.name}
+                />
+                <TeamMemberInput
+                  handleChange={formik.handleChange}
+                  name="email"
+                  value={formik.values.email}
+                  placeholder="Email"
+                  error={formik.errors.email}
+                />
+                <TeamMemberInput
+                  handleChange={formik.handleChange}
+                  name="institute"
+                  value={formik.values.institute}
+                  placeholder="Institute"
+                  error={formik.errors.institute}
+                />
+                <TeamMemberInput
+                  handleChange={formik.handleChange}
+                  name="title"
+                  value={formik.values.title}
+                  placeholder="Judul"
+                  error={formik.errors.title}
+                />
               </div>
             </Grid>
           
@@ -173,10 +202,13 @@ export default function Register(): ReactElement {
               </div>
               <div className="form-input-link">
                 <WhiteTypography variant="h3">Link Berkas</WhiteTypography>
-                <FormControl fullWidth>
-                  <WhiteInputLabel htmlFor="input-link">Link</WhiteInputLabel>
-                  <WhiteInput id="input-link" fullWidth onChange={formik.handleChange} name="url_files"/>
-                </FormControl>
+                <TeamMemberInput
+                  handleChange={formik.handleChange}
+                  name="url_files"
+                  value={formik.values.url_files}
+                  placeholder="Link"
+                  error={formik.errors.url_files}
+                />
               </div>
             </Grid>
           </Grid>

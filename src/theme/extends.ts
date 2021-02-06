@@ -53,6 +53,9 @@ const WhiteInputLabel = withStyles({
   },
   focused: {
     color: 'white !important'
+  },
+  error: {
+    color: '#f44336 !important'
   }
 })(InputLabel)
 
@@ -61,7 +64,10 @@ const WhiteInput = withStyles({
     borderBottom: '1px solid white',
     '&:after': {
       borderBottom: '1px solid white'
-    }
+    },
+  },
+  error: {
+    borderBottomColor: '#f44336'
   },
   root: {
     color: 'white'

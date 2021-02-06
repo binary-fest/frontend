@@ -40,7 +40,7 @@ const MembersComponent = React.memo((props: { members: IndexedMemberState[] }) =
   )
 })
 
-export default function ListMember(): ReactElement {
+export default React.memo(function ListMember(): ReactElement {
   const setIsMemberModalShowState = useSetRecoilState(isMemberModalShowState)
   const indexedMembers = useRecoilValue(indexedMemberState)
   const classes = useStyles()
@@ -68,4 +68,4 @@ export default function ListMember(): ReactElement {
       </Grid>
     </div>
   )
-}
+})
