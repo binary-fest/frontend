@@ -260,7 +260,7 @@ export default function Register(): ReactElement {
           }
           <div className={classes.footer}>
             <FormControlLabel
-              data-aos="zoom-out"
+              data-aos="zoom-in"
               className="label"
               control={
                 <WhiteCheckbox
@@ -277,7 +277,7 @@ export default function Register(): ReactElement {
               }
             />
             <FormControlLabel
-              data-aos="zoom-out"
+              data-aos="zoom-in"
               className="label"
               control={
                 <WhiteCheckbox
@@ -301,7 +301,7 @@ export default function Register(): ReactElement {
                 >{formik.errors.verify}</WhiteInputLabel>
               )
             }
-            <GradientButton type="submit" fullWidth style={{ margin: '0 auto' }} data-aos="zoom-out">
+            <GradientButton type="submit" fullWidth style={{ margin: '0 auto' }} data-aos="zoom-in">
               <WhiteTypography>Register</WhiteTypography>
             </GradientButton>
           </div>
