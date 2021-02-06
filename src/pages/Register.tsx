@@ -1,7 +1,7 @@
-import { Button, Container, FormControl, Grid, makeStyles, Typography } from '@material-ui/core'
+import { Button, Container, FormControl, FormControlLabel, Grid, makeStyles, Typography } from '@material-ui/core'
 import React, { ReactElement, useState } from 'react'
 import ListMember from '../components/ListMember'
-import { AbsoluteFormHelperText, GradientButton, WhiteInput, WhiteInputLabel, WhiteTypography } from '../theme/extends'
+import { AbsoluteFormHelperText, GradientButton, WhiteCheckbox, WhiteInput, WhiteInputLabel, WhiteTypography } from '../theme/extends'
 import MemberModalPopup from '../components/MemberModalPopup'
 import { useFormik } from 'formik'
 import { CompetitionType, Team } from '../@types/Team'
@@ -56,6 +56,16 @@ const useStyles = makeStyles(({breakpoints}) => ({
   },
   uploadFile: {
     marginTop: '36px'
+  },
+  footer: {
+    margin: '5rem auto 0 auto',
+    paddingBottom: '200px',
+    display: 'flex',
+    flexDirection: 'column',
+    maxWidth: '440px',
+    '& .label': {
+      marginBottom: '1rem'
+    }
   }
 }))
 
@@ -238,8 +248,40 @@ export default function Register(): ReactElement {
           {formik.errors.membersError &&
             <Typography className="error-list-member">Error: {formik.errors.membersError}</Typography>
           }
-          <div style={{marginTop: '5rem', paddingBottom: '200px', display: 'flex'}}>
-            <GradientButton type="submit" fullWidth style={{maxWidth: '440px', margin: '0 auto'}}>
+          <div className={classes.footer}>
+            <FormControlLabel
+              className="label"
+              control={
+                <WhiteCheckbox
+                  name="googleDrive"
+                  value="Validation"
+                  onChange={formik.handleChange}
+                  color="primary"
+                />
+              }
+              label={
+                <WhiteTypography>
+                  Data yang anda inputkan merupakan data asli dan dapat di pertanggung jawabkan
+                </WhiteTypography>
+              }
+            />
+            <FormControlLabel
+              className="label"
+              control={
+                <WhiteCheckbox
+                  name="googleDrive"
+                  value="Validation"
+                  onChange={formik.handleChange}
+                  color="primary"
+                />
+              }
+              label={
+                <WhiteTypography>
+                  Berkas yang ada di Google Drive tidak boleh di ubah selama menyetujui ini
+                </WhiteTypography>
+              }
+            />
+            <GradientButton type="submit" fullWidth style={{margin: '0 auto'}}>
               <WhiteTypography>Register</WhiteTypography>
             </GradientButton>
           </div>

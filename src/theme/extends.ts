@@ -1,4 +1,4 @@
-import { Button, FormHelperText, Input, InputLabel, Typography, withStyles } from '@material-ui/core';
+import { Button, Checkbox, FormHelperText, Input, InputLabel, Typography, withStyles } from '@material-ui/core';
 import styled from 'styled-components';
 
 const GradientButton = withStyles({
@@ -74,6 +74,12 @@ const WhiteInput = withStyles({
   }
 })(Input)
 
+const WhiteCheckbox = withStyles({
+  root: {
+    color: 'white'
+  }
+})(Checkbox)
+
 const AbsoluteFormHelperText = withStyles({
   root: {
     position: 'absolute',
@@ -89,5 +95,6 @@ export {
   WhiteInputLabel,
   WhiteInput,
   AbsoluteFormHelperText,
-  WhiteButton
+  WhiteButton,
+  WhiteCheckbox
 }
