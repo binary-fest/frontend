@@ -6,6 +6,9 @@
   top: 1rem !important;
   transition: top 500ms;
 }
+.animate-MemberModal-enter-done {
+  top: 1rem !important;
+}
 
 .animate-MemberModal-exit {
   top: 1rem !important;
@@ -29,4 +32,19 @@
 .animate-Backdrop-exit-active {
   opacity: 0 !important;
   transition: opacity 500ms;
+}
+
+.animate-MemberCard-enter {
+  transform: scale(0);
+}
+.animate-MemberCard-enter-active {
+  transform: scale(1);
+  transition: transform 750ms;
+}
+.animate-MemberCard-exit {
+  transform: scale(1);
+}
+.animate-MemberCard-exit-active {
+  transform: scale(0);
+  transition: transform 750ms;
 }

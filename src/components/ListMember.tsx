@@ -6,6 +6,7 @@ import MemberCard from './MemberCard'
 import { WhiteTypography } from '../theme/extends'
 import { isMemberModalShowState } from '../store/ui'
 import { IndexedMemberState } from '../@types/Member'
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -34,9 +35,13 @@ const useStyles = makeStyles(() => ({
 
 const MembersComponent = React.memo((props: { members: IndexedMemberState[] }) => {
   return (
-    <>
-      {props.members.map(member => <MemberCard member={member} key={member.id} idx={member.idx} />)}
-    </>
+    <TransitionGroup component={null}>
+      {props.members.map(member => (
+        <CSSTransition key={member.id} classNames="animate-MemberCard" unmountOnExit timeout={750}>
+          <MemberCard member={member} key={member.id} idx={member.idx} />
+        </CSSTransition>
+      ))}
+    </TransitionGroup>
   )
 })
 
