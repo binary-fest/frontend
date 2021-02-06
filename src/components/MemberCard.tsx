@@ -1,31 +1,38 @@
-import { Button, Grid, makeStyles, Typography } from '@material-ui/core'
+import { Grid, makeStyles, Typography } from '@material-ui/core'
 import clsx from 'clsx'
 import React, { ReactElement } from 'react'
-import { useRecoilState } from 'recoil'
+import { useSetRecoilState } from 'recoil'
 import { MemberState } from '../@types/Member'
 import membersState, { memberModalState } from '../store/members'
-import { isParticipantModalShowAtom } from '../store/ui'
+import { isMemberModalShowState } from '../store/ui'
+import { GradientButton, WhiteButton } from '../theme/extends'
 
 interface Props {
   member: MemberState
+  idx?: number
 }
 
 const useStyles = makeStyles(({ breakpoints }) => ({
   root: {
+    position: 'relative',
     display: 'flex',
     borderRadius: '5px',
-    alignItems: 'center',
     flexDirection: 'column',
     padding: '30px 23px',
+    '& .member-icon': {
+      width: '102px',
+      height: '102px',
+      margin: '0 auto 26px auto',
+      borderRadius: '50%',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
     '& .member-name': {
       fontWeight: 'bold'
     },
     '& .member-bio': {
       textAlign: 'center',
-      '& p:nth-child(2)': {
-        fontStyle: 'italic',
-        padding: '17px 0'
-      }
     },
     '& .member-files': {
       marginTop: '39px',
@@ -67,8 +74,16 @@ const useStyles = makeStyles(({ breakpoints }) => ({
   },
   leaderCard: {
     background: 'linear-gradient(124.15deg, #FF512F -3.94%, #DF2672 179.22%)',
-    '& *': {
+    '& p': {
       color: 'white'
+    },
+    '& .member-icon': {
+      backgroundColor: 'white',
+    },
+    '& .member-role': {
+      color: 'white',
+      margin: '1rem 0',
+      textAlign: 'center'
     },
     '& .files': {
       '& p a': {
@@ -82,8 +97,17 @@ const useStyles = makeStyles(({ breakpoints }) => ({
   },
   memberCard: {
     backgroundColor: 'white',
-    '& *': {
-      color: 'black'
+    '& .member-icon': {
+      backgroundImage: 'linear-gradient(140.7deg, #FF512F 12%, #DF2672 95.63%)'
+    },
+    '& .member-role': {
+      backgroundImage: 'linear-gradient(140.7deg, #FF512F 12%, #DF2672 95.63%)',
+      '-webkit-background-clip': 'text',
+      '-webkit-text-fill-color': 'transparent',
+      '-moz-background-clip': 'text',
+      '-moz-text-fill-color': 'transparent',
+      margin: '1rem 0',
+      textAlign: 'center'
     },
     '& .files': {
       '& p a': {
@@ -97,44 +121,60 @@ const useStyles = makeStyles(({ breakpoints }) => ({
   },
 }))
 
-export default function MemberCard({ member }: Props): ReactElement {
-  const [, setMemberState] = useRecoilState(membersState)
-  const [, setMemberModalState] = useRecoilState(memberModalState)
-  const [, setIsParticipantModalShow] = useRecoilState(isParticipantModalShowAtom)
+export default React.memo(function MemberCard({ member, idx = 1 }: Props): ReactElement {
+  const setMemberState = useSetRecoilState(membersState)
+  const setMemberModalState = useSetRecoilState(memberModalState)
+  const setIsMemberModalShowState = useSetRecoilState(isMemberModalShowState)
   const classes = useStyles()
 
   const deleteMember = () => setMemberState(members => members.filter(data => data.id !== member.id))
 
   const openModal = () => {
     setMemberModalState(member)
-    setIsParticipantModalShow(true)
+    setIsMemberModalShowState(true)
   }
 
   return (
     <Grid item xs={12} sm={6} md={4}>
       <div className={clsx(classes.root, member.isLeader ? classes.leaderCard : classes.memberCard)}>
+        <div
+          style={{
+            position: "absolute",
+            right: "23px",
+            cursor: 'pointer'
+          }}
+          onClick={deleteMember}
+        >
+          <img
+            src={member.isLeader ? "/delete-leader.svg" : "/delete-member.svg"}
+            alt="close"
+          />
+        </div>
+        <div className="member-icon">
+          {
+            member.gender === "pria" ?
+              <img src={member.isLeader ? "/man-leader.svg" : "/man-member.svg"} alt="icon" /> :
+              <img src={member.isLeader ? "/woman-leader.svg" : "/woman-member.svg"} alt="icon"/>
+          }
+        </div>
         <div className="member-bio">
           <Typography className="member-name">{member.name}</Typography>
-          <Typography>{member.email}</Typography>
+          <Typography style={{fontSize: '14px'}}>({member.student_id})</Typography>
+        </div>
+        <div style={{margin: '27px 0 26px 0', textAlign: 'center'}}>
+          <Typography style={{ marginBottom: '9px', fontStyle: 'italic'}}>{member.email}</Typography>
           <Typography>{member.phone}</Typography>
         </div>
-        <Typography variant="h3" style={{ marginTop: '1rem' }}>
-          {member.isLeader ? 'Leader' : 'Member'}
+        <Typography className="member-role" variant="h3">
+          {member.isLeader ? 'Ketua' : `Anggota ${idx}` }
         </Typography>
-        <div style={{marginTop: '1rem'}}>
-          <Button 
-            variant="contained" 
-            color="secondary" 
-            style={{ marginRight: '1rem' }}
-            onClick={openModal}
-          >Update</Button>
-          <Button 
-            variant="contained" 
-            color="secondary"
-            onClick={deleteMember}
-          >Delete</Button>
+        <div>
+          {member.isLeader ? 
+            (<WhiteButton onClick={openModal} fullWidth>Update</WhiteButton>) :
+            (<GradientButton onClick={openModal} fullWidth style={{color: 'white'}}>Update</GradientButton>)
+          }
         </div>
       </div>
     </Grid>
   )
-}
+})

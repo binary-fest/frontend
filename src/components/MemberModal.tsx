@@ -14,12 +14,12 @@ import {
 import React, { ReactElement } from 'react'
 import { AbsoluteFormHelperText, GradientButton } from '../theme/extends'
 import { useFormik } from 'formik'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import membersState, { initialMemberModal, leaderAtom, memberModalState } from '../store/members'
-import { isParticipantModalShowAtom } from '../store/ui'
+import { isMemberModalShowState } from '../store/ui'
 import { MemberFormik, MemberState } from '../@types/Member'
 
-interface ParticipantInputProps {
+interface MemberInputProps {
   error: string | undefined
   name: string
   placeholder: string
@@ -34,7 +34,13 @@ const useStyles = makeStyles(({breakpoints}) => ({
     top: '1rem',
     left: '50%',
     transform: 'translateX(-50%)',
-    maxWidth: '650px'
+    maxWidth: '650px',
+    '& .close-button': {
+      position: 'absolute',
+      right: '3rem',
+      top: '2.5rem',
+      cursor: 'pointer'
+    }
   },
   root: {
     display: 'flex',
@@ -86,27 +92,30 @@ const useStyles = makeStyles(({breakpoints}) => ({
   }
 }))
 
-const ParticipantInput = ({ error, handleChange, name, placeholder, value }: ParticipantInputProps) => {
-  return (
-    <FormControl fullWidth error={!!error}>
-      <InputLabel htmlFor={`input-${name}`}>{placeholder}</InputLabel>
-      <Input
-        id={`input-${name}`}
-        fullWidth
-        name={name}
-        value={value}
-        onChange={handleChange}
-      />
-      <AbsoluteFormHelperText>{error}</AbsoluteFormHelperText>
-    </FormControl>
-  )
-}
+const MemberInput = React.memo(
+  ({ error, handleChange, name, placeholder, value }: MemberInputProps) =>
+  {
+    return (
+      <FormControl fullWidth error={!!error}>
+        <InputLabel htmlFor={`input-${name}`}>{placeholder}</InputLabel>
+        <Input
+          id={`input-${name}`}
+          fullWidth
+          name={name}
+          value={value}
+          onChange={handleChange}
+        />
+        <AbsoluteFormHelperText>{error}</AbsoluteFormHelperText>
+      </FormControl>
+    )
+  }
+)
 
-export default function ParticipantModal(): ReactElement {
+export default function MemberModal(): ReactElement {
   const [memberModal, setMemberModalState] = useRecoilState(memberModalState)
-  const [, setMembersAtom] = useRecoilState(membersState)
+  const setMembersAtom = useSetRecoilState(membersState)
   const leader = useRecoilValue(leaderAtom)
-  const [, setIsParticipantModalShow] = useRecoilState(isParticipantModalShowAtom)
+  const setIsMemberModalShowState = useSetRecoilState(isMemberModalShowState)
 
   const formik = useFormik<MemberFormik>({
     initialValues: {
@@ -152,15 +161,20 @@ export default function ParticipantModal(): ReactElement {
           return newMember
         })
         setMemberModalState(initialMemberModal)
-        setIsParticipantModalShow(false)
+        setIsMemberModalShowState(false)
         return
       }
       
 
       setMembersAtom((currVal) => [...currVal, memberData])
-      setIsParticipantModalShow(false)
+      setIsMemberModalShowState(false)
     }
   })
+
+  const closeModal = () => {
+    setMemberModalState(initialMemberModal)
+    setIsMemberModalShowState(false)
+  }
 
   const classes = useStyles()
 
@@ -173,33 +187,36 @@ export default function ParticipantModal(): ReactElement {
           formik.handleSubmit()
         }}
       >
+        <div className="close-button" onClick={closeModal}>
+          <img src="/delete-member.svg" alt="close"/>
+        </div>
         <Typography variant="h3">
           {memberModal.id !== '' ? 'Update Anggota' : 'Tambah Anggota'}
         </Typography>
         <Grid container spacing={4}>
           <Grid item className={classes.formArea}>
-            <ParticipantInput
+            <MemberInput
               handleChange={formik.handleChange}
               error={formik.errors.name}
               value={formik.values.name}
               name="name"
               placeholder="Nama"
             />
-            <ParticipantInput
+            <MemberInput
               handleChange={formik.handleChange}
               error={formik.errors.student_id}
               value={formik.values.student_id}
               name="student_id"
               placeholder="NISN / NIM"
             />
-            <ParticipantInput
+            <MemberInput
               handleChange={formik.handleChange}
               error={formik.errors.email}
               value={formik.values.email}
               name="email"
               placeholder="Email"
             />
-            <ParticipantInput
+            <MemberInput
               handleChange={formik.handleChange}
               error={formik.errors.phone}
               value={formik.values.phone}

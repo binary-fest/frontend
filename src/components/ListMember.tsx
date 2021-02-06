@@ -1,10 +1,11 @@
 import { Grid, makeStyles, Typography } from '@material-ui/core'
-import React, { ReactElement } from 'react'
-import { useRecoilState, useRecoilValue } from 'recoil'
-import membersState from '../store/members'
+import React, {  ReactElement } from 'react'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { indexedMemberState } from '../store/members'
 import MemberCard from './MemberCard'
 import { WhiteTypography } from '../theme/extends'
-import { isParticipantModalShowAtom } from '../store/ui'
+import { isMemberModalShowState } from '../store/ui'
+import { IndexedMemberState } from '../@types/Member'
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -31,10 +32,20 @@ const useStyles = makeStyles(() => ({
   }
 }))
 
-export default function ListMember(): ReactElement {
-  const [,setIsParticipantModalShow] = useRecoilState(isParticipantModalShowAtom)
-  const members = useRecoilValue(membersState)
+const MembersComponent = React.memo((props: { members: IndexedMemberState[] }) => {
+  return (
+    <>
+      {props.members.map(member => <MemberCard member={member} key={member.id} idx={member.idx} />)}
+    </>
+  )
+})
+
+export default React.memo(function ListMember(): ReactElement {
+  const setIsMemberModalShowState = useSetRecoilState(isMemberModalShowState)
+  const indexedMembers = useRecoilValue(indexedMemberState)
   const classes = useStyles()
+
+  const showMemberModalHandler = () => setIsMemberModalShowState(true)
 
   return (
     <div className={classes.root}>
@@ -45,9 +56,9 @@ export default function ListMember(): ReactElement {
         marginBottom: '29px'
       }}>* Klik anggota untuk mengedit</WhiteTypography>
       <Grid container spacing={3} justify="center">
-        {members.map(member => <MemberCard member={member} key={member.id} />)}
-        {members.length < 3 && (
-          <Grid item xs={12} sm={6} md={4} onClick={() => setIsParticipantModalShow(true)}>
+        <MembersComponent members={indexedMembers}/>
+        {indexedMembers.length < 3 && (
+          <Grid item xs={12} sm={6} md={4} onClick={showMemberModalHandler}>
             <div className="add-participant">
               <img src="/add-participant.svg" alt="Add Participant"/>
               <Typography>Tambah Peserta</Typography>
@@ -57,4 +68,4 @@ export default function ListMember(): ReactElement {
       </Grid>
     </div>
   )
-}
+})
