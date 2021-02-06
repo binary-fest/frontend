@@ -1,5 +1,5 @@
 import { atom, selector } from 'recoil'
-import { IndexedMemberState, MemberState } from '../@types/Member'
+import { IndexedMemberState, Member, MemberState } from '../@types/Member'
 
 const initialMemberModal: MemberState = {
   id: '',
@@ -19,6 +19,26 @@ const membersState = atom<MemberState[]>({
 const memberModalState = atom<MemberState>({
   key: 'memberModalState',
   default: initialMemberModal
+})
+
+const membersRequestBodyState = selector<Member[]>({
+  key: 'membersRequestBodyState',
+  get: ({get}) => {
+    const members = get(membersState)
+
+    const newMembers = members.map(member => {
+      return {
+        name: member.name,
+        student_id: member.student_id,
+        email: member.email,
+        gender: member.gender,
+        isLeader: member.isLeader,
+        phone: member.phone
+      }
+    })
+
+    return newMembers
+  }
 })
 
 const indexedMemberState = selector<IndexedMemberState[]>({
@@ -50,4 +70,4 @@ const leaderAtom = selector<MemberState>({
 })
 
 export default membersState
-export { indexedMemberState, leaderAtom, memberModalState, initialMemberModal }
+export { indexedMemberState, leaderAtom, memberModalState, initialMemberModal, membersRequestBodyState }

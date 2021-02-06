@@ -5,6 +5,8 @@ import { AbsoluteFormHelperText, GradientButton, WhiteInput, WhiteInputLabel, Wh
 import MemberModalPopup from '../components/MemberModalPopup'
 import { useFormik } from 'formik'
 import { CompetitionType, Team } from '../@types/Team'
+import { useRecoilValue } from 'recoil'
+import { membersRequestBodyState } from '../store/members'
 
 interface CompetitionState {
   id: CompetitionType,
@@ -78,6 +80,7 @@ const TeamMemberInput = React.memo(
 )
 
 export default function Register(): ReactElement {
+  const membersRequestBody = useRecoilValue(membersRequestBodyState)
   const [competitions, setCompetitions] = useState<CompetitionState[]>([
     {
       id: 'iot',
@@ -123,7 +126,13 @@ export default function Register(): ReactElement {
         competition_type: selectedCompetition.id,
         url_files: values.url_files
       }
-      alert(JSON.stringify(teamData, undefined, 2))
+
+      const request = {
+        team: teamData,
+        members: membersRequestBody
+      }
+
+      alert(JSON.stringify(request, undefined, 2))
     }
   })
 
