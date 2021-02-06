@@ -186,6 +186,7 @@ export default function MemberModal(): ReactElement {
           e.preventDefault()
           formik.handleSubmit()
         }}
+        autoComplete="off"
       >
         <div className="close-button" onClick={closeModal}>
           <img src="/delete-member.svg" alt="close"/>

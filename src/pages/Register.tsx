@@ -20,6 +20,7 @@ interface TeamInputProps {
   placeholder: string
   value: any
   handleChange: (e: React.ChangeEvent<any>) => void
+  aosDuration?: number
 }
 
 const useStyles = makeStyles(({breakpoints}) => ({
@@ -86,9 +87,9 @@ const initialValueFormik: RegisterFormik = {
 }
 
 const TeamMemberInput = React.memo(
-  ({ error, handleChange, name, placeholder, value }: TeamInputProps) => {
+  ({ error, handleChange, name, placeholder, value, aosDuration }: TeamInputProps) => {
     return (
-      <FormControl fullWidth error={!!error}>
+      <FormControl fullWidth error={!!error} data-aos-delay={aosDuration} data-aos="fade-up">
         <WhiteInputLabel htmlFor={`input-${name}`}>{placeholder}</WhiteInputLabel>
         <WhiteInput
           id={`input-${name}`}
@@ -96,6 +97,7 @@ const TeamMemberInput = React.memo(
           name={name}
           value={value}
           onChange={handleChange}
+          type="search"
         />
         <AbsoluteFormHelperText>{error}</AbsoluteFormHelperText>
       </FormControl>
@@ -173,10 +175,11 @@ export default function Register(): ReactElement {
             e.preventDefault()
             formik.handleSubmit()
           }}
+          autoComplete="off"
         >
           <Grid container spacing={4}>
             <Grid item xs={12} md={6} lg={5}>
-              <WhiteTypography variant="h3">Pendaftaran Team</WhiteTypography>
+              <WhiteTypography variant="h3" data-aos="fade-up">Pendaftaran Team</WhiteTypography>
               <div className={classes.teamForm}>
                 <TeamMemberInput
                   handleChange={formik.handleChange}
@@ -184,6 +187,7 @@ export default function Register(): ReactElement {
                   value={formik.values.name}
                   placeholder="Name"
                   error={formik.errors.name}
+                  aosDuration={500}
                 />
                 <TeamMemberInput
                   handleChange={formik.handleChange}
@@ -191,6 +195,7 @@ export default function Register(): ReactElement {
                   value={formik.values.email}
                   placeholder="Email"
                   error={formik.errors.email}
+                  aosDuration={600}
                 />
                 <TeamMemberInput
                   handleChange={formik.handleChange}
@@ -198,6 +203,7 @@ export default function Register(): ReactElement {
                   value={formik.values.institute}
                   placeholder="Institute"
                   error={formik.errors.institute}
+                  aosDuration={700}
                 />
                 <TeamMemberInput
                   handleChange={formik.handleChange}
@@ -205,11 +211,12 @@ export default function Register(): ReactElement {
                   value={formik.values.title}
                   placeholder="Judul"
                   error={formik.errors.title}
+                  aosDuration={800}
                 />
               </div>
             </Grid>
           
-            <Grid item xs={12} md={6} lg={7} className={classes.competitionType}>
+            <Grid item xs={12} md={6} lg={7} className={classes.competitionType} data-aos="fade-up">
               <div>
                 <WhiteTypography variant="h3">Jenis Perlombaan</WhiteTypography>
                 {competitions.map((competition) => (
@@ -253,6 +260,7 @@ export default function Register(): ReactElement {
           }
           <div className={classes.footer}>
             <FormControlLabel
+              data-aos="zoom-in"
               className="label"
               control={
                 <WhiteCheckbox
@@ -269,6 +277,7 @@ export default function Register(): ReactElement {
               }
             />
             <FormControlLabel
+              data-aos="zoom-in"
               className="label"
               control={
                 <WhiteCheckbox
@@ -292,7 +301,7 @@ export default function Register(): ReactElement {
                 >{formik.errors.verify}</WhiteInputLabel>
               )
             }
-            <GradientButton type="submit" fullWidth style={{margin: '0 auto'}}>
+            <GradientButton type="submit" fullWidth style={{ margin: '0 auto' }} data-aos="zoom-in">
               <WhiteTypography>Register</WhiteTypography>
             </GradientButton>
           </div>
