@@ -97,7 +97,7 @@ const TeamMemberInput = React.memo(
           name={name}
           value={value}
           onChange={handleChange}
-          type="url"
+          type="search"
         />
         <AbsoluteFormHelperText>{error}</AbsoluteFormHelperText>
       </FormControl>

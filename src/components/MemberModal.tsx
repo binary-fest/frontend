@@ -104,7 +104,6 @@ const MemberInput = React.memo(
           name={name}
           value={value}
           onChange={handleChange}
-          type="url"
         />
         <AbsoluteFormHelperText>{error}</AbsoluteFormHelperText>
       </FormControl>
