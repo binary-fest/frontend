@@ -49,8 +49,8 @@ export default React.memo(function ListMember(): ReactElement {
 
   return (
     <div className={classes.root}>
-      <WhiteTypography variant="h3" className="title">List Anggota</WhiteTypography>
-      <WhiteTypography style={{
+      <WhiteTypography variant="h3" className="title" data-aos="fade-up">List Anggota</WhiteTypography>
+      <WhiteTypography data-aos="fade-up" data-aos-delay="250" style={{
         fontSize: '12px',
         fontStyle: 'italic',
         marginBottom: '29px'
@@ -59,7 +59,7 @@ export default React.memo(function ListMember(): ReactElement {
         <MembersComponent members={indexedMembers}/>
         {indexedMembers.length < 3 && (
           <Grid item xs={12} sm={6} md={4} onClick={showMemberModalHandler}>
-            <div className="add-participant">
+            <div className="add-participant" data-aos="zoom-in">
               <img src="/add-participant.svg" alt="Add Participant"/>
               <Typography>Tambah Peserta</Typography>
             </div>
