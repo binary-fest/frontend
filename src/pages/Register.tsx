@@ -213,7 +213,11 @@ export default function Register(): ReactElement {
             </Grid>
           </Grid>
           <ListMember />
-          <GradientButton type="submit">Register</GradientButton>
+          <div style={{marginTop: '5rem', paddingBottom: '200px', display: 'flex'}}>
+            <GradientButton type="submit" fullWidth style={{maxWidth: '440px', margin: '0 auto'}}>
+              <WhiteTypography>Register</WhiteTypography>
+            </GradientButton>
+          </div>
       </form>
     </Container>
     </>
