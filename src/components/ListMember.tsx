@@ -63,7 +63,7 @@ export default React.memo(function ListMember(): ReactElement {
       <Grid container spacing={3} justify="center">
         <MembersComponent members={indexedMembers}/>
         {indexedMembers.length < 3 && (
-          <Grid item xs={12} sm={6} md={4} onClick={showMemberModalHandler}>
+          <Grid item xs={12} sm={6} md={4} onClick={showMemberModalHandler} data-testid="show-MemberModal">
             <div className="add-participant" data-aos="zoom-in">
               <img src="/add-participant.svg" alt="Add Participant"/>
               <Typography>Tambah Peserta</Typography>

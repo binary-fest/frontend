@@ -25,6 +25,7 @@ interface MemberInputProps {
   placeholder: string
   value: any
   handleChange: (e: React.ChangeEvent<any>) => void
+  testId?: string
 }
 
 const useStyles = makeStyles(({breakpoints}) => ({
@@ -93,7 +94,7 @@ const useStyles = makeStyles(({breakpoints}) => ({
 }))
 
 const MemberInput = React.memo(
-  ({ error, handleChange, name, placeholder, value }: MemberInputProps) =>
+  ({ error, handleChange, name, placeholder, value, testId }: MemberInputProps) =>
   {
     return (
       <FormControl fullWidth error={!!error}>
@@ -104,6 +105,9 @@ const MemberInput = React.memo(
           name={name}
           value={value}
           onChange={handleChange}
+          inputProps={{
+            'data-testid': testId
+          }}
         />
         <AbsoluteFormHelperText>{error}</AbsoluteFormHelperText>
       </FormControl>
@@ -191,7 +195,7 @@ export default function MemberModal(): ReactElement {
         <div className="close-button" onClick={closeModal}>
           <img src="/delete-member.svg" alt="close"/>
         </div>
-        <Typography variant="h3">
+        <Typography variant="h3" data-testid="title-MemberModal">
           {memberModal.id !== '' ? 'Update Anggota' : 'Tambah Anggota'}
         </Typography>
         <Grid container spacing={4}>
@@ -202,6 +206,7 @@ export default function MemberModal(): ReactElement {
               value={formik.values.name}
               name="name"
               placeholder="Nama"
+              testId="input-name-member"
             />
             <MemberInput
               handleChange={formik.handleChange}
@@ -209,6 +214,7 @@ export default function MemberModal(): ReactElement {
               value={formik.values.student_id}
               name="student_id"
               placeholder="NISN / NIM"
+              testId="input-student-id-member"
             />
             <MemberInput
               handleChange={formik.handleChange}
@@ -216,6 +222,7 @@ export default function MemberModal(): ReactElement {
               value={formik.values.email}
               name="email"
               placeholder="Email"
+              testId="input-email-member"
             />
             <MemberInput
               handleChange={formik.handleChange}
@@ -223,6 +230,7 @@ export default function MemberModal(): ReactElement {
               value={formik.values.phone}
               name="phone"
               placeholder="Nomor Whatsapp"
+              testId="input-whatsapp-member"
             />
             <Grid container>
               <Grid item xs={12} md={6}>
@@ -237,6 +245,7 @@ export default function MemberModal(): ReactElement {
                     value="pria"
                     control={<Radio color="primary" />}
                     label="Pria"
+                    data-testid="gender-man"
                   />
                   <FormControlLabel
                     value="wanita"
@@ -264,6 +273,7 @@ export default function MemberModal(): ReactElement {
                     disabled={formik.initialValues.role === "ketua" ? false : !!leader}
                     control={<Radio color="primary" />}
                     label="Ketua"
+                    data-testid="role-leader"
                   />
                 </RadioGroup>
                 <FormHelperText error={!!formik.errors.role}>{formik.errors.role}</FormHelperText> 
@@ -276,7 +286,7 @@ export default function MemberModal(): ReactElement {
         </Grid>
       
         <div className={classes.addParticipantButton}>
-          <GradientButton type="submit">
+          <GradientButton type="submit" data-testid="add-member-button">
             {memberModal.id !== '' ? 'Update Anggota' : 'Tambah Anggota'}
           </GradientButton>
         </div>

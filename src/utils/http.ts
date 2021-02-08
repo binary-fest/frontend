@@ -6,4 +6,5 @@ const httpConfig: AxiosRequestConfig = {
 
 const http = axios.create(httpConfig)
 
+export default http
 export { http }
