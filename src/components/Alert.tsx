@@ -6,6 +6,8 @@ import Backdrop from './Backdrop'
 interface Props {
   isShow: boolean
   handleShow: (state: boolean) => void
+  variant: "success" | "wait" | "error"
+  message?: string
 }
 
 const useStyles = makeStyles(() => ({
@@ -41,6 +43,15 @@ const useStyles = makeStyles(() => ({
     width: '100%',
     height: '100%',
     zIndex: -1
+  },
+  spinner: {
+    height: '90px',
+    width: '90px',
+    border: '5px solid white',
+    borderTop: '5px solid #FF512F',
+    borderRadius: '50%',
+    marginBottom: '1rem',
+    animation: 'spinner 1s linear infinite'
   }
 }))
 
@@ -48,6 +59,7 @@ export default function Alert(props: Props): ReactElement {
   const classes = useStyles()
 
   const closeAlertHandler = () => props.handleShow(false)
+
 
   return (
     <>
@@ -59,8 +71,12 @@ export default function Alert(props: Props): ReactElement {
       >
         <div className={classes.root}>
           <div className={classes.wrapper}>
-            <Typography>Alert !</Typography>
-            <Typography onClick={closeAlertHandler}>Close</Typography>
+            {props.variant === "wait" && (
+              <>
+                <div className={classes.spinner} />
+                <Typography>Melakukan request...</Typography>
+              </>
+            )}
           </div>
           <div className={classes.closeZone} onClick={closeAlertHandler}/>
         </div>
