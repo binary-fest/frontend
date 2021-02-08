@@ -48,3 +48,22 @@
   transform: scale(0);
   transition: transform 750ms;
 }
+
+.animate-Alert-enter {
+  opacity: 0 !important;
+  transform: scale(0.5) !important;
+}
+.animate-Alert-enter-active {
+  opacity: 1 !important;
+  transform: scale(1) !important;
+  transition: opacity 500ms, transform 500ms;
+}
+.animate-Alert-exit {
+  opacity: 1 !important;
+  transform: scale(1) !important;
+}
+.animate-Alert-exit-active {
+  opacity: 0 !important;
+  transform: scale(0.5) !important;
+  transition: opacity 500ms, transform 500ms;
+}
