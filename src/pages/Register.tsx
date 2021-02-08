@@ -8,6 +8,7 @@ import { CompetitionType, Team } from '../@types/Team'
 import { useRecoilValue } from 'recoil'
 import { membersRequestBodyState } from '../store/members'
 import http from '../utils/http'
+import Alert from '../components/Alert'
 
 interface CompetitionState {
   id: CompetitionType,
@@ -112,6 +113,7 @@ const TeamMemberInput = React.memo(
 
 export default function Register(): ReactElement {
   const membersRequestBody = useRecoilValue(membersRequestBodyState)
+  const [isAlertShow, setIsAlertShow] = useState(false)
   const [request, setRequest] = useState({
     response: 0,
     message: ''
@@ -171,6 +173,7 @@ export default function Register(): ReactElement {
 
       const requestRegister = async () => {
         let res;
+        setIsAlertShow(true)
         try {
           res = await http.post('/register', request)
           console.log(res)
@@ -183,10 +186,13 @@ export default function Register(): ReactElement {
     }
   })
 
+  const alertHandler = (state: boolean) => setIsAlertShow(state)
+
   const classes = useStyles()
 
   return (
     <>
+    <Alert isShow={isAlertShow} handleShow={alertHandler}/>
     <MemberModalPopup />
       <Container className={classes.root}>
         <form
