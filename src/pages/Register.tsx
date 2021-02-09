@@ -9,6 +9,7 @@ import { useRecoilValue } from 'recoil'
 import { membersRequestBodyState } from '../store/members'
 import http from '../utils/http'
 import Alert, { AlertStatus } from '../components/Alert'
+import { validateEmail } from '../utils/validate'
 
 interface CompetitionState {
   id: CompetitionType,
@@ -143,9 +144,10 @@ export default function Register(): ReactElement {
     validateOnChange: false,
     validate: (values) => {
       const errors: any = {}
+      const checkEmail = validateEmail(values.email)
       if (!values.name) errors.name = "Tidak boleh kosong"
       if (!values.email) errors.email = "Tidak boleh kosong"
-      else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) errors.email = "Email tidak valid";
+      if (!checkEmail.isValid) errors.email = checkEmail.message
       if (!values.institute) errors.institute = "Tidak boleh kosong"
       if (!values.title) errors.title = "Tidak boleh kosong"
       if (!values.url_files) errors.url_files = "Tidak boleh kosong"
