@@ -178,24 +178,22 @@ export default function Register(): ReactElement {
         variant: 'wait',
         message: ''
       })
-      
-      setTimeout(() => {
-        const arrVariant: ["success", "error"] = ['success', 'error']
-        setAlertStatus({
-          ...alertStatus,
-          isShow: true,
-          variant: arrVariant[
-            Math.floor(Math.random() * (Math.floor(1) - Math.ceil(0) + 1) + Math.ceil(0))
-          ]
-        })
-      }, 1000)
+
       const requestRegister = async () => {
         let res;
         try {
           res = await http.post('/register', request)
-          console.log(res)
+          setAlertStatus({
+            isShow: true,
+            variant: 'success',
+            message: ''
+          })
         } catch (err) {
-          console.log(err)
+          setAlertStatus({
+            isShow: true,
+            variant: 'error',
+            message: ''
+          })
         }
       }
 
@@ -209,7 +207,12 @@ export default function Register(): ReactElement {
 
   return (
     <>
-    <Alert isShow={alertStatus.isShow} handleShow={alertHandler} variant={alertStatus.variant}/>
+      <Alert
+        isShow={alertStatus.isShow}
+        handleShow={alertHandler}
+        variant={alertStatus.variant}
+        message={alertStatus.message}
+      />
     <MemberModalPopup />
       <Container className={classes.root}>
         <form
