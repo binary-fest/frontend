@@ -66,7 +66,7 @@ export default React.memo(function ListMember(): ReactElement {
           <Grid item xs={12} sm={6} md={4} onClick={showMemberModalHandler} data-testid="show-MemberModal">
             <div className="add-participant" data-aos="zoom-in">
               <img src="/add-participant.svg" alt="Add Participant"/>
-              <Typography>Tambah Peserta</Typography>
+              <Typography>Tambah Anggota</Typography>
             </div>
           </Grid>
         )}
