@@ -64,14 +64,14 @@ export default function Alert(props: Props): ReactElement {
               <AlertContent
                 icon={<StyledAlertIconSpinner />}
                 title="Melakukan request..."
-                message="Silahkan tunggu beberapa saat"
+                message={props.message || "Silahkan tunggu beberapa saat"}
               />
             )}
             {props.variant === "success" && (
               <AlertContent
                 icon={<StyledAlertIconSuccess />}
                 title="Pendaftaran Berhasil"
-                message="Selamat ! kami akan mengirim email sesaat lagi"
+                message={props.message || "Selamat ! kami akan mengirim email sesaat lagi"}
                 closeHandler={closeAlertHandler}
               />
             )}
@@ -84,7 +84,7 @@ export default function Alert(props: Props): ReactElement {
                   </StyledAlertIconError>
                 }
                 title="Pendaftaran Gagal"
-                message="Mohon maaf terjadi kesalahan, silahkan coba beberapa saat lagi"
+                message={props.message || "Mohon maaf terjadi kesalahan, silahkan coba beberapa saat lagi"}
                 closeHandler={closeAlertHandler}
               />
             )}
