@@ -59,7 +59,7 @@ export default React.memo(function ListMember(): ReactElement {
         fontSize: '12px',
         fontStyle: 'italic',
         marginBottom: '29px'
-      }}>* Klik anggota untuk mengedit</WhiteTypography>
+      }}>Maksimal 3 anggota</WhiteTypography>
       <Grid container spacing={3} justify="center">
         <MembersComponent members={indexedMembers}/>
         {indexedMembers.length < 3 && (
