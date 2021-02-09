@@ -227,7 +227,7 @@ export default function Register(): ReactElement {
                   handleChange={formik.handleChange}
                   name="name"
                   value={formik.values.name}
-                  placeholder="Name"
+                  placeholder="Nama Team"
                   error={formik.errors.name}
                   aosDuration={500}
                   testId="input-name-team"
@@ -236,7 +236,7 @@ export default function Register(): ReactElement {
                   handleChange={formik.handleChange}
                   name="email"
                   value={formik.values.email}
-                  placeholder="Email"
+                  placeholder="Email Team"
                   error={formik.errors.email}
                   aosDuration={600}
                   testId="input-email-team"
@@ -245,7 +245,7 @@ export default function Register(): ReactElement {
                   handleChange={formik.handleChange}
                   name="institute"
                   value={formik.values.institute}
-                  placeholder="Institute"
+                  placeholder="Insitut"
                   error={formik.errors.institute}
                   aosDuration={700}
                   testId="input-institute-team"
