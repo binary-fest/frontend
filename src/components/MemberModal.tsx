@@ -245,13 +245,13 @@ export default function MemberModal(): ReactElement {
                   defaultValue={formik.initialValues.gender}
                 >
                   <FormControlLabel
-                    value="pria"
+                    value="man"
                     control={<Radio color="primary" />}
                     label="Pria"
                     data-testid="gender-man"
                   />
                   <FormControlLabel
-                    value="wanita"
+                    value="woman"
                     control={<Radio color="primary" />}
                     label="Wanita"
                   />

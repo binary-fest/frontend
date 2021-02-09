@@ -6,7 +6,7 @@ const initialMemberModal: MemberState = {
   name: '',
   student_id: '',
   email: '',
-  gender: 'pria',
+  gender: 'man',
   isLeader: false,
   phone: '',
 }
