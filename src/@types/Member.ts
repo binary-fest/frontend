@@ -1,4 +1,4 @@
-type GenderType = "pria" | "wanita"
+type GenderType = "man" | "woman"
 type RoleType = "ketua" | "anggota"
 
 interface Member {
