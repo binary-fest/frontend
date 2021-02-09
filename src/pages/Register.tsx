@@ -8,7 +8,7 @@ import { CompetitionType, Team } from '../@types/Team'
 import { useRecoilValue } from 'recoil'
 import { membersRequestBodyState } from '../store/members'
 import http from '../utils/http'
-import Alert from '../components/Alert'
+import Alert, { AlertStatus } from '../components/Alert'
 
 interface CompetitionState {
   id: CompetitionType,
@@ -113,10 +113,10 @@ const TeamMemberInput = React.memo(
 
 export default function Register(): ReactElement {
   const membersRequestBody = useRecoilValue(membersRequestBodyState)
-  const [isAlertShow, setIsAlertShow] = useState(false)
-  const [request, setRequest] = useState({
-    response: 0,
-    message: ''
+  const [alertStatus, setAlertStatus] = useState<AlertStatus>({
+    isShow: false,
+    message: '',
+    variant: 'wait'
   })
   const [competitions, setCompetitions] = useState<CompetitionState[]>([
     {
@@ -152,9 +152,9 @@ export default function Register(): ReactElement {
       if (!membersRequestBody.length) errors.membersError = "Minimal harus memiliki 1 ketua"
       if (values.verify.length < 2) errors.verify = "Harap menyetujui 2 bidang diatas"
 
-      return errors
+      return {}
     },
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       const [selectedCompetition] = competitions.filter(comp => comp.isSelected)
 
       const teamData: Team = {
@@ -171,9 +171,24 @@ export default function Register(): ReactElement {
         members: membersRequestBody
       }
 
+      setAlertStatus({
+        isShow: true,
+        variant: 'wait',
+        message: ''
+      })
+      
+      setTimeout(() => {
+        const arrVariant: ["success", "error"] = ['success', 'error']
+        setAlertStatus({
+          ...alertStatus,
+          isShow: true,
+          variant: arrVariant[
+            Math.floor(Math.random() * (Math.floor(1) - Math.ceil(0) + 1) + Math.ceil(0))
+          ]
+        })
+      }, 1000)
       const requestRegister = async () => {
         let res;
-        setIsAlertShow(true)
         try {
           res = await http.post('/register', request)
           console.log(res)
@@ -186,13 +201,13 @@ export default function Register(): ReactElement {
     }
   })
 
-  const alertHandler = (state: boolean) => setIsAlertShow(state)
+  const alertHandler = (state: boolean) => setAlertStatus({...alertStatus, isShow: state})
 
   const classes = useStyles()
 
   return (
     <>
-    <Alert isShow={isAlertShow} handleShow={alertHandler}/>
+    <Alert isShow={alertStatus.isShow} handleShow={alertHandler} variant={alertStatus.variant}/>
     <MemberModalPopup />
       <Container className={classes.root}>
         <form
