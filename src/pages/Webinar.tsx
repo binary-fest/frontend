@@ -1,4 +1,5 @@
 import React, { ReactElement } from 'react'
+import ListLecturer from '../components/ListLecturer'
 import useTitlePage from '../hooks/useTitlePage'
 import { GradientTypography, WhiteTypography } from '../theme/extends'
 import { StyledWebinarContainer } from '../theme/pages/Webinar'
@@ -18,6 +19,7 @@ export default function Webinar(): ReactElement {
           style={{ marginTop: '16px' }}
           align="center"
         >Peran IoT dan Cyber Security di Era Revolusi 4.0</WhiteTypography>
+        <ListLecturer />
       </StyledWebinarContainer>
     </>
   )
