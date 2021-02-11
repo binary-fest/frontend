@@ -30,9 +30,11 @@ function App() {
   return (
     <RecoilRoot>
       <div className={classes.root}>
-        <Navigation />
         <Switch>
-          <Route path="/register" exact component={Register} />
+          <Route path="/register" exact>
+            <Navigation />
+            <Register />
+          </Route>
           <Route path="/" component={StaticPageLayout} />
         </Switch>
       </div>

@@ -1,8 +1,13 @@
-import { Container, Grid, makeStyles } from '@material-ui/core'
+import { Container, Grid, makeStyles, Typography } from '@material-ui/core'
 import React, { ReactElement } from 'react'
 import { Link } from 'react-router-dom'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
+import { navigationLinks } from '../store/links'
 import { isNavigationResponsiveShowAtom } from '../store/ui'
+
+export interface NavigationDesktopProps {
+  withLinks?: boolean
+}
 
 const useStyles = makeStyles(({ spacing, breakpoints }) => ({
   root: {
@@ -66,8 +71,9 @@ const useStyles = makeStyles(({ spacing, breakpoints }) => ({
   }
 }))
 
-export default function NavigationDesktop(): ReactElement {
+export default function NavigationDesktop(props: NavigationDesktopProps): ReactElement {
   const [isNavigationResponsiveShow, setIsNavigationResponsiveShow] = useRecoilState(isNavigationResponsiveShowAtom)
+  const listNavigationLink = useRecoilValue(navigationLinks)
 
   const toggleNavigationResponsive = () => setIsNavigationResponsiveShow(!isNavigationResponsiveShow)
 
@@ -89,9 +95,22 @@ export default function NavigationDesktop(): ReactElement {
             alt="Binary Fest"
             onClick={toggleNavigationResponsive}
           />
+          {props.withLinks &&
+            <div className={classes.listLink}>
+              {listNavigationLink.map(link => {
+                return (
+                  <Link key={link.id} to={link.href}>
+                    <Typography>{link.name}</Typography>
+                  </Link>
+                )
+              })}
+            </div>
+          }
         </Grid>
       </Grid>
-      <img src="/decoration-2.svg" alt="decoration-2" className={classes.decoration2}/>
+      {!props.withLinks &&
+        <img src="/decoration-2.svg" alt="decoration-2" className={classes.decoration2} />
+      }
     </Container>
   )
 }
