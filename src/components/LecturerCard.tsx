@@ -9,7 +9,7 @@ interface LecturerCardProps {
 
 export default function LecturerCard(props : LecturerCardProps): ReactElement {
   return (
-    <StyledLecturerCard>
+    <StyledLecturerCard data-aos="fade-up">
       <StyledLecturerCardProfilePict>
         <img src={props.lecturer.profilePict} alt=""/>
       </StyledLecturerCardProfilePict>

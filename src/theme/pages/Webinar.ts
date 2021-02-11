@@ -3,7 +3,7 @@ import theme from '..'
 
 const StyledWebinarContainer = withStyles({
   root: {
-    paddingTop: '389px'
+    paddingTop: '289px'
   }
 })(Container)
 

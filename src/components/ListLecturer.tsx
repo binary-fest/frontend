@@ -9,7 +9,7 @@ export default function ListLecturer(): ReactElement {
 
   return (
     <StyledListLecturer>
-      {lecturers.map(lecturer => (<LecturerCard lecturer={lecturer} key={lecturer.id} />))}
+      {lecturers.map(lecturer => (<LecturerCard lecturer={lecturer} key={lecturer.id} data-aos="fade-up"/>))}
     </StyledListLecturer>
   )
 }
