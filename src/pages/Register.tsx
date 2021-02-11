@@ -7,6 +7,8 @@ import { useFormik } from 'formik'
 import { CompetitionType, Team } from '../@types/Team'
 import { useRecoilValue } from 'recoil'
 import { membersRequestBodyState } from '../store/members'
+import http from '../utils/http'
+import Alert, { AlertStatus } from '../components/Alert'
 
 interface CompetitionState {
   id: CompetitionType,
@@ -21,6 +23,7 @@ interface TeamInputProps {
   value: any
   handleChange: (e: React.ChangeEvent<any>) => void
   aosDuration?: number
+  testId?: string
 }
 
 const useStyles = makeStyles(({breakpoints}) => ({
@@ -87,7 +90,7 @@ const initialValueFormik: RegisterFormik = {
 }
 
 const TeamMemberInput = React.memo(
-  ({ error, handleChange, name, placeholder, value, aosDuration }: TeamInputProps) => {
+  ({ error, handleChange, name, placeholder, value, aosDuration, testId }: TeamInputProps) => {
     return (
       <FormControl fullWidth error={!!error} data-aos-delay={aosDuration} data-aos="fade-up">
         <WhiteInputLabel htmlFor={`input-${name}`}>{placeholder}</WhiteInputLabel>
@@ -98,6 +101,9 @@ const TeamMemberInput = React.memo(
           value={value}
           onChange={handleChange}
           type="search"
+          inputProps={{
+            'data-testid': testId
+          }}
         />
         <AbsoluteFormHelperText>{error}</AbsoluteFormHelperText>
       </FormControl>
@@ -107,6 +113,11 @@ const TeamMemberInput = React.memo(
 
 export default function Register(): ReactElement {
   const membersRequestBody = useRecoilValue(membersRequestBodyState)
+  const [alertStatus, setAlertStatus] = useState<AlertStatus>({
+    isShow: false,
+    message: '',
+    variant: 'wait'
+  })
   const [competitions, setCompetitions] = useState<CompetitionState[]>([
     {
       id: 'iot',
@@ -141,9 +152,9 @@ export default function Register(): ReactElement {
       if (!membersRequestBody.length) errors.membersError = "Minimal harus memiliki 1 ketua"
       if (values.verify.length < 2) errors.verify = "Harap menyetujui 2 bidang diatas"
 
-      return errors
+      return {}
     },
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       const [selectedCompetition] = competitions.filter(comp => comp.isSelected)
 
       const teamData: Team = {
@@ -160,14 +171,43 @@ export default function Register(): ReactElement {
         members: membersRequestBody
       }
 
-      alert(JSON.stringify(request, undefined, 2))
+      setAlertStatus({
+        isShow: true,
+        variant: 'wait',
+        message: ''
+      })
+      
+      setTimeout(() => {
+        const arrVariant: ["success", "error"] = ['success', 'error']
+        setAlertStatus({
+          ...alertStatus,
+          isShow: true,
+          variant: arrVariant[
+            Math.floor(Math.random() * (Math.floor(1) - Math.ceil(0) + 1) + Math.ceil(0))
+          ]
+        })
+      }, 1000)
+      const requestRegister = async () => {
+        let res;
+        try {
+          res = await http.post('/register', request)
+          console.log(res)
+        } catch (err) {
+          console.log(err)
+        }
+      }
+
+      requestRegister()
     }
   })
+
+  const alertHandler = (state: boolean) => setAlertStatus({...alertStatus, isShow: state})
 
   const classes = useStyles()
 
   return (
     <>
+    <Alert isShow={alertStatus.isShow} handleShow={alertHandler} variant={alertStatus.variant}/>
     <MemberModalPopup />
       <Container className={classes.root}>
         <form
@@ -188,6 +228,7 @@ export default function Register(): ReactElement {
                   placeholder="Name"
                   error={formik.errors.name}
                   aosDuration={500}
+                  testId="input-name-team"
                 />
                 <TeamMemberInput
                   handleChange={formik.handleChange}
@@ -196,6 +237,7 @@ export default function Register(): ReactElement {
                   placeholder="Email"
                   error={formik.errors.email}
                   aosDuration={600}
+                  testId="input-email-team"
                 />
                 <TeamMemberInput
                   handleChange={formik.handleChange}
@@ -204,6 +246,7 @@ export default function Register(): ReactElement {
                   placeholder="Institute"
                   error={formik.errors.institute}
                   aosDuration={700}
+                  testId="input-institute-team"
                 />
                 <TeamMemberInput
                   handleChange={formik.handleChange}
@@ -212,6 +255,7 @@ export default function Register(): ReactElement {
                   placeholder="Judul"
                   error={formik.errors.title}
                   aosDuration={800}
+                  testId="input-title-team"
                 />
               </div>
             </Grid>
@@ -250,6 +294,7 @@ export default function Register(): ReactElement {
                   value={formik.values.url_files}
                   placeholder="Link"
                   error={formik.errors.url_files}
+                  testId="input-url-files-team"
                 />
               </div>
             </Grid>
@@ -262,6 +307,7 @@ export default function Register(): ReactElement {
             <FormControlLabel
               data-aos="zoom-in"
               className="label"
+              data-testid="verify-responsibility"
               control={
                 <WhiteCheckbox
                   name="verify"
@@ -279,6 +325,7 @@ export default function Register(): ReactElement {
             <FormControlLabel
               data-aos="zoom-in"
               className="label"
+              data-testid="verify-google-drive"
               control={
                 <WhiteCheckbox
                   name="verify"
@@ -301,7 +348,13 @@ export default function Register(): ReactElement {
                 >{formik.errors.verify}</WhiteInputLabel>
               )
             }
-            <GradientButton type="submit" fullWidth style={{ margin: '0 auto' }} data-aos="zoom-in">
+            <GradientButton
+              type="submit"
+              fullWidth
+              style={{ margin: '0 auto' }}
+              data-aos="zoom-in"
+              data-testid="register-button"
+            >
               <WhiteTypography>Register</WhiteTypography>
             </GradientButton>
           </div>
