@@ -16,11 +16,11 @@ const navigationLinks = atom<LinkState[]>({
   default: [{
     id: 1,
     name: 'Webinar',
-    href: '/'
+    href: '/webinar'
   }, {
     id: 2,
     name: 'Kompetisi',
-    href: '/'
+    href: '/competition'
   }, {
     id: 3,
     name: 'Tech Expo',
