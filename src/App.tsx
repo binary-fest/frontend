@@ -9,6 +9,7 @@ import './styles/animation.css';
 import { Route, Switch } from 'react-router-dom';
 import Register from './pages/Register';
 import Navigation from './components/Navigation';
+import Webinar from './pages/Webinar';
 
 const useStyles = makeStyles(({palette, breakpoints}) => ({
   root: {
@@ -33,6 +34,7 @@ function App() {
         <Navigation />
         <Switch>
           <Route path="/register" exact component={Register} />
+          <Route path="/webinar" exact component={Webinar} />
           <Route path="/" component={StaticPageLayout} />
         </Switch>
       </div>
