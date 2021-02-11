@@ -16,8 +16,9 @@ export default function Webinar(): ReactElement {
           align="center"
         >Webinar Nasional</GradientTypography>
         <WhiteTypography
-          style={{ marginTop: '16px' }}
+          style={{ marginTop: '16px', marginBottom: '78px', fontWeight: 400 }}
           align="center"
+          variant="h3"
         >Peran IoT dan Cyber Security di Era Revolusi 4.0</WhiteTypography>
         <ListLecturer />
       </StyledWebinarContainer>
