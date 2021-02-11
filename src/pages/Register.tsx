@@ -154,7 +154,7 @@ export default function Register(): ReactElement {
       if (!membersRequestBody.length) errors.membersError = "Minimal harus memiliki 1 ketua"
       if (values.verify.length < 2) errors.verify = "Harap menyetujui 2 bidang diatas"
 
-      return {}
+      return errors
     },
     onSubmit: async (values) => {
       const [selectedCompetition] = competitions.filter(comp => comp.isSelected)
@@ -180,20 +180,18 @@ export default function Register(): ReactElement {
       })
 
       const requestRegister = async () => {
-        let res;
         try {
-          res = await http.post('/register', request)
+          await http.post('/competition/register', request)
           setAlertStatus({
             isShow: true,
             variant: 'success',
             message: ''
           })
-          console.log(res)
         } catch (err) {
           setAlertStatus({
             isShow: true,
             variant: 'error',
-            message: ''
+            message: err.response.data.message || ''
           })
         }
       }
