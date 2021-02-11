@@ -1,15 +1,15 @@
 import React, { ReactElement } from 'react'
 import { useRecoilValue } from 'recoil'
 import { isNavigationResponsiveShowAtom } from '../store/ui'
-import NavigationDesktop from './NavigationDesktop'
+import NavigationDesktop, { NavigationDesktopProps } from './NavigationDesktop'
 import NavigationResponsive from './NavigationResponsive'
 
-export default function Navigation(): ReactElement {
+export default function Navigation(props: NavigationDesktopProps): ReactElement {
   const isNavigationResponsiveShow = useRecoilValue(isNavigationResponsiveShowAtom)
 
   return (
     <>
-      <NavigationDesktop />
+      <NavigationDesktop withLinks={props.withLinks}/>
       {isNavigationResponsiveShow && <NavigationResponsive />}
     </>
   )

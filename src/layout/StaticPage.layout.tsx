@@ -1,11 +1,13 @@
 import { Container, makeStyles } from '@material-ui/core'
 import React, { ReactElement } from 'react'
-import { Route } from 'react-router-dom'
+import { Route, useHistory } from 'react-router-dom'
 import FixedSocialMedia from '../components/FixedSocialMedia'
+import Navigation from '../components/Navigation'
 import About from '../pages/About'
 import Competition from '../pages/Competition'
 import Expo from '../pages/Expo'
 import Home from '../pages/Home'
+import Webinar from '../pages/Webinar'
 
 const useStyles = makeStyles(({ palette, breakpoints }) => ({
   decorationContainer: {
@@ -39,6 +41,9 @@ const RouteComponents = (): ReactElement => {
   }, {
     path: '/expo',
     components: Expo
+  }, {
+    path: '/webinar',
+    components: Webinar
   }]
 
   return (
@@ -51,10 +56,12 @@ const RouteComponents = (): ReactElement => {
 }
 
 export default function StaticPageLayout(): ReactElement {
+  const router = useHistory()
   const classes = useStyles()
 
   return (
     <>
+      <Navigation withLinks={router.location.pathname !== '/'}/>
       <div className={classes.decorationContainer}>
         <img className={classes.decoration1} src="/decoration-1.svg" alt="decoration" />
       </div>
