@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios'
 
 const httpConfig: AxiosRequestConfig = {
-  baseURL: 'http://localhost:9000/api'
+  baseURL: 'https://api-binaryfest.herokuapp.com/api'
 }
 
 const http = axios.create(httpConfig)
