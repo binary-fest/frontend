@@ -1,8 +1,11 @@
 import React, { ReactElement } from 'react'
+import useTitlePage from '../hooks/useTitlePage'
 import { GradientTypography, WhiteTypography } from '../theme/extends'
 import { StyledWebinarContainer } from '../theme/pages/Webinar'
 
 export default function Webinar(): ReactElement {
+  useTitlePage("Webinar - BinaryFest2021")
+
   return (
     <>
       <StyledWebinarContainer>
