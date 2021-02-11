@@ -32,9 +32,11 @@ export default function FixedSocialMedia(): ReactElement {
     <div className={classes.root}>
       <Grid container direction="column" data-aos="fade-left">
         {listSocialMedia.map((item) => {
+          if (item.href === '') return (null)
+
           return (
             <Grid item key={item.name}>
-              <a href={item.href}>
+              <a href={item.href} target="__BLANK">
                 <img src={item.whiteSvgFile} alt={item.name} />
               </a>
             </Grid>

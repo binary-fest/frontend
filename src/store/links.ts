@@ -33,7 +33,7 @@ const socialMediaLinks = atom<LinkState[]>({
   default: [{
     id: 1,
     name: 'Instagram',
-    href: ''
+    href: 'https://www.instagram.com/binaryfest.uty/'
   }, {
     id: 2,
     name: 'Telegram',
@@ -41,7 +41,7 @@ const socialMediaLinks = atom<LinkState[]>({
   }, {
     id: 3,
     name: 'Youtube',
-    href: ''
+    href: 'https://www.youtube.com/channel/UCB85z5VHQwDCXdnR5F-VAAg'
   }]
 })
 
