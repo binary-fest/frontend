@@ -9,6 +9,7 @@ import { useRecoilValue } from 'recoil'
 import { membersRequestBodyState } from '../store/members'
 import http from '../utils/http'
 import Alert, { AlertStatus } from '../components/Alert'
+import { validateEmail } from '../utils/validate'
 
 interface CompetitionState {
   id: CompetitionType,
@@ -143,9 +144,10 @@ export default function Register(): ReactElement {
     validateOnChange: false,
     validate: (values) => {
       const errors: any = {}
+      const checkEmail = validateEmail(values.email)
       if (!values.name) errors.name = "Tidak boleh kosong"
       if (!values.email) errors.email = "Tidak boleh kosong"
-      else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) errors.email = "Email tidak valid";
+      if (!checkEmail.isValid) errors.email = checkEmail.message
       if (!values.institute) errors.institute = "Tidak boleh kosong"
       if (!values.title) errors.title = "Tidak boleh kosong"
       if (!values.url_files) errors.url_files = "Tidak boleh kosong"
@@ -176,24 +178,23 @@ export default function Register(): ReactElement {
         variant: 'wait',
         message: ''
       })
-      
-      setTimeout(() => {
-        const arrVariant: ["success", "error"] = ['success', 'error']
-        setAlertStatus({
-          ...alertStatus,
-          isShow: true,
-          variant: arrVariant[
-            Math.floor(Math.random() * (Math.floor(1) - Math.ceil(0) + 1) + Math.ceil(0))
-          ]
-        })
-      }, 1000)
+
       const requestRegister = async () => {
         let res;
         try {
           res = await http.post('/register', request)
+          setAlertStatus({
+            isShow: true,
+            variant: 'success',
+            message: ''
+          })
           console.log(res)
         } catch (err) {
-          console.log(err)
+          setAlertStatus({
+            isShow: true,
+            variant: 'error',
+            message: ''
+          })
         }
       }
 
@@ -207,7 +208,12 @@ export default function Register(): ReactElement {
 
   return (
     <>
-    <Alert isShow={alertStatus.isShow} handleShow={alertHandler} variant={alertStatus.variant}/>
+      <Alert
+        isShow={alertStatus.isShow}
+        handleShow={alertHandler}
+        variant={alertStatus.variant}
+        message={alertStatus.message}
+      />
     <MemberModalPopup />
       <Container className={classes.root}>
         <form
@@ -225,7 +231,7 @@ export default function Register(): ReactElement {
                   handleChange={formik.handleChange}
                   name="name"
                   value={formik.values.name}
-                  placeholder="Name"
+                  placeholder="Nama Team"
                   error={formik.errors.name}
                   aosDuration={500}
                   testId="input-name-team"
@@ -234,7 +240,7 @@ export default function Register(): ReactElement {
                   handleChange={formik.handleChange}
                   name="email"
                   value={formik.values.email}
-                  placeholder="Email"
+                  placeholder="Email Team"
                   error={formik.errors.email}
                   aosDuration={600}
                   testId="input-email-team"
@@ -243,7 +249,7 @@ export default function Register(): ReactElement {
                   handleChange={formik.handleChange}
                   name="institute"
                   value={formik.values.institute}
-                  placeholder="Institute"
+                  placeholder="Insitut"
                   error={formik.errors.institute}
                   aosDuration={700}
                   testId="input-institute-team"

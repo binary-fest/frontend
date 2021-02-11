@@ -18,6 +18,7 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import membersState, { initialMemberModal, leaderAtom, memberModalState } from '../store/members'
 import { isMemberModalShowState } from '../store/ui'
 import { MemberFormik, MemberState } from '../@types/Member'
+import { validateEmail } from '../utils/validate'
 
 interface MemberInputProps {
   error: string | undefined
@@ -133,9 +134,11 @@ export default function MemberModal(): ReactElement {
     validateOnChange: false,
     validate: (values) => {
       const errors: any = {}
+      const checkEmail = validateEmail(values.email)
       if (!values.name) errors.name = "Tidak boleh kosong"
       if (!values.student_id) errors.student_id = "Tidak boleh kosong"
       if (!values.email) errors.email = "Tidak boleh kosong"
+      if (!checkEmail.isValid) errors.email = checkEmail.message
       if (!values.phone) errors.phone = "Tidak boleh kosong"
       if (!values.gender) errors.gender = "Pilih salah satu"
       if (!values.role) errors.role = "Pilih salah satu"
@@ -242,13 +245,13 @@ export default function MemberModal(): ReactElement {
                   defaultValue={formik.initialValues.gender}
                 >
                   <FormControlLabel
-                    value="pria"
+                    value="man"
                     control={<Radio color="primary" />}
                     label="Pria"
                     data-testid="gender-man"
                   />
                   <FormControlLabel
-                    value="wanita"
+                    value="woman"
                     control={<Radio color="primary" />}
                     label="Wanita"
                   />

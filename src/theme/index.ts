@@ -20,7 +20,7 @@ const theme = createMuiTheme({
   },
   palette: {
     gradient: {
-      main: 'radial-gradient(188.15% 293.06% at 93.46% -88.15%, #780031 13.16%, #100E17 100%);'
+      main: 'radial-gradient(312.96% 312.96% at 109.41% -262.96%, #780031 13.16%, #100E17 100%);'
     }
   }
 })
