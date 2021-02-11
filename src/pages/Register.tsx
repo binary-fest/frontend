@@ -188,6 +188,7 @@ export default function Register(): ReactElement {
             variant: 'success',
             message: ''
           })
+          console.log(res)
         } catch (err) {
           setAlertStatus({
             isShow: true,
