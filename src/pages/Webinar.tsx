@@ -1,15 +1,16 @@
 import { Grid } from '@material-ui/core'
 import React, { ReactElement } from 'react'
+import FooterPage from '../components/FooterPage'
 import ListLecturer from '../components/ListLecturer'
 import useTitlePage from '../hooks/useTitlePage'
-import { GradientButton, GradientTypography, WhiteTypography } from '../theme/extends'
+import { GradientButton, GradientTypography, StaticPageContentStyled, WhiteTypography } from '../theme/extends'
 import { StyledWebinarContainer, StyledWebinarButtonGroup } from '../theme/pages/Webinar'
 
 export default function Webinar(): ReactElement {
   useTitlePage("Webinar - BinaryFest2021")
 
   return (
-    <>
+    <StaticPageContentStyled>
       <StyledWebinarContainer>
         <GradientTypography
           variant="h3" 
@@ -40,6 +41,7 @@ export default function Webinar(): ReactElement {
           </Grid>
         </StyledWebinarButtonGroup>
       </StyledWebinarContainer>
-    </>
+      <FooterPage />
+    </StaticPageContentStyled>
   )
 }

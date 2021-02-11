@@ -11,6 +11,7 @@ const StyledWebinarButtonGroup = withStyles({
   container: {
     flexDirection: 'column',
     alignItems: 'center',
+    marginBottom: '168px',
     [theme.breakpoints.up('sm')]: {
       flexDirection: 'row',
       justifyContent: 'center',
