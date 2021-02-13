@@ -6,15 +6,16 @@ import AOS from 'aos';
 import './styles/root.css';
 import './styles/animation.css';
 import { Route, Switch } from 'react-router-dom';
-import Register from './pages/Register';
 import Navigation from './components/Navigation';
-import ErrorPage from './pages/404';
 import Home from './pages/Home';
-import About from './pages/About';
-import Competition from './pages/Competition';
-import Expo from './pages/Expo';
-import Webinar from './pages/Webinar';
 import StaticLayout from './layout/StaticLayout';
+
+const RegisterLazy = React.lazy(() => import('./pages/Register'))
+const WebinarLazy = React.lazy(() => import('./pages/Webinar'))
+const AboutLazy = React.lazy(() => import('./pages/About'))
+const CompetitionLazy = React.lazy(() => import('./pages/Competition'))
+const RegisterWebinarLazy = React.lazy(() => import('./pages/RegisterWebinar'))
+const ErrorLazy = React.lazy(() => import('./pages/404'))
 
 const useStyles = makeStyles(({palette, breakpoints}) => ({
   root: {
@@ -38,16 +39,16 @@ function App() {
     components: Home
   }, {
     path: '/about',
-    components: About
+    components: AboutLazy
   }, {
     path: '/competition',
-    components: Competition
-  }, {
-    path: '/expo',
-    components: Expo
+    components: CompetitionLazy
   }, {
     path: '/webinar',
-    components: Webinar
+    components: WebinarLazy
+  }, {
+    path: '/webinar/register',
+    components: RegisterWebinarLazy
   }]
 
   return (
@@ -56,20 +57,26 @@ function App() {
         <Switch>
           <Route path="/register" exact>
             <Navigation />
-            <Register />
+            <React.Suspense fallback={null}>
+              <RegisterLazy />
+            </React.Suspense>
           </Route>
           {
             routes.map(route => (
               <Route path={route.path} exact key={route.path} component={() => (
                 <StaticLayout>
-                  <route.components />
+                  <React.Suspense fallback={null}>
+                    <route.components />
+                  </React.Suspense>
                 </StaticLayout>
               )} />
             ))
           }
           <Route component={() => (
             <StaticLayout>
-              <ErrorPage />
+              <React.Suspense fallback={null}>
+                <ErrorLazy />
+              </React.Suspense>
             </StaticLayout>
           )}/>
         </Switch>
