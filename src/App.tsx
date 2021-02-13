@@ -12,7 +12,6 @@ import ErrorPage from './pages/404';
 import Home from './pages/Home';
 import About from './pages/About';
 import Competition from './pages/Competition';
-import Expo from './pages/Expo';
 import Webinar from './pages/Webinar';
 import StaticLayout from './layout/StaticLayout';
 
@@ -42,9 +41,6 @@ function App() {
   }, {
     path: '/competition',
     components: Competition
-  }, {
-    path: '/expo',
-    components: Expo
   }, {
     path: '/webinar',
     components: Webinar
