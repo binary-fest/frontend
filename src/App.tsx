@@ -1,7 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { RecoilRoot } from 'recoil';
-import StaticPageLayout from './layout/StaticPage.layout';
 import AOS from 'aos';
 
 import './styles/root.css';
@@ -9,6 +8,13 @@ import './styles/animation.css';
 import { Route, Switch } from 'react-router-dom';
 import Register from './pages/Register';
 import Navigation from './components/Navigation';
+import ErrorPage from './pages/404';
+import Home from './pages/Home';
+import About from './pages/About';
+import Competition from './pages/Competition';
+import Expo from './pages/Expo';
+import Webinar from './pages/Webinar';
+import StaticLayout from './layout/StaticLayout';
 
 const useStyles = makeStyles(({palette, breakpoints}) => ({
   root: {
@@ -27,6 +33,23 @@ function App() {
     })
   }, [])
 
+  const routes = [{
+    path: '/',
+    components: Home
+  }, {
+    path: '/about',
+    components: About
+  }, {
+    path: '/competition',
+    components: Competition
+  }, {
+    path: '/expo',
+    components: Expo
+  }, {
+    path: '/webinar',
+    components: Webinar
+  }]
+
   return (
     <RecoilRoot>
       <div className={classes.root}>
@@ -35,7 +58,20 @@ function App() {
             <Navigation />
             <Register />
           </Route>
-          <Route path="/" component={StaticPageLayout} />
+          {
+            routes.map(route => (
+              <Route path={route.path} exact key={route.path} component={() => (
+                <StaticLayout>
+                  <route.components />
+                </StaticLayout>
+              )} />
+            ))
+          }
+          <Route component={() => (
+            <StaticLayout>
+              <ErrorPage />
+            </StaticLayout>
+          )}/>
         </Switch>
       </div>
     </RecoilRoot>
