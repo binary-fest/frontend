@@ -6,7 +6,6 @@ import AOS from 'aos';
 import './styles/root.css';
 import './styles/animation.css';
 import { Route, Switch } from 'react-router-dom';
-import Register from './pages/Register';
 import Navigation from './components/Navigation';
 import ErrorPage from './pages/404';
 import Home from './pages/Home';
@@ -15,6 +14,8 @@ import Competition from './pages/Competition';
 import Webinar from './pages/Webinar';
 import StaticLayout from './layout/StaticLayout';
 import RegisterWebinar from './pages/RegisterWebinar';
+
+const RegisterLazy = React.lazy(() => import('./pages/Register'))
 
 const useStyles = makeStyles(({palette, breakpoints}) => ({
   root: {
@@ -56,7 +57,9 @@ function App() {
         <Switch>
           <Route path="/register" exact>
             <Navigation />
-            <Register />
+            <React.Suspense fallback={null}>
+              <RegisterLazy />
+            </React.Suspense>
           </Route>
           {
             routes.map(route => (
