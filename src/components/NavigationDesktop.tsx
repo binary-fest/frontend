@@ -84,8 +84,8 @@ export default function NavigationDesktop(props: NavigationDesktopProps): ReactE
       <Grid container justify="space-between" alignItems="center">
         <Grid item>
           <Link to="/">
-            <img src="/binary-fest-logo-mobile.svg" alt="Binary Fest" className={classes.mobileIcon}/>
-            <img src="/binary-fest-text-right.svg" alt="Binary Fest" className={classes.desktopIcon}/>
+            <img src="https://res.cloudinary.com/binaryfest/image/upload/v1613227023/web/binary-fest-logo-mobile_ezr4ve.svg" alt="Binary Fest" className={classes.mobileIcon}/>
+            <img src="https://res.cloudinary.com/binaryfest/image/upload/v1613227023/web/binary-fest-text-right_n0za1i.svg" alt="Binary Fest" className={classes.desktopIcon}/>
           </Link>
         </Grid>
         <Grid item className={classes.containerLinkResponsive}>
