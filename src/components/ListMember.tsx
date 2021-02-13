@@ -37,7 +37,7 @@ const MembersComponent = React.memo((props: { members: IndexedMemberState[] }) =
   return (
     <TransitionGroup component={null}>
       {props.members.map(member => (
-        <CSSTransition key={member.id} classNames="animate-MemberCard" unmountOnExit timeout={750}>
+        <CSSTransition key={member.id} classNames="animate-MemberCard" unmountOnExit timeout={500}>
           <MemberCard member={member} key={member.id} idx={member.idx} />
         </CSSTransition>
       ))}
