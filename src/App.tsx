@@ -14,6 +14,7 @@ import About from './pages/About';
 import Competition from './pages/Competition';
 import Webinar from './pages/Webinar';
 import StaticLayout from './layout/StaticLayout';
+import RegisterWebinar from './pages/RegisterWebinar';
 
 const useStyles = makeStyles(({palette, breakpoints}) => ({
   root: {
@@ -44,6 +45,9 @@ function App() {
   }, {
     path: '/webinar',
     components: Webinar
+  }, {
+    path: '/webinar/register',
+    components: RegisterWebinar
   }]
 
   return (

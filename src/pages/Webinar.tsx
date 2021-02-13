@@ -1,6 +1,7 @@
 import { Grid } from '@material-ui/core'
 import React, { ReactElement } from 'react'
 import FooterPage from '../components/FooterPage'
+import LinkScroll from '../components/LinkScroll'
 import ListLecturer from '../components/ListLecturer'
 import useTitlePage from '../hooks/useTitlePage'
 import { GradientButton, GradientTypography, StaticPageContentStyled, WhiteTypography } from '../theme/extends'
@@ -34,9 +35,11 @@ export default function Webinar(): ReactElement {
         >Pengen tau seberapa serunya ?</WhiteTypography>
         <StyledWebinarButtonGroup container>
           <Grid item data-aos="zoom-in" data-aos-delay="250">
-            <GradientButton>
-              <WhiteTypography>Daftar Webinar</WhiteTypography>
-            </GradientButton>
+            <LinkScroll to="/webinar/register" style={{textDecoration: 'none'}}>
+              <GradientButton>
+                <WhiteTypography>Daftar Webinar</WhiteTypography>
+              </GradientButton>
+            </LinkScroll>
           </Grid>
           <Grid item data-aos="zoom-in" data-aos-delay="500">
             <GradientButton>
