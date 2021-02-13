@@ -231,7 +231,7 @@ export default function Home(): ReactElement {
     <>
       <div className={classes.hero}>
         <div className="hero-content">
-          <img data-aos="fade-up" src="/binary-fest-text-bottom.svg" className="binary-fest-logo" alt="binary-fest"/>
+          <img data-aos="fade-up" src="https://res.cloudinary.com/binaryfest/image/upload/v1613227023/web/binary-fest-text-bottom_mtat4t.svg" className="binary-fest-logo" alt="binary-fest"/>
           <Typography
             className="coming-soon"
             data-aos="fade-up"
