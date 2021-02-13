@@ -10,16 +10,19 @@ export default function ErrorPage(): ReactElement {
         <GradientTypography
           style={{ fontSize: '100px', fontWeight: 'bold' }}
           align="center"
+          data-aos="fade-in"
         >404</GradientTypography>
         <WhiteTypography
           variant="h3"
           style={{ fontWeight: 400 }}
           align="center"
+          data-aos="fade-in"
+          data-aos-delay="250"
         >Page not Found</WhiteTypography>
       </div>
       <StyledErroPageFooter>
         <Link to="/">
-          <WhiteTypography>Back to Homepage</WhiteTypography>
+          <WhiteTypography data-aos="fade-in" data-aos-delay="500">Back to Homepage</WhiteTypography>
         </Link>
       </StyledErroPageFooter>
     </StyledErrorPage>
