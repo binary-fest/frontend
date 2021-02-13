@@ -1,13 +1,12 @@
 import { Container, makeStyles } from '@material-ui/core'
 import React, { ReactElement } from 'react'
-import { Route, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import FixedSocialMedia from '../components/FixedSocialMedia'
 import Navigation from '../components/Navigation'
-import About from '../pages/About'
-import Competition from '../pages/Competition'
-import Expo from '../pages/Expo'
-import Home from '../pages/Home'
-import Webinar from '../pages/Webinar'
+
+interface StaticLayoutProps {
+  children: any
+}
 
 const useStyles = makeStyles(({ palette, breakpoints }) => ({
   decorationContainer: {
@@ -28,34 +27,7 @@ const useStyles = makeStyles(({ palette, breakpoints }) => ({
   }
 }))
 
-const RouteComponents = (): ReactElement => {
-  const routes = [{
-    path: '/',
-    components: Home
-  }, {
-    path: '/about',
-    components: About
-  }, {
-    path: '/competition',
-    components: Competition
-  }, {
-    path: '/expo',
-    components: Expo
-  }, {
-    path: '/webinar',
-    components: Webinar
-  }]
-
-  return (
-    <>
-      {routes.map(route => (
-        <Route path={route.path} exact key={route.path} component={route.components} />
-      ))}
-    </>
-  )
-}
-
-export default function StaticPageLayout(): ReactElement {
+export default function StaticLayout({children}: StaticLayoutProps): ReactElement {
   const router = useHistory()
   const classes = useStyles()
 
@@ -67,7 +39,7 @@ export default function StaticPageLayout(): ReactElement {
       </div>
       <FixedSocialMedia />
       <Container>
-        <RouteComponents />
+        {children}
       </Container>
     </>
   )
