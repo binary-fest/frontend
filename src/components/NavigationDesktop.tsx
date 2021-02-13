@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { navigationLinks } from '../store/links'
 import { isNavigationResponsiveShowAtom } from '../store/ui'
+import Image from './Image'
 
 export interface NavigationDesktopProps {
   withLinks?: boolean
@@ -89,9 +90,9 @@ export default function NavigationDesktop(props: NavigationDesktopProps): ReactE
           </Link>
         </Grid>
         <Grid item className={classes.containerLinkResponsive}>
-          <img
+          <Image
             className={classes.hamburgerIcon}
-            src="/hamburger-icon.svg"
+            src="hamburger-icon.svg"
             alt="Binary Fest"
             onClick={toggleNavigationResponsive}
           />
