@@ -1,10 +1,10 @@
 import { Grid, makeStyles, Typography } from '@material-ui/core'
 import React, { ReactElement } from 'react'
-import { Link } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import useTitlePage from '../hooks/useTitlePage'
 import { navigationLinks } from '../store/links'
 import { Element, scroller } from 'react-scroll'
+import LinkScroll from '../components/LinkScroll'
 
 const useStyles = makeStyles(({breakpoints, spacing}) => ({
   hero: {
@@ -268,9 +268,9 @@ export default function Home(): ReactElement {
               {links.map((link) => {
                 return (
                   <Grid item key={link.id}>
-                    <Link to={link.href} className="footer-link">
+                    <LinkScroll to={link.href} className="footer-link">
                       <Typography>{link.name}</Typography>
-                    </Link>
+                    </LinkScroll>
                   </Grid>
                 )
               })}
