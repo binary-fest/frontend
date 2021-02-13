@@ -1,8 +1,8 @@
 import { Container, Grid, makeStyles, Typography } from '@material-ui/core'
 import clsx from 'clsx'
-import React, { ReactElement, useState } from 'react'
+import React, { ReactElement } from 'react'
 import { Link } from 'react-router-dom'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { navigationLinks, socialMediaIcons } from '../store/links'
 import { isNavigationResponsiveShowAtom } from '../store/ui'
 
@@ -18,13 +18,7 @@ const useStyles = makeStyles(({ spacing }) => ({
     zIndex: 1000,
     width: "80%",
     top: "0",
-  },
-  showNav: {
-    right: '0',
-    animation: '$showNav .5s linear alternate',
-  },
-  hideNav: {
-    animation: '$hideNav .5s linear alternate',
+    right: '0'
   },
   container: {
     display: 'flex',
@@ -59,42 +53,20 @@ const useStyles = makeStyles(({ spacing }) => ({
     display: 'flex',
     justifyContent: 'space-between'
   },
-  '@keyframes showNav': {
-    '0%': {
-      right: '-100%'
-    },
-    '100%': {
-      right: '0'
-    }
-  },
-  '@keyframes hideNav': {
-    '0%': {
-      right: '0'
-    },
-    '100%': {
-      right: '-100%'
-    }
-  }
 }))
 
 export default function NavigationResponsive(props: NavigationResponsiveProps): ReactElement {
   const listNavigationLink = useRecoilValue(navigationLinks)
   const listSocialMedia = useRecoilValue(socialMediaIcons)
-  const [isNavigationShow, setIsNavigationShow] = useRecoilState(isNavigationResponsiveShowAtom)
-  const [animationRoot, setAnimationRoot] = useState(isNavigationShow)
+  const setIsNavigationShow = useSetRecoilState(isNavigationResponsiveShowAtom)
   
-  const hideHandler = () => {
-    setTimeout(() => {
-      setIsNavigationShow(false)
-    }, 500)
-    setAnimationRoot(false)
-  }
+  const hideHandler = () => setIsNavigationShow(false)
 
   const classes = useStyles()
 
   return (
     <>
-      <div className={clsx(classes.root, animationRoot ? classes.showNav : classes.hideNav)}>
+      <div className={clsx(classes.root)}>
         <Container className={classes.container}>
           <Grid container justify="space-between">
             <Grid item>

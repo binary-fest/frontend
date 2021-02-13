@@ -25,6 +25,12 @@ app.get('/', (req, res, next) => {
   res.json('server was running')
 })
 
+app.post('/api/register', (req, res) => {
+  res.json({
+    message: 'initialize /api/register'
+  })
+})
+
 app.use(middlewares)
 app.use('/api', routes)
 

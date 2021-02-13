@@ -1,6 +1,7 @@
 import { Grid, makeStyles, Typography } from '@material-ui/core'
 import React, { ReactElement } from 'react'
 import FooterPage from '../components/FooterPage';
+import LinkScroll from '../components/LinkScroll';
 import useTitlePage from '../hooks/useTitlePage';
 import { GradientButton, GradientTypography, StaticPageContentStyled } from '../theme/extends';
 
@@ -104,7 +105,9 @@ export default function Competition(): ReactElement {
       <div className={classes.reoffer} data-aos="zoom-in">
         <Typography variant="h1" align="center">Do you ready ?</Typography>
         <div>
-          <GradientButton variant='contained' color="primary">Registrasi Kompetisi</GradientButton>
+          <LinkScroll to="/register" style={{textDecoration: 'none'}}>
+            <GradientButton variant='contained' color="primary">Registrasi Kompetisi</GradientButton>
+          </LinkScroll>
         </div>
       </div>
       <FooterPage />

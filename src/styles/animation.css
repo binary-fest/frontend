@@ -1,0 +1,100 @@
+.animate-MemberModal-enter {
+  top: 100% !important;
+}
+
+.animate-MemberModal-enter-active {
+  top: 1rem !important;
+  transition: top 500ms;
+}
+.animate-MemberModal-enter-done {
+  top: 1rem !important;
+}
+
+.animate-MemberModal-exit {
+  top: 1rem !important;
+}
+
+.animate-MemberModal-exit-active {
+  top: 100% !important;
+  transition: top 500ms;
+}
+
+.animate-Backdrop-enter {
+  opacity: 0 !important;
+}
+.animate-Backdrop-enter-active {
+  opacity: 0.5 !important;
+  transition: opacity 500ms;
+}
+.animate-Backdrop-exit {
+  opacity: 0.5 !important;
+}
+.animate-Backdrop-exit-active {
+  opacity: 0 !important;
+  transition: opacity 500ms;
+}
+
+.animate-MemberCard-enter {
+  opacity: 0;
+  transform: scale(0.5);
+}
+.animate-MemberCard-enter-active {
+  transform: scale(1);
+  opacity: 1;
+  transition: transform 500ms, opacity 500ms;
+}
+.animate-MemberCard-exit {
+  opacity: 1;
+  transform: scale(1);
+}
+.animate-MemberCard-exit-active {
+  transform: scale(0.5);
+  opacity: 0;
+  transition: transform 500ms, opacity 500ms;
+}
+
+.animate-Alert-enter {
+  opacity: 0 !important;
+  transform: scale(0.5) !important;
+}
+.animate-Alert-enter-active {
+  opacity: 1 !important;
+  transform: scale(1) !important;
+  transition: opacity 500ms, transform 500ms;
+}
+.animate-Alert-exit {
+  opacity: 1 !important;
+  transform: scale(1) !important;
+}
+.animate-Alert-exit-active {
+  opacity: 0 !important;
+  transform: scale(0.5) !important;
+  transition: opacity 500ms, transform 500ms;
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-NavigationResponsive-enter {
+  right: -100% !important;
+}
+
+.animate-NavigationResponsive-enter-active {
+  right: 0 !important;
+  transition: right 500ms;
+}
+
+.animate-NavigationResponsive-exit {
+  right: 0 !important;
+}
+
+.animate-NavigationResponsive-exit-active {
+  right: -100% !important;
+  transition: right 500ms;
+}

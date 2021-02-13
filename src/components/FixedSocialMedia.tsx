@@ -2,6 +2,7 @@ import { Grid, makeStyles } from '@material-ui/core'
 import React, { ReactElement } from 'react'
 import { useRecoilValue } from 'recoil'
 import { socialMediaIcons } from '../store/links'
+import Image from './Image'
 
 const useStyles = makeStyles(({breakpoints}) => ({
   root: {
@@ -32,10 +33,12 @@ export default function FixedSocialMedia(): ReactElement {
     <div className={classes.root}>
       <Grid container direction="column" data-aos="fade-left">
         {listSocialMedia.map((item) => {
+          if (item.href === '') return (null)
+
           return (
             <Grid item key={item.name}>
-              <a href={item.href}>
-                <img src={item.whiteSvgFile} alt={item.name} />
+              <a href={item.href} target="__BLANK">
+                <Image src={item.whiteSvgFile} alt={item.name} />
               </a>
             </Grid>
           )

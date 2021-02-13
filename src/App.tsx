@@ -1,10 +1,21 @@
 import { makeStyles } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { RecoilRoot } from 'recoil';
-import StaticPageLayout from './layout/StaticPage.layout';
 import AOS from 'aos';
 
 import './styles/root.css';
+import './styles/animation.css';
+import { Route, Switch } from 'react-router-dom';
+import Navigation from './components/Navigation';
+import Home from './pages/Home';
+import StaticLayout from './layout/StaticLayout';
+
+const RegisterLazy = React.lazy(() => import('./pages/Register'))
+const WebinarLazy = React.lazy(() => import('./pages/Webinar'))
+const AboutLazy = React.lazy(() => import('./pages/About'))
+const CompetitionLazy = React.lazy(() => import('./pages/Competition'))
+const RegisterWebinarLazy = React.lazy(() => import('./pages/RegisterWebinar'))
+const ErrorLazy = React.lazy(() => import('./pages/404'))
 
 const useStyles = makeStyles(({palette, breakpoints}) => ({
   root: {
@@ -18,14 +29,57 @@ function App() {
 
   useEffect(() => {
     AOS.init({
-      duration: 1000
+      duration: 1000,
+      once: true
     })
   }, [])
+
+  const routes = [{
+    path: '/',
+    components: Home
+  }, {
+    path: '/about',
+    components: AboutLazy
+  }, {
+    path: '/competition',
+    components: CompetitionLazy
+  }, {
+    path: '/webinar',
+    components: WebinarLazy
+  }, {
+    path: '/webinar/register',
+    components: RegisterWebinarLazy
+  }]
 
   return (
     <RecoilRoot>
       <div className={classes.root}>
-        <StaticPageLayout />
+        <Switch>
+          <Route path="/register" exact>
+            <Navigation />
+            <React.Suspense fallback={null}>
+              <RegisterLazy />
+            </React.Suspense>
+          </Route>
+          {
+            routes.map(route => (
+              <Route path={route.path} exact key={route.path} component={() => (
+                <StaticLayout>
+                  <React.Suspense fallback={null}>
+                    <route.components />
+                  </React.Suspense>
+                </StaticLayout>
+              )} />
+            ))
+          }
+          <Route component={() => (
+            <StaticLayout>
+              <React.Suspense fallback={null}>
+                <ErrorLazy />
+              </React.Suspense>
+            </StaticLayout>
+          )}/>
+        </Switch>
       </div>
     </RecoilRoot>
   );
