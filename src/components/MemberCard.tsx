@@ -6,6 +6,7 @@ import { MemberState } from '../@types/Member'
 import membersState, { memberModalState } from '../store/members'
 import { isMemberModalShowState } from '../store/ui'
 import { GradientButton, WhiteButton } from '../theme/extends'
+import Image from './Image'
 
 interface Props {
   member: MemberState
@@ -153,8 +154,8 @@ export default React.memo(function MemberCard({ member, idx = 1 }: Props): React
         <div className="member-icon">
           {
             member.gender === "man" ?
-              <img src={member.isLeader ? "/man-leader.svg" : "/man-member.svg"} alt="icon" /> :
-              <img src={member.isLeader ? "/woman-leader.svg" : "/woman-member.svg"} alt="icon"/>
+              <Image src={member.isLeader ? "man-leader.svg" : "man-member.svg"} alt="icon" /> :
+              <Image src={member.isLeader ? "woman-leader.svg" : "woman-member.svg"} alt="icon" />
           }
         </div>
         <div className="member-bio">
