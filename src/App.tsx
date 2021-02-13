@@ -7,15 +7,15 @@ import './styles/root.css';
 import './styles/animation.css';
 import { Route, Switch } from 'react-router-dom';
 import Navigation from './components/Navigation';
-import ErrorPage from './pages/404';
 import Home from './pages/Home';
-import About from './pages/About';
-import Competition from './pages/Competition';
-import Webinar from './pages/Webinar';
 import StaticLayout from './layout/StaticLayout';
-import RegisterWebinar from './pages/RegisterWebinar';
 
 const RegisterLazy = React.lazy(() => import('./pages/Register'))
+const WebinarLazy = React.lazy(() => import('./pages/Webinar'))
+const AboutLazy = React.lazy(() => import('./pages/About'))
+const CompetitionLazy = React.lazy(() => import('./pages/Competition'))
+const RegisterWebinarLazy = React.lazy(() => import('./pages/RegisterWebinar'))
+const ErrorLazy = React.lazy(() => import('./pages/404'))
 
 const useStyles = makeStyles(({palette, breakpoints}) => ({
   root: {
@@ -39,16 +39,16 @@ function App() {
     components: Home
   }, {
     path: '/about',
-    components: About
+    components: AboutLazy
   }, {
     path: '/competition',
-    components: Competition
+    components: CompetitionLazy
   }, {
     path: '/webinar',
-    components: Webinar
+    components: WebinarLazy
   }, {
     path: '/webinar/register',
-    components: RegisterWebinar
+    components: RegisterWebinarLazy
   }]
 
   return (
@@ -65,14 +65,18 @@ function App() {
             routes.map(route => (
               <Route path={route.path} exact key={route.path} component={() => (
                 <StaticLayout>
-                  <route.components />
+                  <React.Suspense fallback={null}>
+                    <route.components />
+                  </React.Suspense>
                 </StaticLayout>
               )} />
             ))
           }
           <Route component={() => (
             <StaticLayout>
-              <ErrorPage />
+              <React.Suspense fallback={null}>
+                <ErrorLazy />
+              </React.Suspense>
             </StaticLayout>
           )}/>
         </Switch>
