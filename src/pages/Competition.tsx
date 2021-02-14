@@ -63,7 +63,7 @@ export default function Competition(): ReactElement {
 
   const competitions = [{
     title: 'UI / UX',
-    description: 'Perkembangan sebuah aplikasi melibatkan berbagai macam hal termasuk UI / UX untuk mempengaruhi dan membantu pengguna dalam menggunakan aplikasi. BinaryFest 2021 mengadakan perlombaan bagi seluruh masyarakat Indonesia untuk menunjukan hasil-hasil terbaik',
+    description: 'UI/UX Competition adalah cabang kompetisi dalam event BinaryFest2021 untuk membuat antarmuka produk yang dapat memberikan kenyamanan & mewujudkan pengalaman terbaik bagi pengguna. UI / UX Competition bertujuan untuk menguji peserta dalam menganalisa dan berkreasi dengan design website',
     imageUrl: 'https://images.unsplash.com/photo-1611172062119-05251ea06de8?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80',
     guideBookUrl: 'https://drive.google.com/file/d/1gZxFLHaw47xs5ZcCaH4pnXL52EN7DIVE/view?usp=sharing'
   }, {
@@ -91,9 +91,9 @@ export default function Competition(): ReactElement {
               <img src={competition.imageUrl} alt={competition.title} className="competition-image"/>
               <div className="competition-content">
                 <Typography variant="h1">{competition.title}</Typography>
-                <Typography>{competition.description}</Typography>
+                <Typography style={{lineHeight: '1.75rem'}}>{competition.description}</Typography>
               </div>
-              <div>
+              <div style={{marginTop: 'auto'}}>
                 <a
                   href={competition.guideBookUrl}
                   style={{ textDecoration: 'none' }}
