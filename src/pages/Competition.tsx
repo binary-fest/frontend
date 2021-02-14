@@ -68,7 +68,7 @@ export default function Competition(): ReactElement {
     guideBookUrl: '/'
   }, {
     title: 'Internet of Things',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut facilisis eu lacus vel aliquam. Suspendisse potenti. Ut sed orci quis nisl lacinia ullamcorper.',
+    description: 'Internet of Things merupakan salah satu kompetisi yang diadakan oleh BinaryFest 2021 yang fokusnya pada pengembangan perangkat berbasis IoT. Harapannya, para peserta dapat menghasilkan inovasi-inovasi baru yang bermanfaat tentunya untuk permasalahan yang ada. ',
     imageUrl: 'https://images.unsplash.com/photo-1611172062119-05251ea06de8?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80',
     guideBookUrl: 'https://res.cloudinary.com/binaryfest/raw/upload/v1613276868/web/binaryfest-guidebook-iot.docx'
   }];
