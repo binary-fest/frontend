@@ -14,7 +14,6 @@ const RegisterLazy = React.lazy(() => import('./pages/Register'))
 const WebinarLazy = React.lazy(() => import('./pages/Webinar'))
 const AboutLazy = React.lazy(() => import('./pages/About'))
 const CompetitionLazy = React.lazy(() => import('./pages/Competition'))
-const RegisterWebinarLazy = React.lazy(() => import('./pages/RegisterWebinar'))
 const ErrorLazy = React.lazy(() => import('./pages/404'))
 
 const useStyles = makeStyles(({palette, breakpoints}) => ({
@@ -46,9 +45,6 @@ function App() {
   }, {
     path: '/webinar',
     components: WebinarLazy
-  }, {
-    path: '/webinar/register',
-    components: RegisterWebinarLazy
   }]
 
   return (
