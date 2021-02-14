@@ -63,14 +63,14 @@ export default function Competition(): ReactElement {
 
   const competitions = [{
     title: 'UI / UX',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut facilisis eu lacus vel aliquam. Suspendisse potenti. Ut sed orci quis nisl lacinia ullamcorper.',
+    description: 'UI/UX Competition adalah cabang kompetisi dalam event BinaryFest2021 untuk membuat antarmuka produk yang dapat memberikan kenyamanan & mewujudkan pengalaman terbaik bagi pengguna. UI / UX Competition bertujuan untuk menguji peserta dalam menganalisa dan berkreasi dengan design website',
     imageUrl: 'https://images.unsplash.com/photo-1611172062119-05251ea06de8?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80',
-    guideBookUrl: '/'
+    guideBookUrl: 'https://drive.google.com/file/d/1gZxFLHaw47xs5ZcCaH4pnXL52EN7DIVE/view?usp=sharing'
   }, {
     title: 'Internet of Things',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut facilisis eu lacus vel aliquam. Suspendisse potenti. Ut sed orci quis nisl lacinia ullamcorper.',
+    description: 'Internet of Things merupakan salah satu kompetisi yang diadakan oleh BinaryFest 2021 yang fokusnya pada pengembangan perangkat berbasis IoT. Harapannya, para peserta dapat menghasilkan inovasi-inovasi baru yang bermanfaat tentunya untuk permasalahan yang ada. ',
     imageUrl: 'https://images.unsplash.com/photo-1611172062119-05251ea06de8?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80',
-    guideBookUrl: 'https://res.cloudinary.com/binaryfest/raw/upload/v1613276868/web/binaryfest-guidebook-iot.docx'
+    guideBookUrl: 'https://drive.google.com/file/d/1sSSiAazpQ7-jrd86ovYN4RDFkYcIHkwn/view?usp=sharing'
   }];
 
   const classes = useStyles()
@@ -88,13 +88,17 @@ export default function Competition(): ReactElement {
               data-aos="fade-up"
               data-aos-delay={index * 500}
             >
-              <img src={competition.imageUrl} alt={competition.title} className="competition-image"/>
               <div className="competition-content">
                 <Typography variant="h1">{competition.title}</Typography>
-                <Typography>{competition.description}</Typography>
+                <Typography style={{lineHeight: '1.75rem'}}>{competition.description}</Typography>
               </div>
-              <div>
-                <a href={competition.guideBookUrl} style={{textDecoration: 'none'}}>
+              <div style={{marginTop: 'auto'}}>
+                <a
+                  href={competition.guideBookUrl}
+                  style={{ textDecoration: 'none' }}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   <GradientButton variant='contained' color="primary">
                     <img src="/download-icon.svg" alt="Download guide book" className="download-icon"/>
                     Download Guide Book</GradientButton>
@@ -105,7 +109,7 @@ export default function Competition(): ReactElement {
         })}
       </Grid>
       <div className={classes.reoffer} data-aos="zoom-in">
-        <Typography variant="h1" align="center">Do you ready ?</Typography>
+        <Typography variant="h1" align="center">Are you ready ?</Typography>
         <div>
           <LinkScroll to="/register" style={{textDecoration: 'none'}}>
             <GradientButton variant='contained' color="primary">Registrasi Kompetisi</GradientButton>

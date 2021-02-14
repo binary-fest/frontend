@@ -249,12 +249,12 @@ export default function Register(): ReactElement {
                 <WhiteTypography variant="h3" data-aos="fade-up">Petunjuk Pendaftaran</WhiteTypography>
                 <ul className={classes.listGuideLink} data-aos="fade-up">
                   <li>
-                    <a href="https://res.cloudinary.com/binaryfest/raw/upload/v1613276862/web/binaryfest-guidebook-register-iot.docx" className={classes.guideLink}>
+                    <a href="https://drive.google.com/file/d/1RcUwE2GD1VWkVGbHiAzIm9nHb9AphrV1/view?usp=sharing" className={classes.guideLink} target="_blank" rel="noreferrer">
                       <Typography>Internet of Things</Typography>
                     </a>
                   </li>
                   <li>
-                    <a href="/#" className={classes.guideLink}>
+                    <a href="https://drive.google.com/file/d/1gZxFLHaw47xs5ZcCaH4pnXL52EN7DIVE/view?usp=sharing" className={classes.guideLink} target="_blank" rel="noreferrer">
                       <Typography>UI / UX</Typography>
                     </a>
                   </li>

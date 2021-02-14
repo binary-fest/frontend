@@ -70,9 +70,10 @@ export default function FooterPage(): ReactElement {
                   </Link>
                 )) :
                 contact.list.map((item: any) => (
-                  <a key={item.name} href={item.href}>
+                  item.href === "" ? null :
+                  (<a key={item.name} href={item.href}>
                     <Typography>{item.name}</Typography>
-                  </a>
+                  </a>)
                 ))
               }
             </Grid>
@@ -80,7 +81,7 @@ export default function FooterPage(): ReactElement {
         })}
         <Grid item className="icon-wrapper" xs={12} md={3}>
           <img src="https://res.cloudinary.com/binaryfest/image/upload/v1613227023/web/binary-fest-text-bottom_mtat4t.svg" alt="Binary Fest" />
-          <Typography color="inherit" align="center">© BinaryFest 2020</Typography>
+          <Typography color="inherit" align="center">© BinaryFest 2021</Typography>
         </Grid>
       </Grid>
     </Container>

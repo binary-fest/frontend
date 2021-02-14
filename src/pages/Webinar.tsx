@@ -2,7 +2,6 @@ import { Grid } from '@material-ui/core'
 import axios from 'axios'
 import React, { ReactElement } from 'react'
 import FooterPage from '../components/FooterPage'
-import LinkScroll from '../components/LinkScroll'
 import ListLecturer from '../components/ListLecturer'
 import useTitlePage from '../hooks/useTitlePage'
 import { GradientButton, GradientTypography, StaticPageContentStyled, WhiteTypography } from '../theme/extends'
@@ -45,21 +44,26 @@ export default function Webinar(): ReactElement {
           variant="h3"
           data-aos="fade-in"
           data-aos-delay="500"
-        >Peran IoT dan Cyber Security di Era Revolusi 4.0</WhiteTypography>
+        >Peranan IoT dan Cyber Security di Era Revolusi 4.0</WhiteTypography>
         <ListLecturer />
         <WhiteTypography
           style={{ fontSize: '36px', fontWeight: 'bold', marginBottom: '41px' }}
           align="center"
           variant="h3"
           data-aos="zoom-in"
-        >Pengen tau seberapa serunya ?</WhiteTypography>
+        >Ingin tau seberapa serunya ?</WhiteTypography>
         <StyledWebinarButtonGroup container>
           <Grid item data-aos="zoom-in" data-aos-delay="250">
-            <LinkScroll to="/webinar/register" style={{textDecoration: 'none'}}>
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSdAYPP09X7zS_UmgI4oJGEFwfOrlQfl-Hcq4PZN4pnmq5NeLg/viewform"
+              style={{ textDecoration: 'none' }}
+              target="_blank"
+              rel="noreferrer"
+            >
               <GradientButton>
                 <WhiteTypography>Daftar Webinar</WhiteTypography>
               </GradientButton>
-            </LinkScroll>
+            </a>
           </Grid>
           <Grid item data-aos="zoom-in" data-aos-delay="500">
             <GradientButton onClick={downloadPosterHandler}>
