@@ -65,12 +65,12 @@ export default function Competition(): ReactElement {
     title: 'UI / UX',
     description: 'Perkembangan sebuah aplikasi melibatkan berbagai macam hal termasuk UI / UX untuk mempengaruhi dan membantu pengguna dalam menggunakan aplikasi. BinaryFest 2021 mengadakan perlombaan bagi seluruh masyarakat Indonesia untuk menunjukan hasil-hasil terbaik',
     imageUrl: 'https://images.unsplash.com/photo-1611172062119-05251ea06de8?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80',
-    guideBookUrl: '/'
+    guideBookUrl: 'https://drive.google.com/file/d/1gZxFLHaw47xs5ZcCaH4pnXL52EN7DIVE/view?usp=sharing'
   }, {
     title: 'Internet of Things',
     description: 'Internet of Things merupakan salah satu kompetisi yang diadakan oleh BinaryFest 2021 yang fokusnya pada pengembangan perangkat berbasis IoT. Harapannya, para peserta dapat menghasilkan inovasi-inovasi baru yang bermanfaat tentunya untuk permasalahan yang ada. ',
     imageUrl: 'https://images.unsplash.com/photo-1611172062119-05251ea06de8?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80',
-    guideBookUrl: 'https://res.cloudinary.com/binaryfest/raw/upload/v1613276868/web/binaryfest-guidebook-iot.docx'
+    guideBookUrl: 'https://drive.google.com/file/d/1sSSiAazpQ7-jrd86ovYN4RDFkYcIHkwn/view?usp=sharing'
   }];
 
   const classes = useStyles()
@@ -94,7 +94,12 @@ export default function Competition(): ReactElement {
                 <Typography>{competition.description}</Typography>
               </div>
               <div>
-                <a href={competition.guideBookUrl} style={{textDecoration: 'none'}}>
+                <a
+                  href={competition.guideBookUrl}
+                  style={{ textDecoration: 'none' }}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   <GradientButton variant='contained' color="primary">
                     <img src="/download-icon.svg" alt="Download guide book" className="download-icon"/>
                     Download Guide Book</GradientButton>
