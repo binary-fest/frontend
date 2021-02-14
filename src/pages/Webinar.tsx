@@ -45,14 +45,14 @@ export default function Webinar(): ReactElement {
           variant="h3"
           data-aos="fade-in"
           data-aos-delay="500"
-        >Peran IoT dan Cyber Security di Era Revolusi 4.0</WhiteTypography>
+        >Peranan IoT dan Cyber Security di Era Revolusi 4.0</WhiteTypography>
         <ListLecturer />
         <WhiteTypography
           style={{ fontSize: '36px', fontWeight: 'bold', marginBottom: '41px' }}
           align="center"
           variant="h3"
           data-aos="zoom-in"
-        >Pengen tau seberapa serunya ?</WhiteTypography>
+        >Ingin tau seberapa serunya ?</WhiteTypography>
         <StyledWebinarButtonGroup container>
           <Grid item data-aos="zoom-in" data-aos-delay="250">
             <LinkScroll to="/webinar/register" style={{textDecoration: 'none'}}>
