@@ -110,7 +110,7 @@ export default function Competition(): ReactElement {
         })}
       </Grid>
       <div className={classes.reoffer} data-aos="zoom-in">
-        <Typography variant="h1" align="center">Do you ready ?</Typography>
+        <Typography variant="h1" align="center">Are you ready ?</Typography>
         <div>
           <LinkScroll to="/register" style={{textDecoration: 'none'}}>
             <GradientButton variant='contained' color="primary">Registrasi Kompetisi</GradientButton>
