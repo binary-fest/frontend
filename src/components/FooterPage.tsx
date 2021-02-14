@@ -70,9 +70,10 @@ export default function FooterPage(): ReactElement {
                   </Link>
                 )) :
                 contact.list.map((item: any) => (
-                  <a key={item.name} href={item.href}>
+                  item.href === "" ? null :
+                  (<a key={item.name} href={item.href}>
                     <Typography>{item.name}</Typography>
-                  </a>
+                  </a>)
                 ))
               }
             </Grid>

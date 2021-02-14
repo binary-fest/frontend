@@ -73,11 +73,11 @@ const footerLinks = selector<FooterLinkGroup[]>({
       list: [{
         id: 1,
         name: 'UI / UX',
-        href: ''
+        href: '/competition'
       }, {
         id: 2,
         name: 'Internet of Things',
-        href: ''
+        href: '/competition'
       }]
     }, {
       group: 'Menu',
