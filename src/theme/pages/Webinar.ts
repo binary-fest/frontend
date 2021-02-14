@@ -1,11 +1,5 @@
-import { Container, Grid, withStyles } from '@material-ui/core'
+import { Grid, withStyles } from '@material-ui/core'
 import theme from '..'
-
-const StyledWebinarContainer = withStyles({
-  root: {
-    paddingTop: '289px'
-  }
-})(Container)
 
 const StyledWebinarButtonGroup = withStyles({
   container: {
@@ -29,6 +23,5 @@ const StyledWebinarButtonGroup = withStyles({
 })(Grid)
 
 export {
-  StyledWebinarContainer,
   StyledWebinarButtonGroup
 }
