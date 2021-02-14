@@ -27,7 +27,7 @@ interface TeamInputProps {
   testId?: string
 }
 
-const useStyles = makeStyles(({breakpoints}) => ({
+const useStyles = makeStyles(({ breakpoints }) => ({
   root: {
     paddingTop: '139px',
     '& .error-list-member': {
@@ -70,6 +70,28 @@ const useStyles = makeStyles(({breakpoints}) => ({
     maxWidth: '440px',
     '& .label': {
       marginBottom: '1rem'
+    }
+  },
+  guideLink: {
+    color: 'white'
+  },
+  listGuideLink: {
+    marginTop: '29px',
+    '& li': {
+      marginTop: '0.5rem',
+      paddingLeft: '1rem',
+      position: 'relative',
+      '&:before': {
+        content: "'• '",
+        color: "white",
+        fontWeight: "bold",
+        width: "1em",
+        marginRight: '1rem',
+        position: 'absolute',
+        left: '0',
+        top: '50%',
+        transform: 'translateY(-50%)'
+      }
     }
   }
 }))
@@ -223,6 +245,21 @@ export default function Register(): ReactElement {
         >
           <Grid container spacing={4}>
             <Grid item xs={12} md={6} lg={5}>
+              <div style={{marginBottom: '29px'}}>
+                <WhiteTypography variant="h3" data-aos="fade-up">Petunjuk Pendaftaran</WhiteTypography>
+                <ul className={classes.listGuideLink} data-aos="fade-up">
+                  <li>
+                    <a href="https://res.cloudinary.com/binaryfest/raw/upload/v1613276862/web/binaryfest-guidebook-register-iot.docx" className={classes.guideLink}>
+                      <Typography>Internet of Things</Typography>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/#" className={classes.guideLink}>
+                      <Typography>UI / UX</Typography>
+                    </a>
+                  </li>
+                </ul>
+              </div>
               <WhiteTypography variant="h3" data-aos="fade-up">Pendaftaran Team</WhiteTypography>
               <div className={classes.teamForm}>
                 <TeamMemberInput

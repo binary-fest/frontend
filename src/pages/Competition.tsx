@@ -70,7 +70,7 @@ export default function Competition(): ReactElement {
     title: 'Internet of Things',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut facilisis eu lacus vel aliquam. Suspendisse potenti. Ut sed orci quis nisl lacinia ullamcorper.',
     imageUrl: 'https://images.unsplash.com/photo-1611172062119-05251ea06de8?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80',
-    guideBookUrl: '/'
+    guideBookUrl: 'https://res.cloudinary.com/binaryfest/raw/upload/v1613276868/web/binaryfest-guidebook-iot.docx'
   }];
 
   const classes = useStyles()
@@ -94,9 +94,11 @@ export default function Competition(): ReactElement {
                 <Typography>{competition.description}</Typography>
               </div>
               <div>
-                <GradientButton variant='contained' color="primary">
-                  <img src="/download-icon.svg" alt="Download guide book" className="download-icon"/>
-                  Download Guide Book</GradientButton>
+                <a href={competition.guideBookUrl} style={{textDecoration: 'none'}}>
+                  <GradientButton variant='contained' color="primary">
+                    <img src="/download-icon.svg" alt="Download guide book" className="download-icon"/>
+                    Download Guide Book</GradientButton>
+                </a>
               </div>
             </Grid>
           )
