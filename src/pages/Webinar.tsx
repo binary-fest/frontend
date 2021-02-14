@@ -52,7 +52,7 @@ export default function Webinar(): ReactElement {
         data-aos="zoom-in"
       >Ingin tau seberapa serunya ?</WhiteTypography>
       <WhiteTypography align="center" style={{ marginBottom: '41px' }}>
-        <i>Pendaftaran dibuka pada tanggal 17 February 2021, <b>Stay tune !!</b></i>
+        <i>Pendaftaran dibuka pada tanggal 17 Februari 2021, <b>Stay tune !!</b></i>
       </WhiteTypography>
       <StyledWebinarButtonGroup container>
         <Grid item data-aos="zoom-in" data-aos-delay="500">
