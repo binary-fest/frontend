@@ -46,24 +46,15 @@ export default function Webinar(): ReactElement {
       >Peranan IoT dan Cyber Security di Era Revolusi 4.0</WhiteTypography>
       <ListLecturer />
       <WhiteTypography
-        style={{ fontSize: '36px', fontWeight: 'bold', marginBottom: '41px' }}
+        style={{ fontSize: '36px', fontWeight: 'bold', marginBottom: '1rem' }}
         align="center"
         variant="h3"
         data-aos="zoom-in"
       >Ingin tau seberapa serunya ?</WhiteTypography>
+      <WhiteTypography align="center" style={{ marginBottom: '41px' }}>
+        <i>Pendaftaran dibuka pada tanggal 17 Februari 2021, <b>Stay tune !!</b></i>
+      </WhiteTypography>
       <StyledWebinarButtonGroup container>
-        <Grid item data-aos="zoom-in" data-aos-delay="250">
-          <a
-            href="https://docs.google.com/forms/d/e/1FAIpQLSdAYPP09X7zS_UmgI4oJGEFwfOrlQfl-Hcq4PZN4pnmq5NeLg/viewform"
-            style={{ textDecoration: 'none' }}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <GradientButton>
-              <WhiteTypography>Daftar Webinar</WhiteTypography>
-            </GradientButton>
-          </a>
-        </Grid>
         <Grid item data-aos="zoom-in" data-aos-delay="500">
           <GradientButton onClick={downloadPosterHandler}>
             <WhiteTypography>Download Poster</WhiteTypography>
