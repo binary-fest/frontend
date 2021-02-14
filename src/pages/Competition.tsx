@@ -63,7 +63,7 @@ export default function Competition(): ReactElement {
 
   const competitions = [{
     title: 'UI / UX',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut facilisis eu lacus vel aliquam. Suspendisse potenti. Ut sed orci quis nisl lacinia ullamcorper.',
+    description: 'Perkembangan sebuah aplikasi melibatkan berbagai macam hal termasuk UI / UX untuk mempengaruhi dan membantu pengguna dalam menggunakan aplikasi. BinaryFest 2021 mengadakan perlombaan bagi seluruh masyarakat Indonesia untuk menunjukan hasil-hasil terbaik',
     imageUrl: 'https://images.unsplash.com/photo-1611172062119-05251ea06de8?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80',
     guideBookUrl: '/'
   }, {
