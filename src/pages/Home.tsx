@@ -1,10 +1,8 @@
-import { Grid, makeStyles, Typography } from '@material-ui/core'
+import { makeStyles, Typography } from '@material-ui/core'
 import React, { ReactElement } from 'react'
-import { useRecoilValue } from 'recoil'
 import useTitlePage from '../hooks/useTitlePage'
-import { navigationLinks } from '../store/links'
-import { Element, scroller } from 'react-scroll'
-import LinkScroll from '../components/LinkScroll'
+import { scroller } from 'react-scroll'
+import { Highlight } from './Home/Home.styled'
 
 const useStyles = makeStyles(({breakpoints, spacing}) => ({
   hero: {
@@ -20,9 +18,8 @@ const useStyles = makeStyles(({breakpoints, spacing}) => ({
         textAlign: 'center'
       },
       '& .binary-fest-logo': {
-        [breakpoints.up('md')]: {
-          width: '225px'
-        },
+        maxWidth: '539px',
+        width: '100%'
       },
       '& .heading': {
         fontWeight: 'bold',
@@ -42,6 +39,9 @@ const useStyles = makeStyles(({breakpoints, spacing}) => ({
         color: '#FFFFFF',
         fontSize: '18px',
         lineHeight: '36px',
+        position: 'relative',
+        zIndex: 2,
+        marginTop: '19.3px',
         [breakpoints.up('sm')]: {
           width: '388px'
         }
@@ -215,7 +215,6 @@ const useStyles = makeStyles(({breakpoints, spacing}) => ({
 
 export default function Home(): ReactElement {
   useTitlePage("BinaryFest 2021")
-  const links = useRecoilValue(navigationLinks)
 
   const scrollToFooter = () => {
     scroller.scrollTo('scroll-to-element', {
@@ -231,17 +230,12 @@ export default function Home(): ReactElement {
     <>
       <div className={classes.hero}>
         <div className="hero-content">
-          <img data-aos="fade-up" src="https://res.cloudinary.com/binaryfest/image/upload/v1613227023/web/binary-fest-text-bottom_mtat4t.svg" className="binary-fest-logo" alt="binary-fest"/>
-          <Typography
-            className="coming-soon"
-            data-aos="fade-up"
-            data-aos-delay="500"
-          >COMING SOON</Typography>
+          <img data-aos="fade-up" src="/binary-fest-logo-text.svg" className="binary-fest-logo" alt="binary-fest"/>
           <Typography
             className="tagline"
             data-aos="fade-up"
-            data-aos-delay="1000"
           >"Future Technology to Reinforce 9th Sustainable Development"</Typography>
+          <Highlight src="/highlight.svg"/>
           <div onClick={scrollToFooter}>
             <div className={classes.arrows}>
               <span></span>
@@ -250,46 +244,6 @@ export default function Home(): ReactElement {
             </div>
           </div>
         </div>
-      </div>
-      <Element
-        className={classes.footer}
-        name="scroll-to-element"
-        id="start"
-      >
-        <Grid container direction="column">
-          <Grid item>
-            <Typography
-              variant="h3"
-              align="center"
-            >Want to Be The First BinaryFest Participant ?</Typography>
-          </Grid>
-          <Grid item>
-            <Grid container direction="column" alignItems="center" className="footer-links">
-              {links.map((link) => {
-                return (
-                  <Grid item key={link.id}>
-                    <LinkScroll to={link.href} className="footer-link">
-                      <Typography>{link.name}</Typography>
-                    </LinkScroll>
-                  </Grid>
-                )
-              })}
-              <div className="footer-separator" />
-              <Grid item className="footer-credit">
-                <Typography className="footer-link">© BinaryFest 2021</Typography>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Element>
-      <div className={classes.loadingText}>
-        <span>
-          <Typography
-            variant="caption"
-            data-text="Loading..." 
-            className={classes.animateLoadingText}
-          >Loading...</Typography>
-        </span>
       </div>
     </>
   )

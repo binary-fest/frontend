@@ -1,6 +1,5 @@
 import { Container, makeStyles } from '@material-ui/core'
 import React, { ReactElement } from 'react'
-import { useHistory } from 'react-router-dom'
 import FixedSocialMedia from '../components/FixedSocialMedia'
 import Navigation from '../components/Navigation'
 
@@ -28,12 +27,11 @@ const useStyles = makeStyles(({ palette, breakpoints }) => ({
 }))
 
 export default function StaticLayout({children}: StaticLayoutProps): ReactElement {
-  const router = useHistory()
   const classes = useStyles()
 
   return (
     <>
-      <Navigation withLinks={router.location.pathname !== '/'}/>
+      <Navigation withLinks={true}/>
       <div className={classes.decorationContainer}>
         <img className={classes.decoration1} src="/decoration-1.svg" alt="decoration" />
       </div>
