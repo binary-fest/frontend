@@ -1,5 +1,6 @@
 import Styled from 'styled-components'
 import theme from '../../theme'
+import { GradientTypography } from '../../theme/extends'
 
 const Highlight = Styled.img`
   position: absolute;
@@ -46,7 +47,22 @@ const Arrows = Styled.div`
   }
 `
 
+const StyledSponsorshipContainer = Styled.div`
+  margin-top: 73px;
+`
+
+const StyledSponsorshipTitle = Styled(GradientTypography)`
+  margin-bottom: 43px;
+`
+
+const StyledMediaPartnerContainer = StyledSponsorshipContainer;
+const StyledMediaPartnerTitle = StyledSponsorshipTitle;
+
 export {
   Highlight,
-  Arrows
+  Arrows,
+  StyledSponsorshipContainer,
+  StyledSponsorshipTitle,
+  StyledMediaPartnerContainer,
+  StyledMediaPartnerTitle
 }

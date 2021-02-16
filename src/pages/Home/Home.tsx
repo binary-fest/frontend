@@ -4,6 +4,8 @@ import { scroller } from 'react-scroll'
 import FooterPage from '../../components/FooterPage'
 import useTitlePage from '../../hooks/useTitlePage'
 import { Highlight, Arrows } from './Home.styled'
+import MediaPartner from './MediaPartner'
+import Sponsorship from './Sponsorship'
 import Webinar from './Webinar'
 
 const useStyles = makeStyles(({breakpoints, spacing}) => ({
@@ -69,6 +71,8 @@ export default function Home(): ReactElement {
         </div>
       </div>
       <Webinar />
+      <Sponsorship />
+      <MediaPartner />
       <FooterPage />
     </>
   )
