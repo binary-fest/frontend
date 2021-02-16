@@ -58,11 +58,40 @@ const StyledSponsorshipTitle = Styled(GradientTypography)`
 const StyledMediaPartnerContainer = StyledSponsorshipContainer;
 const StyledMediaPartnerTitle = StyledSponsorshipTitle;
 
+const StyledListCompanyContainer = Styled.div`
+  display: flex; 
+  justify-content: center; 
+  max-width: 734px; 
+  flex-wrap: wrap; 
+  margin: auto;
+`
+
+const StyledCompanyItem = Styled.div`
+  padding: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ff512f;
+  margin: 0 14px 28px 14px;
+`
+
+const StyledCompanyImage = Styled.img`
+  max-width: 300px;
+  height: 50px; 
+  filter: grayscale(1);
+  transition: filter 500ms;
+  &:hover {
+    filter: grayscale(0);
+    transition: filter 500ms;
+  }
+`
+
 export {
   Highlight,
   Arrows,
   StyledSponsorshipContainer,
   StyledSponsorshipTitle,
   StyledMediaPartnerContainer,
-  StyledMediaPartnerTitle
+  StyledMediaPartnerTitle,
+  StyledListCompanyContainer,
+  StyledCompanyItem,
+  StyledCompanyImage
 }
