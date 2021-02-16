@@ -1,8 +1,14 @@
-import { makeStyles, Typography } from '@material-ui/core'
+import { Grid, makeStyles, Typography } from '@material-ui/core'
 import React, { ReactElement } from 'react'
 import useTitlePage from '../hooks/useTitlePage'
 import { scroller } from 'react-scroll'
-import { Highlight } from './Home/Home.styled'
+import { Arrows, Highlight } from './Home/Home.styled'
+import ListLecturer from '../components/ListLecturer'
+import { GradientTypography, WhiteTypography, GradientButton } from '../theme/extends'
+import { StyledWebinarButtonGroup } from '../theme/pages/Webinar'
+import base64 from '../utils/base64'
+import axios from 'axios'
+import FooterPage from '../components/FooterPage'
 
 const useStyles = makeStyles(({breakpoints, spacing}) => ({
   hero: {
@@ -224,6 +230,24 @@ export default function Home(): ReactElement {
     })
   }
 
+  const downloadPosterHandler = () => {
+    axios
+      .get(
+        'https://res.cloudinary.com/binaryfest/image/upload/web/webinar-poster.jpg',
+        { responseType: 'blob' }
+      )
+      .then(res => {
+        base64(res.data, (base64Result) => {
+          const a = document.createElement('a') as HTMLAnchorElement;
+          a.href = base64Result;
+          a.download = "webinar-poster.jpg";
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        })
+      })
+  }
+
   const classes = useStyles()
 
   return (
@@ -236,15 +260,44 @@ export default function Home(): ReactElement {
             data-aos="fade-up"
           >"Future Technology to Reinforce 9th Sustainable Development"</Typography>
           <Highlight src="/highlight.svg"/>
-          <div onClick={scrollToFooter}>
-            <div className={classes.arrows}>
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          </div>
+          <Arrows onClick={scrollToFooter}>
+            <span></span>
+            <span></span>
+            <span></span>
+          </Arrows>
         </div>
       </div>
+      <GradientTypography
+        variant="h3" 
+        style={{ fontSize: '36px', marginTop: '206px', marginBottom: '24px' }} 
+        align="center"
+        data-aos="fade-in"
+      >Webinar Nasional</GradientTypography>
+      <WhiteTypography
+        style={{ marginBottom: '78px', fontWeight: 400 }}
+        align="center"
+        variant="h3"
+        data-aos="fade-in"
+        data-aos-delay="500"
+      >"Peranan IoT dan Cyber Security di Era Revolusi 4.0"</WhiteTypography>
+      <ListLecturer />
+      <WhiteTypography
+        style={{ fontSize: '36px', fontWeight: 'bold', marginBottom: '1rem' }}
+        align="center"
+        variant="h3"
+        data-aos="zoom-in"
+      >Ingin tau seberapa serunya ?</WhiteTypography>
+      <WhiteTypography align="center" style={{ marginBottom: '41px' }}>
+        <i>Pendaftaran dibuka pada tanggal 17 Februari 2021, <b>Stay tune !!</b></i>
+      </WhiteTypography>
+      <StyledWebinarButtonGroup container>
+        <Grid item data-aos="zoom-in" data-aos-delay="500">
+          <GradientButton onClick={downloadPosterHandler}>
+            <WhiteTypography>Download Poster</WhiteTypography>
+          </GradientButton>
+        </Grid>
+      </StyledWebinarButtonGroup>
+      <FooterPage />
     </>
   )
 }
