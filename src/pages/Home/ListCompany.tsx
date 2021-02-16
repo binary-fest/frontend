@@ -40,7 +40,7 @@ const initialListCompany: Company[] = [{
 
 export default function ListCompany(props: ListCompanyProps): ReactElement {
   return (
-    <StyledListCompanyContainer>
+    <StyledListCompanyContainer data-aos="fade-up" data-aos-delay="250">
         {initialListCompany.map((company) => {
           return (
             <StyledCompanyItem key={company.id}>
