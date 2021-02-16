@@ -1,6 +1,6 @@
 import { makeStyles, Typography } from '@material-ui/core'
 import React, { ReactElement } from 'react'
-import { scroller } from 'react-scroll'
+import { Element, scroller } from 'react-scroll'
 import FooterPage from '../../components/FooterPage'
 import useTitlePage from '../../hooks/useTitlePage'
 import { Highlight, Arrows } from './Home.styled'
@@ -70,7 +70,9 @@ export default function Home(): ReactElement {
           </Arrows>
         </div>
       </div>
-      <Webinar />
+      <Element name="scroll-to-element">
+        <Webinar />
+      </Element>
       <Sponsorship />
       <MediaPartner />
       <FooterPage />
