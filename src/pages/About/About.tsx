@@ -1,5 +1,6 @@
 import { Grid, makeStyles, Typography } from '@material-ui/core'
 import React, { ReactElement } from 'react'
+import CloudinaryImg from '../../components/CloudinaryImg'
 import FooterPage from '../../components/FooterPage'
 import useTitlePage from '../../hooks/useTitlePage'
 import { GradientTypography, StaticPageContentStyled } from '../../theme/extends'
@@ -121,8 +122,8 @@ export default function About(): ReactElement {
           <GradientTypography variant="h1">About</GradientTypography>
         </Grid>
         <StyledAboutHeroImageContainer item data-aos="fade-up">
-          <img src="/binary-fest-logo-diagonal.svg" alt="binaryfest" className="binaryfest-logo"/>
-          <img src="/highlight.svg" alt="Highlight" className="highlight"/>
+          <CloudinaryImg src="/binary-fest-logo-diagonal.svg" alt="binaryfest" className="binaryfest-logo"/>
+          <CloudinaryImg src="/highlight.svg" alt="Highlight" className="highlight"/>
         </StyledAboutHeroImageContainer>
         <Grid item className="content" data-aos="fade-up" data-aos-delay="250">
           <Typography>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Risus vitae id odio at mi mauris. Dolor purus lacus risus rhoncus. Interdum lobortis massa nisi, turpis dictum fusce ultrices. Turpis bibendum cursus ut a mauris, mi sit quam.  Dolor purus lacus risus rhoncus. Interdum lobortis massa nisi, turpis dictum fusce ultrices. Turpis bibendum cursus ut a mauris, mi sit quam.</Typography>
@@ -130,13 +131,13 @@ export default function About(): ReactElement {
       </Grid>
       <Grid container className={classes.quote} direction="column" alignItems="center" data-aos="zoom-in">
         <Grid item>
-          <img src="/quote-icon.svg" alt="quote"/>
+          <CloudinaryImg src="quote-icon.svg" alt="quote"/>
         </Grid>
         <Grid item>
           <Typography>Lorem ipsum dolor sit amet</Typography>
         </Grid>
         <Grid item>
-          <img src="/quote-icon.svg" alt="quote"/>
+          <CloudinaryImg src="quote-icon.svg" alt="quote"/>
         </Grid>
       </Grid>
       <Grid container className={classes.visi} direction="column">
