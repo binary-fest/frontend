@@ -1,7 +1,8 @@
 import Styled from 'styled-components'
+import CloudinaryImg from '../../components/CloudinaryImg'
 import { GradientTypography } from '../../theme/extends'
 
-const Highlight = Styled.img`
+const Highlight = Styled(CloudinaryImg)`
   position: absolute;
   max-width: 446.5px;
   width: 100%;

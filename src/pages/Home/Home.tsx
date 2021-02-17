@@ -1,6 +1,7 @@
 import { makeStyles, Typography } from '@material-ui/core'
 import React, { ReactElement } from 'react'
 import { Element, scroller } from 'react-scroll'
+import CloudinaryImg from '../../components/CloudinaryImg'
 import FooterPage from '../../components/FooterPage'
 import useTitlePage from '../../hooks/useTitlePage'
 import { Highlight, Arrows } from './Home.styled'
@@ -57,12 +58,12 @@ export default function Home(): ReactElement {
     <>
       <div className={classes.hero}>
         <div className="hero-content">
-          <img data-aos="fade-up" src="/binary-fest-logo-text.svg" className="binary-fest-logo" alt="binary-fest"/>
+          <CloudinaryImg data-aos="fade-up" src="binary-fest-logo-text.svg" className="binary-fest-logo" alt="binary-fest"/>
           <Typography
             className="tagline"
             data-aos="fade-up"
           >"Future Technology to Reinforce 9th Sustainable Development"</Typography>
-          <Highlight src="/highlight.svg"/>
+          <Highlight src="highlight.svg" alt="highlight"/>
           <Arrows onClick={scrollToFooter}>
             <span></span>
             <span></span>
