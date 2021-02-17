@@ -24,7 +24,7 @@ const navigationLinks = atom<LinkState[]>({
   }, {
     id: 3,
     name: 'Tech Expo',
-    href: '/'
+    href: 'https://expo.binaryfest.or.id/'
   },{
     id: 4,
     name: 'About',
