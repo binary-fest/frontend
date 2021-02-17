@@ -4,6 +4,7 @@ import { Link, useHistory } from 'react-router-dom'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { navigationLinks } from '../store/links'
 import { isNavigationResponsiveShowAtom } from '../store/ui'
+import { isExternalUrl } from '../utils/validate'
 import CloudinaryImg from './CloudinaryImg'
 
 export interface NavigationDesktopProps {
@@ -114,13 +115,22 @@ export default function NavigationDesktop(props: NavigationDesktopProps): ReactE
             <div className={classes.listLink}>
               {listNavigationLink.map(link => {
                 return (
-                  <Link
-                    key={link.id}
-                    to={link.href}
-                    className={router.location.pathname === link.href ? classes.linkActive : ''}
-                  >
-                    <Typography>{link.name}</Typography>
-                  </Link>
+                  isExternalUrl(link.href) ? 
+                    <a
+                      key={link.id}
+                      href={link.href}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <Typography>{link.name}</Typography>
+                    </a> :
+                    <Link
+                      key={link.id}
+                      to={link.href}
+                      className={router.location.pathname === link.href ? classes.linkActive : ''}
+                    >
+                      <Typography>{link.name}</Typography>
+                    </Link>
                 )
               })}
             </div>
