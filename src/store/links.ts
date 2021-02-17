@@ -15,8 +15,8 @@ const navigationLinks = atom<LinkState[]>({
   key: 'navigationLinks',
   default: [{
     id: 1,
-    name: 'Webinar',
-    href: '/webinar'
+    name: 'Home',
+    href: '/'
   }, {
     id: 2,
     name: 'Kompetisi',

@@ -11,7 +11,6 @@ import Home from './pages/Home';
 import StaticLayout from './layout/StaticLayout';
 
 const RegisterLazy = React.lazy(() => import('./pages/Register'))
-const WebinarLazy = React.lazy(() => import('./pages/Webinar'))
 const AboutLazy = React.lazy(() => import('./pages/About'))
 const CompetitionLazy = React.lazy(() => import('./pages/Competition'))
 const ErrorLazy = React.lazy(() => import('./pages/404'))
@@ -42,9 +41,6 @@ function App() {
   }, {
     path: '/competition',
     components: CompetitionLazy
-  }, {
-    path: '/webinar',
-    components: WebinarLazy
   }]
 
   return (
