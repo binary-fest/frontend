@@ -29,6 +29,13 @@ const StyledLecturerCardProfilePict = styled.div`
     height: 100%;
     width: 100%;
     object-fit: cover;
+    filter: grayscale(1);
+    transition: filter 500ms;
+    
+    &:hover {
+      filter: grayscale(0);
+      transition: filter 500ms;
+    }
   }
 `
 
