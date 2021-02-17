@@ -3,6 +3,7 @@ import React, { ReactElement } from 'react'
 import FooterPage from '../../components/FooterPage'
 import useTitlePage from '../../hooks/useTitlePage'
 import { GradientTypography, StaticPageContentStyled } from '../../theme/extends'
+import { StyledAboutHeroImageContainer } from './About.styled'
 
 const useStyles = makeStyles(({ spacing, breakpoints }) => ({
   aboutContainer: {
@@ -27,20 +28,6 @@ const useStyles = makeStyles(({ spacing, breakpoints }) => ({
     '& .content': {
       maxWidth: '419.71px'
     },
-    '& .image': {
-      height: '179px',
-      backgroundColor: '#C4C4C4',
-      width: '100%',
-      borderRadius: '0 20px 0 20px',
-      marginBottom: '38px',
-      maxWidth: '350px',
-      [breakpoints.up('md')]: {
-        position: 'absolute',
-        maxWidth: '332px',
-        height: '242px',
-        right: '0'
-      }
-    }
   },
   quote: {
     color: 'white',
@@ -133,9 +120,10 @@ export default function About(): ReactElement {
         <Grid item>
           <GradientTypography variant="h1">About</GradientTypography>
         </Grid>
-        <Grid item className="image">
-          <div></div>
-        </Grid>
+        <StyledAboutHeroImageContainer item>
+          <img src="/binary-fest-logo-diagonal.svg" alt="binaryfest" className="binaryfest-logo"/>
+          <img src="/highlight.svg" alt="Highlight" className="highlight"/>
+        </StyledAboutHeroImageContainer>
         <Grid item className="content">
           <Typography>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Risus vitae id odio at mi mauris. Dolor purus lacus risus rhoncus. Interdum lobortis massa nisi, turpis dictum fusce ultrices. Turpis bibendum cursus ut a mauris, mi sit quam.  Dolor purus lacus risus rhoncus. Interdum lobortis massa nisi, turpis dictum fusce ultrices. Turpis bibendum cursus ut a mauris, mi sit quam.</Typography>
         </Grid>
