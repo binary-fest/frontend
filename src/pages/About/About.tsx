@@ -117,18 +117,18 @@ export default function About(): ReactElement {
   return (
     <StaticPageContentStyled>
       <Grid container className={classes.aboutContainer}>
-        <Grid item>
+        <Grid item data-aos="fade-up">
           <GradientTypography variant="h1">About</GradientTypography>
         </Grid>
-        <StyledAboutHeroImageContainer item>
+        <StyledAboutHeroImageContainer item data-aos="fade-up">
           <img src="/binary-fest-logo-diagonal.svg" alt="binaryfest" className="binaryfest-logo"/>
           <img src="/highlight.svg" alt="Highlight" className="highlight"/>
         </StyledAboutHeroImageContainer>
-        <Grid item className="content">
+        <Grid item className="content" data-aos="fade-up" data-aos-delay="250">
           <Typography>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Risus vitae id odio at mi mauris. Dolor purus lacus risus rhoncus. Interdum lobortis massa nisi, turpis dictum fusce ultrices. Turpis bibendum cursus ut a mauris, mi sit quam.  Dolor purus lacus risus rhoncus. Interdum lobortis massa nisi, turpis dictum fusce ultrices. Turpis bibendum cursus ut a mauris, mi sit quam.</Typography>
         </Grid>
       </Grid>
-      <Grid container className={classes.quote} direction="column" alignItems="center">
+      <Grid container className={classes.quote} direction="column" alignItems="center" data-aos="zoom-in">
         <Grid item>
           <img src="/quote-icon.svg" alt="quote"/>
         </Grid>
@@ -140,20 +140,27 @@ export default function About(): ReactElement {
         </Grid>
       </Grid>
       <Grid container className={classes.visi} direction="column">
-        <Grid item>
+        <Grid item data-aos="fade-up">
           <Typography variant="h1" className={classes.titleTrapezoid}>Visi</Typography>
         </Grid>
-        <Grid item>
+        <Grid item data-aos="fade-up" data-aos-delay="250">
           <Typography align="center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Risus vitae id odio at mi mauris. Dolor purus lacus risus rhoncus. Interdum lobortis massa nisi, turpis dictum fusce ultrices. Turpis bibendum cursus ut a mauris, mi sit quam.  Dolor purus lacus risus rhoncus. Interdum lobortis massa nisi, turpis dictum fusce ultrices. Turpis bibendum cursus ut a mauris, mi sit quam.</Typography>
         </Grid>
       </Grid>
       <Grid container className={classes.mission} direction="column">
-        <Grid item>
+        <Grid item data-aos="fade-up">
           <Typography variant="h1" className={classes.titleTrapezoid}>Misi</Typography>
         </Grid>
         <Grid container justify="space-between">
-          {missions.map(mission => (
-            <Grid item xs={12} key={mission.no} className="mission-item">
+          {missions.map((mission, index) => (
+            <Grid
+              item
+              xs={12}
+              key={mission.no}
+              className="mission-item"
+              data-aos="fade-up"
+              data-aos-delay={250 * index}
+            >
               <Typography variant="h4" align="center">{mission.no}</Typography>
               <Typography align="center">{mission.content}</Typography>
             </Grid>
