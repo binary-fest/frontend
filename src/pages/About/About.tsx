@@ -1,8 +1,8 @@
 import { Grid, makeStyles, Typography } from '@material-ui/core'
 import React, { ReactElement } from 'react'
-import FooterPage from '../components/FooterPage'
-import useTitlePage from '../hooks/useTitlePage'
-import { GradientTypography, StaticPageContentStyled } from '../theme/extends'
+import FooterPage from '../../components/FooterPage'
+import useTitlePage from '../../hooks/useTitlePage'
+import { GradientTypography, StaticPageContentStyled } from '../../theme/extends'
 
 const useStyles = makeStyles(({ spacing, breakpoints }) => ({
   aboutContainer: {
