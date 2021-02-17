@@ -1,16 +1,12 @@
 import { Grid } from '@material-ui/core'
 import axios from 'axios'
 import React, { ReactElement } from 'react'
-import FooterPage from '../components/FooterPage'
-import ListLecturer from '../components/ListLecturer'
-import useTitlePage from '../hooks/useTitlePage'
-import { GradientButton, GradientTypography, StaticPageContentStyled, WhiteTypography } from '../theme/extends'
-import { StyledWebinarButtonGroup } from '../theme/pages/Webinar'
-import base64 from '../utils/base64'
+import ListLecturer from '../../components/ListLecturer'
+import { GradientButton, GradientTypography, WhiteTypography } from '../../theme/extends'
+import { StyledWebinarButtonGroup } from '../../theme/pages/Webinar'
+import base64 from '../../utils/base64'
 
 export default function Webinar(): ReactElement {
-  useTitlePage("Webinar - BinaryFest2021")
-
   const downloadPosterHandler = () => {
     axios
       .get(
@@ -30,20 +26,20 @@ export default function Webinar(): ReactElement {
   }
 
   return (
-    <StaticPageContentStyled>
+    <div>
       <GradientTypography
         variant="h3" 
-        style={{ fontSize: '36px' }} 
+        style={{ fontSize: '36px', marginTop: '206px', marginBottom: '24px' }} 
         align="center"
         data-aos="fade-in"
       >Webinar Nasional</GradientTypography>
       <WhiteTypography
-        style={{ marginTop: '16px', marginBottom: '78px', fontWeight: 400 }}
+        style={{ marginBottom: '78px', fontWeight: 400 }}
         align="center"
         variant="h3"
         data-aos="fade-in"
         data-aos-delay="500"
-      >Peranan IoT dan Cyber Security di Era Revolusi 4.0</WhiteTypography>
+      >"Peranan IoT dan Cyber Security di Era Revolusi 4.0"</WhiteTypography>
       <ListLecturer />
       <WhiteTypography
         style={{ fontSize: '36px', fontWeight: 'bold', marginBottom: '1rem' }}
@@ -61,7 +57,6 @@ export default function Webinar(): ReactElement {
           </GradientButton>
         </Grid>
       </StyledWebinarButtonGroup>
-      <FooterPage />
-    </StaticPageContentStyled>
+    </div>
   )
 }

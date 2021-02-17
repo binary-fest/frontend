@@ -1,7 +1,10 @@
 import { Grid, makeStyles, Typography } from '@material-ui/core'
 import React, { ReactElement } from 'react'
-import useTitlePage from '../hooks/useTitlePage'
-import { GradientTypography, StaticPageContentStyled } from '../theme/extends'
+import CloudinaryImg from '../../components/CloudinaryImg'
+import FooterPage from '../../components/FooterPage'
+import useTitlePage from '../../hooks/useTitlePage'
+import { GradientTypography, StaticPageContentStyled } from '../../theme/extends'
+import { StyledAboutHeroImageContainer } from './About.styled'
 
 const useStyles = makeStyles(({ spacing, breakpoints }) => ({
   aboutContainer: {
@@ -26,20 +29,6 @@ const useStyles = makeStyles(({ spacing, breakpoints }) => ({
     '& .content': {
       maxWidth: '419.71px'
     },
-    '& .image': {
-      height: '179px',
-      backgroundColor: '#C4C4C4',
-      width: '100%',
-      borderRadius: '0 20px 0 20px',
-      marginBottom: '38px',
-      maxWidth: '350px',
-      [breakpoints.up('md')]: {
-        position: 'absolute',
-        maxWidth: '332px',
-        height: '242px',
-        right: '0'
-      }
-    }
   },
   quote: {
     color: 'white',
@@ -129,48 +118,57 @@ export default function About(): ReactElement {
   return (
     <StaticPageContentStyled>
       <Grid container className={classes.aboutContainer}>
-        <Grid item>
+        <Grid item data-aos="fade-up">
           <GradientTypography variant="h1">About</GradientTypography>
         </Grid>
-        <Grid item className="image">
-          <div></div>
-        </Grid>
-        <Grid item className="content">
+        <StyledAboutHeroImageContainer item data-aos="fade-up">
+          <CloudinaryImg src="/binary-fest-logo-diagonal.svg" alt="binaryfest" className="binaryfest-logo"/>
+          <CloudinaryImg src="/highlight.svg" alt="Highlight" className="highlight"/>
+        </StyledAboutHeroImageContainer>
+        <Grid item className="content" data-aos="fade-up" data-aos-delay="250">
           <Typography>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Risus vitae id odio at mi mauris. Dolor purus lacus risus rhoncus. Interdum lobortis massa nisi, turpis dictum fusce ultrices. Turpis bibendum cursus ut a mauris, mi sit quam.  Dolor purus lacus risus rhoncus. Interdum lobortis massa nisi, turpis dictum fusce ultrices. Turpis bibendum cursus ut a mauris, mi sit quam.</Typography>
         </Grid>
       </Grid>
-      <Grid container className={classes.quote} direction="column" alignItems="center">
+      <Grid container className={classes.quote} direction="column" alignItems="center" data-aos="zoom-in">
         <Grid item>
-          <img src="/quote-icon.svg" alt="quote"/>
+          <CloudinaryImg src="quote-icon.svg" alt="quote"/>
         </Grid>
         <Grid item>
           <Typography>Lorem ipsum dolor sit amet</Typography>
         </Grid>
         <Grid item>
-          <img src="/quote-icon.svg" alt="quote"/>
+          <CloudinaryImg src="quote-icon.svg" alt="quote"/>
         </Grid>
       </Grid>
       <Grid container className={classes.visi} direction="column">
-        <Grid item>
+        <Grid item data-aos="fade-up">
           <Typography variant="h1" className={classes.titleTrapezoid}>Visi</Typography>
         </Grid>
-        <Grid item>
+        <Grid item data-aos="fade-up" data-aos-delay="250">
           <Typography align="center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Risus vitae id odio at mi mauris. Dolor purus lacus risus rhoncus. Interdum lobortis massa nisi, turpis dictum fusce ultrices. Turpis bibendum cursus ut a mauris, mi sit quam.  Dolor purus lacus risus rhoncus. Interdum lobortis massa nisi, turpis dictum fusce ultrices. Turpis bibendum cursus ut a mauris, mi sit quam.</Typography>
         </Grid>
       </Grid>
       <Grid container className={classes.mission} direction="column">
-        <Grid item>
+        <Grid item data-aos="fade-up">
           <Typography variant="h1" className={classes.titleTrapezoid}>Misi</Typography>
         </Grid>
         <Grid container justify="space-between">
-          {missions.map(mission => (
-            <Grid item xs={12} key={mission.no} className="mission-item">
+          {missions.map((mission, index) => (
+            <Grid
+              item
+              xs={12}
+              key={mission.no}
+              className="mission-item"
+              data-aos="fade-up"
+              data-aos-delay={250 * index}
+            >
               <Typography variant="h4" align="center">{mission.no}</Typography>
               <Typography align="center">{mission.content}</Typography>
             </Grid>
           ))}
         </Grid>
       </Grid>
+      <FooterPage />
     </StaticPageContentStyled>
   )
 }
