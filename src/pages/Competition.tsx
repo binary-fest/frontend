@@ -1,5 +1,6 @@
 import { Grid, makeStyles, Typography } from '@material-ui/core'
 import React, { ReactElement } from 'react'
+import CloudinaryImg from '../components/CloudinaryImg';
 import FooterPage from '../components/FooterPage';
 import LinkScroll from '../components/LinkScroll';
 import useTitlePage from '../hooks/useTitlePage';
@@ -89,7 +90,11 @@ export default function Competition(): ReactElement {
               data-aos="fade-up"
               data-aos-delay={index * 500}
             >
-              <img src={competition.imageUrl} alt={competition.title} className="competition-image"/>
+              <CloudinaryImg
+                src={competition.imageUrl}
+                alt={competition.title}
+                className="competition-image"
+              />
               <div className="competition-content">
                 <Typography variant="h1">{competition.title}</Typography>
                 <Typography style={{lineHeight: '1.75rem'}}>{competition.description}</Typography>
