@@ -1,6 +1,6 @@
 import { Container, Grid, makeStyles, Typography } from '@material-ui/core'
 import React, { ReactElement } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { navigationLinks } from '../store/links'
 import { isNavigationResponsiveShowAtom } from '../store/ui'
@@ -29,7 +29,7 @@ const useStyles = makeStyles(({ spacing, breakpoints }) => ({
   },
   listLink: {
     display: 'none',
-    "& *": {
+    "& a": {
       color: 'white',
       textDecoration: 'none'
     },
@@ -69,10 +69,24 @@ const useStyles = makeStyles(({ spacing, breakpoints }) => ({
     [breakpoints.up('md')]: {
       display: 'block'
     }
+  },
+  linkActive: {
+    position: 'relative',
+    '&:before': {
+      content: "''",
+      width: "100%",
+      height: "1px",
+      backgroundImage: 'linear-gradient(to top, #ff512f, #df2672)',
+      position: "absolute",
+      bottom: "-10px",
+      padding: "0 0.5rem",
+      left: "-0.5rem",
+    },
   }
 }))
 
 export default function NavigationDesktop(props: NavigationDesktopProps): ReactElement {
+  const router = useHistory()
   const [isNavigationResponsiveShow, setIsNavigationResponsiveShow] = useRecoilState(isNavigationResponsiveShowAtom)
   const listNavigationLink = useRecoilValue(navigationLinks)
 
@@ -100,7 +114,11 @@ export default function NavigationDesktop(props: NavigationDesktopProps): ReactE
             <div className={classes.listLink}>
               {listNavigationLink.map(link => {
                 return (
-                  <Link key={link.id} to={link.href}>
+                  <Link
+                    key={link.id}
+                    to={link.href}
+                    className={router.location.pathname === link.href ? classes.linkActive : ''}
+                  >
                     <Typography>{link.name}</Typography>
                   </Link>
                 )
