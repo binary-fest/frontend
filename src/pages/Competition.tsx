@@ -33,8 +33,9 @@ const useStyles = makeStyles(({spacing, breakpoints}) => ({
       },
       '& .competition-image': {
         width: '100%',
-        maxWidth: '363px',
-        borderRadius: '0 20px 0 20px'
+        maxWidth: '243px',
+        borderRadius: '0 20px 0 20px',
+        height: '181px'
       },
       '& .download-icon': {
         marginRight: spacing(2)
@@ -64,12 +65,12 @@ export default function Competition(): ReactElement {
   const competitions = [{
     title: 'UI / UX',
     description: 'UI/UX Competition adalah cabang kompetisi dalam event BinaryFest2021 untuk membuat antarmuka produk yang dapat memberikan kenyamanan & mewujudkan pengalaman terbaik bagi pengguna. UI / UX Competition bertujuan untuk menguji peserta dalam menganalisa dan berkreasi dengan design website',
-    imageUrl: 'https://images.unsplash.com/photo-1611172062119-05251ea06de8?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80',
+    imageUrl: 'uiux-icon-competition.svg',
     guideBookUrl: 'https://drive.google.com/file/d/1gZxFLHaw47xs5ZcCaH4pnXL52EN7DIVE/view?usp=sharing'
   }, {
     title: 'Internet of Things',
     description: 'Internet of Things merupakan salah satu kompetisi yang diadakan oleh BinaryFest 2021 yang fokusnya pada pengembangan perangkat berbasis IoT. Harapannya, para peserta dapat menghasilkan inovasi-inovasi baru yang bermanfaat tentunya untuk permasalahan yang ada. ',
-    imageUrl: 'https://images.unsplash.com/photo-1611172062119-05251ea06de8?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80',
+    imageUrl: 'iot-icon-competition.svg',
     guideBookUrl: 'https://drive.google.com/file/d/1sSSiAazpQ7-jrd86ovYN4RDFkYcIHkwn/view?usp=sharing'
   }];
 
@@ -88,6 +89,7 @@ export default function Competition(): ReactElement {
               data-aos="fade-up"
               data-aos-delay={index * 500}
             >
+              <img src={competition.imageUrl} alt={competition.title} className="competition-image"/>
               <div className="competition-content">
                 <Typography variant="h1">{competition.title}</Typography>
                 <Typography style={{lineHeight: '1.75rem'}}>{competition.description}</Typography>
