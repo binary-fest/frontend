@@ -126,7 +126,7 @@ export default function About(): ReactElement {
           <CloudinaryImg src="/highlight.svg" alt="Highlight" className="highlight"/>
         </StyledAboutHeroImageContainer>
         <Grid item className="content" data-aos="fade-up" data-aos-delay="250">
-          <Typography>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Risus vitae id odio at mi mauris. Dolor purus lacus risus rhoncus. Interdum lobortis massa nisi, turpis dictum fusce ultrices. Turpis bibendum cursus ut a mauris, mi sit quam.  Dolor purus lacus risus rhoncus. Interdum lobortis massa nisi, turpis dictum fusce ultrices. Turpis bibendum cursus ut a mauris, mi sit quam.</Typography>
+          <Typography>BinaryFest tercipta untuk menarik para informatik berkontribusi dalam penerapan teknologi digital di semua aspek kehidupan yang terdapat pada masyarakat dan menyebarluaskan informasi tentang pentingnya inovasi teknologi yang menjadi urgensi saat ini. Untuk membantu indonesia dalam menyelaraskan Sustainable Development Goals (SDGs) 2030.</Typography>
         </Grid>
       </Grid>
       <Grid container className={classes.quote} direction="column" alignItems="center" data-aos="zoom-in">
