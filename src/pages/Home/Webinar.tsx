@@ -47,11 +47,13 @@ export default function Webinar(): ReactElement {
         variant="h3"
         data-aos="zoom-in"
       >Ingin tau seberapa serunya ?</WhiteTypography>
-      <WhiteTypography align="center" style={{ marginBottom: '41px' }}>
-        <i>Pendaftaran dibuka pada tanggal 17 Februari 2021, <b>Stay tune !!</b></i>
-      </WhiteTypography>
       <StyledWebinarButtonGroup container>
         <Grid item data-aos="zoom-in" data-aos-delay="500">
+          <GradientButton style={{marginRight: '16px'}}>
+            <a href="https://bit.ly/WebinarBinaryFest" style={{textDecoration: 'none'}} target="_blank" rel="noreferrer">
+              <WhiteTypography>Daftar Webinar</WhiteTypography>
+            </a>
+          </GradientButton>
           <GradientButton onClick={downloadPosterHandler}>
             <WhiteTypography>Download Poster</WhiteTypography>
           </GradientButton>
