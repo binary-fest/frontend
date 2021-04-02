@@ -254,7 +254,7 @@ export default function Register(): ReactElement {
                     </a>
                   </li>
                   <li>
-                    <a href="https://drive.google.com/file/d/1gZxFLHaw47xs5ZcCaH4pnXL52EN7DIVE/view?usp=sharing" className={classes.guideLink} target="_blank" rel="noreferrer">
+                    <a href="https://drive.google.com/file/d/16zMQ1qPj_FholxHFZZCV-RnIunNHhf3n/view" className={classes.guideLink} target="_blank" rel="noreferrer">
                       <Typography>UI / UX</Typography>
                     </a>
                   </li>
