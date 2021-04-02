@@ -9,8 +9,8 @@ const lecturerState = atom<LecturerState[]>({
     id: '1',
     profilePict: 'https://res.cloudinary.com/binaryfest/image/upload/v1613226675/web/cgfmrx.jpg'
   }, {
-    name: 'Anak Agung Duwi Arsana',
-    job: 'Youtuber dan Praktisi Bidang Elektronika',
+    name: 'Oby Zamisyak, B.Ed',
+    job: 'Professional Electronics Arduino IoT',
     id: '2',
     profilePict: 'https://res.cloudinary.com/binaryfest/image/upload/v1613226674/web/yufbp7.jpg'
   }]
