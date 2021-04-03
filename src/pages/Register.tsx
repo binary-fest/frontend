@@ -13,6 +13,7 @@ import { validateEmail } from '../utils/validate'
 import { useEffect } from 'react'
 import { fetchCompetitions } from '../http/competition'
 import ErrorPage from './404'
+import { Competition } from '../@types/Competition'
 
 interface CompetitionState {
   id: CompetitionType,
@@ -144,28 +145,18 @@ export default function Register(): ReactElement {
     isFetching: true,
     isPageOpen: false
   })
+  const [pickCompetitions, setPickCompetitions] = useState<CompetitionState[]>([])
   const [alertStatus, setAlertStatus] = useState<AlertStatus>({
     isShow: false,
     message: '',
     variant: 'wait'
   })
-  const [competitions, setCompetitions] = useState<CompetitionState[]>([
-    {
-      id: 'iot',
-      name: 'Internet of Things',
-      isSelected: true,
-    },
-    {
-      id: 'uiux',
-      name: 'UI / UX',
-      isSelected: false,
-    }
-  ])
+  const [competitions, setCompetitions] = useState<Competition[]>([])
 
   const selectCompetitionHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     const id = e.currentTarget.dataset.competition
-    setCompetitions(
-      competitions.map((comp) => ({ ...comp, isSelected: comp.id === id }))
+    setPickCompetitions(
+      pickCompetitions.map((comp) => ({ ...comp, isSelected: comp.id === id }))
     )
   }
 
@@ -187,7 +178,7 @@ export default function Register(): ReactElement {
       return errors
     },
     onSubmit: async (values) => {
-      const [selectedCompetition] = competitions.filter(comp => comp.isSelected)
+      const [selectedCompetition] = pickCompetitions.filter(comp => comp.isSelected)
 
       const teamData: Team = {
         name: values.name,
@@ -243,6 +234,19 @@ export default function Register(): ReactElement {
         isFetching: false,
         isPageOpen: data.some(competition => competition.isOpen)
       })
+
+      const newCompetitions = data.filter(competition => competition.isOpen)
+      const selectCompetitions: CompetitionState[] = newCompetitions
+        .map((competition, idx) => {
+          return {
+            id: competition.code,
+            name: competition.title,
+            isSelected: idx === 0,
+          }
+        })
+      
+      setCompetitions(newCompetitions)
+      setPickCompetitions(selectCompetitions)
     })
   }, [])
 
@@ -273,16 +277,15 @@ export default function Register(): ReactElement {
               <div style={{marginBottom: '29px'}}>
                 <WhiteTypography variant="h3" data-aos="fade-up">Petunjuk Pendaftaran</WhiteTypography>
                 <ul className={classes.listGuideLink} data-aos="fade-up">
-                  <li>
-                    <a href="https://drive.google.com/file/d/1RcUwE2GD1VWkVGbHiAzIm9nHb9AphrV1/view?usp=sharing" className={classes.guideLink} target="_blank" rel="noreferrer">
-                      <Typography>Internet of Things</Typography>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://drive.google.com/file/d/16zMQ1qPj_FholxHFZZCV-RnIunNHhf3n/view" className={classes.guideLink} target="_blank" rel="noreferrer">
-                      <Typography>UI / UX</Typography>
-                    </a>
-                  </li>
+                  {competitions.map(competition => {
+                    return (
+                      <li>
+                        <a href={competition.guideBookUrl} className={classes.guideLink} target="_blank" rel="noreferrer">
+                          <Typography>{competition.title}</Typography>
+                        </a>
+                      </li>
+                    )
+                  })}
                 </ul>
               </div>
               <WhiteTypography variant="h3" data-aos="fade-up">Pendaftaran Team</WhiteTypography>
@@ -329,7 +332,7 @@ export default function Register(): ReactElement {
             <Grid item xs={12} md={6} lg={7} className={classes.competitionType} data-aos="fade-up">
               <div>
                 <WhiteTypography variant="h3">Jenis Perlombaan</WhiteTypography>
-                {competitions.map((competition) => (
+                {pickCompetitions.map((competition) => (
                   competition.isSelected ? (
                     <GradientButton
                       key={competition.id}
