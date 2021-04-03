@@ -4,6 +4,7 @@ import CloudinaryImg from '../../components/CloudinaryImg'
 import FooterPage from '../../components/FooterPage'
 import useTitlePage from '../../hooks/useTitlePage'
 import { GradientTypography, StaticPageContentStyled } from '../../theme/extends'
+import ErrorPage from '../404'
 import { StyledAboutHeroImageContainer } from './About.styled'
 
 const useStyles = makeStyles(({ spacing, breakpoints }) => ({
@@ -100,6 +101,8 @@ const useStyles = makeStyles(({ spacing, breakpoints }) => ({
   }
 }))
 
+const isDisabled = true;
+
 export default function About(): ReactElement {
   useTitlePage("About - BinaryFest")
   const classes = useStyles()
@@ -114,6 +117,8 @@ export default function About(): ReactElement {
     no: '3',
     content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Risus vitae id odio at mi mauris. Dolor purus lacus risus rhoncus. Interdum lobortis massa nisi, turpis dictum fusce ultrices. Turpis bibendum cursus ut a mauris,'
   }]
+
+  if (isDisabled) return <ErrorPage title="</>" caption="Halaman sedang dalam proses pengembangan" />
 
   return (
     <StaticPageContentStyled>
