@@ -101,7 +101,7 @@ export default function CompetitionPage(): ReactElement {
               <div style={{marginTop: 'auto'}}>
                 <GradientButton variant='contained' color="primary" disabled={!competition.isOpen}>
                   <a
-                    href={competition.guideBookUrl}
+                    href={competition.isOpen ? competition.guideBookUrl : '/'}
                     style={{ textDecoration: 'none', display: 'flex' }}
                     target="_blank"
                     rel="noreferrer"
