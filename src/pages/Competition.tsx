@@ -67,12 +67,14 @@ const useStyles = makeStyles(({spacing, breakpoints}) => ({
 export default function CompetitionPage(): ReactElement {
   useTitlePage("Competition - BinaryFest")
   const [competitions, setCompetitions] = useState<Competition[]>([])
+  const [isCompetitionOpen, setIsCompetitionOpen] = useState<boolean>(false)
 
   const classes = useStyles()
 
   useEffect(() => {
     fetchCompetitions().then(data => {
       setCompetitions(data)
+      setIsCompetitionOpen(data.some(competition => competition.isOpen))
     })
   }, [])
   
@@ -106,8 +108,12 @@ export default function CompetitionPage(): ReactElement {
                     target="_blank"
                     rel="noreferrer"
                   >
-                    <img src="/download-icon.svg" alt="Download guide book" className="download-icon"/>
-                    Download Guide Book
+                    {competition.isOpen ? (
+                      <>
+                        <img src="/download-icon.svg" alt="Download guide book" className="download-icon"/>
+                        Download Guide Book
+                      </>
+                    ) : "Belum tersedia"}
                   </a>
                 </GradientButton>
               </div>
@@ -121,10 +127,10 @@ export default function CompetitionPage(): ReactElement {
           <GradientButton
             variant='contained'
             color="primary"
-            disabled={!competitions.some(competition => competition.isOpen)}
+            disabled={!isCompetitionOpen}
           >
-            <LinkScroll to="/register" style={{ textDecoration: 'none' }}>
-              Registrasi Kompetisi
+            <LinkScroll to={isCompetitionOpen ? "/register" : '/'} style={{ textDecoration: 'none' }}>
+              {isCompetitionOpen ? 'Registrasi Kompetisi' : 'Belum dibuka ~'}
             </LinkScroll>
           </GradientButton>
         </div>
