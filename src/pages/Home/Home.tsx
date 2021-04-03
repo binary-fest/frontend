@@ -7,6 +7,7 @@ import useTitlePage from '../../hooks/useTitlePage'
 import { Highlight, Arrows } from './Home.styled'
 import MediaPartner from './MediaPartner'
 import Sponsorship from './Sponsorship'
+import TechExpo from './TechExpo'
 import Webinar from './Webinar'
 
 const useStyles = makeStyles(({breakpoints, spacing}) => ({
@@ -74,6 +75,7 @@ export default function Home(): ReactElement {
       <Element name="scroll-to-element">
         <Webinar />
       </Element>
+      <TechExpo />
       <Sponsorship />
       <MediaPartner />
       <FooterPage />
