@@ -71,7 +71,9 @@ export default function CompetitionPage(): ReactElement {
   const classes = useStyles()
 
   useEffect(() => {
-    fetchCompetitions().then(data => setCompetitions(data))
+    fetchCompetitions().then(data => {
+      setCompetitions(data)
+    })
   }, [])
   
   return (
@@ -116,7 +118,11 @@ export default function CompetitionPage(): ReactElement {
       <div className={classes.reoffer} data-aos="zoom-in">
         <Typography variant="h1" align="center">Are you ready ?</Typography>
         <div>  
-          <GradientButton variant='contained' color="primary" disabled>
+          <GradientButton
+            variant='contained'
+            color="primary"
+            disabled={!competitions.some(competition => competition.isOpen)}
+          >
             <LinkScroll to="/register" style={{ textDecoration: 'none' }}>
               Registrasi Kompetisi
             </LinkScroll>
