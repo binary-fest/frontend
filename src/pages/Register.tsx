@@ -10,6 +10,9 @@ import { membersRequestBodyState } from '../store/members'
 import http from '../utils/http'
 import Alert, { AlertStatus } from '../components/Alert'
 import { validateEmail } from '../utils/validate'
+import { useEffect } from 'react'
+import { fetchCompetitions } from '../http/competition'
+import ErrorPage from './404'
 
 interface CompetitionState {
   id: CompetitionType,
@@ -137,6 +140,10 @@ const TeamMemberInput = React.memo(
 
 export default function Register(): ReactElement {
   const membersRequestBody = useRecoilValue(membersRequestBodyState)
+  const [loading, setLoading] = useState({
+    isFetching: true,
+    isPageOpen: false
+  })
   const [alertStatus, setAlertStatus] = useState<AlertStatus>({
     isShow: false,
     message: '',
@@ -229,6 +236,20 @@ export default function Register(): ReactElement {
   const alertHandler = (state: boolean) => setAlertStatus({...alertStatus, isShow: state})
 
   const classes = useStyles()
+
+  useEffect(() => {
+    fetchCompetitions().then(data => {
+      setLoading({
+        isFetching: false,
+        isPageOpen: data.some(competition => competition.isOpen)
+      })
+    })
+  }, [])
+
+  if (loading.isFetching) return <></>
+
+  if (!loading.isPageOpen)
+    return <ErrorPage title="</>" caption="Halaman sedang dalam proses pengembangan" />
 
   return (
     <>

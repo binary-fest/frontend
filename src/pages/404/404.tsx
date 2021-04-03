@@ -3,7 +3,17 @@ import { Link } from 'react-router-dom'
 import { GradientTypography, WhiteTypography } from '../../theme/extends'
 import { StyledErroPageFooter, StyledErrorPage } from './404.styled'
 
-export default function ErrorPage(): ReactElement {
+interface Props {
+  title?: string
+  caption?: string
+}
+
+const initialErrorPageProps: Props = {
+  title: '404',
+  caption: 'Page not Found'
+}
+
+export default function ErrorPage(props: Props): ReactElement {
   return (
     <StyledErrorPage>
       <div>
@@ -11,14 +21,14 @@ export default function ErrorPage(): ReactElement {
           style={{ fontSize: '100px', fontWeight: 'bold' }}
           align="center"
           data-aos="fade-in"
-        >404</GradientTypography>
+        >{props.title}</GradientTypography>
         <WhiteTypography
           variant="h3"
           style={{ fontWeight: 400 }}
           align="center"
           data-aos="fade-in"
           data-aos-delay="250"
-        >Page not Found</WhiteTypography>
+        >{props.caption}</WhiteTypography>
       </div>
       <StyledErroPageFooter>
         <Link to="/">
@@ -28,3 +38,5 @@ export default function ErrorPage(): ReactElement {
     </StyledErrorPage>
   )
 }
+
+ErrorPage.defaultProps = initialErrorPageProps
