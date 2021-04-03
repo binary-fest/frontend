@@ -5,7 +5,17 @@ const GradientButton = withStyles({
   root: {
     textTransform: 'capitalize',
     padding: '16px 24px',
-    background: 'linear-gradient(124.15deg, #FF512F -3.94%, #DF2672 179.22%)'
+    background: 'linear-gradient(124.15deg, #FF512F -3.94%, #DF2672 179.22%)',
+    '& a': {
+      color: 'white'
+    }
+  },
+  disabled: {
+    background: 'none !important',
+    backgroundColor: '#CCCCCC !important',
+    '& a': {
+      color: '#32322C'
+    }
   }
 })(Button)
 

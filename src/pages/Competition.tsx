@@ -100,16 +100,17 @@ export default function Competition(): ReactElement {
                 <Typography style={{lineHeight: '1.75rem'}}>{competition.description}</Typography>
               </div>
               <div style={{marginTop: 'auto'}}>
-                <a
-                  href={competition.guideBookUrl}
-                  style={{ textDecoration: 'none' }}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <GradientButton variant='contained' color="primary">
+                <GradientButton variant='contained' color="primary" disabled>
+                  <a
+                    href={competition.guideBookUrl}
+                    style={{ textDecoration: 'none', display: 'flex' }}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     <img src="/download-icon.svg" alt="Download guide book" className="download-icon"/>
-                    Download Guide Book</GradientButton>
-                </a>
+                    Download Guide Book
+                  </a>
+                </GradientButton>
               </div>
             </Grid>
           )
@@ -117,10 +118,12 @@ export default function Competition(): ReactElement {
       </Grid>
       <div className={classes.reoffer} data-aos="zoom-in">
         <Typography variant="h1" align="center">Are you ready ?</Typography>
-        <div>
-          <LinkScroll to="/register" style={{textDecoration: 'none'}}>
-            <GradientButton variant='contained' color="primary">Registrasi Kompetisi</GradientButton>
-          </LinkScroll>
+        <div>  
+          <GradientButton variant='contained' color="primary" disabled>
+            <LinkScroll to="/register" style={{ textDecoration: 'none' }}>
+              Registrasi Kompetisi
+            </LinkScroll>
+          </GradientButton>
         </div>
       </div>
       <FooterPage />
