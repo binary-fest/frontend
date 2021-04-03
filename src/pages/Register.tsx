@@ -99,6 +99,7 @@ const useStyles = makeStyles(({ breakpoints }) => ({
 interface RegisterFormik extends Team{
   membersError: string
   verify: string[]
+  url_files: ''
 }
 
 const initialValueFormik: RegisterFormik = {
@@ -187,12 +188,15 @@ export default function Register(): ReactElement {
         institute: values.institute,
         title: values.title,
         competition_type: selectedCompetition.id,
-        url_files: values.url_files
       }
 
       const request = {
         team: teamData,
-        members: membersRequestBody
+        members: membersRequestBody,
+        submission: {
+          submission_type: "1",
+          url_files: values.url_files
+        }
       }
 
       setAlertStatus({

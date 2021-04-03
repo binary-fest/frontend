@@ -163,7 +163,6 @@ export default React.memo(function MemberCard({ member, idx = 1 }: Props): React
           <Typography style={{fontSize: '14px'}}>({member.student_id})</Typography>
         </div>
         <div style={{margin: '27px 0 26px 0', textAlign: 'center'}}>
-          <Typography style={{ marginBottom: '9px', fontStyle: 'italic'}}>{member.email}</Typography>
           <Typography>{member.phone}</Typography>
         </div>
         <Typography className="member-role" variant="h3">

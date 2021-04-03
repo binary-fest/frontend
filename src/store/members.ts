@@ -5,7 +5,6 @@ const initialMemberModal: MemberState = {
   id: '',
   name: '',
   student_id: '',
-  email: '',
   gender: 'man',
   isLeader: false,
   phone: '',
@@ -32,7 +31,6 @@ const membersRequestBodyState = selector<Member[]>({
       return {
         name: member.name,
         student_id: member.student_id,
-        email: member.email,
         gender: member.gender,
         isLeader: member.isLeader,
         phone: member.phone

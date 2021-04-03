@@ -6,7 +6,6 @@ interface Team {
   institute: string
   title: string
   competition_type: CompetitionType
-  url_files: string
 }
 
 export type { Team, CompetitionType }

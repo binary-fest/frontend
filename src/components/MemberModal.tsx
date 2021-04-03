@@ -18,7 +18,6 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import membersState, { initialMemberModal, leaderAtom, memberModalState } from '../store/members'
 import { isMemberModalShowState } from '../store/ui'
 import { MemberFormik, MemberState } from '../@types/Member'
-import { validateEmail } from '../utils/validate'
 
 interface MemberInputProps {
   error: string | undefined
@@ -126,7 +125,6 @@ export default function MemberModal(): ReactElement {
     initialValues: {
       name: memberModal.name,
       student_id: memberModal.student_id,
-      email: memberModal.email,
       phone: memberModal.phone,
       gender: memberModal.gender,
       role: memberModal.isLeader ? 'ketua' : 'anggota',
@@ -134,11 +132,8 @@ export default function MemberModal(): ReactElement {
     validateOnChange: false,
     validate: (values) => {
       const errors: any = {}
-      const checkEmail = validateEmail(values.email)
       if (!values.name) errors.name = "Tidak boleh kosong"
       if (!values.student_id) errors.student_id = "Tidak boleh kosong"
-      if (!values.email) errors.email = "Tidak boleh kosong"
-      if (!checkEmail.isValid) errors.email = checkEmail.message
       if (!values.phone) errors.phone = "Tidak boleh kosong"
       if (!values.gender) errors.gender = "Pilih salah satu"
       if (!values.role) errors.role = "Pilih salah satu"
@@ -150,7 +145,6 @@ export default function MemberModal(): ReactElement {
         id: (new Date().getTime()).toString(),
         name: values.name,
         student_id: values.student_id,
-        email: values.email,
         phone: values.phone,
         gender: values.gender,
         isLeader: values.role === 'ketua',
@@ -218,14 +212,6 @@ export default function MemberModal(): ReactElement {
               name="student_id"
               placeholder="NISN / NIM"
               testId="input-student-id-member"
-            />
-            <MemberInput
-              handleChange={formik.handleChange}
-              error={formik.errors.email}
-              value={formik.values.email}
-              name="email"
-              placeholder="Email"
-              testId="input-email-member"
             />
             <MemberInput
               handleChange={formik.handleChange}
