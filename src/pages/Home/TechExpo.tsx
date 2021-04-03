@@ -12,12 +12,16 @@ const useStyles = makeStyles(({breakpoints}) => ({
     flexDirection: 'column',
     alignItems: 'center',
     '& img': {
-      maxWidth: "460px",
-      maxHeight: "251px",
+      width: '270px'
     },
-    [breakpoints.up('md')]: {
+    [breakpoints.up('md')]: {   
       flexDirection: 'row',
-      justifyContent: 'center'
+      justifyContent: 'center',
+      '& img': {
+        maxWidth: "460px",
+        maxHeight: "251px",
+        width: "100%",
+      },
     }
   },
   content: {
@@ -25,7 +29,7 @@ const useStyles = makeStyles(({breakpoints}) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    maxWidth: '419.71px',
+    maxWidth: '720px',
     '& h3': {
       textAlign: 'center'
     },
@@ -39,6 +43,7 @@ const useStyles = makeStyles(({breakpoints}) => ({
     [breakpoints.up('md')]: {
       marginLeft: '70px',
       alignItems: 'flex-start',
+      maxWidth: '419.71px',
       '& h3': {
         textAlign: 'left',
       },
@@ -61,8 +66,8 @@ export default function TechExpo(): ReactElement {
         data-aos="fade-in"
       >Tech Expo</GradientTypography>
       <section className={classes.wrapper}>
-        <CloudinaryImg src="undraw_virtual_reality_xprpip.png" alt="Virtual reality" />
-        <section className={classes.content}>
+        <CloudinaryImg src="undraw_virtual_reality_xprpip.png" alt="Virtual reality" data-aos="fade-down"/>
+        <section className={classes.content} data-aos="fade-up">
           <GradientTypography
             variant="h3" 
             style={{ fontSize: '18px', marginBottom: '12px' }}
