@@ -1,10 +1,29 @@
-import { Grid } from '@material-ui/core'
+import { Grid, makeStyles } from '@material-ui/core'
 import axios from 'axios'
 import React, { ReactElement } from 'react'
 import ListLecturer from '../../components/ListLecturer'
 import { GradientButton, GradientTypography, WhiteTypography } from '../../theme/extends'
 import { StyledWebinarButtonGroup } from '../../theme/pages/Webinar'
 import base64 from '../../utils/base64'
+
+const useStyles = makeStyles(({breakpoints}) => ({
+  buttonGroup: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    
+    '& > *:not(:last-child)': {
+      marginBottom: '8px'
+    },
+    [breakpoints.up('sm')]: {
+      flexDirection: 'row',
+      '& > *:not(:last-child)': {
+        marginBottom: '0',
+        marginRight: '16px'
+      },
+    }
+  }
+}))
 
 export default function Webinar(): ReactElement {
   const downloadPosterHandler = () => {
@@ -24,6 +43,8 @@ export default function Webinar(): ReactElement {
         })
       })
   }
+
+  const classes = useStyles()
 
   return (
     <div>
@@ -48,8 +69,8 @@ export default function Webinar(): ReactElement {
         data-aos="zoom-in"
       >Ingin tau seberapa serunya ?</WhiteTypography>
       <StyledWebinarButtonGroup container>
-        <Grid item data-aos="zoom-in" data-aos-delay="500">
-          <GradientButton style={{marginRight: '16px'}}>
+        <Grid item data-aos="zoom-in" data-aos-delay="500" className={classes.buttonGroup}>
+          <GradientButton>
             <a href="https://bit.ly/WebinarBinaryFest" style={{textDecoration: 'none'}} target="_blank" rel="noreferrer">
               <WhiteTypography>Daftar Webinar</WhiteTypography>
             </a>
