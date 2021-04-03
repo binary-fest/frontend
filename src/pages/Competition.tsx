@@ -1,9 +1,13 @@
 import { Grid, makeStyles, Typography } from '@material-ui/core'
 import React, { ReactElement } from 'react'
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { Competition } from '../@types/Competition';
 import CloudinaryImg from '../components/CloudinaryImg';
 import FooterPage from '../components/FooterPage';
 import LinkScroll from '../components/LinkScroll';
 import useTitlePage from '../hooks/useTitlePage';
+import { fetchCompetitions } from '../http/competition';
 import { GradientButton, GradientTypography, StaticPageContentStyled } from '../theme/extends';
 
 const useStyles = makeStyles(({spacing, breakpoints}) => ({
@@ -60,22 +64,15 @@ const useStyles = makeStyles(({spacing, breakpoints}) => ({
   }
 }))
 
-export default function Competition(): ReactElement {
+export default function CompetitionPage(): ReactElement {
   useTitlePage("Competition - BinaryFest")
-
-  const competitions = [{
-    title: 'UI / UX',
-    description: 'UI/UX Competition adalah cabang kompetisi dalam event BinaryFest2021 untuk membuat antarmuka produk yang dapat memberikan kenyamanan & mewujudkan pengalaman terbaik bagi pengguna. UI / UX Competition bertujuan untuk menguji peserta dalam menganalisa dan berkreasi dengan design website',
-    imageUrl: 'uiux-icon-competition.svg',
-    guideBookUrl: 'https://drive.google.com/file/d/16zMQ1qPj_FholxHFZZCV-RnIunNHhf3n/view?usp=sharing'
-  }, {
-    title: 'Internet of Things',
-    description: 'Internet of Things merupakan salah satu kompetisi yang diadakan oleh BinaryFest 2021 yang fokusnya pada pengembangan perangkat berbasis IoT. Harapannya, para peserta dapat menghasilkan inovasi-inovasi baru yang bermanfaat tentunya untuk permasalahan yang ada. ',
-    imageUrl: 'iot-icon-competition.svg',
-    guideBookUrl: 'https://drive.google.com/file/d/1sSSiAazpQ7-jrd86ovYN4RDFkYcIHkwn/view?usp=sharing'
-  }];
+  const [competitions, setCompetitions] = useState<Competition[]>([])
 
   const classes = useStyles()
+
+  useEffect(() => {
+    fetchCompetitions().then(data => setCompetitions(data))
+  }, [])
   
   return (
     <StaticPageContentStyled>
@@ -100,7 +97,7 @@ export default function Competition(): ReactElement {
                 <Typography style={{lineHeight: '1.75rem'}}>{competition.description}</Typography>
               </div>
               <div style={{marginTop: 'auto'}}>
-                <GradientButton variant='contained' color="primary" disabled>
+                <GradientButton variant='contained' color="primary" disabled={!competition.isOpen}>
                   <a
                     href={competition.guideBookUrl}
                     style={{ textDecoration: 'none', display: 'flex' }}
