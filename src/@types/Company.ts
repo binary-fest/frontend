@@ -1,5 +1,5 @@
 interface Company {
-  id: number
+  id: string
   name: string
   imageUrl: string
   website: string
