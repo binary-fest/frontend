@@ -101,22 +101,11 @@ const useStyles = makeStyles(({ spacing, breakpoints }) => ({
   }
 }))
 
-const isDisabled = true;
+const isDisabled = false;
 
 export default function About(): ReactElement {
   useTitlePage("About - BinaryFest")
   const classes = useStyles()
-
-  const missions = [{
-    no: '1',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Risus vitae id odio at mi mauris. Dolor purus lacus risus rhoncus. Interdum lobortis massa nisi, turpis dictum fusce ultrices. Turpis bibendum cursus ut a mauris,'
-  }, {
-    no: '2',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Risus vitae id odio at mi mauris. Dolor purus lacus risus rhoncus. Interdum lobortis massa nisi, turpis dictum fusce ultrices. Turpis bibendum cursus ut a mauris,'
-  }, {
-    no: '3',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Risus vitae id odio at mi mauris. Dolor purus lacus risus rhoncus. Interdum lobortis massa nisi, turpis dictum fusce ultrices. Turpis bibendum cursus ut a mauris,'
-  }]
 
   if (isDisabled) return <ErrorPage title="</>" caption="Halaman sedang dalam proses pengembangan" />
 
@@ -131,48 +120,10 @@ export default function About(): ReactElement {
           <CloudinaryImg src="/highlight.svg" alt="Highlight" className="highlight"/>
         </StyledAboutHeroImageContainer>
         <Grid item className="content" data-aos="fade-up" data-aos-delay="250">
-          <Typography>BinaryFest tercipta untuk menarik para informatik berkontribusi dalam penerapan teknologi digital di semua aspek kehidupan yang terdapat pada masyarakat dan menyebarluaskan informasi tentang pentingnya inovasi teknologi yang menjadi urgensi saat ini. Untuk membantu indonesia dalam menyelaraskan Sustainable Development Goals (SDGs) 2030.</Typography>
+          <Typography style={{lineHeight: '1.75rem'}}>BinaryFest tercipta untuk menarik para informatik berkontribusi dalam penerapan teknologi digital di semua aspek kehidupan yang terdapat pada masyarakat dan menyebarluaskan informasi tentang pentingnya inovasi teknologi yang menjadi urgensi saat ini. Untuk membantu indonesia dalam menyelaraskan Sustainable Development Goals (SDGs) 2030.</Typography>
         </Grid>
       </Grid>
-      <Grid container className={classes.quote} direction="column" alignItems="center" data-aos="zoom-in">
-        <Grid item>
-          <CloudinaryImg src="quote-icon.svg" alt="quote"/>
-        </Grid>
-        <Grid item>
-          <Typography>Lorem ipsum dolor sit amet</Typography>
-        </Grid>
-        <Grid item>
-          <CloudinaryImg src="quote-icon.svg" alt="quote"/>
-        </Grid>
-      </Grid>
-      <Grid container className={classes.visi} direction="column">
-        <Grid item data-aos="fade-up">
-          <Typography variant="h1" className={classes.titleTrapezoid}>Visi</Typography>
-        </Grid>
-        <Grid item data-aos="fade-up" data-aos-delay="250">
-          <Typography align="center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Risus vitae id odio at mi mauris. Dolor purus lacus risus rhoncus. Interdum lobortis massa nisi, turpis dictum fusce ultrices. Turpis bibendum cursus ut a mauris, mi sit quam.  Dolor purus lacus risus rhoncus. Interdum lobortis massa nisi, turpis dictum fusce ultrices. Turpis bibendum cursus ut a mauris, mi sit quam.</Typography>
-        </Grid>
-      </Grid>
-      <Grid container className={classes.mission} direction="column">
-        <Grid item data-aos="fade-up">
-          <Typography variant="h1" className={classes.titleTrapezoid}>Misi</Typography>
-        </Grid>
-        <Grid container justify="space-between">
-          {missions.map((mission, index) => (
-            <Grid
-              item
-              xs={12}
-              key={mission.no}
-              className="mission-item"
-              data-aos="fade-up"
-              data-aos-delay={250 * index}
-            >
-              <Typography variant="h4" align="center">{mission.no}</Typography>
-              <Typography align="center">{mission.content}</Typography>
-            </Grid>
-          ))}
-        </Grid>
-      </Grid>
+      <div style={{marginTop: '100px'}}/>
       <FooterPage />
     </StaticPageContentStyled>
   )
