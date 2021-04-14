@@ -280,7 +280,7 @@ export default function Register(): ReactElement {
                   {competitions.map(competition => {
                     return (
                       <li>
-                        <a href={competition.guideBookUrl} className={classes.guideLink} target="_blank" rel="noreferrer">
+                        <a href={competition.technicalGuideUrl} className={classes.guideLink} target="_blank" rel="noreferrer">
                           <Typography>{competition.title}</Typography>
                         </a>
                       </li>

@@ -6,7 +6,8 @@ interface Competition {
   imageUrl: string,
   guideBookUrl: string,
   isOpen: boolean,
-  code: CompetitionType
+  code: CompetitionType,
+  technicalGuideUrl: string
 }
 
 export type { Competition }
