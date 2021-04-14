@@ -32,6 +32,10 @@ const StyledLecturerCardProfilePict = styled.div`
     filter: grayscale(1);
     transition: filter 500ms;
     
+    ${theme.breakpoints.down('sm')} {
+      filter: grayscale(0);
+    }
+
     &:hover {
       filter: grayscale(0);
       transition: filter 500ms;

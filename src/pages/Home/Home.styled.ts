@@ -1,6 +1,7 @@
 import Styled from 'styled-components'
 import CloudinaryImg from '../../components/CloudinaryImg'
 import { GradientTypography } from '../../theme/extends'
+import theme from '../../theme'
 
 const Highlight = Styled(CloudinaryImg)`
   position: absolute;
@@ -75,6 +76,11 @@ const StyledCompanyImage = Styled.img`
   height: 50px; 
   filter: grayscale(1);
   transition: filter 500ms;
+
+  ${theme.breakpoints.down('sm')} {
+    filter: grayscale(0);
+  }
+
   &:hover {
     filter: grayscale(0);
     transition: filter 500ms;
