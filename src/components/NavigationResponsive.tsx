@@ -72,16 +72,20 @@ export default function NavigationResponsive(props: NavigationResponsiveProps): 
             <Grid item>
               {listNavigationLink.map((link) => {
                 return (
-                  <Link
-                    onClick={hideHandler}
-                    key={link.id}
-                    to={link.name === 'Tech Expo' ? '' : link.href}
-                    className={classes.navigationLink}
-                  >
-                    <Typography>{link.name}</Typography>
-                    {link.name === 'Tech Expo' && (
-                    <Typography variant="caption" align="center">Coming soon !</Typography>)}
-                  </Link>
+                  link.isOpen ?
+                    <Link
+                      onClick={hideHandler}
+                      key={link.id}
+                      to={link.href}
+                      className={classes.navigationLink}
+                    >
+                      <Typography>{link.name}</Typography>
+                    </Link>
+                    :
+                    <div key={link.id} className={classes.navigationLink}>
+                      <Typography>{link.name}</Typography>
+                      <Typography variant="caption" align="center">Coming soon !</Typography>
+                    </div>
                 )
               })}
             </Grid>

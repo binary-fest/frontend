@@ -30,7 +30,7 @@ const useStyles = makeStyles(({ spacing, breakpoints }) => ({
   },
   listLink: {
     display: 'none',
-    "& a": {
+    "& a, & div": {
       color: 'white',
       textDecoration: 'none'
     },
@@ -115,23 +115,21 @@ export default function NavigationDesktop(props: NavigationDesktopProps): ReactE
             <div className={classes.listLink}>
               {listNavigationLink.map(link => {
                 return (
-                  isExternalUrl(link.href) ? 
-                    <a
-                      key={link.id}
-                      href={link.name === 'Tech Expo' ? '' : link.href}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <Typography>{link.name}</Typography>
-                      <Typography variant="caption" align="center">Coming soon !</Typography>
-                    </a> :
+                  link.isOpen ?
                     <Link
                       key={link.id}
                       to={link.href}
                       className={router.location.pathname === link.href ? classes.linkActive : ''}
+                      target={isExternalUrl(link.href) ? '_blank' : '_self'}
+                      rel="noreferrer"
                     >
                       <Typography>{link.name}</Typography>
                     </Link>
+                    :
+                    <div key={link.id}>
+                      <Typography>{link.name}</Typography>
+                      <Typography variant="caption" align="center">Coming soon !</Typography>
+                    </div>
                 )
               })}
             </div>

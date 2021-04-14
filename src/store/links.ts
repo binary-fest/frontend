@@ -4,6 +4,7 @@ interface LinkState {
   id: number
   href: string
   name: string
+  isOpen: boolean
 }
 
 interface FooterLinkGroup {
@@ -16,19 +17,23 @@ const navigationLinks = atom<LinkState[]>({
   default: [{
     id: 1,
     name: 'Home',
-    href: '/'
+    href: '/',
+    isOpen: true
   }, {
     id: 2,
     name: 'Kompetisi',
-    href: '/competition'
+    href: '/competition',
+    isOpen: true
   }, {
     id: 3,
     name: 'Tech Expo',
-    href: 'https://expo.binaryfest.or.id/'
+    href: 'https://expo.binaryfest.or.id/',
+    isOpen: false
   },{
     id: 4,
     name: 'About',
-    href: '/about'
+    href: '/about',
+    isOpen: true
   }]
 })
 
@@ -37,15 +42,18 @@ const socialMediaLinks = atom<LinkState[]>({
   default: [{
     id: 1,
     name: 'Instagram',
-    href: 'https://www.instagram.com/binaryfest.uty/'
+    href: 'https://www.instagram.com/binaryfest.uty/',
+    isOpen: true
   }, {
     id: 2,
     name: 'Telegram',
-    href: ''
+    href: '',
+    isOpen: true
   }, {
     id: 3,
     name: 'Youtube',
-    href: 'https://www.youtube.com/channel/UCB85z5VHQwDCXdnR5F-VAAg'
+    href: 'https://www.youtube.com/channel/UCB85z5VHQwDCXdnR5F-VAAg',
+    isOpen: true
   }]
 })
 
@@ -77,11 +85,13 @@ const footerLinks = selector<FooterLinkGroup[]>({
       list: [{
         id: 1,
         name: 'UI / UX',
-        href: '/competition'
+        href: '/competition',
+        isOpen: true
       }, {
         id: 2,
         name: 'Internet of Things',
-        href: '/competition'
+        href: '/competition',
+        isOpen: true
       }]
     }, {
       group: 'Menu',
