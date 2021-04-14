@@ -118,11 +118,12 @@ export default function NavigationDesktop(props: NavigationDesktopProps): ReactE
                   isExternalUrl(link.href) ? 
                     <a
                       key={link.id}
-                      href={link.href}
+                      href={link.name === 'Tech Expo' ? '' : link.href}
                       target="_blank"
                       rel="noreferrer"
                     >
                       <Typography>{link.name}</Typography>
+                      <Typography variant="caption" align="center">Coming soon !</Typography>
                     </a> :
                     <Link
                       key={link.id}

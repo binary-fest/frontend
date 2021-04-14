@@ -75,10 +75,12 @@ export default function NavigationResponsive(props: NavigationResponsiveProps): 
                   <Link
                     onClick={hideHandler}
                     key={link.id}
-                    to={link.href}
+                    to={link.name === 'Tech Expo' ? '' : link.href}
                     className={classes.navigationLink}
                   >
                     <Typography>{link.name}</Typography>
+                    {link.name === 'Tech Expo' && (
+                    <Typography variant="caption" align="center">Coming soon !</Typography>)}
                   </Link>
                 )
               })}
