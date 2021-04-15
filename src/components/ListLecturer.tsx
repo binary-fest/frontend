@@ -1,7 +1,7 @@
 import React, { ReactElement, useEffect, useState } from 'react'
 import { LecturerState } from '../@types/Lecturer'
-import { StyledListLecturer } from '../theme/components/ListLecturer'
 import LecturerCard from './LecturerCard'
+import { ListLecturerContainer } from '../pages/Home/Home.styled'
 import { fetchWebinarLecturer } from '../http/webinar'
 
 export default function ListLecturer(): ReactElement {
@@ -12,10 +12,10 @@ export default function ListLecturer(): ReactElement {
   }, [])
 
   return (
-    <StyledListLecturer>
+    <ListLecturerContainer>
       {lecturers.map(lecturer => (
         <LecturerCard lecturer={lecturer} key={lecturer.id} data-aos="fade-up"/>
       ))}
-    </StyledListLecturer>
+    </ListLecturerContainer>
   )
 }

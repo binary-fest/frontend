@@ -108,6 +108,21 @@ const WebinarButtonGroup = withStyles({
   }
 })(Grid)
 
+const ListLecturerContainer = Styled.div`
+  margin-bottom: 137px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  ${theme.breakpoints.up('sm')} {
+    & {
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: center;
+    }
+  }
+`
+
 export {
   Highlight,
   Arrows,
@@ -118,5 +133,6 @@ export {
   StyledListCompanyContainer,
   StyledCompanyItem,
   StyledCompanyImage,
-  WebinarButtonGroup
+  WebinarButtonGroup,
+  ListLecturerContainer
 }
