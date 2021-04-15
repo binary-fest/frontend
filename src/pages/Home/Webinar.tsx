@@ -3,7 +3,7 @@ import axios from 'axios'
 import React, { ReactElement } from 'react'
 import ListLecturer from '../../components/ListLecturer'
 import { GradientButton, GradientTypography, WhiteTypography } from '../../theme/extends'
-import { StyledWebinarButtonGroup } from '../../theme/pages/Webinar'
+import { WebinarButtonGroup } from './Home.styled'
 import base64 from '../../utils/base64'
 
 const useStyles = makeStyles(({breakpoints}) => ({
@@ -68,7 +68,7 @@ export default function Webinar(): ReactElement {
         variant="h3"
         data-aos="zoom-in"
       >Ingin tau seberapa serunya ?</WhiteTypography>
-      <StyledWebinarButtonGroup container>
+      <WebinarButtonGroup container>
         <Grid item data-aos="zoom-in" data-aos-delay="500" className={classes.buttonGroup}>
           <GradientButton>
             <a href="https://bit.ly/WebinarBinaryFest" style={{textDecoration: 'none'}} target="_blank" rel="noreferrer">
@@ -79,7 +79,7 @@ export default function Webinar(): ReactElement {
             <WhiteTypography>Download Poster</WhiteTypography>
           </GradientButton>
         </Grid>
-      </StyledWebinarButtonGroup>
+      </WebinarButtonGroup>
     </div>
   )
 }

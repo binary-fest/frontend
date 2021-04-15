@@ -2,6 +2,7 @@ import Styled from 'styled-components'
 import CloudinaryImg from '../../components/CloudinaryImg'
 import { GradientTypography } from '../../theme/extends'
 import theme from '../../theme'
+import { Grid, withStyles } from '@material-ui/core'
 
 const Highlight = Styled(CloudinaryImg)`
   position: absolute;
@@ -87,6 +88,26 @@ const StyledCompanyImage = Styled.img`
   }
 `
 
+const WebinarButtonGroup = withStyles({
+  container: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    [theme.breakpoints.up('sm')]: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+    },
+    '& > div': {
+      '&:not(:last-child)': {
+        marginBottom: '57px',
+        [theme.breakpoints.up('sm')]: {
+          marginBottom: '0px !important',
+          marginRight: '33.5px'
+        },
+      },
+    }
+  }
+})(Grid)
+
 export {
   Highlight,
   Arrows,
@@ -96,5 +117,6 @@ export {
   StyledMediaPartnerTitle,
   StyledListCompanyContainer,
   StyledCompanyItem,
-  StyledCompanyImage
+  StyledCompanyImage,
+  WebinarButtonGroup
 }
