@@ -161,7 +161,7 @@ export default function Alert(props: Props): ReactElement {
               <AlertContent
                 icon={<AlertIconSuccess />}
                 title="Pendaftaran Berhasil"
-                message={props.message || "Selamat ! kami akan mengirim email sesaat lagi"}
+                message={props.message || "Untuk informasi tahap selanjutnya akan di konfimasi via email"}
                 closeHandler={closeAlertHandler}
               />
             )}
