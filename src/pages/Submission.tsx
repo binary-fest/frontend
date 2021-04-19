@@ -9,6 +9,7 @@ import {
   WhiteInputLabel,
   WhiteTypography
 } from '../theme/extends';
+import { useLocation } from 'react-router-dom'
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -26,7 +27,13 @@ const useStyles = makeStyles(() => ({
 }))
 
 const SubmissionPage = () => {
+  const params = useLocation()
   const classes = useStyles()
+
+  const initialKey = () => {
+    const queryString = new URLSearchParams(params.search).get('key') || ''
+    return queryString
+  }
 
   return (
     <StaticPageContentStyled>
@@ -43,6 +50,7 @@ const SubmissionPage = () => {
           <WhiteInput
             fullWidth
             type="search"
+            value={initialKey()}
           />
           <AbsoluteFormHelperText>err</AbsoluteFormHelperText>
         </FormControl>
