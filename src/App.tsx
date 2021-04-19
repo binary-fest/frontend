@@ -13,6 +13,7 @@ import StaticLayout from './layout/StaticLayout';
 const RegisterLazy = React.lazy(() => import('./pages/Register'))
 const AboutLazy = React.lazy(() => import('./pages/About'))
 const CompetitionLazy = React.lazy(() => import('./pages/Competition'))
+const SubmissionLazy = React.lazy(() => import('./pages/Submission'))
 const ErrorLazy = React.lazy(() => import('./pages/404'))
 
 const useStyles = makeStyles(({palette, breakpoints}) => ({
@@ -40,7 +41,10 @@ function App() {
     components: AboutLazy
   }, {
     path: '/competition',
-    components: CompetitionLazy
+    components: CompetitionLazy,
+  }, {
+    path: '/submission',
+    components: SubmissionLazy
   }]
 
   return (
