@@ -29,14 +29,18 @@ const useStyles = makeStyles(() => ({
 const SubmissionPage = () => {
   const [key, setKey] = useState('')
   const [urlFiles, setUrlFiles] = useState('')
+  const [keyErrorMessage, setKeyErrorMessage] = useState('')
+  const [urlFilesErrorMessage, setUrlFilesErrorMessage] = useState('')
   const params = useLocation()
   const classes = useStyles()
 
   const inputKeyHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setKeyErrorMessage(!e.target.value ? 'Data tidak boleh kosong' : '')
     setKey(e.target.value)
   }
   
   const inputUrlFilesHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUrlFilesErrorMessage(!e.target.value ? 'Data tidak boleh kosong' : '')
     setUrlFiles(e.target.value)
   }
 
@@ -45,6 +49,7 @@ const SubmissionPage = () => {
       key, urlFiles
     }
 
+    if (!request.key || !request.urlFiles) return
     console.log(request)
   }
 
@@ -63,7 +68,7 @@ const SubmissionPage = () => {
           data-aos="fade-in"
           data-aos-delay="500"
         >Submission Team</WhiteTypography>
-        <FormControl data-aos="fade-up" className={classes.input}>
+        <FormControl data-aos="fade-up" className={classes.input} error={!!keyErrorMessage}>
           <WhiteInputLabel>Key</WhiteInputLabel>
           <WhiteInput
             fullWidth
@@ -71,9 +76,9 @@ const SubmissionPage = () => {
             value={key}
             onChange={inputKeyHandler}
           />
-          <AbsoluteFormHelperText>err</AbsoluteFormHelperText>
+          <AbsoluteFormHelperText>{keyErrorMessage}</AbsoluteFormHelperText>
         </FormControl>
-        <FormControl data-aos="fade-up" className={classes.input}>
+        <FormControl data-aos="fade-up" className={classes.input} error={!!urlFilesErrorMessage}>
           <WhiteInputLabel>Url Berkas</WhiteInputLabel>
           <WhiteInput
             fullWidth
@@ -81,7 +86,7 @@ const SubmissionPage = () => {
             value={urlFiles}
             onChange={inputUrlFilesHandler}
           />
-          <AbsoluteFormHelperText>err</AbsoluteFormHelperText>
+          <AbsoluteFormHelperText>{urlFilesErrorMessage}</AbsoluteFormHelperText>
         </FormControl>
         <GradientButton fullWidth onClick={submitHandler}>
           <WhiteTypography>Submit Submission</WhiteTypography>
