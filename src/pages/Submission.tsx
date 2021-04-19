@@ -1,5 +1,5 @@
 import { FormControl, makeStyles } from '@material-ui/core';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   AbsoluteFormHelperText,
   GradientButton,
@@ -27,13 +27,31 @@ const useStyles = makeStyles(() => ({
 }))
 
 const SubmissionPage = () => {
+  const [key, setKey] = useState('')
+  const [urlFiles, setUrlFiles] = useState('')
   const params = useLocation()
   const classes = useStyles()
 
-  const initialKey = () => {
-    const queryString = new URLSearchParams(params.search).get('key') || ''
-    return queryString
+  const inputKeyHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setKey(e.target.value)
   }
+  
+  const inputUrlFilesHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUrlFiles(e.target.value)
+  }
+
+  const submitHandler = () => {
+    const request = {
+      key, urlFiles
+    }
+
+    console.log(request)
+  }
+
+  useEffect(() => {
+    const queryString = new URLSearchParams(params.search).get('key') || ''
+    setKey(queryString)
+  }, [params.search])
 
   return (
     <StaticPageContentStyled>
@@ -50,7 +68,8 @@ const SubmissionPage = () => {
           <WhiteInput
             fullWidth
             type="search"
-            value={initialKey()}
+            value={key}
+            onChange={inputKeyHandler}
           />
           <AbsoluteFormHelperText>err</AbsoluteFormHelperText>
         </FormControl>
@@ -59,10 +78,12 @@ const SubmissionPage = () => {
           <WhiteInput
             fullWidth
             type="search"
+            value={urlFiles}
+            onChange={inputUrlFilesHandler}
           />
           <AbsoluteFormHelperText>err</AbsoluteFormHelperText>
         </FormControl>
-        <GradientButton fullWidth>
+        <GradientButton fullWidth onClick={submitHandler}>
           <WhiteTypography>Submit Submission</WhiteTypography>
         </GradientButton>
       </main>
