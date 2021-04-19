@@ -88,7 +88,7 @@ const SubmissionPage = () => {
           />
           <AbsoluteFormHelperText>{urlFilesErrorMessage}</AbsoluteFormHelperText>
         </FormControl>
-        <GradientButton fullWidth onClick={submitHandler}>
+        <GradientButton fullWidth onClick={submitHandler} data-aos="fade-in">
           <WhiteTypography>Submit Submission</WhiteTypography>
         </GradientButton>
       </main>
