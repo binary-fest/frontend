@@ -116,15 +116,23 @@ export default function NavigationDesktop(props: NavigationDesktopProps): ReactE
               {listNavigationLink.map(link => {
                 return (
                   link.isOpen ?
-                    <Link
-                      key={link.id}
-                      to={link.href}
-                      className={router.location.pathname === link.href ? classes.linkActive : ''}
-                      target={isExternalUrl(link.href) ? '_blank' : '_self'}
-                      rel="noreferrer"
-                    >
-                      <Typography>{link.name}</Typography>
-                    </Link>
+                    !isExternalUrl(link.href) ?
+                      <Link
+                        key={link.id}
+                        to={link.href}
+                        className={router.location.pathname === link.href ? classes.linkActive : ''}
+                      >
+                        <Typography>{link.name}</Typography>
+                      </Link> :
+                      <a
+                        key={link.id}
+                        href={link.href}
+                        className={router.location.pathname === link.href ? classes.linkActive : ''}
+                        target='_blank'
+                        rel="noreferrer"
+                      >
+                        <Typography>{link.name}</Typography>
+                      </a>
                     :
                     <div key={link.id}>
                       <Typography>{link.name}</Typography>

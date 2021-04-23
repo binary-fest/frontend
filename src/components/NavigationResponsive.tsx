@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { navigationLinks, socialMediaIcons } from '../store/links'
 import { isNavigationResponsiveShowAtom } from '../store/ui'
+import { isExternalUrl } from '../utils/validate'
 
 interface NavigationResponsiveProps {
   toggleHandler?: (status: boolean) => void
@@ -73,14 +74,24 @@ export default function NavigationResponsive(props: NavigationResponsiveProps): 
               {listNavigationLink.map((link) => {
                 return (
                   link.isOpen ?
-                    <Link
-                      onClick={hideHandler}
-                      key={link.id}
-                      to={link.href}
-                      className={classes.navigationLink}
-                    >
-                      <Typography>{link.name}</Typography>
-                    </Link>
+                    !isExternalUrl(link.href) ?
+                      <Link
+                        onClick={hideHandler}
+                        key={link.id}
+                        to={link.href}
+                        className={classes.navigationLink}
+                      >
+                        <Typography>{link.name}</Typography>
+                      </Link> :
+                      <a
+                        key={link.id}
+                        href={link.href}
+                        className={classes.navigationLink}
+                        target='_blank'
+                        rel="noreferrer"
+                      >
+                        <Typography>{link.name}</Typography>
+                      </a>
                     :
                     <div key={link.id} className={classes.navigationLink}>
                       <Typography>{link.name}</Typography>

@@ -75,7 +75,14 @@ export default function TechExpo(): ReactElement {
           <WhiteTypography style={{lineHeight: '1.75'}}>
             Techno Expo merupakan serangkaian acara dari BinaryFest 2021 yang merupakan pameran teknologi berbasis virtual dengan harapan mampu menginspirasi anak-anak Indonesia untuk pada bidang teknologi. Pameran virtual ini menghadirkan beberapa karya dari mahasiswa UTY yang pastinya nggak kalah keren nih!!
           </WhiteTypography>
-          <GradientButton disabled>Play Now !</GradientButton>
+          <GradientButton>
+            <a 
+              href="https://expo.binaryfest.or.id/" 
+              style={{ textDecoration: 'none' }}
+              target='_blank'
+              rel="noreferrer"
+            >Play Now !</a>
+          </GradientButton>
         </section>
       </section>
     </section>
