@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import {
   AbsoluteFormHelperText,
   GradientButton,
-  GradientTypography,
   StaticPageContentStyled,
   WhiteInput,
   WhiteInputLabel,
