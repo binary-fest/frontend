@@ -26,16 +26,16 @@ const useStyles = makeStyles(() => ({
 }))
 
 const SubmissionPage = () => {
-  const [key, setKey] = useState('')
+  const [token, setToken] = useState('')
   const [urlFiles, setUrlFiles] = useState('')
-  const [keyErrorMessage, setKeyErrorMessage] = useState('')
+  const [tokenErrorMessage, setTokenErrorMessage] = useState('')
   const [urlFilesErrorMessage, setUrlFilesErrorMessage] = useState('')
   const params = useLocation()
   const classes = useStyles()
 
-  const inputKeyHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setKeyErrorMessage(!e.target.value ? 'Data tidak boleh kosong' : '')
-    setKey(e.target.value)
+  const inputTokenHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTokenErrorMessage(!e.target.value ? 'Data tidak boleh kosong' : '')
+    setToken(e.target.value)
   }
   
   const inputUrlFilesHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,7 +45,7 @@ const SubmissionPage = () => {
 
   const submitHandler = () => {
     const request = {
-      key, urlFiles
+      key: token, urlFiles
     }
 
     if (!request.key || !request.urlFiles) return
@@ -53,8 +53,8 @@ const SubmissionPage = () => {
   }
 
   useEffect(() => {
-    const queryString = new URLSearchParams(params.search).get('key') || ''
-    setKey(queryString)
+    const queryString = new URLSearchParams(params.search).get('token') || ''
+    setToken(queryString)
   }, [params.search])
 
   return (
@@ -67,15 +67,15 @@ const SubmissionPage = () => {
           data-aos="fade-in"
           data-aos-delay="500"
         >Submission Team</WhiteTypography>
-        <FormControl data-aos="fade-up" className={classes.input} error={!!keyErrorMessage}>
-          <WhiteInputLabel>Key</WhiteInputLabel>
+        <FormControl data-aos="fade-up" className={classes.input} error={!!tokenErrorMessage}>
+          <WhiteInputLabel>Token</WhiteInputLabel>
           <WhiteInput
             fullWidth
             type="search"
-            value={key}
-            onChange={inputKeyHandler}
+            value={token}
+            onChange={inputTokenHandler}
           />
-          <AbsoluteFormHelperText>{keyErrorMessage}</AbsoluteFormHelperText>
+          <AbsoluteFormHelperText>{tokenErrorMessage}</AbsoluteFormHelperText>
         </FormControl>
         <FormControl data-aos="fade-up" className={classes.input} error={!!urlFilesErrorMessage}>
           <WhiteInputLabel>Url Berkas</WhiteInputLabel>
