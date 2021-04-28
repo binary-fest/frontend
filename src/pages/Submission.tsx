@@ -8,7 +8,7 @@ import {
   WhiteInputLabel,
   WhiteTypography
 } from '../theme/extends';
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -30,6 +30,7 @@ const SubmissionPage = () => {
   const [urlFiles, setUrlFiles] = useState('')
   const [tokenErrorMessage, setTokenErrorMessage] = useState('')
   const [urlFilesErrorMessage, setUrlFilesErrorMessage] = useState('')
+  const [isInvalidToken, setIsInvalidToken] = useState(true)
   const params = useLocation()
   const classes = useStyles()
 
@@ -54,42 +55,59 @@ const SubmissionPage = () => {
 
   useEffect(() => {
     const queryString = new URLSearchParams(params.search).get('token') || ''
+    if (!queryString) {
+      return setIsInvalidToken(true)
+    }
     setToken(queryString)
+    setIsInvalidToken(false)
   }, [params.search])
 
   return (
     <StaticPageContentStyled>
       <main className={classes.container}>
+        {isInvalidToken && <div>Invalid Token</div>}
         <WhiteTypography
           style={{ marginBottom: '38px' }}
           align="center"
           variant="h3"
           data-aos="fade-in"
           data-aos-delay="500"
-        >Submission Team</WhiteTypography>
-        <FormControl data-aos="fade-up" className={classes.input} error={!!tokenErrorMessage}>
-          <WhiteInputLabel>Token</WhiteInputLabel>
-          <WhiteInput
-            fullWidth
-            type="search"
-            value={token}
-            onChange={inputTokenHandler}
-          />
-          <AbsoluteFormHelperText>{tokenErrorMessage}</AbsoluteFormHelperText>
-        </FormControl>
-        <FormControl data-aos="fade-up" className={classes.input} error={!!urlFilesErrorMessage}>
-          <WhiteInputLabel>Url Berkas</WhiteInputLabel>
-          <WhiteInput
-            fullWidth
-            type="search"
-            value={urlFiles}
-            onChange={inputUrlFilesHandler}
-          />
-          <AbsoluteFormHelperText>{urlFilesErrorMessage}</AbsoluteFormHelperText>
-        </FormControl>
-        <GradientButton fullWidth onClick={submitHandler} data-aos="fade-in">
-          <WhiteTypography>Submit Submission</WhiteTypography>
-        </GradientButton>
+        >{isInvalidToken ? "Invalid Token" : "Submission Team"}</WhiteTypography>
+        {isInvalidToken ? null : (
+          <>
+            <FormControl data-aos="fade-up" className={classes.input} error={!!tokenErrorMessage}>
+              <WhiteInputLabel>Token</WhiteInputLabel>
+              <WhiteInput
+                fullWidth
+                type="search"
+                value={token}
+                onChange={inputTokenHandler}
+              />
+              <AbsoluteFormHelperText>{tokenErrorMessage}</AbsoluteFormHelperText>
+            </FormControl>
+            <FormControl data-aos="fade-up" className={classes.input} error={!!urlFilesErrorMessage}>
+              <WhiteInputLabel>Url Berkas</WhiteInputLabel>
+              <WhiteInput
+                fullWidth
+                type="search"
+                value={urlFiles}
+                onChange={inputUrlFilesHandler}
+              />
+              <AbsoluteFormHelperText>{urlFilesErrorMessage}</AbsoluteFormHelperText>
+            </FormControl>
+          </>
+        )}
+        {isInvalidToken ? (
+          <GradientButton fullWidth onClick={submitHandler} data-aos="fade-in">
+            <Link to="/" style={{textDecoration: 'none'}}>
+              <WhiteTypography>Kembali ke beranda</WhiteTypography>
+            </Link>
+          </GradientButton>
+        ) : (
+          <GradientButton fullWidth onClick={submitHandler} data-aos="fade-in">
+            <WhiteTypography>Submit Submission</WhiteTypography>
+          </GradientButton>
+        )}
       </main>
     </StaticPageContentStyled>
   )
