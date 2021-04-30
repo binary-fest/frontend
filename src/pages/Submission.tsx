@@ -174,6 +174,7 @@ const SubmissionPage = () => {
                     data-aos="zoom-in"
                     className="label"
                     data-testid="verify-google-drive"
+                    style={{marginBottom: '2rem'}}
                     control={
                       <WhiteCheckbox
                         name="verify"
