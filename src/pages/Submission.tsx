@@ -182,7 +182,7 @@ const SubmissionPage = () => {
                 </>
               )}
               {isInvalidToken ? (
-                <GradientButton fullWidth onClick={submitHandler} data-aos="fade-in">
+                <GradientButton fullWidth data-aos="fade-in">
                   <Link to="/" style={{textDecoration: 'none'}}>
                     <WhiteTypography>Kembali ke beranda</WhiteTypography>
                   </Link>
