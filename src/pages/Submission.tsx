@@ -11,7 +11,7 @@ import {
 } from '../theme/extends';
 import { Link, useLocation } from 'react-router-dom'
 import Alert, { AlertStatus } from '../components/Alert';
-import { verifyTokenSubmission } from '../http/team';
+import { verifyTokenSubmission, sendTokenSubmission } from '../http/team';
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -70,7 +70,7 @@ const SubmissionPage = () => {
       key: token, urlFiles
     }
 
-    if (!request.key || !request.urlFiles) {
+    if (!request.key || !request.urlFiles || !isVerifyGoogleDrive || !isVerifyResponsibility) {
       setAlertStatus({
         isShow: true,
         variant: 'error',
@@ -78,16 +78,26 @@ const SubmissionPage = () => {
       })
       return
     }
-    setAlertStatus({
-      isShow: true,
-      variant: 'success',
-      message: 'Pengumpulan berhasil'
+    sendTokenSubmission(token, urlFiles).then(() => {
+      setAlertStatus({
+        isShow: true,
+        variant: 'success',
+        message: 'Pengumpulan berhasil'
+      })
+    }).catch(() => {
+      setAlertStatus({
+        isShow: true,
+        variant: 'error',
+        message: 'Pengumpulan gagal, silahkan periksa token'
+      })
     })
+
   }
 
   useEffect(() => {
     const queryString = new URLSearchParams(params.search).get('token') || ''
     if (!queryString) {
+      setIsFetching(false)
       return setIsInvalidToken(true)
     }
 
@@ -99,7 +109,6 @@ const SubmissionPage = () => {
     }).finally(() => {
       setIsFetching(false)
     })
-
   }, [params.search])
 
   return (
