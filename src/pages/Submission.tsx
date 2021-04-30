@@ -11,6 +11,7 @@ import {
 } from '../theme/extends';
 import { Link, useLocation } from 'react-router-dom'
 import Alert, { AlertStatus } from '../components/Alert';
+import { verifyTokenSubmission } from '../http/team';
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -40,6 +41,7 @@ const SubmissionPage = () => {
     message: '',
     variant: 'wait'
   })
+  const [isFetching, setIsFetching] = useState(true)
   const params = useLocation()
   const classes = useStyles()
 
@@ -88,8 +90,16 @@ const SubmissionPage = () => {
     if (!queryString) {
       return setIsInvalidToken(true)
     }
-    setToken(queryString)
-    setIsInvalidToken(false)
+
+    verifyTokenSubmission(queryString).then(() => {
+      setToken(queryString)
+      setIsInvalidToken(false)
+    }).catch(() => {
+      setIsInvalidToken(true)
+    }).finally(() => {
+      setIsFetching(false)
+    })
+
   }, [params.search])
 
   return (
@@ -102,84 +112,87 @@ const SubmissionPage = () => {
       />
       <StaticPageContentStyled>
         <main className={classes.container}>
-          {isInvalidToken && <div>Invalid Token</div>}
-          <WhiteTypography
-            style={{ marginBottom: '38px' }}
-            align="center"
-            variant="h3"
-            data-aos="fade-in"
-            data-aos-delay="500"
-          >{isInvalidToken ? "Invalid Token" : "Submission Team"}</WhiteTypography>
-          {isInvalidToken ? null : (
+          {isFetching ? <></> : (
             <>
-              <FormControl data-aos="fade-up" className={classes.input} error={!!tokenErrorMessage}>
-                <WhiteInputLabel>Token</WhiteInputLabel>
-                <WhiteInput
-                  fullWidth
-                  type="search"
-                  value={token}
-                  onChange={inputTokenHandler}
-                />
-                <AbsoluteFormHelperText>{tokenErrorMessage}</AbsoluteFormHelperText>
-              </FormControl>
-              <FormControl data-aos="fade-up" className={classes.input} error={!!urlFilesErrorMessage}>
-                <WhiteInputLabel>Url Berkas</WhiteInputLabel>
-                <WhiteInput
-                  fullWidth
-                  type="search"
-                  value={urlFiles}
-                  onChange={inputUrlFilesHandler}
-                />
-                <AbsoluteFormHelperText>{urlFilesErrorMessage}</AbsoluteFormHelperText>
-              </FormControl>
-              <FormControlLabel
-                data-aos="zoom-in"
-                className="label"
-                data-testid="verify-responsibility"
-                control={
-                  <WhiteCheckbox
-                    name="verify"
-                    value="responsibilityVerify"
-                    color="default"
-                    onChange={verifyResponsibilityHandler}
+              <WhiteTypography
+                style={{ marginBottom: '38px' }}
+                align="center"
+                variant="h3"
+                data-aos="fade-in"
+                data-aos-delay="500"
+              >{isInvalidToken ? "Invalid Token" : "Submission Team"}</WhiteTypography>
+              {isInvalidToken ? null : (
+                <>
+                  <FormControl data-aos="fade-up" className={classes.input} error={!!tokenErrorMessage}>
+                    <WhiteInputLabel>Token</WhiteInputLabel>
+                    <WhiteInput
+                      fullWidth
+                      type="search"
+                      value={token}
+                      onChange={inputTokenHandler}
+                    />
+                    <AbsoluteFormHelperText>{tokenErrorMessage}</AbsoluteFormHelperText>
+                  </FormControl>
+                  <FormControl data-aos="fade-up" className={classes.input} error={!!urlFilesErrorMessage}>
+                    <WhiteInputLabel>Url Berkas</WhiteInputLabel>
+                    <WhiteInput
+                      fullWidth
+                      type="search"
+                      value={urlFiles}
+                      onChange={inputUrlFilesHandler}
+                    />
+                    <AbsoluteFormHelperText>{urlFilesErrorMessage}</AbsoluteFormHelperText>
+                  </FormControl>
+                  <FormControlLabel
+                    data-aos="zoom-in"
+                    className="label"
+                    data-testid="verify-responsibility"
+                    control={
+                      <WhiteCheckbox
+                        name="verify"
+                        value="responsibilityVerify"
+                        color="default"
+                        onChange={verifyResponsibilityHandler}
+                      />
+                    }
+                    label={
+                      <WhiteTypography>
+                        Data yang anda inputkan merupakan data asli dan dapat di pertanggung jawabkan
+                      </WhiteTypography>
+                    }
                   />
-                }
-                label={
-                  <WhiteTypography>
-                    Data yang anda inputkan merupakan data asli dan dapat di pertanggung jawabkan
-                  </WhiteTypography>
-                }
-              />
-              <FormControlLabel
-                data-aos="zoom-in"
-                className="label"
-                data-testid="verify-google-drive"
-                control={
-                  <WhiteCheckbox
-                    name="verify"
-                    value="googleDriveVerify"
-                    color="default"
-                    onChange={verifyGoogleDriveHandler}
+                  <FormControlLabel
+                    data-aos="zoom-in"
+                    className="label"
+                    data-testid="verify-google-drive"
+                    control={
+                      <WhiteCheckbox
+                        name="verify"
+                        value="googleDriveVerify"
+                        color="default"
+                        onChange={verifyGoogleDriveHandler}
+                      />
+                    }
+                    label={
+                      <WhiteTypography>
+                        Berkas yang ada di Google Drive tidak boleh di ubah selama menyetujui ini
+                      </WhiteTypography>
+                    }
                   />
-                }
-                label={
-                  <WhiteTypography>
-                    Berkas yang ada di Google Drive tidak boleh di ubah selama menyetujui ini
-                  </WhiteTypography>
-                }
-              />
+                </>
+              )}
+              {isInvalidToken ? (
+                <GradientButton fullWidth onClick={submitHandler} data-aos="fade-in">
+                  <Link to="/" style={{textDecoration: 'none'}}>
+                    <WhiteTypography>Kembali ke beranda</WhiteTypography>
+                  </Link>
+                </GradientButton>
+              ) : (
+                <GradientButton fullWidth onClick={submitHandler} data-aos="fade-in">
+                  <WhiteTypography>Submit Submission</WhiteTypography>
+                </GradientButton>
+              )}
             </>
-          )}
-          {isInvalidToken ? (
-            <GradientButton fullWidth onClick={submitHandler} data-aos="fade-in">
-              <Link to="/" style={{textDecoration: 'none'}}>
-                <WhiteTypography>Kembali ke beranda</WhiteTypography>
-              </Link>
-            </GradientButton>
-          ) : (
-            <GradientButton fullWidth onClick={submitHandler} data-aos="fade-in">
-              <WhiteTypography>Submit Submission</WhiteTypography>
-            </GradientButton>
           )}
         </main>
       </StaticPageContentStyled>
