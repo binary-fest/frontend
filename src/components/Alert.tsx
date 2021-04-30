@@ -37,6 +37,7 @@ const AlertRoot = styled.div`
   height: 100%;
   box-sizing: border-box;
   display: flex;
+  left: 0;
 `
 
 const AlertWrapper = styled.div`
