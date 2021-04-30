@@ -1,9 +1,10 @@
-import { FormControl, makeStyles } from '@material-ui/core';
+import { FormControl, FormControlLabel, makeStyles } from '@material-ui/core';
 import React, { useEffect, useState } from 'react'
 import {
   AbsoluteFormHelperText,
   GradientButton,
   StaticPageContentStyled,
+  WhiteCheckbox,
   WhiteInput,
   WhiteInputLabel,
   WhiteTypography
@@ -31,6 +32,8 @@ const SubmissionPage = () => {
   const [tokenErrorMessage, setTokenErrorMessage] = useState('')
   const [urlFilesErrorMessage, setUrlFilesErrorMessage] = useState('')
   const [isInvalidToken, setIsInvalidToken] = useState(true)
+  const [isVerifyResponsibility, setIsVerifyResponsibility] = useState(false)
+  const [isVerifyGoogleDrive, setIsVerifyGoogleDrive] = useState(false)
   const params = useLocation()
   const classes = useStyles()
 
@@ -42,6 +45,14 @@ const SubmissionPage = () => {
   const inputUrlFilesHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUrlFilesErrorMessage(!e.target.value ? 'Data tidak boleh kosong' : '')
     setUrlFiles(e.target.value)
+  }
+
+  const verifyResponsibilityHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsVerifyResponsibility(!isVerifyResponsibility)
+  }
+
+  const verifyGoogleDriveHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsVerifyGoogleDrive(!isVerifyGoogleDrive)
   }
 
   const submitHandler = () => {
@@ -95,6 +106,42 @@ const SubmissionPage = () => {
               />
               <AbsoluteFormHelperText>{urlFilesErrorMessage}</AbsoluteFormHelperText>
             </FormControl>
+            <FormControlLabel
+              data-aos="zoom-in"
+              className="label"
+              data-testid="verify-responsibility"
+              control={
+                <WhiteCheckbox
+                  name="verify"
+                  value="responsibilityVerify"
+                  color="default"
+                  onChange={verifyResponsibilityHandler}
+                />
+              }
+              label={
+                <WhiteTypography>
+                  Data yang anda inputkan merupakan data asli dan dapat di pertanggung jawabkan
+                </WhiteTypography>
+              }
+            />
+            <FormControlLabel
+              data-aos="zoom-in"
+              className="label"
+              data-testid="verify-google-drive"
+              control={
+                <WhiteCheckbox
+                  name="verify"
+                  value="googleDriveVerify"
+                  color="default"
+                  onChange={verifyGoogleDriveHandler}
+                />
+              }
+              label={
+                <WhiteTypography>
+                  Berkas yang ada di Google Drive tidak boleh di ubah selama menyetujui ini
+                </WhiteTypography>
+              }
+            />
           </>
         )}
         {isInvalidToken ? (
