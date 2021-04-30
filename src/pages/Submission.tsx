@@ -10,6 +10,7 @@ import {
   WhiteTypography
 } from '../theme/extends';
 import { Link, useLocation } from 'react-router-dom'
+import Alert, { AlertStatus } from '../components/Alert';
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -34,6 +35,11 @@ const SubmissionPage = () => {
   const [isInvalidToken, setIsInvalidToken] = useState(true)
   const [isVerifyResponsibility, setIsVerifyResponsibility] = useState(false)
   const [isVerifyGoogleDrive, setIsVerifyGoogleDrive] = useState(false)
+  const [alertStatus, setAlertStatus] = useState<AlertStatus>({
+    isShow: false,
+    message: '',
+    variant: 'wait'
+  })
   const params = useLocation()
   const classes = useStyles()
 
@@ -55,13 +61,26 @@ const SubmissionPage = () => {
     setIsVerifyGoogleDrive(!isVerifyGoogleDrive)
   }
 
+  const alertHandler = (state: boolean) => setAlertStatus({...alertStatus, isShow: state})
+
   const submitHandler = () => {
     const request = {
       key: token, urlFiles
     }
 
-    if (!request.key || !request.urlFiles) return
-    console.log(request)
+    if (!request.key || !request.urlFiles) {
+      setAlertStatus({
+        isShow: true,
+        variant: 'error',
+        message: 'Pengumpulan gagal, silahkan periksa formulir atau tunggu beberapa saat lagi'
+      })
+      return
+    }
+    setAlertStatus({
+      isShow: true,
+      variant: 'success',
+      message: 'Pengumpulan berhasil'
+    })
   }
 
   useEffect(() => {
@@ -74,89 +93,97 @@ const SubmissionPage = () => {
   }, [params.search])
 
   return (
-    <StaticPageContentStyled>
-      <main className={classes.container}>
-        {isInvalidToken && <div>Invalid Token</div>}
-        <WhiteTypography
-          style={{ marginBottom: '38px' }}
-          align="center"
-          variant="h3"
-          data-aos="fade-in"
-          data-aos-delay="500"
-        >{isInvalidToken ? "Invalid Token" : "Submission Team"}</WhiteTypography>
-        {isInvalidToken ? null : (
-          <>
-            <FormControl data-aos="fade-up" className={classes.input} error={!!tokenErrorMessage}>
-              <WhiteInputLabel>Token</WhiteInputLabel>
-              <WhiteInput
-                fullWidth
-                type="search"
-                value={token}
-                onChange={inputTokenHandler}
-              />
-              <AbsoluteFormHelperText>{tokenErrorMessage}</AbsoluteFormHelperText>
-            </FormControl>
-            <FormControl data-aos="fade-up" className={classes.input} error={!!urlFilesErrorMessage}>
-              <WhiteInputLabel>Url Berkas</WhiteInputLabel>
-              <WhiteInput
-                fullWidth
-                type="search"
-                value={urlFiles}
-                onChange={inputUrlFilesHandler}
-              />
-              <AbsoluteFormHelperText>{urlFilesErrorMessage}</AbsoluteFormHelperText>
-            </FormControl>
-            <FormControlLabel
-              data-aos="zoom-in"
-              className="label"
-              data-testid="verify-responsibility"
-              control={
-                <WhiteCheckbox
-                  name="verify"
-                  value="responsibilityVerify"
-                  color="default"
-                  onChange={verifyResponsibilityHandler}
+    <>
+      <Alert
+        isShow={alertStatus.isShow}
+        handleShow={alertHandler}
+        variant={alertStatus.variant}
+        message={alertStatus.message}
+      />
+      <StaticPageContentStyled>
+        <main className={classes.container}>
+          {isInvalidToken && <div>Invalid Token</div>}
+          <WhiteTypography
+            style={{ marginBottom: '38px' }}
+            align="center"
+            variant="h3"
+            data-aos="fade-in"
+            data-aos-delay="500"
+          >{isInvalidToken ? "Invalid Token" : "Submission Team"}</WhiteTypography>
+          {isInvalidToken ? null : (
+            <>
+              <FormControl data-aos="fade-up" className={classes.input} error={!!tokenErrorMessage}>
+                <WhiteInputLabel>Token</WhiteInputLabel>
+                <WhiteInput
+                  fullWidth
+                  type="search"
+                  value={token}
+                  onChange={inputTokenHandler}
                 />
-              }
-              label={
-                <WhiteTypography>
-                  Data yang anda inputkan merupakan data asli dan dapat di pertanggung jawabkan
-                </WhiteTypography>
-              }
-            />
-            <FormControlLabel
-              data-aos="zoom-in"
-              className="label"
-              data-testid="verify-google-drive"
-              control={
-                <WhiteCheckbox
-                  name="verify"
-                  value="googleDriveVerify"
-                  color="default"
-                  onChange={verifyGoogleDriveHandler}
+                <AbsoluteFormHelperText>{tokenErrorMessage}</AbsoluteFormHelperText>
+              </FormControl>
+              <FormControl data-aos="fade-up" className={classes.input} error={!!urlFilesErrorMessage}>
+                <WhiteInputLabel>Url Berkas</WhiteInputLabel>
+                <WhiteInput
+                  fullWidth
+                  type="search"
+                  value={urlFiles}
+                  onChange={inputUrlFilesHandler}
                 />
-              }
-              label={
-                <WhiteTypography>
-                  Berkas yang ada di Google Drive tidak boleh di ubah selama menyetujui ini
-                </WhiteTypography>
-              }
-            />
-          </>
-        )}
-        {isInvalidToken ? (
-          <GradientButton fullWidth onClick={submitHandler} data-aos="fade-in">
-            <Link to="/" style={{textDecoration: 'none'}}>
-              <WhiteTypography>Kembali ke beranda</WhiteTypography>
-            </Link>
-          </GradientButton>
-        ) : (
-          <GradientButton fullWidth onClick={submitHandler} data-aos="fade-in">
-            <WhiteTypography>Submit Submission</WhiteTypography>
-          </GradientButton>
-        )}
-      </main>
-    </StaticPageContentStyled>
+                <AbsoluteFormHelperText>{urlFilesErrorMessage}</AbsoluteFormHelperText>
+              </FormControl>
+              <FormControlLabel
+                data-aos="zoom-in"
+                className="label"
+                data-testid="verify-responsibility"
+                control={
+                  <WhiteCheckbox
+                    name="verify"
+                    value="responsibilityVerify"
+                    color="default"
+                    onChange={verifyResponsibilityHandler}
+                  />
+                }
+                label={
+                  <WhiteTypography>
+                    Data yang anda inputkan merupakan data asli dan dapat di pertanggung jawabkan
+                  </WhiteTypography>
+                }
+              />
+              <FormControlLabel
+                data-aos="zoom-in"
+                className="label"
+                data-testid="verify-google-drive"
+                control={
+                  <WhiteCheckbox
+                    name="verify"
+                    value="googleDriveVerify"
+                    color="default"
+                    onChange={verifyGoogleDriveHandler}
+                  />
+                }
+                label={
+                  <WhiteTypography>
+                    Berkas yang ada di Google Drive tidak boleh di ubah selama menyetujui ini
+                  </WhiteTypography>
+                }
+              />
+            </>
+          )}
+          {isInvalidToken ? (
+            <GradientButton fullWidth onClick={submitHandler} data-aos="fade-in">
+              <Link to="/" style={{textDecoration: 'none'}}>
+                <WhiteTypography>Kembali ke beranda</WhiteTypography>
+              </Link>
+            </GradientButton>
+          ) : (
+            <GradientButton fullWidth onClick={submitHandler} data-aos="fade-in">
+              <WhiteTypography>Submit Submission</WhiteTypography>
+            </GradientButton>
+          )}
+        </main>
+      </StaticPageContentStyled>
+    </>
   )
 }
 
