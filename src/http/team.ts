@@ -1,7 +1,7 @@
 import http from '../utils/http'
 
 const verifyTokenSubmission = (token: string) => {
-  return http.get('/submission/token', { data: { token } })
+  return http.post('/submission/token', { token })
 }
 
 const sendTokenSubmission = (token: string, file_url: string) => {
