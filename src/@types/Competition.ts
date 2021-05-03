@@ -7,7 +7,8 @@ interface Competition {
   guideBookUrl: string,
   isOpen: boolean,
   code: CompetitionType,
-  technicalGuideUrl: string
+  technicalGuideUrl: string,
+  templateUrl?: string
 }
 
 export type { Competition }
