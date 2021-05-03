@@ -116,6 +116,23 @@ export default function CompetitionPage(): ReactElement {
                     ) : "Belum tersedia"}
                   </a>
                 </GradientButton>
+                {competition.isOpen && competition.templateUrl ? (
+                  <GradientButton variant='contained' color="primary" style={{marginTop: '1rem'}}>
+                    <a
+                      href={competition.templateUrl}
+                      style={{ textDecoration: 'none', display: 'flex' }}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <img
+                        src="/download-icon.svg"
+                        alt="Download guide book"
+                        className="download-icon"
+                      />
+                      Download Template
+                    </a>
+                  </GradientButton>
+                ) : ''}
               </div>
             </Grid>
           )
