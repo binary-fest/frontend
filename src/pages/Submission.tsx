@@ -139,6 +139,8 @@ const SubmissionPage = () => {
                       type="search"
                       value={token}
                       onChange={inputTokenHandler}
+                      disabled
+                      style={{color: 'white'}}
                     />
                     <AbsoluteFormHelperText>{tokenErrorMessage}</AbsoluteFormHelperText>
                   </FormControl>
