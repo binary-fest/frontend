@@ -96,17 +96,15 @@ const SubmissionPage = () => {
       setIsFetching(false)
       return setIsInvalidToken(true)
     }
-    setToken(queryString)
-    setIsInvalidToken(false)
-    setIsFetching(false)
-    // verifyTokenSubmission(queryString).then(() => {
-    //   setToken(queryString)
-    //   setIsInvalidToken(false)
-    // }).catch(() => {
-    //   setIsInvalidToken(true)
-    // }).finally(() => {
-    //   setIsFetching(false)
-    // })
+  
+    verifyTokenSubmission(queryString).then(() => {
+      setToken(queryString)
+      setIsInvalidToken(false)
+    }).catch(() => {
+      setIsInvalidToken(true)
+    }).finally(() => {
+      setIsFetching(false)
+    })
   }, [params.search])
 
   return (
