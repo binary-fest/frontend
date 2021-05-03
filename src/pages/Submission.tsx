@@ -21,6 +21,7 @@ const useStyles = makeStyles(() => ({
     flexDirection: 'column',
     alignItems: 'center',
     margin: 'auto',
+    paddingBottom: '300px',
   },
   input: {
     width: '100%',
