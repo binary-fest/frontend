@@ -35,7 +35,6 @@ const SubmissionPage = () => {
   const [tokenErrorMessage, setTokenErrorMessage] = useState('')
   const [urlFilesErrorMessage, setUrlFilesErrorMessage] = useState('')
   const [isInvalidToken, setIsInvalidToken] = useState(true)
-  const [isVerifyResponsibility, setIsVerifyResponsibility] = useState(false)
   const [isVerifyGoogleDrive, setIsVerifyGoogleDrive] = useState(false)
   const [alertStatus, setAlertStatus] = useState<AlertStatus>({
     isShow: false,
@@ -56,10 +55,6 @@ const SubmissionPage = () => {
     setUrlFiles(e.target.value)
   }
 
-  const verifyResponsibilityHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsVerifyResponsibility(!isVerifyResponsibility)
-  }
-
   const verifyGoogleDriveHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsVerifyGoogleDrive(!isVerifyGoogleDrive)
   }
@@ -71,7 +66,7 @@ const SubmissionPage = () => {
       key: token, urlFiles
     }
 
-    if (!request.key || !request.urlFiles || !isVerifyGoogleDrive || !isVerifyResponsibility) {
+    if (!request.key || !request.urlFiles || !isVerifyGoogleDrive) {
       setAlertStatus({
         isShow: true,
         variant: 'error',
@@ -101,15 +96,17 @@ const SubmissionPage = () => {
       setIsFetching(false)
       return setIsInvalidToken(true)
     }
-
-    verifyTokenSubmission(queryString).then(() => {
-      setToken(queryString)
-      setIsInvalidToken(false)
-    }).catch(() => {
-      setIsInvalidToken(true)
-    }).finally(() => {
-      setIsFetching(false)
-    })
+    setToken(queryString)
+    setIsInvalidToken(false)
+    setIsFetching(false)
+    // verifyTokenSubmission(queryString).then(() => {
+    //   setToken(queryString)
+    //   setIsInvalidToken(false)
+    // }).catch(() => {
+    //   setIsInvalidToken(true)
+    // }).finally(() => {
+    //   setIsFetching(false)
+    // })
   }, [params.search])
 
   return (
@@ -158,24 +155,6 @@ const SubmissionPage = () => {
                   <FormControlLabel
                     data-aos="zoom-in"
                     className="label"
-                    data-testid="verify-responsibility"
-                    control={
-                      <WhiteCheckbox
-                        name="verify"
-                        value="responsibilityVerify"
-                        color="default"
-                        onChange={verifyResponsibilityHandler}
-                      />
-                    }
-                    label={
-                      <WhiteTypography>
-                        Data yang anda inputkan merupakan data asli dan dapat di pertanggung jawabkan
-                      </WhiteTypography>
-                    }
-                  />
-                  <FormControlLabel
-                    data-aos="zoom-in"
-                    className="label"
                     data-testid="verify-google-drive"
                     style={{marginBottom: '2rem'}}
                     control={
@@ -188,7 +167,7 @@ const SubmissionPage = () => {
                     }
                     label={
                       <WhiteTypography>
-                        Berkas yang ada di Google Drive tidak boleh di ubah selama menyetujui ini
+                        Sumber file yang ada di Google Drive tidak boleh di ubah selama menyetujui ini
                       </WhiteTypography>
                     }
                   />
