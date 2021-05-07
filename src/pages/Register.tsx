@@ -153,6 +153,7 @@ export default function Register(): ReactElement {
     variant: 'wait'
   })
   const [competitions, setCompetitions] = useState<Competition[]>([])
+  const [isSubmissionOpen, setIsSubmissionOpen] = useState(true)
   const history = useHistory()
 
   const selectCompetitionHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -231,37 +232,34 @@ export default function Register(): ReactElement {
   const classes = useStyles()
 
   useEffect(() => {
-    validateSubmissionOpen().then((status) => {
-      status && setLoading({isFetching: false, isPageOpen: false})
+    fetchCompetitions().then(data => {
+      setLoading({
+        isFetching: false,
+        isPageOpen: data.some(competition => competition.isOpen)
+      })
 
-      if (!status) {
-        fetchCompetitions().then(data => {
-          setLoading({
-            isFetching: false,
-            isPageOpen: data.some(competition => competition.isOpen)
-          })
-    
-          const newCompetitions = data.filter(competition => competition.isOpen)
-          const selectCompetitions: CompetitionState[] = newCompetitions
-            .map((competition, idx) => {
-              return {
-                id: competition.code,
-                name: competition.title,
-                isSelected: idx === 0,
-              }
-            })
-          
-          setCompetitions(newCompetitions)
-          setPickCompetitions(selectCompetitions)
+      const newCompetitions = data.filter(competition => competition.isOpen)
+      const selectCompetitions: CompetitionState[] = newCompetitions
+        .map((competition, idx) => {
+          return {
+            id: competition.code,
+            name: competition.title,
+            isSelected: idx === 0,
+          }
         })
-      }
+      
+      setCompetitions(newCompetitions)
+      setPickCompetitions(selectCompetitions)
+    })
+    validateSubmissionOpen().then((status) => {
+      status && setIsSubmissionOpen(status)
     })
   }, [history])
 
   if (loading.isFetching) return <></>
 
   if (!loading.isPageOpen)
-    return <ErrorPage title="</>" caption="Pendaftaran telah ditutup" />
+    return <ErrorPage title="</>" caption="Halaman sedang dalam proses pengembangan" />
 
   return (
     <>
@@ -431,6 +429,7 @@ export default function Register(): ReactElement {
               style={{ margin: '0 auto' }}
               data-aos="zoom-in"
               data-testid="register-button"
+              disabled={isSubmissionOpen}
             >
               <WhiteTypography>Register</WhiteTypography>
             </GradientButton>
