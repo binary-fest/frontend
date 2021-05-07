@@ -232,7 +232,7 @@ export default function Register(): ReactElement {
 
   useEffect(() => {
     validateSubmissionOpen().then((status) => {
-      status && history.push('/')
+      status && setLoading({isFetching: false, isPageOpen: false})
 
       if (!status) {
         fetchCompetitions().then(data => {
@@ -261,7 +261,7 @@ export default function Register(): ReactElement {
   if (loading.isFetching) return <></>
 
   if (!loading.isPageOpen)
-    return <ErrorPage title="</>" caption="Halaman sedang dalam proses pengembangan" />
+    return <ErrorPage title="</>" caption="Pendaftaran telah ditutup" />
 
   return (
     <>

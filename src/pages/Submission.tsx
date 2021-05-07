@@ -13,6 +13,7 @@ import { Link, useHistory, useLocation } from 'react-router-dom'
 import Alert, { AlertStatus } from '../components/Alert';
 import { verifyTokenSubmission, sendTokenSubmission } from '../http/team';
 import { validateSubmissionOpen } from '../utils/validate';
+import ErrorPage from './404';
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -43,6 +44,7 @@ const SubmissionPage = () => {
     variant: 'wait'
   })
   const [isFetching, setIsFetching] = useState(true)
+  const [isPageOpen, setIsPageOpen] = useState(true)
   const history = useHistory()
   const params = useLocation()
   const classes = useStyles()
@@ -94,7 +96,7 @@ const SubmissionPage = () => {
 
   useEffect(() => {
     validateSubmissionOpen().then((status) => {
-      status && history.push('/')
+      status && setIsPageOpen(false)
       if (!status) {
         const queryString = new URLSearchParams(params.search).get('token') || ''
         if (!queryString) {
@@ -113,6 +115,9 @@ const SubmissionPage = () => {
       }
     })
   }, [params.search, history])
+
+
+  if (!isPageOpen) return (<ErrorPage title="</>" caption="Waktu pengumpulan telah habis"/>)
 
   return (
     <>
