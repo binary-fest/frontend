@@ -9,11 +9,12 @@ import { useRecoilValue } from 'recoil'
 import { membersRequestBodyState } from '../store/members'
 import http from '../utils/http'
 import Alert, { AlertStatus } from '../components/Alert'
-import { validateEmail } from '../utils/validate'
+import { validateEmail, validateSubmissionOpen } from '../utils/validate'
 import { useEffect } from 'react'
 import { fetchCompetitions } from '../http/competition'
 import ErrorPage from './404'
 import { Competition } from '../@types/Competition'
+import { useHistory } from 'react-router'
 
 interface CompetitionState {
   id: CompetitionType,
@@ -152,6 +153,7 @@ export default function Register(): ReactElement {
     variant: 'wait'
   })
   const [competitions, setCompetitions] = useState<Competition[]>([])
+  const history = useHistory()
 
   const selectCompetitionHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     const id = e.currentTarget.dataset.competition
@@ -229,26 +231,32 @@ export default function Register(): ReactElement {
   const classes = useStyles()
 
   useEffect(() => {
-    fetchCompetitions().then(data => {
-      setLoading({
-        isFetching: false,
-        isPageOpen: data.some(competition => competition.isOpen)
-      })
+    validateSubmissionOpen().then((status) => {
+      status && history.push('/')
 
-      const newCompetitions = data.filter(competition => competition.isOpen)
-      const selectCompetitions: CompetitionState[] = newCompetitions
-        .map((competition, idx) => {
-          return {
-            id: competition.code,
-            name: competition.title,
-            isSelected: idx === 0,
-          }
+      if (!status) {
+        fetchCompetitions().then(data => {
+          setLoading({
+            isFetching: false,
+            isPageOpen: data.some(competition => competition.isOpen)
+          })
+    
+          const newCompetitions = data.filter(competition => competition.isOpen)
+          const selectCompetitions: CompetitionState[] = newCompetitions
+            .map((competition, idx) => {
+              return {
+                id: competition.code,
+                name: competition.title,
+                isSelected: idx === 0,
+              }
+            })
+          
+          setCompetitions(newCompetitions)
+          setPickCompetitions(selectCompetitions)
         })
-      
-      setCompetitions(newCompetitions)
-      setPickCompetitions(selectCompetitions)
+      }
     })
-  }, [])
+  }, [history])
 
   if (loading.isFetching) return <></>
 

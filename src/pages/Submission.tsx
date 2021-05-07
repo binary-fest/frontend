@@ -9,9 +9,10 @@ import {
   WhiteInputLabel,
   WhiteTypography
 } from '../theme/extends';
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import Alert, { AlertStatus } from '../components/Alert';
 import { verifyTokenSubmission, sendTokenSubmission } from '../http/team';
+import { validateSubmissionOpen } from '../utils/validate';
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -42,6 +43,7 @@ const SubmissionPage = () => {
     variant: 'wait'
   })
   const [isFetching, setIsFetching] = useState(true)
+  const history = useHistory()
   const params = useLocation()
   const classes = useStyles()
 
@@ -91,21 +93,26 @@ const SubmissionPage = () => {
   }
 
   useEffect(() => {
-    const queryString = new URLSearchParams(params.search).get('token') || ''
-    if (!queryString) {
-      setIsFetching(false)
-      return setIsInvalidToken(true)
-    }
-  
-    verifyTokenSubmission(queryString).then(() => {
-      setToken(queryString)
-      setIsInvalidToken(false)
-    }).catch(() => {
-      setIsInvalidToken(true)
-    }).finally(() => {
-      setIsFetching(false)
+    validateSubmissionOpen().then((status) => {
+      status && history.push('/')
+      if (!status) {
+        const queryString = new URLSearchParams(params.search).get('token') || ''
+        if (!queryString) {
+          setIsFetching(false)
+          return setIsInvalidToken(true)
+        }
+      
+        verifyTokenSubmission(queryString).then(() => {
+          setToken(queryString)
+          setIsInvalidToken(false)
+        }).catch(() => {
+          setIsInvalidToken(true)
+        }).finally(() => {
+          setIsFetching(false)
+        })
+      }
     })
-  }, [params.search])
+  }, [params.search, history])
 
   return (
     <>
